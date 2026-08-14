@@ -6,6 +6,7 @@ from nifty_gap.data.loader import (
     load_history,
     read_csv,
     seed_history,
+    write_history,
 )
 from nifty_gap.data.validation import (
     DataValidationError,
@@ -22,6 +23,7 @@ __all__ = [
     "load_history",
     "read_csv",
     "seed_history",
+    "write_history",
     "DataValidationError",
     "KNOWN_HOLIDAYS",
     "MAX_CALENDAR_GAP_DAYS",
