@@ -1,4 +1,4 @@
-"""Phase 5: risk-free rate sourcing tests."""
+"""Risk-free rate sourcing tests."""
 
 from __future__ import annotations
 

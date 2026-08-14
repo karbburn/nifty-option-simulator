@@ -1,4 +1,4 @@
-"""Phase 6: exit-ladder state machine tests."""
+"""Exit-ladder state machine tests."""
 
 from __future__ import annotations
 

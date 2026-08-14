@@ -1,1 +1,1 @@
-"""Reporting layer: metrics (plan §5.6) and report generation."""
+"""Reporting layer: metrics and report generation."""

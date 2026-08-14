@@ -1,4 +1,4 @@
-"""Phase 3: refresh pipeline tests (fully offline)."""
+"""Refresh pipeline tests (fully offline)."""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""Phase 7: backtest engine + benchmark tests."""
+"""Backtest engine + benchmark tests."""
 
 from __future__ import annotations
 

@@ -1,4 +1,4 @@
-"""Phase 2: loader tests."""
+"""Loader tests."""
 
 from __future__ import annotations
 

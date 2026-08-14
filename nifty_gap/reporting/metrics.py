@@ -1,4 +1,4 @@
-"""Phase 8: metrics per plan §5.6, computed from trade/equity frames."""
+"""Metrics definitions, computed from trade/equity frames."""
 
 from __future__ import annotations
 

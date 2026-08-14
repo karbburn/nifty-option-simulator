@@ -1,4 +1,4 @@
-"""Phase 4: probability table & signal tests."""
+"""Probability table & signal tests."""
 
 from __future__ import annotations
 

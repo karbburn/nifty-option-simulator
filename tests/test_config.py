@@ -1,4 +1,4 @@
-"""Phase 1: config module smoke tests."""
+"""Config tests: resolved defaults and registry completeness."""
 
 from __future__ import annotations
 

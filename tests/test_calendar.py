@@ -1,4 +1,4 @@
-"""Phase 5: weekly expiry calendar tests."""
+"""Weekly expiry calendar tests."""
 
 from __future__ import annotations
 

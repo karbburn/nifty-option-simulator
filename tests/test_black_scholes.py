@@ -1,4 +1,4 @@
-"""Phase 5: Black-Scholes pricer tests."""
+"""Black-Scholes pricer tests."""
 
 from __future__ import annotations
 

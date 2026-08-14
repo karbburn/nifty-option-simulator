@@ -1,4 +1,4 @@
-"""Phase 5: nearest strike router tests."""
+"""Nearest strike router tests."""
 
 from __future__ import annotations
 

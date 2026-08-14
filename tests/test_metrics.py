@@ -1,4 +1,4 @@
-"""Phase 8: metrics tests (hand-computed against plan §5.6)."""
+"""Metrics tests (hand-computed)."""
 
 from __future__ import annotations
 
