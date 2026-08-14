@@ -71,10 +71,12 @@ def write_history(path, df: pd.DataFrame) -> None:
     out.to_csv(path, index=False)
 
 
-def seed_history(history_path, seed_path) -> pd.DataFrame:
+def seed_history(history_path, seed_path) -> pd.DataFrame | None:
     history = load_history(history_path)
     if history is not None:
         return history
+    if not seed_path.exists():
+        return None
     df = read_csv(seed_path)
     df["data_source"] = "nse"
     write_history(history_path, df)

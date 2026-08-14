@@ -133,6 +133,9 @@ def upsert(history: pd.DataFrame, new: pd.DataFrame) -> pd.DataFrame:
     return merged.sort_values("Date").reset_index(drop=True)
 
 
+BOOTSTRAP_WINDOW_DAYS = 400
+
+
 def run_refresh(
     history_path,
     seed_path,
@@ -142,6 +145,21 @@ def run_refresh(
     dry_run: bool = False,
 ) -> dict:
     history = seed_history(history_path, seed_path)
+    if history is None:
+        end = to_date or dt.date.today()
+        bootstrap = fetch_yfinance(end - dt.timedelta(days=BOOTSTRAP_WINDOW_DAYS), end)
+        if bootstrap.empty:
+            return {
+                "status": "warn",
+                "rows_added": 0,
+                "provider": None,
+                "reason": "no history/seed available; yfinance bootstrap empty",
+            }
+        history = bootstrap
+        if not dry_run:
+            write_history(history_path, history)
+        validate_integrity(history)
+        return {"status": "ok", "rows_added": len(history), "provider": "yfinance", "reason": "bootstrap"}
     validate_integrity(history)
     latest = history["Date"].max().date()
     start = backfill_from or latest + dt.timedelta(days=1)

@@ -3,4 +3,5 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 output/
+assets/
 data/nifty50_history.csv

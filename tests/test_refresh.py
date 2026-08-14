@@ -150,6 +150,29 @@ def test_run_refresh_noop_when_start_after_end(tmp_path, monkeypatch):
     assert not hp.exists()
 
 
+def test_run_refresh_bootstraps_from_yfinance_when_no_history_or_seed(tmp_path, monkeypatch):
+    monkeypatch.setattr(refresh, "seed_history", lambda hp, sp: None)
+    monkeypatch.setattr(refresh, "fetch_yfinance", lambda f, t: _frame(BASE_DATES, source="yfinance"))
+    hp = tmp_path / "history.csv"
+    result = refresh.run_refresh(hp, tmp_path / "seed.csv", to_date=dt.date(2026, 8, 14))
+    assert result["status"] == "ok"
+    assert result["reason"] == "bootstrap"
+    assert result["provider"] == "yfinance"
+    assert result["rows_added"] == len(BASE_DATES)
+    loaded = load_history(hp)
+    assert loaded is not None and len(loaded) == len(BASE_DATES)
+
+
+def test_run_refresh_warns_when_bootstrap_empty(tmp_path, monkeypatch):
+    monkeypatch.setattr(refresh, "seed_history", lambda hp, sp: None)
+    monkeypatch.setattr(refresh, "fetch_yfinance", lambda f, t: _frame([], source="yfinance"))
+    hp = tmp_path / "history.csv"
+    result = refresh.run_refresh(hp, tmp_path / "seed.csv", to_date=dt.date(2026, 8, 14))
+    assert result["status"] == "warn"
+    assert result["reason"] == "no history/seed available; yfinance bootstrap empty"
+    assert not hp.exists()
+
+
 def test_main_returns_zero_on_warn(monkeypatch, capsys):
     result = {
         "status": "warn",
