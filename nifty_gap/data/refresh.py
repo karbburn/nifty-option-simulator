@@ -8,7 +8,6 @@ import json
 import time
 
 import pandas as pd
-import requests
 
 from nifty_gap.config import Config
 from nifty_gap.data.loader import seed_history, write_history
@@ -79,29 +78,29 @@ def fetch_yfinance(start: dt.date, end: dt.date) -> pd.DataFrame:
         return _empty_output()
 
 
+def _nse_session(timeout: float = 20):
+    from curl_cffi import requests as cffi
+
+    session = cffi.Session(impersonate="chrome124", timeout=timeout)
+    session.headers.update({"Accept-Language": "en-US,en;q=0.9"})
+    return session
+
+
 def fetch_nse(from_date: dt.date, to_date: dt.date, requests_timeout: float = 20) -> pd.DataFrame | None:
-    session = requests.Session()
-    session.headers.update(
-        {
-            "User-Agent": (
-                "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 "
-                "(KHTML, like Gecko) Chrome/124.0.0.0 Safari/537.36"
-            ),
-            "Accept-Language": "en-US,en;q=0.9",
-        }
-    )
+    session = _nse_session(requests_timeout)
     reports_url = "https://www.nseindia.com/reports-indices-historical-index-data"
     api_url = "https://www.nseindia.com/api/historical/indicesHistory"
     try:
-        res = session.get(reports_url, timeout=requests_timeout)
-        res.raise_for_status()
+        res = session.get(reports_url)
+        if res.status_code != 200:
+            return None
         time.sleep(2.0)
         params = {
             "indexType": "NIFTY 50",
             "from": from_date.strftime("%d-%m-%Y"),
             "to": to_date.strftime("%d-%m-%Y"),
         }
-        res = session.get(api_url, params=params, headers={"Referer": reports_url}, timeout=requests_timeout)
+        res = session.get(api_url, params=params, headers={"Referer": reports_url})
         if res.status_code != 200:
             return None
         items = res.json().get("indexHistoricalData") or []

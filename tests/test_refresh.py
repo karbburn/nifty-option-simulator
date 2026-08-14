@@ -162,3 +162,54 @@ def test_main_returns_zero_on_warn(monkeypatch, capsys):
     monkeypatch.setattr(refresh, "run_refresh", lambda *a, **k: result)
     assert refresh.main(["refresh"]) == 0
     assert '"status": "warn"' in capsys.readouterr().out
+
+
+class _FakeResponse:
+    def __init__(self, status_code, payload=None):
+        self.status_code = status_code
+        self._payload = payload
+
+    def json(self):
+        return self._payload
+
+
+class _FakeSession:
+    def __init__(self, page, api):
+        self._page = page
+        self._api = api
+
+    def get(self, url, params=None, headers=None):
+        if "indicesHistory" in str(url) or (params and "indicesHistory" in str(params)):
+            return self._api
+        return self._page
+
+
+def test_fetch_nse_returns_data_on_200(monkeypatch):
+    payload = {
+        "indexName": "NIFTY 50",
+        "indexHistoricalData": [
+            {
+                "OPEN": "24641.00",
+                "HIGH": "24677.05",
+                "LOW": "24604.15",
+                "CLOSE": "24636.00",
+                "SHARES_TRADED": "344001180",
+                "TURNOVER": "30115.41",
+                "TIMESTAMP": "13-Aug-2026",
+            }
+        ],
+    }
+    fake = _FakeSession(_FakeResponse(200, payload), _FakeResponse(200, payload))
+    monkeypatch.setattr(refresh, "_nse_session", lambda timeout=20: fake)
+    df = refresh.fetch_nse(dt.date(2026, 8, 13), dt.date(2026, 8, 14))
+    assert df is not None
+    assert len(df) == 1
+    assert df["Date"].iloc[0] == pd.Timestamp("2026-08-13")
+    assert df["Close"].iloc[0] == pytest.approx(24636.0)
+    assert df["data_source"].iloc[0] == "nse"
+
+
+def test_fetch_nse_returns_none_on_503(monkeypatch):
+    fake = _FakeSession(_FakeResponse(200), _FakeResponse(503))
+    monkeypatch.setattr(refresh, "_nse_session", lambda timeout=20: fake)
+    assert refresh.fetch_nse(dt.date(2026, 8, 13), dt.date(2026, 8, 14)) is None
