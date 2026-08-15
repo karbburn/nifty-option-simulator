@@ -66,6 +66,7 @@ def load_history(path) -> pd.DataFrame | None:
 
 
 def write_history(path, df: pd.DataFrame) -> None:
+    path.parent.mkdir(parents=True, exist_ok=True)
     out = df.copy()
     out["Date"] = out["Date"].dt.strftime("%d-%b-%Y").str.upper()
     out.to_csv(path, index=False)
