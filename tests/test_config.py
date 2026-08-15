@@ -17,6 +17,7 @@ def test_defaults():
     assert cfg.ladder_floor_pcts_friday == (0.07, 0.10, 0.13)
     assert cfg.ladder_stop_pcts == (0.03, 0.05, 0.07)
     assert cfg.ladder_fill_mode == "observed_close"
+    assert cfg.ladder_rollover is True
     assert cfg.refresh_provider_order == ("nse", "yfinance")
     assert cfg.validation_mode == "full_sample"
 

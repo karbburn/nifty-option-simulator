@@ -3,6 +3,7 @@
 from __future__ import annotations
 
 import json
+from dataclasses import replace
 
 import pandas as pd
 import pytest
@@ -64,8 +65,9 @@ def _ts(s: str) -> pd.Timestamp:
     return pd.Timestamp(s)
 
 
-def _trade_for(engine_df, entry_date):
-    trades = run_backtest(engine_df, _table(engine_df), cfg)
+def _trade_for(engine_df, entry_date, rollover=True):
+    local = replace(cfg, ladder_rollover=rollover)
+    trades = run_backtest(engine_df, _table(engine_df), local)
     return next(t for t in trades if t.entry_date == _ts(entry_date))
 
 
@@ -92,7 +94,7 @@ def test_trade_count_and_entry_pricing_match_bs(engine_df):
     assert len(trades) == 9
     for t in trades:
         strike = nearest_strike(t.entry_close, cfg.strike_interval, cfg.strike_tie_rule)
-        t0 = (t.expiry - t.entry_date).days / 365.0
+        t0 = (t.legs[0]["expiry"] - t.entry_date).days / 365.0
         expected = black_scholes(t.entry_close, strike, t0, cfg.iv_flat, RATE, t.side)
         assert t.entry_premium == pytest.approx(expected, rel=1e-9)
         assert t.strike == strike
@@ -113,7 +115,7 @@ def test_stop_trade_hand_checked(engine_df):
 
 
 def test_trailing_floor_holds_rally_to_expiry(engine_df):
-    t = _trade_for(engine_df, "2026-08-14")
+    t = _trade_for(engine_df, "2026-08-14", rollover=False)
     assert t.pair == "Fri→Mon"
     assert t.side == "CE"
     assert t.exit_reason == "expiry"
@@ -123,7 +125,7 @@ def test_trailing_floor_holds_rally_to_expiry(engine_df):
 
 
 def test_expiry_exit_at_intrinsic(engine_df):
-    t = _trade_for(engine_df, "2026-08-12")
+    t = _trade_for(engine_df, "2026-08-12", rollover=False)
     assert t.pair == "Wed→Thu"
     assert t.side == "PE"
     assert t.exit_reason == "expiry"
@@ -133,9 +135,32 @@ def test_expiry_exit_at_intrinsic(engine_df):
     assert t.pnl == pytest.approx(-t.entry_premium * cfg.lot_size, rel=1e-9)
 
 
+def test_rollover_rolls_expiry_trades_to_next_expiry(engine_df):
+    baseline = run_backtest(engine_df, _table(engine_df), replace(cfg, ladder_rollover=False))
+    rolled = run_backtest(engine_df, _table(engine_df), cfg)
+    by_entry = {t.entry_date: t for t in rolled}
+    for a in baseline:
+        if a.exit_reason != "expiry":
+            continue
+        b = by_entry[a.entry_date]
+        assert b.rolls >= 1
+        assert b.exit_date > a.exit_date
+        assert all(leg["exit_reason"] == "expiry" for leg in b.legs[:-1])
+
+
+def test_rollover_never_chains_past_available_data(engine_df):
+    t = _trade_for(engine_df, "2026-08-14", rollover=True)
+    assert t.legs[-1]["exit_date"] <= engine_df["Date"].max()
+    assert t.rolls == len(t.legs) - 1
+
+
 def test_pnl_arithmetic_is_exit_minus_entry_times_lot(engine_df):
     for t in run_backtest(engine_df, _table(engine_df), cfg):
-        assert t.pnl == pytest.approx((t.exit_premium - t.entry_premium) * cfg.lot_size, rel=1e-9)
+        assert t.pnl == pytest.approx(sum(leg["pnl"] for leg in t.legs), rel=1e-9)
+        for leg in t.legs:
+            assert leg["pnl"] == pytest.approx(
+                (leg["exit_premium"] - leg["entry_premium"]) * cfg.lot_size, rel=1e-9
+            )
 
 
 # ---------- portfolio MTM ----------
@@ -249,6 +274,7 @@ def test_export_results_writes_three_artifacts(engine_df, tmp_path):
         "exit_reason",
         "days_held",
         "pnl",
+        "rolls",
     ]
 
 

@@ -25,6 +25,7 @@ class Config:
     ladder_floor_pcts_friday: tuple[float, float, float] = (0.07, 0.10, 0.13)
     ladder_stop_pcts: tuple[float, float, float] = (0.03, 0.05, 0.07)
     ladder_fill_mode: str = "observed_close"
+    ladder_rollover: bool = True
     data_path: Path = PROJECT_ROOT / "assets" / "NIFTY 50-14-08-2025-to-14-08-2026.csv"
     data_history_path: Path = PROJECT_ROOT / "data" / "nifty50_history.csv"
     refresh_provider_order: tuple[str, ...] = ("nse", "yfinance")

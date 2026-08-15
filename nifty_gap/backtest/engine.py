@@ -33,6 +33,8 @@ class Trade:
     exit_reason: str
     days_held: int
     pnl: float
+    rolls: int = 0
+    legs: tuple = ()
 
 
 def build_signals(df: pd.DataFrame, table: pd.DataFrame) -> pd.DataFrame:
@@ -72,65 +74,91 @@ def price_trade(df: pd.DataFrame, signal, cfg: Config, mode: str = "ladder") -> 
     pair = str(signal["pair"])
     side = str(signal["side"])
 
-    strike = nearest_strike(entry_close, cfg.strike_interval, cfg.strike_tie_rule)
-    expiry = pd.Timestamp(next_expiry(entry_date.date(), cfg.expiry_weekday)).normalize()
-    rate = get_risk_free_rate(cfg.rate_default)
-    t0 = max((expiry - entry_date).days, 1) / 365.0
-    entry_premium = black_scholes(entry_close, strike, t0, cfg.iv_flat, rate, side)
-
     closes = df.set_index("Date")["Close"]
-    obs_days = [d for d in df["Date"] if entry_date < d <= expiry]
-    triggers = [d for d in obs_days if d < expiry]
+    rate = get_risk_free_rate(cfg.rate_default)
+    floor_pcts = (
+        cfg.ladder_floor_pcts_friday if pair.startswith("Fri") else cfg.ladder_floor_pcts
+    )
 
-    premiums = [entry_premium] + [
-        _mark(closes, d, strike, side, expiry, cfg) for d in triggers
-    ]
+    legs: list[dict] = []
+    cur_date = entry_date
+    cur_close = entry_close
+    cur_expiry = pd.Timestamp(next_expiry(entry_date.date(), cfg.expiry_weekday)).normalize()
+    while True:
+        strike = nearest_strike(cur_close, cfg.strike_interval, cfg.strike_tie_rule)
+        t0 = max((cur_expiry - cur_date).days, 1) / 365.0
+        entry_premium = black_scholes(cur_close, strike, t0, cfg.iv_flat, rate, side)
 
-    if mode == "hold":
-        exit_reason = "expiry"
-        exit_index = len(premiums) - 1
-    else:
-        floor_pcts = (
-            cfg.ladder_floor_pcts_friday
-            if pair.startswith("Fri")
-            else cfg.ladder_floor_pcts
-        )
-        ladder: LadderExit = simulate(
-            premiums,
-            entry_premium,
-            floor_pcts=floor_pcts,
-            stop_pcts=cfg.ladder_stop_pcts,
-            fill_mode=cfg.ladder_fill_mode,
-        )
-        exit_reason = ladder.exit_reason
-        exit_index = ladder.exit_index
+        obs_days = [d for d in df["Date"] if cur_date < d <= cur_expiry]
+        triggers = [d for d in obs_days if d < cur_expiry]
+        premiums = [entry_premium] + [
+            _mark(closes, d, strike, side, cur_expiry, cfg) for d in triggers
+        ]
 
-    if exit_reason == "expiry":
-        if obs_days:
-            exit_premium = _mark(closes, obs_days[-1], strike, side, expiry, cfg)
-            exit_date = obs_days[-1]
+        if mode == "hold":
+            exit_reason = "expiry"
+            exit_index = len(premiums) - 1
         else:
-            exit_premium = entry_premium
-            exit_date = entry_date
-    else:
-        exit_premium = premiums[exit_index]
-        exit_date = triggers[exit_index - 1] if exit_index >= 1 else entry_date
+            ladder: LadderExit = simulate(
+                premiums,
+                entry_premium,
+                floor_pcts=floor_pcts,
+                stop_pcts=cfg.ladder_stop_pcts,
+                fill_mode=cfg.ladder_fill_mode,
+            )
+            exit_reason = ladder.exit_reason
+            exit_index = ladder.exit_index
 
-    days_held = max((exit_date - entry_date).days, 0)
-    pnl = (exit_premium - entry_premium) * cfg.lot_size
+        if exit_reason == "expiry":
+            if obs_days:
+                exit_premium = _mark(closes, obs_days[-1], strike, side, cur_expiry, cfg)
+                exit_date = obs_days[-1]
+            else:
+                exit_premium = entry_premium
+                exit_date = cur_date
+        else:
+            exit_premium = premiums[exit_index]
+            exit_date = triggers[exit_index - 1] if exit_index >= 1 else cur_date
+
+        legs.append(
+            {
+                "entry_date": cur_date,
+                "exit_date": exit_date,
+                "expiry": cur_expiry,
+                "strike": strike,
+                "entry_premium": entry_premium,
+                "exit_premium": exit_premium,
+                "exit_reason": exit_reason,
+                "pnl": (exit_premium - entry_premium) * cfg.lot_size,
+            }
+        )
+
+        if exit_reason != "expiry" or mode == "hold" or not cfg.ladder_rollover:
+            break
+
+        nxt = pd.Timestamp(next_expiry(cur_expiry.date(), cfg.expiry_weekday)).normalize()
+        if not any(exit_date < d <= nxt for d in df["Date"]):
+            break
+        cur_date = exit_date
+        cur_close = float(closes.loc[cur_date])
+        cur_expiry = nxt
+
+    first, last = legs[0], legs[-1]
     return Trade(
         entry_date=entry_date,
-        exit_date=exit_date,
+        exit_date=last["exit_date"],
         pair=pair,
         side=side,
-        strike=float(strike),
+        strike=first["strike"],
         entry_close=entry_close,
-        expiry=expiry,
-        entry_premium=entry_premium,
-        exit_premium=exit_premium,
-        exit_reason=exit_reason,
-        days_held=days_held,
-        pnl=pnl,
+        expiry=last["expiry"],
+        entry_premium=first["entry_premium"],
+        exit_premium=last["exit_premium"],
+        exit_reason=last["exit_reason"],
+        days_held=max((last["exit_date"] - entry_date).days, 0),
+        pnl=sum(leg["pnl"] for leg in legs),
+        rolls=len(legs) - 1,
+        legs=tuple(legs),
     )
 
 
@@ -140,7 +168,7 @@ def run_backtest(df: pd.DataFrame, table: pd.DataFrame, cfg: Config, mode: str =
 
 
 def trades_frame(trades: list[Trade]) -> pd.DataFrame:
-    return pd.DataFrame([asdict(t) for t in trades])
+    return pd.DataFrame([asdict(t) for t in trades]).drop(columns=["legs"])
 
 
 def daily_mtm(df: pd.DataFrame, trades: list[Trade], cfg: Config) -> pd.DataFrame:
@@ -148,16 +176,29 @@ def daily_mtm(df: pd.DataFrame, trades: list[Trade], cfg: Config) -> pd.DataFram
     rate = get_risk_free_rate(cfg.rate_default)
     rows = []
     for day in df["Date"]:
-        realized = sum(t.pnl for t in trades if t.exit_date <= day)
+        realized = 0.0
         unrealized = 0.0
         for t in trades:
-            if t.exit_date <= day or t.entry_date > day:
-                continue
-            if t.entry_date <= day < t.exit_date:
+            legs = t.legs or (
+                {
+                    "entry_date": t.entry_date,
+                    "exit_date": t.exit_date,
+                    "expiry": t.expiry,
+                    "strike": t.strike,
+                    "entry_premium": t.entry_premium,
+                    "exit_premium": t.exit_premium,
+                },
+            )
+            for leg in legs:
+                if leg["exit_date"] <= day:
+                    realized += (leg["exit_premium"] - leg["entry_premium"]) * cfg.lot_size
+                    continue
+                if leg["entry_date"] > day:
+                    continue
                 spot = float(closes.loc[day])
-                tte = max((t.expiry - day).days, 0) / 365.0
-                mark = black_scholes(spot, t.strike, tte, cfg.iv_flat, rate, t.side)
-                unrealized += (mark - t.entry_premium) * cfg.lot_size
+                tte = max((leg["expiry"] - day).days, 0) / 365.0
+                mark = black_scholes(spot, leg["strike"], tte, cfg.iv_flat, rate, t.side)
+                unrealized += (mark - leg["entry_premium"]) * cfg.lot_size
         rows.append({"Date": day, "equity": realized + unrealized})
     return pd.DataFrame(rows, columns=["Date", "equity"])
 

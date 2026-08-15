@@ -45,6 +45,8 @@ For each weekday pair (Mon→Tue, Tue→Wed, Wed→Thu, Thu→Fri, Fri→Mon):
    - Forced exit at next weekly expiry
 5. **Report** exit reasons, per‑pair P&L, equity curve, and benchmark comparison
 
+`ladder_rollover` (default `True`) re-enters a fresh ATM weekly option when a trade reaches expiry without hitting any ladder condition, chaining legs until a stop/floor triggers or data runs out. On the current sample this is **loss-making** (full-sample −₹329.7k vs −₹75.5k without rollover) because the rolled-in ATM premium mostly theta‑decays into the −7% stop. Set `ladder_rollover=False` to exit at the first expiry.
+
 ---
 
 ## 3. Output
