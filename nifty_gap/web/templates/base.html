@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#1976d2">
+  <link rel="icon" href="/static/favicon.ico">
+  <link rel="apple-touch-icon" href="/static/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="/static/icon-192.png">
+  <title>NIFTY Gap Dashboard</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.7"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-adapter-date-fns@3.0.0"></script>
+  <script src="https://cdn.jsdelivr.net/npm/chartjs-chart-error-bars@4.4.5"></script>
+  <style>
+    :root {
+      --bg-primary: #ffffff; --bg-secondary: #f8f9fa; --bg-tertiary: #e9ecef; --border: #dee2e6;
+      --text-primary: #212529; --text-secondary: #6c757d; --text-muted: #adb5bd;
+      --accent: #1976d2;
+      --ce-green: #2e7d32; --pe-red: #c62828;
+      --profit-bg: #e8f5e9; --loss-bg: #ffebee; --neutral-grey: #757575;
+      --chart-blue: #1565c0; --chart-yellow: #f9a825; --chart-drawdown: rgba(198,40,40,0.18); --chart-grid: #e9ecef;
+      --badge-fresh: #28a745; --badge-stale: #ffc107; --badge-stale-red: #dc3545;
+      --sp-1: 4px; --sp-2: 8px; --sp-3: 8px; --sp-4: 16px; --sp-5: 24px; --sp-6: 24px; --sp-8: 32px;
+      --font-body: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      --font-mono: "SF Mono", "Cascadia Code", "Fira Code", monospace;
+      --radius-sm: 4px; --radius-md: 6px; --radius-lg: 8px;
+      --shadow-card: 0 1px 3px rgba(0,0,0,0.08); --shadow-hover: 0 2px 8px rgba(0,0,0,0.12);
+    }
+    * { box-sizing: border-box; }
+    body { margin: 0; font-family: var(--font-body); font-size: 14px; line-height: 1.5; color: var(--text-primary); background: var(--bg-primary); }
+    a { color: var(--accent); text-decoration: none; }
+    .header { display: flex; align-items: center; justify-content: space-between; gap: var(--sp-4); padding: var(--sp-3) var(--sp-5); background: var(--bg-secondary); border-bottom: 1px solid var(--border); position: sticky; top: 0; z-index: 20; flex-wrap: wrap; }
+    .logo { font-size: 18px; font-weight: 600; color: var(--text-primary); }
+    .nav { display: flex; gap: var(--sp-4); }
+    .nav a { padding: var(--sp-1) var(--sp-2); border-radius: var(--radius-sm); }
+    .nav a.active { color: var(--accent); border-bottom: 2px solid var(--accent); }
+    .header-right { display: flex; align-items: center; gap: var(--sp-4); }
+    .spot-ticker { font-variant-numeric: tabular-nums; }
+    .spot-label { font-size: 12px; color: var(--text-secondary); margin-right: var(--sp-1); }
+    .spot-value { font-weight: 600; transition: color 0.3s ease; }
+    .flash-up { color: var(--ce-green) !important; animation: spotFade 1.2s ease forwards; }
+    .flash-down { color: var(--pe-red) !important; animation: spotFade 1.2s ease forwards; }
+    @keyframes spotFade { 0% { opacity: 1; } 100% { color: var(--text-primary); } }
+    .spot-change { font-size: 12px; }
+    .spot-change.up { color: var(--ce-green); }
+    .spot-change.down { color: var(--pe-red); }
+    .spot-change.neutral { color: var(--text-muted); }
+    .fresh-badge { font-size: 11px; padding: 2px 8px; border-radius: 10px; font-weight: 500; white-space: nowrap; }
+    .fresh-badge.fresh { background: #e8f5e9; color: var(--badge-fresh); }
+    .fresh-badge.stale { background: #fff8e1; color: var(--badge-stale); }
+    .fresh-badge.stale-red { background: #ffebee; color: var(--badge-stale-red); }
+    main { max-width: 1200px; margin: 0 auto; padding: var(--sp-5) var(--sp-5) var(--sp-16); }
+    .card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--sp-5); box-shadow: var(--shadow-card); margin-bottom: var(--sp-6); }
+    .card h2 { margin: 0 0 var(--sp-4); font-size: 18px; font-weight: 600; }
+    .kpi-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--sp-4); margin-bottom: var(--sp-6); }
+    .kpi-card { background: var(--bg-secondary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--sp-4) var(--sp-5); box-shadow: var(--shadow-card); text-align: center; }
+    .kpi-label { font-size: 12px; color: var(--text-secondary); display: block; margin-bottom: var(--sp-1); }
+    .kpi-value { font-size: 24px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .kpi-value.profit { color: var(--ce-green); }
+    .kpi-value.loss { color: var(--pe-red); }
+    .positions-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--sp-4); }
+    .position-card { background: var(--bg-primary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--sp-4); box-shadow: var(--shadow-card); }
+    .position-header { display: flex; align-items: center; gap: var(--sp-2); }
+    .pair-label { font-weight: 600; }
+    .side-badge { display: inline-block; padding: 1px 6px; border-radius: var(--radius-sm); font-size: 11px; font-weight: 600; letter-spacing: 0.5px; color: #fff; }
+    .side-badge.ce { background: var(--ce-green); }
+    .side-badge.pe { background: var(--pe-red); }
+    .dte-badge { font-size: 11px; color: var(--text-secondary); margin-left: auto; }
+    .position-body { display: grid; grid-template-columns: repeat(2, 1fr); gap: var(--sp-2); margin: var(--sp-3) 0; }
+    .stat-label { font-size: 11px; color: var(--text-secondary); display: block; }
+    .stat-value { font-size: 14px; font-weight: 600; font-variant-numeric: tabular-nums; }
+    .stat-value.profit { color: var(--ce-green); }
+    .stat-value.loss { color: var(--pe-red); }
+    .position-chart { height: 48px; margin: var(--sp-2) 0; position: relative; }
+    .position-footer { display: flex; justify-content: space-between; font-size: 12px; color: var(--text-secondary); }
+    .empty-state { color: var(--text-secondary); text-align: center; padding: var(--sp-6); }
+    .empty-state .empty-sub { font-size: 12px; }
+    .chart-container { position: relative; width: 100%; height: 320px; }
+    .chart-container[aria-label] { position: relative; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: var(--sp-6); }
+    .table-wrap { overflow-x: auto; }
+    table { width: 100%; border-collapse: collapse; font-size: 14px; }
+    th, td { padding: var(--sp-2) var(--sp-3); text-align: left; border-bottom: 1px solid var(--border); white-space: nowrap; }
+    th { background: var(--bg-tertiary); font-weight: 600; cursor: pointer; user-select: none; }
+    th.sortable:hover { background: #dee2e6; }
+    td:nth-child(n+6), th:nth-child(n+6) { text-align: right; font-variant-numeric: tabular-nums; font-family: var(--font-mono); }
+    td.pnl-positive { color: var(--ce-green); background: var(--profit-bg); }
+    td.pnl-negative { color: var(--pe-red); background: var(--loss-bg); }
+    .filters { display: flex; gap: var(--sp-3); flex-wrap: wrap; margin-bottom: var(--sp-3); }
+    .filters select { padding: var(--sp-2); border: 1px solid var(--border); border-radius: var(--radius-sm); font-size: 13px; min-height: 44px; }
+    .tab-panel[hidden] { display: none; }
+    .bottom-nav { display: none; }
+    .footer { text-align: center; color: var(--text-muted); font-size: 12px; padding: var(--sp-6) 0; }
+    @media (max-width: 991px) {
+      .kpi-row { grid-template-columns: repeat(2, 1fr); }
+      .two-col { grid-template-columns: 1fr; }
+      .chart-container { height: 260px; }
+    }
+    @media (max-width: 767px) {
+      .kpi-row { grid-template-columns: 1fr; }
+      .chart-container { height: 220px; }
+      .header { flex-direction: column; align-items: flex-start; }
+      .bottom-nav { display: flex; position: fixed; bottom: 0; left: 0; right: 0; height: 56px; background: var(--bg-primary); border-top: 1px solid var(--border); z-index: 30; touch-action: manipulation; }
+      .bottom-nav button { flex: 1; background: none; border: none; font-size: 11px; color: var(--text-secondary); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 2px; min-height: 44px; touch-action: manipulation; }
+      .bottom-nav button.active { color: var(--accent); border-top: 2px solid var(--accent); }
+      .bottom-nav button .tab-icon { font-size: 18px; }
+      main { padding-bottom: 72px; }
+      .coming-soon-mobile { display: block; }
+    }
+    .coming-soon-mobile { display: none; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--sp-3) var(--sp-4); font-size: 12px; color: var(--text-secondary); margin-bottom: var(--sp-4); }
+  </style>
+</head>
+<body>
+  <header class="header">
+    <div class="header-left">
+      <a href="/" class="logo">NIFTY Gap Dashboard</a>
+      <nav class="nav">
+        <a href="/" class="{{ 'active' if request.url.path == '/' else '' }}">Dashboard</a>
+        <a href="/expiry" class="{{ 'active' if request.url.path == '/expiry' else '' }}">Expiry Explainer</a>
+      </nav>
+    </div>
+    <div class="header-right">
+      <span class="spot-ticker">
+        <span class="spot-label">NIFTY 50</span>
+        <span class="spot-value" id="spotValue">₹{{ "%.2f"|format(spot.spot) }}</span>
+        <span class="spot-change" id="spotChange">—</span>
+      </span>
+      <span class="fresh-badge {{ badge_class }}" title="Last trading date: {{ snap.last_trading_date }}">{{ badge_text }}</span>
+    </div>
+  </header>
+
+  <main>
+    {% block content %}{% endblock %}
+  </main>
+
+  <nav class="bottom-nav" aria-label="Mobile navigation">
+    <button data-tab="live" class="active" aria-current="page"><span class="tab-icon">📈</span>Live</button>
+    <button data-tab="trades"><span class="tab-icon">📋</span>Trades</button>
+    <button data-tab="charts"><span class="tab-icon">📊</span>Charts</button>
+    <a data-tab="expiry" href="/expiry" class="{{ 'active' if request.url.path == '/expiry' else '' }}"><span class="tab-icon">📘</span>Expiry</a>
+  </nav>
+
+  <footer class="footer">
+    {{ snap.git_sha[:7] }} · generated {{ snap.generated_at }} · research tool — not investment advice
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () {
+      var tabButtons = document.querySelectorAll('.bottom-nav button');
+      var isMobile = function () { return window.innerWidth < 768; };
+      tabButtons.forEach(function (btn) {
+        btn.addEventListener('click', function () {
+          tabButtons.forEach(function (b) { b.classList.remove('active'); b.removeAttribute('aria-current'); });
+          btn.classList.add('active'); btn.setAttribute('aria-current', 'page');
+          var target = btn.dataset.tab;
+          document.querySelectorAll('.tab-panel').forEach(function (p) {
+            p.hidden = isMobile() && p.id !== 'tab-' + target;
+          });
+        });
+      });
+      var expiryLink = document.querySelector('.bottom-nav a[data-tab="expiry"]');
+      if (expiryLink && window.location.pathname === '/') {
+        expiryLink.addEventListener('click', function () {
+          expiryLink.classList.add('active');
+        });
+      }
+    });
+
+    var lastSpot = {{ spot.spot }};
+    async function pollSpot() {
+      try {
+        var resp = await fetch('/api/spot');
+        var data = await resp.json();
+        var el = document.getElementById('spotValue');
+        var change = document.getElementById('spotChange');
+        var fmt = data.spot.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        el.textContent = '\u20B9' + fmt;
+        if (lastSpot !== null && data.spot !== lastSpot) {
+          var dir = data.spot > lastSpot ? 'up' : 'down';
+          el.classList.remove('flash-up', 'flash-down');
+          void el.offsetWidth;
+          el.classList.add(dir === 'up' ? 'flash-up' : 'flash-down');
+          change.textContent = dir === 'up' ? '\u25B2' : '\u25BC';
+          change.className = 'spot-change ' + dir;
+        } else {
+          change.textContent = '\u2014';
+          change.className = 'spot-change neutral';
+        }
+        lastSpot = data.spot;
+      } catch (e) {
+        document.getElementById('spotValue').textContent = '\u2014';
+      }
+    }
+    setInterval(pollSpot, 60000);
+  </script>
+  {% block scripts %}{% endblock %}
+</body>
+</html>
