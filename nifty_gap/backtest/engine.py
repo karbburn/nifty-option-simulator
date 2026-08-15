@@ -93,9 +93,8 @@ def price_trade(df: pd.DataFrame, signal, cfg: Config, mode: str = "ladder") -> 
         ladder: LadderExit = simulate(
             premiums,
             entry_premium,
-            sl_pct=cfg.ladder_sl_pct,
             floor_pcts=cfg.ladder_floor_pcts,
-            target_pct=cfg.ladder_target_pct,
+            stop_pcts=cfg.ladder_stop_pcts,
             fill_mode=cfg.ladder_fill_mode,
         )
         exit_reason = ladder.exit_reason
@@ -191,5 +190,5 @@ def ladder_log_gate(trades: list[Trade]) -> dict:
         "exit_reason_counts": counts,
         "avg_days_held": avg_days,
         "max_days_held": max_days,
-        "expected_scheme": avg_days <= 3.0,
+        "expected_scheme": any(r != "expiry" for r in counts),
     }

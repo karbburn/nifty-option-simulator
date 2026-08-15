@@ -11,7 +11,7 @@ from pathlib import Path
 import pandas as pd
 
 ANNUALIZATION = 252
-REASON_ORDER = ["SL", "floor_3", "floor_5", "floor_10", "target_15", "expiry"]
+REASON_ORDER = ["stop_3", "stop_5", "stop_7", "floor_5", "floor_10", "floor_15", "expiry"]
 
 
 def trade_stats(trades: pd.DataFrame) -> dict:

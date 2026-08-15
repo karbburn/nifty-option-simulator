@@ -3,7 +3,7 @@
 **Period:** 14 Aug 2025 – 14 Aug 2026  
 **Data:** NIFTY 50 daily OHLC (yfinance; current-day bar provisional, dropped until finalised)  
 **Engine:** Black‑Scholes ATM pricing, 12.5% flat IV, ₹50 strike granularity  
-**Ladder:** Ratcheting exit on option premium % move (−7% hard SL, floors at +3%/+5%/+10%, final target +15%)  
+**Ladder:** Two-sided ratcheting exit on option premium % move (loss stops −3%/−5%/−7%; trailing profit floors +5%/+10%/+15%)  
 **Tests:** 110 pytest cases green; ruff clean
 
 ---

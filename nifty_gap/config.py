@@ -21,9 +21,8 @@ class Config:
     ci_alpha: float = 0.05
     validation_mode: str = "full_sample"
     position_mode: str = "fixed_lot"
-    ladder_sl_pct: float = -0.07
-    ladder_floor_pcts: tuple[float, float, float] = (0.03, 0.05, 0.10)
-    ladder_target_pct: float = 0.15
+    ladder_floor_pcts: tuple[float, float, float] = (0.05, 0.10, 0.15)
+    ladder_stop_pcts: tuple[float, float, float] = (0.03, 0.05, 0.07)
     ladder_fill_mode: str = "observed_close"
     data_path: Path = PROJECT_ROOT / "assets" / "NIFTY 50-14-08-2025-to-14-08-2026.csv"
     data_history_path: Path = PROJECT_ROOT / "data" / "nifty50_history.csv"

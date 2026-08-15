@@ -98,11 +98,11 @@ def test_trade_count_and_entry_pricing_match_bs(engine_df):
         assert t.strike == strike
 
 
-def test_sl_trade_hand_checked(engine_df):
+def test_stop_trade_hand_checked(engine_df):
     t = _trade_for(engine_df, "2026-08-10")
     assert t.pair == "Mon→Tue"
     assert t.side == "CE"
-    assert t.exit_reason == "SL"
+    assert t.exit_reason == "stop_7"
     assert t.exit_date == _ts("2026-08-11")
     assert t.days_held == 1
     expected_entry = black_scholes(24000, 24000, 3 / 365, cfg.iv_flat, RATE, "CE")
@@ -112,15 +112,14 @@ def test_sl_trade_hand_checked(engine_df):
     assert t.pnl == pytest.approx((expected_exit - expected_entry) * cfg.lot_size, rel=1e-9)
 
 
-def test_target_trade_hand_checked(engine_df):
+def test_trailing_floor_holds_rally_to_expiry(engine_df):
     t = _trade_for(engine_df, "2026-08-14")
     assert t.pair == "Fri→Mon"
     assert t.side == "CE"
-    assert t.exit_reason == "target_15"
-    assert t.exit_date == _ts("2026-08-18")
-    assert t.days_held == 4
-    expected_exit = black_scholes(24000, 23000, 2 / 365, cfg.iv_flat, RATE, "CE")
-    assert t.exit_premium == pytest.approx(expected_exit, rel=1e-9)
+    assert t.exit_reason == "expiry"
+    assert t.exit_date == _ts("2026-08-20")
+    assert t.days_held == 6
+    assert t.exit_premium == pytest.approx(1000.0, rel=1e-9)
 
 
 def test_expiry_exit_at_intrinsic(engine_df):
@@ -256,7 +255,7 @@ def test_export_results_writes_three_artifacts(engine_df, tmp_path):
 def test_ladder_log_gate_reports_reasons_and_hold(engine_df):
     trades = run_backtest(engine_df, _table(engine_df), cfg)
     gate = ladder_log_gate(trades)
-    assert gate["exit_reason_counts"]["SL"] >= 1
+    assert sum(gate["exit_reason_counts"].values()) == 9
+    assert any(r.startswith(("stop_", "floor_")) for r in gate["exit_reason_counts"])
     assert gate["avg_days_held"] > 0
     assert gate["max_days_held"] >= gate["avg_days_held"]
-    assert gate["expected_scheme"] is True

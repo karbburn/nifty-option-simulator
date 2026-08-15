@@ -13,9 +13,8 @@ def test_defaults():
     assert cfg.strike_interval == 50
     assert cfg.lot_size == 75
     assert cfg.min_pair_sample == 5
-    assert cfg.ladder_sl_pct == -0.07
-    assert cfg.ladder_floor_pcts == (0.03, 0.05, 0.10)
-    assert cfg.ladder_target_pct == 0.15
+    assert cfg.ladder_floor_pcts == (0.05, 0.10, 0.15)
+    assert cfg.ladder_stop_pcts == (0.03, 0.05, 0.07)
     assert cfg.ladder_fill_mode == "observed_close"
     assert cfg.refresh_provider_order == ("nse", "yfinance")
     assert cfg.validation_mode == "full_sample"

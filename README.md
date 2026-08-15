@@ -38,10 +38,9 @@ For each weekday pair (Mon→Tue, Tue→Wed, Wed→Thu, Thu→Fri, Fri→Mon):
 1. **Compute** `P(open_day2 > close_day1)` from historical data
 2. **Trade** long ATM Call if `p_up > 50%`, else long ATM Put
 3. **Price** the option via Black‑Scholes (ATM strike, nearest ₹50, 12.5% IV)
-4. **Exit** via a ratcheting ladder on the option premium's own % move
-   - Hard SL: −7%
-   - Floors: +3%/+5%/+10%
-   - Final target: +15%
+4. **Exit** via a two-sided ratcheting ladder on the option premium's own % move
+   - Loss stops cascade: −3% / −5% / −7% (first breach exits)
+   - Profit floors trail up: +5% / +10% / +15% (exit when the premium falls back through the highest banked floor)
    - Forced exit at next weekly expiry
 5. **Report** exit reasons, per‑pair P&L, equity curve, and benchmark comparison
 
@@ -69,7 +68,7 @@ Key parameters you may want to adjust:
 - `min_pair_sample` — minimum rows per pair before a probability is computed (default: 5)
 - `z_score` — how many standard deviations to use for Wilson CI (default: 2)
 - `iv` — implied volatility flat rate used for all BS prices (default: 0.125)
-- `ladder_*` — exit‑ladder thresholds and floors
+- `ladder_*` — exit‑ladder levels: loss stops (`ladder_stop_pcts`) and trailing profit floors (`ladder_floor_pcts`)
 
 All parameters are exposed in `config.py` and are individually reversible.
 

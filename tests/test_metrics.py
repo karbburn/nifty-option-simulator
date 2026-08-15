@@ -23,10 +23,10 @@ TRADE_COLUMNS = ["entry_date", "exit_date", "pair", "side", "strike", "entry_clo
 def _trades() -> pd.DataFrame:
     return pd.DataFrame(
         [
-            ["2026-08-10", "2026-08-11", "Mon→Tue", "CE", 24500, 24500, "2026-08-13", 100.0, 200.0, "target_15", 1, 100.0],
-            ["2026-08-11", "2026-08-12", "Mon→Tue", "CE", 24500, 24500, "2026-08-13", 100.0, 50.0, "SL", 1, -50.0],
+            ["2026-08-10", "2026-08-11", "Mon→Tue", "CE", 24500, 24500, "2026-08-13", 100.0, 200.0, "floor_15", 1, 100.0],
+            ["2026-08-11", "2026-08-12", "Mon→Tue", "CE", 24500, 24500, "2026-08-13", 100.0, 50.0, "stop_7", 1, -50.0],
             ["2026-08-12", "2026-08-13", "Tue→Wed", "PE", 24600, 24600, "2026-08-13", 100.0, 100.0, "expiry", 1, 0.0],
-            ["2026-08-13", "2026-08-14", "Tue→Wed", "PE", 24600, 24600, "2026-08-20", 100.0, 130.0, "floor_3", 1, 30.0],
+            ["2026-08-13", "2026-08-14", "Tue→Wed", "PE", 24600, 24600, "2026-08-20", 100.0, 130.0, "floor_5", 1, 30.0],
         ],
         columns=TRADE_COLUMNS,
     )
@@ -41,8 +41,8 @@ def test_trade_stats_hand_computed():
     assert stats["avg_loss"] == pytest.approx(-25.0)
     assert stats["profit_factor"] == pytest.approx(2.6)
     by_reason = {r["exit_reason"]: r for r in stats["exit_reasons"]}
-    assert by_reason["SL"]["count"] == 1 and by_reason["SL"]["pct"] == pytest.approx(25.0)
-    assert by_reason["target_15"]["avg_pnl"] == pytest.approx(100.0)
+    assert by_reason["stop_7"]["count"] == 1 and by_reason["stop_7"]["pct"] == pytest.approx(25.0)
+    assert by_reason["floor_15"]["avg_pnl"] == pytest.approx(100.0)
     assert by_reason["expiry"]["avg_pnl"] == pytest.approx(0.0)
 
 

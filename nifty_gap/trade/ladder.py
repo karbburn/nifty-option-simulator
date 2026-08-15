@@ -1,4 +1,8 @@
-"""GTT-style ratcheting trailing ladder on the premium's own % move from entry."""
+"""GTT-style ratcheting ladder on the premium's own % move from entry.
+
+Two-sided: loss stops cascade down (-3%/-5%/-7%), profit floors trail up
+(+5%/+10%/+15%). Exit at the banked floor, a loss stop, or expiry.
+"""
 
 from __future__ import annotations
 
@@ -13,32 +17,29 @@ class LadderExit:
     floor_level: float | None = None
 
 
-def _reason_name(level, level3, level5):
-    if level == level3:
-        return "floor_3"
-    if level == level5:
-        return "floor_5"
-    return "floor_10"
+def _floor_reason(level, floor_pcts: tuple[float, float, float]) -> str:
+    return f"floor_{int(round(level * 100))}"
 
 
-def _fill(reason, level, entry_premium, sl_pct, target_pct, observed, fill_mode):
+def _stop_level(m, stop_pcts: tuple[float, float, float]) -> float:
+    return max(stop for stop in stop_pcts if m <= -stop)
+
+
+def _fill(reason, level, entry_premium, observed, fill_mode):
     if fill_mode != "at_floor":
         return observed
-    if reason == "SL":
-        return entry_premium * (1.0 + sl_pct)
-    if reason == "target_15":
-        return entry_premium * (1.0 + target_pct)
     if reason == "expiry":
         return observed
-    return entry_premium * (1.0 + level)
+    if reason.startswith("floor_"):
+        return entry_premium * (1.0 + level)
+    return entry_premium * (1.0 - level)
 
 
 def simulate(
     premiums: list[float],
     entry_premium: float,
-    sl_pct: float = -0.07,
-    floor_pcts: tuple[float, float, float] = (0.03, 0.05, 0.10),
-    target_pct: float = 0.15,
+    floor_pcts: tuple[float, float, float] = (0.05, 0.10, 0.15),
+    stop_pcts: tuple[float, float, float] = (0.03, 0.05, 0.07),
     fill_mode: str = "observed_close",
 ) -> LadderExit:
     if not premiums:
@@ -46,38 +47,31 @@ def simulate(
     if entry_premium <= 0:
         raise ValueError("entry_premium must be positive")
 
-    level3, level5, level10 = floor_pcts
     floor_level = None
     for t in range(1, len(premiums)):
-        m = premiums[t] / entry_premium - 1.0
-        if m <= sl_pct:
+        m = round(premiums[t] / entry_premium - 1.0, 10)
+        if m <= -stop_pcts[0]:
+            stop_level = _stop_level(m, stop_pcts)
+            reason = f"stop_{int(round(stop_level * 100))}"
             return LadderExit(
-                "SL",
-                _fill("SL", None, entry_premium, sl_pct, target_pct, premiums[t], fill_mode),
-                t,
-                floor_level,
-            )
-        if floor_level == level10 and m >= target_pct:
-            return LadderExit(
-                "target_15",
-                _fill("target_15", floor_level, entry_premium, sl_pct, target_pct, premiums[t], fill_mode),
+                reason,
+                _fill(reason, stop_level, entry_premium, premiums[t], fill_mode),
                 t,
                 floor_level,
             )
         if floor_level is not None and m <= floor_level:
-            name = _reason_name(floor_level, level3, level5)
+            reason = _floor_reason(floor_level, floor_pcts)
             return LadderExit(
-                name,
-                _fill(name, floor_level, entry_premium, sl_pct, target_pct, premiums[t], fill_mode),
+                reason,
+                _fill(reason, floor_level, entry_premium, premiums[t], fill_mode),
                 t,
                 floor_level,
             )
-        if floor_level is None and m >= level3:
-            floor_level = level3
-        if floor_level == level3 and m >= level5:
-            floor_level = level5
-        if floor_level == level5 and m >= level10:
-            floor_level = level10
+        if floor_level is None and m >= floor_pcts[0]:
+            floor_level = floor_pcts[0]
+        for level in floor_pcts[1:]:
+            if floor_level is not None and floor_level < level and m >= level:
+                floor_level = level
 
     last = len(premiums) - 1
     return LadderExit("expiry", premiums[last], last, floor_level)
