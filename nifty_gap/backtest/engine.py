@@ -90,10 +90,15 @@ def price_trade(df: pd.DataFrame, signal, cfg: Config, mode: str = "ladder") -> 
         exit_reason = "expiry"
         exit_index = len(premiums) - 1
     else:
+        floor_pcts = (
+            cfg.ladder_floor_pcts_friday
+            if pair.startswith("Fri")
+            else cfg.ladder_floor_pcts
+        )
         ladder: LadderExit = simulate(
             premiums,
             entry_premium,
-            floor_pcts=cfg.ladder_floor_pcts,
+            floor_pcts=floor_pcts,
             stop_pcts=cfg.ladder_stop_pcts,
             fill_mode=cfg.ladder_fill_mode,
         )

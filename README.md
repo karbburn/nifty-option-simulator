@@ -41,6 +41,7 @@ For each weekday pair (Mon→Tue, Tue→Wed, Wed→Thu, Thu→Fri, Fri→Mon):
 4. **Exit** via a two-sided ratcheting ladder on the option premium's own % move
    - Loss stops cascade: −3% / −5% / −7% (first breach exits)
    - Profit floors trail up: +5% / +10% / +15% (exit when the premium falls back through the highest banked floor)
+   - Friday entries (Fri→Mon) trail up from a higher start: +7% / +10% / +13%
    - Forced exit at next weekly expiry
 5. **Report** exit reasons, per‑pair P&L, equity curve, and benchmark comparison
 
