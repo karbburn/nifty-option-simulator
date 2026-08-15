@@ -68,18 +68,18 @@ def test_stop_5():
     assert at_floor.exit_premium == pytest.approx(95.0)
 
 
-def test_stop_7():
+def test_stop_5_deep_drop():
     result = simulate([100, 92], 100)
-    assert result.exit_reason == "stop_7"
+    assert result.exit_reason == "stop_5"
     assert result.exit_index == 1
     assert result.exit_premium == pytest.approx(92)
     at_floor = simulate([100, 92], 100, fill_mode="at_floor")
-    assert at_floor.exit_premium == pytest.approx(93.0)
+    assert at_floor.exit_premium == pytest.approx(95.0)
 
 
 def test_stop_wins_over_banked_floor():
     result = simulate([100, 105, 92], 100)
-    assert result.exit_reason == "stop_7"
+    assert result.exit_reason == "stop_5"
     assert result.exit_index == 2
     assert result.exit_premium == pytest.approx(92)
     assert result.floor_level == pytest.approx(0.05)

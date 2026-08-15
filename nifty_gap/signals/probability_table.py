@@ -25,7 +25,12 @@ def wilson_interval(successes, n, z: float = 1.96):
         return ci_low, ci_high
 
 
-def build_probability_table(df: pd.DataFrame, min_pair_sample: int = 5, z: float = 1.96) -> pd.DataFrame:
+def build_probability_table(
+    df: pd.DataFrame,
+    min_pair_sample: int = 5,
+    z: float = 1.96,
+    excluded_pairs: frozenset = frozenset(),
+) -> pd.DataFrame:
     g = df.dropna(subset=["weekday_pair"]).copy()
     stats = (
         g.groupby("weekday_pair", sort=False)["gap_up"]
@@ -36,7 +41,11 @@ def build_probability_table(df: pd.DataFrame, min_pair_sample: int = 5, z: float
     stats["p_up"] = stats["n_up"] / stats["n"]
     stats["ci_low"], stats["ci_high"] = wilson_interval(stats["n_up"], stats["n"], z)
     stats["side"] = np.where(stats["p_up"] > 0.5, "CE", "PE")
-    stats["tradeable"] = (stats["n"] >= min_pair_sample) & stats["ci_low"].notna()
+    stats["tradeable"] = (
+        (stats["n"] >= min_pair_sample)
+        & stats["ci_low"].notna()
+        & ~stats["weekday_pair"].isin(excluded_pairs)
+    )
     stats["_d1"] = stats["weekday_pair"].str[:3].map(WEEKDAY_ORDER)
     stats["_d2"] = stats["weekday_pair"].str[-3:].map(WEEKDAY_ORDER)
     stats = stats.sort_values(["_d1", "_d2"]).drop(columns=["_d1", "_d2"]).reset_index(drop=True)

@@ -1,6 +1,6 @@
 """GTT-style ratcheting ladder on the premium's own % move from entry.
 
-Two-sided: loss stops cascade down (-3%/-5%/-7%), profit floors trail up
+Two-sided: loss stops cascade down (-3%/-5%), profit floors trail up
 (+5%/+10%/+15%). Exit at the banked floor, a loss stop, or expiry.
 """
 
@@ -17,11 +17,11 @@ class LadderExit:
     floor_level: float | None = None
 
 
-def _floor_reason(level, floor_pcts: tuple[float, float, float]) -> str:
+def _floor_reason(level, floor_pcts: tuple[float, ...]) -> str:
     return f"floor_{int(round(level * 100))}"
 
 
-def _stop_level(m, stop_pcts: tuple[float, float, float]) -> float:
+def _stop_level(m, stop_pcts: tuple[float, ...]) -> float:
     return max(stop for stop in stop_pcts if m <= -stop)
 
 
@@ -38,8 +38,8 @@ def _fill(reason, level, entry_premium, observed, fill_mode):
 def simulate(
     premiums: list[float],
     entry_premium: float,
-    floor_pcts: tuple[float, float, float] = (0.05, 0.10, 0.15),
-    stop_pcts: tuple[float, float, float] = (0.03, 0.05, 0.07),
+    floor_pcts: tuple[float, ...] = (0.05, 0.10, 0.15),
+    stop_pcts: tuple[float, ...] = (0.03, 0.05),
     fill_mode: str = "observed_close",
 ) -> LadderExit:
     if not premiums:

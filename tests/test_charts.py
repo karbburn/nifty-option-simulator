@@ -34,7 +34,7 @@ def _trades():
             "entry_date": pd.to_datetime(["2026-08-10", "2026-08-11", "2026-08-12", "2026-08-13"]),
             "exit_date": pd.to_datetime(["2026-08-12", "2026-08-13", "2026-08-14", "2026-08-17"]),
             "pair": ["Mon→Tue", "Mon→Tue", "Tue→Wed", "Tue→Wed"],
-            "exit_reason": ["floor_15", "stop_7", "floor_10", "expiry"],
+            "exit_reason": ["floor_15", "stop_5", "floor_10", "expiry"],
             "pnl": [6000.0, -4000.0, 2000.0, 0.0],
         }
     )

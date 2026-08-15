@@ -1,7 +1,7 @@
 # NIFTY Weekday‑Gap Options Simulator
 
 [![GitHub](https://img.shields.io/github/stars/karbburn/nifty-option-simulator?style=social)](https://github.com/karbburn/nifty-option-simulator)
-[![Tests](https://img.shields.io/badge/tests-110‑green.svg)](https://github.com/karbburn/nifty-option-simulator)
+[![Tests](https://img.shields.io/badge/tests-116‑green.svg)](https://github.com/karbburn/nifty-option-simulator)
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
 
 A research/backtesting tool that measures weekday‑pair gap probabilities, converts them to CE/PE trade rules, prices options with Black‑Scholes, manages trades via a GTT‑style premium‑% ladder, and honestly reports results and limitations.
@@ -33,19 +33,18 @@ python -m nifty_gap
 
 ## 2. What It Does
 
-For each weekday pair (Mon→Tue, Tue→Wed, Wed→Thu, Thu→Fri, Fri→Mon):
+For each weekday pair (Mon→Tue, Tue→Wed, Wed→Thu, Thu→Fri; Fri→Mon is excluded):
 
 1. **Compute** `P(open_day2 > close_day1)` from historical data
 2. **Trade** long ATM Call if `p_up > 50%`, else long ATM Put
 3. **Price** the option via Black‑Scholes (ATM strike, nearest ₹50, 12.5% IV)
 4. **Exit** via a two-sided ratcheting ladder on the option premium's own % move
-   - Loss stops cascade: −3% / −5% / −7% (first breach exits)
+   - Loss stops cascade: −3% / −5% (first breach exits)
    - Profit floors trail up: +5% / +10% / +15% (exit when the premium falls back through the highest banked floor)
-   - Friday entries (Fri→Mon) trail up from a higher start: +7% / +10% / +13%
    - Forced exit at next weekly expiry
 5. **Report** exit reasons, per‑pair P&L, equity curve, and benchmark comparison
 
-`ladder_rollover` (default `True`) re-enters a fresh ATM weekly option when a trade reaches expiry without hitting any ladder condition, chaining legs until a stop/floor triggers or data runs out. On the current sample this is **loss-making** (full-sample −₹329.7k vs −₹75.5k without rollover) because the rolled-in ATM premium mostly theta‑decays into the −7% stop. Set `ladder_rollover=False` to exit at the first expiry.
+`ladder_rollover` (default `False`) re-enters a fresh ATM weekly option when a trade reaches expiry without hitting any ladder condition, chaining legs until a stop/floor triggers or data runs out. On the current sample this is **loss-making** (full-sample −₹329.7k vs −₹75.5k without rollover) because the rolled-in ATM premium mostly theta‑decays into the −5% stop. Set `ladder_rollover=True` to opt in. `excluded_pairs` (default `{"Fri→Mon"}`) drops the named weekday pairs from the tradeable universe — Fri→Mon has been excluded because weekend theta and gap behavior made it consistently loss-making (−₹202k over the sample).
 
 ---
 

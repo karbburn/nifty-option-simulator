@@ -57,17 +57,17 @@ def engine_df():
     return df
 
 
-def _table(engine_df, min_pair_sample=1):
-    return build_probability_table(engine_df, min_pair_sample=min_pair_sample)
+def _table(engine_df, min_pair_sample=1, excluded=cfg.excluded_pairs):
+    return build_probability_table(engine_df, min_pair_sample=min_pair_sample, excluded_pairs=excluded)
 
 
 def _ts(s: str) -> pd.Timestamp:
     return pd.Timestamp(s)
 
 
-def _trade_for(engine_df, entry_date, rollover=True):
-    local = replace(cfg, ladder_rollover=rollover)
-    trades = run_backtest(engine_df, _table(engine_df), local)
+def _trade_for(engine_df, entry_date, rollover=True, excluded=cfg.excluded_pairs):
+    local = replace(cfg, ladder_rollover=rollover, excluded_pairs=excluded)
+    trades = run_backtest(engine_df, _table(engine_df, excluded=excluded), local)
     return next(t for t in trades if t.entry_date == _ts(entry_date))
 
 
@@ -76,9 +76,11 @@ def _trade_for(engine_df, entry_date, rollover=True):
 def test_signal_universe_is_every_tradeable_observation(engine_df):
     table = _table(engine_df)
     sig = build_signals(engine_df, table)
-    assert len(sig) == 9
-    assert set(sig["pair"]) == {"Mon→Tue", "Tue→Wed", "Wed→Thu", "Thu→Fri", "Fri→Mon"}
-    assert list(sig["entry_date"]) == list(engine_df["Date"].iloc[:-1])
+    assert len(sig) == 8
+    assert set(sig["pair"]) == {"Mon→Tue", "Tue→Wed", "Wed→Thu", "Thu→Fri"}
+    assert "Fri→Mon" not in set(sig["pair"])
+    dates = engine_df["Date"].iloc[:-1]
+    assert list(sig["entry_date"]) == list(dates[dates.index != 4])
     side_of = dict(zip(table["weekday_pair"], table["side"]))
     assert (sig["side"] == sig["pair"].map(side_of)).all()
 
@@ -91,7 +93,7 @@ def test_non_tradeable_pairs_excluded(engine_df):
 
 def test_trade_count_and_entry_pricing_match_bs(engine_df):
     trades = run_backtest(engine_df, _table(engine_df), cfg)
-    assert len(trades) == 9
+    assert len(trades) == 8
     for t in trades:
         strike = nearest_strike(t.entry_close, cfg.strike_interval, cfg.strike_tie_rule)
         t0 = (t.legs[0]["expiry"] - t.entry_date).days / 365.0
@@ -104,7 +106,7 @@ def test_stop_trade_hand_checked(engine_df):
     t = _trade_for(engine_df, "2026-08-10")
     assert t.pair == "Mon→Tue"
     assert t.side == "CE"
-    assert t.exit_reason == "stop_7"
+    assert t.exit_reason == "stop_5"
     assert t.exit_date == _ts("2026-08-11")
     assert t.days_held == 1
     expected_entry = black_scholes(24000, 24000, 3 / 365, cfg.iv_flat, RATE, "CE")
@@ -115,7 +117,7 @@ def test_stop_trade_hand_checked(engine_df):
 
 
 def test_trailing_floor_holds_rally_to_expiry(engine_df):
-    t = _trade_for(engine_df, "2026-08-14", rollover=False)
+    t = _trade_for(engine_df, "2026-08-14", rollover=False, excluded=frozenset())
     assert t.pair == "Fri→Mon"
     assert t.side == "CE"
     assert t.exit_reason == "expiry"
@@ -137,7 +139,7 @@ def test_expiry_exit_at_intrinsic(engine_df):
 
 def test_rollover_rolls_expiry_trades_to_next_expiry(engine_df):
     baseline = run_backtest(engine_df, _table(engine_df), replace(cfg, ladder_rollover=False))
-    rolled = run_backtest(engine_df, _table(engine_df), cfg)
+    rolled = run_backtest(engine_df, _table(engine_df), replace(cfg, ladder_rollover=True))
     by_entry = {t.entry_date: t for t in rolled}
     for a in baseline:
         if a.exit_reason != "expiry":
@@ -149,7 +151,7 @@ def test_rollover_rolls_expiry_trades_to_next_expiry(engine_df):
 
 
 def test_rollover_never_chains_past_available_data(engine_df):
-    t = _trade_for(engine_df, "2026-08-14", rollover=True)
+    t = _trade_for(engine_df, "2026-08-14", rollover=True, excluded=frozenset())
     assert t.legs[-1]["exit_date"] <= engine_df["Date"].max()
     assert t.rolls == len(t.legs) - 1
 
@@ -225,7 +227,7 @@ def test_overlap_two_live_positions_mtm_correct(engine_df):
 def test_benchmark_holds_every_trade_to_expiry(engine_df):
     ladder = run_backtest(engine_df, _table(engine_df), cfg, mode="ladder")
     hold = run_backtest(engine_df, _table(engine_df), cfg, mode="hold")
-    assert len(ladder) == len(hold) == 9
+    assert len(ladder) == len(hold) == 8
     assert all(t.exit_reason == "expiry" for t in hold)
     for h, lad in zip(hold, ladder):
         assert h.entry_date == lad.entry_date
@@ -281,7 +283,7 @@ def test_export_results_writes_three_artifacts(engine_df, tmp_path):
 def test_ladder_log_gate_reports_reasons_and_hold(engine_df):
     trades = run_backtest(engine_df, _table(engine_df), cfg)
     gate = ladder_log_gate(trades)
-    assert sum(gate["exit_reason_counts"].values()) == 9
+    assert sum(gate["exit_reason_counts"].values()) == 8
     assert any(r.startswith(("stop_", "floor_")) for r in gate["exit_reason_counts"])
     assert gate["avg_days_held"] > 0
     assert gate["max_days_held"] >= gate["avg_days_held"]

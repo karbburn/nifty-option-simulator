@@ -76,9 +76,7 @@ def price_trade(df: pd.DataFrame, signal, cfg: Config, mode: str = "ladder") -> 
 
     closes = df.set_index("Date")["Close"]
     rate = get_risk_free_rate(cfg.rate_default)
-    floor_pcts = (
-        cfg.ladder_floor_pcts_friday if pair.startswith("Fri") else cfg.ladder_floor_pcts
-    )
+    floor_pcts = cfg.ladder_floor_pcts
 
     legs: list[dict] = []
     cur_date = entry_date
@@ -208,7 +206,7 @@ def oos_diagnostic(df: pd.DataFrame, cfg: Config) -> dict:
     split = d0 + (d1 - d0) / 2
     first = df[df["Date"] <= split]
     second = df[df["Date"] > split]
-    table = build_probability_table(first, cfg.min_pair_sample, cfg.z_score)
+    table = build_probability_table(first, cfg.min_pair_sample, cfg.z_score, cfg.excluded_pairs)
     g = second.dropna(subset=["weekday_pair"]).groupby("weekday_pair")["gap_up"]
     realized = g.agg(["size", "mean"]).rename(columns={"size": "n_oos", "mean": "realized_p_up"}).reset_index()
     olow, ohigh = wilson_interval(realized["realized_p_up"] * realized["n_oos"], realized["n_oos"], cfg.z_score)

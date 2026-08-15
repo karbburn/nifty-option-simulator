@@ -77,6 +77,13 @@ def test_exclusion_below_min_sample(sample_df):
     assert t["n"].le(1).all()
 
 
+def test_excluded_pairs_marked_non_tradeable(sample_df):
+    t = build_probability_table(sample_df, min_pair_sample=1, excluded_pairs=frozenset({"Fri→Mon"}))
+    assert not t.loc[t["weekday_pair"] == "Fri→Mon", "tradeable"].iloc[0]
+    assert t.loc[t["weekday_pair"] == "Fri→Mon", "n"].iloc[0] == 1
+    assert t.loc[t["weekday_pair"] != "Fri→Mon", "tradeable"].all()
+
+
 def test_groupby_includes_irregular_pairs(holiday_gap_df):
     t = build_probability_table(holiday_gap_df, min_pair_sample=1)
     assert "Fri→Tue" in set(t["weekday_pair"])
