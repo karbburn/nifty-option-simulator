@@ -78,9 +78,13 @@ def _seed_snapshot() -> None:
         generate_snapshot()
     from nifty_gap.web.snapshot import render_report_pngs
 
+    OUTPUT_DIR.mkdir(parents=True, exist_ok=True)
     expected = [OUTPUT_DIR / name for name in ("equity.png", "benchmark.png", "exit_reasons.png", "probability.png", "oos.png")]
     if not all(p.exists() for p in expected):
-        render_report_pngs()
+        try:
+            render_report_pngs()
+        except Exception:
+            pass
     snapshot = json.loads(SNAPSHOT_PATH.read_text(encoding="utf-8"))
 
 
