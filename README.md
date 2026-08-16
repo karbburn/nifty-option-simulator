@@ -87,9 +87,10 @@ Open `http://localhost:8000/`. Routes:
 ### Deploy (Render)
 
 1. Push `main`; create a Render Web Service from the repo (Python runtime).
-2. Start command: `uvicorn nifty_gap.web.app:app --host 0.0.0.0 --port 8000`.
-3. Add a cron ping (e.g. UptimeRobot) to `/health` every 5 min to keep the free tier awake.
-4. The `refresh-data` GitHub Action runs on weekdays at 11:30 UTC, regenerates `output/dashboard.json`, and commits it — Render auto‑deploys on push.
+2. Build command: `pip install -e ".[web]"`.
+3. Start command: `uvicorn nifty_gap.web.app:app --host 0.0.0.0 --port $PORT` (use `$PORT`, Render injects it — do not hardcode `8000`).
+4. Add a cron ping (e.g. UptimeRobot) to `/health` every 5 min to keep the free tier awake.
+5. The `refresh-data` GitHub Action runs on weekdays at 11:30 UTC, regenerates `output/dashboard.json` + PNGs, and commits them — Render auto‑deploys on push. The snapshot, data CSV, and report PNGs are committed, so the app boots instantly without regenerating on startup. No env vars or secrets required.
 
 ---
 
