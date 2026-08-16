@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from dataclasses import asdict
+from dataclasses import asdict, replace
 from datetime import date
 
 import pandas as pd
@@ -34,14 +34,77 @@ def _rate(cfg: Config) -> float:
     return get_risk_free_rate(cfg.rate_default)
 
 
-def run_full_backtest(cfg: Config | None = None) -> dict:
+def apply_costs(
+    trades: list[Trade], cfg: Config, brokerage_per_trade: float = 0.0, slippage_pct: float = 0.0
+) -> list[Trade]:
+    """Adjust legs for slippage and subtract flat brokerage per round-trip leg."""
+    if not brokerage_per_trade and not slippage_pct:
+        return trades
+    out = []
+    for t in trades:
+        legs = list(t.legs) if t.legs else (
+            [
+                {
+                    "entry_date": t.entry_date,
+                    "exit_date": t.exit_date,
+                    "expiry": t.expiry,
+                    "strike": t.strike,
+                    "entry_premium": t.entry_premium,
+                    "exit_premium": t.exit_premium,
+                }
+            ]
+        )
+        adj = []
+        for leg in legs:
+            leg = dict(leg)
+            ep = float(leg["entry_premium"]) * (1 + slippage_pct)
+            xp = float(leg["exit_premium"]) * (1 - slippage_pct)
+            leg["entry_premium"] = ep
+            leg["exit_premium"] = xp
+            leg["pnl"] = (xp - ep) * cfg.lot_size
+            adj.append(leg)
+        pnl = sum(leg["pnl"] for leg in adj) - brokerage_per_trade * len(adj)
+        out.append(
+            replace(
+                t,
+                entry_premium=t.entry_premium * (1 + slippage_pct),
+                exit_premium=t.exit_premium * (1 - slippage_pct),
+                pnl=pnl,
+                legs=tuple(adj),
+            )
+        )
+    return out
+
+
+def _subtract_brokerage(equity: pd.DataFrame, trades: list[Trade], brokerage_per_trade: float) -> pd.DataFrame:
+    if not brokerage_per_trade:
+        return equity
+    pos = {d: i for i, d in enumerate(equity["Date"])}
+    fees = pd.Series(0.0, index=range(len(equity)))
+    for t in trades:
+        i = pos.get(t.exit_date)
+        if i is not None:
+            fees.iloc[i] += brokerage_per_trade * len(t.legs or (t,))
+    equity = equity.copy()
+    equity["equity"] = equity["equity"] - fees.cumsum()
+    return equity
+
+
+def run_full_backtest(
+    cfg: Config | None = None, brokerage_per_trade: float = 0.0, slippage_pct: float = 0.0
+) -> dict:
     cfg = cfg or Config()
     df = load_history_df()
     table = build_probability_table(df, cfg.min_pair_sample, cfg.z_score, cfg.excluded_pairs)
     trades = run_backtest(df, table, cfg, "ladder")
     hold_trades = run_backtest(df, table, cfg, "hold")
+    if brokerage_per_trade or slippage_pct:
+        trades = apply_costs(trades, cfg, brokerage_per_trade, slippage_pct)
+        hold_trades = apply_costs(hold_trades, cfg, brokerage_per_trade, slippage_pct)
     equity = daily_mtm(df, trades, cfg)
+    equity = _subtract_brokerage(equity, trades, brokerage_per_trade)
     equity_hold = daily_mtm(df, hold_trades, cfg)
+    equity_hold = _subtract_brokerage(equity_hold, hold_trades, brokerage_per_trade)
     oos = oos_diagnostic(df, cfg)
     trades_df = trades_frame(trades)
     return {

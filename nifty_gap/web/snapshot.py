@@ -61,14 +61,16 @@ def _equity_curve(equity: pd.DataFrame) -> list[dict]:
     ]
 
 
-def generate_snapshot(cfg: Config | None = None, out_path: str | Path | None = None) -> dict:
+def build_snapshot(
+    cfg: Config | None = None, brokerage_per_trade: float = 0.0, slippage_pct: float = 0.0
+) -> dict:
     cfg = cfg or Config()
-    result = run_full_backtest(cfg)
+    result = run_full_backtest(cfg, brokerage_per_trade, slippage_pct)
     df = result["df"]
     spot = float(df["Close"].iloc[-1])
     last_trading_date = df["Date"].max().strftime("%Y-%m-%d")
 
-    snapshot = {
+    return {
         "generated_at": metrics.provenance()["generated_at"],
         "last_trading_date": last_trading_date,
         "git_sha": metrics.provenance()["git_sha"],
@@ -86,9 +88,38 @@ def generate_snapshot(cfg: Config | None = None, out_path: str | Path | None = N
         "live_positions": compute_live_positions(result["trades"], spot, cfg),
         "next_trade_preview": compute_next_trade_preview(df, result["table"], spot, cfg),
     }
+
+
+def render_report_pngs(
+    cfg: Config | None = None, brokerage_per_trade: float = 0.0, slippage_pct: float = 0.0
+) -> list:
+    """Regenerate the five matplotlib report charts into OUTPUT_DIR."""
+    from nifty_gap.visualization.charts import render_all
+
+    result = run_full_backtest(cfg or Config(), brokerage_per_trade, slippage_pct)
+    return render_all(
+        result["table"],
+        result["trades_df"],
+        result["equity"],
+        result["equity_hold"],
+        result["oos_data"],
+        OUTPUT_DIR,
+    )
+
+
+def generate_snapshot(
+    cfg: Config | None = None,
+    out_path: str | Path | None = None,
+    brokerage_per_trade: float = 0.0,
+    slippage_pct: float = 0.0,
+    render_pngs: bool = True,
+) -> dict:
+    snapshot = build_snapshot(cfg, brokerage_per_trade, slippage_pct)
     out = Path(out_path) if out_path else OUTPUT_DIR / "dashboard.json"
     out.parent.mkdir(parents=True, exist_ok=True)
     out.write_text(json.dumps(snapshot, indent=2), encoding="utf-8")
+    if render_pngs:
+        render_report_pngs(cfg, brokerage_per_trade, slippage_pct)
     return snapshot
 
 

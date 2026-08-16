@@ -110,3 +110,64 @@ def test_json_dumpable():
 
     snap = _snapshot()
     _json.dumps(snap)  # must not raise
+
+
+def test_recompute_default_matches_snapshot():
+    base = _snapshot()
+    rec = client.post("/api/recompute", json={}).json()
+    assert rec["trade_stats"]["total_pnl"] == base["trade_stats"]["total_pnl"]
+    assert len(rec["trades"]) == len(base["trades"])
+
+
+def test_recompute_applies_costs():
+    base = client.post("/api/recompute", json={}).json()
+    costed = client.post(
+        "/api/recompute", json={"brokerage_per_trade": 40, "slippage_pct": 0.005}
+    ).json()
+    assert costed["trade_stats"]["total_pnl"] < base["trade_stats"]["total_pnl"]
+
+
+def test_recompute_changes_config():
+    rec = client.post("/api/recompute", json={"iv_flat": 0.11}).json()
+    assert rec["config"]["iv_flat"] == 0.11
+
+
+def test_recompute_bad_excluded_pair_list():
+    rec = client.post("/api/recompute", json={"excluded_pairs": ["Fri→Mon", "Tue→Wed"]}).json()
+    assert rec["config"]["excluded_pairs"] == ["Fri→Mon", "Tue→Wed"]
+
+
+def test_report_charts_served():
+    for name in ("probability", "exit_reasons", "equity", "benchmark", "oos"):
+        resp = client.get(f"/charts/{name}.png")
+        assert resp.status_code == 200
+        assert resp.headers["content-type"].startswith("image/")
+
+
+def test_dashboard_page_has_config_explorer():
+    resp = client.get("/")
+    assert "Config Explorer" in resp.text
+    assert "cfgApply" in resp.text
+    assert "cfgRefresh" in resp.text
+    assert "themeToggle" in resp.text
+
+
+def test_dashboard_page_has_report_gallery():
+    resp = client.get("/")
+    assert "Report Charts" in resp.text
+    assert "/charts/equity.png" in resp.text
+
+
+def test_dashboard_table_filters_present():
+    resp = client.get("/")
+    assert "filterDateFrom" in resp.text
+    assert "filterPnlMin" in resp.text
+    assert "filterDaysMin" in resp.text
+
+
+def test_refresh_endpoint_structure():
+    resp = client.post("/api/refresh")
+    assert resp.status_code == 200
+    data = resp.json()
+    assert "status" in data
+    assert "rows_added" in data

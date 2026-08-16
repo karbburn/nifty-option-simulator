@@ -12,10 +12,12 @@ from fastapi.responses import FileResponse
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
 from fastapi.templating import Jinja2Templates
+from pydantic import BaseModel
 from starlette.requests import Request
 
 from nifty_gap.backtest.engine import Trade
-from nifty_gap.web.snapshot import OUTPUT_DIR, generate_snapshot
+from nifty_gap.config import Config
+from nifty_gap.web.snapshot import OUTPUT_DIR, build_snapshot, generate_snapshot
 from nifty_gap.web.state import (
     compute_live_positions,
     compute_premium_series,
@@ -38,10 +40,21 @@ templates = Jinja2Templates(directory=str(TEMPLATES_DIR))
 app = FastAPI(title="NIFTY Gap Dashboard")
 
 app.mount("/static", StaticFiles(directory=str(STATIC_DIR)), name="static")
+app.mount("/charts", StaticFiles(directory=str(OUTPUT_DIR)), name="charts")
 
 # 60s in-memory spot cache (single user, no Redis)
 _spot_cache: dict = {"value": None, "ts": 0.0}
 _SPOT_CACHE_TTL = 60
+
+
+class RecomputeRequest(BaseModel):
+    iv_flat: float | None = None
+    ladder_stop_pcts: list[float] | None = None
+    ladder_floor_pcts: list[float] | None = None
+    ladder_rollover: bool | None = None
+    excluded_pairs: list[str] | None = None
+    brokerage_per_trade: float = 0.0
+    slippage_pct: float = 0.0
 
 
 @app.get("/favicon.ico")
@@ -51,12 +64,17 @@ def favicon() -> FileResponse:
 
 @app.on_event("startup")
 def _seed_snapshot() -> None:
-    """Ensure snapshot exists; no-op if already seeded above."""
-    if not SNAPSHOT_PATH.exists():
-        generate_snapshot()
+    """Ensure snapshot + report charts exist; no-op if already seeded above."""
     import json
 
     global snapshot
+    if not SNAPSHOT_PATH.exists():
+        generate_snapshot()
+    from nifty_gap.web.snapshot import render_report_pngs
+
+    expected = [OUTPUT_DIR / name for name in ("equity.png", "benchmark.png", "exit_reasons.png", "probability.png", "oos.png")]
+    if not all(p.exists() for p in expected):
+        render_report_pngs()
     snapshot = json.loads(SNAPSHOT_PATH.read_text(encoding="utf-8"))
 
 
@@ -116,6 +134,38 @@ def health() -> dict:
 @app.get("/api/dashboard")
 def api_dashboard() -> dict:
     return snapshot
+
+
+@app.post("/api/recompute")
+def api_recompute(body: RecomputeRequest) -> dict:
+    from dataclasses import replace
+
+    cfg = Config()
+    kwargs = {}
+    if body.iv_flat is not None:
+        kwargs["iv_flat"] = body.iv_flat
+    if body.ladder_stop_pcts is not None:
+        kwargs["ladder_stop_pcts"] = tuple(body.ladder_stop_pcts)
+    if body.ladder_floor_pcts is not None:
+        kwargs["ladder_floor_pcts"] = tuple(body.ladder_floor_pcts)
+    if body.ladder_rollover is not None:
+        kwargs["ladder_rollover"] = body.ladder_rollover
+    if body.excluded_pairs is not None:
+        kwargs["excluded_pairs"] = frozenset(body.excluded_pairs)
+    cfg = replace(cfg, **kwargs)
+    return build_snapshot(cfg, body.brokerage_per_trade, body.slippage_pct)
+
+
+@app.post("/api/refresh")
+def api_refresh() -> dict:
+    from nifty_gap.data.refresh import run_refresh
+
+    cfg = Config()
+    result = run_refresh(cfg.data_history_path, cfg.data_path)
+    if result["status"] != "warn":
+        global snapshot
+        snapshot = generate_snapshot(cfg)
+    return result
 
 
 @app.get("/api/spot")
