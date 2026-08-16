@@ -26,28 +26,40 @@
   <section class="card" aria-label="Config explorer">
     <h2>Config Explorer</h2>
     <div class="config-grid">
-      <label>IV flat <span class="cfg-note">{{ "%.3f"|format(snap.config.iv_flat) }}</span>
-        <input type="range" id="cfgIv" min="0.05" max="0.25" step="0.005" value="{{ snap.config.iv_flat }}">
-      </label>
-      <label>Stop 1 (%) <span class="cfg-note" id="cfgStop1Val">{{ "%.1f"|format(snap.config.ladder_stop_pcts[0]*100) }}</span>
-        <input type="range" id="cfgStop1" min="1" max="12" step="1" value="{{ "%.0f"|format(snap.config.ladder_stop_pcts[0]*100) }}">
-      </label>
-      <label>Stop 2 (%) <span class="cfg-note" id="cfgStop2Val">{{ "%.1f"|format(snap.config.ladder_stop_pcts[1]*100) }}</span>
-        <input type="range" id="cfgStop2" min="1" max="20" step="1" value="{{ "%.0f"|format(snap.config.ladder_stop_pcts[1]*100) }}">
-      </label>
-      <label>Floor 1 (%) <span class="cfg-note" id="cfgFloor1Val">{{ "%.1f"|format(snap.config.ladder_floor_pcts[0]*100) }}</span>
-        <input type="range" id="cfgFloor1" min="3" max="25" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[0]*100) }}">
-      </label>
-      <label>Floor 2 (%) <span class="cfg-note" id="cfgFloor2Val">{{ "%.1f"|format(snap.config.ladder_floor_pcts[1]*100) }}</span>
-        <input type="range" id="cfgFloor2" min="3" max="30" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[1]*100) }}">
-      </label>
-      <label>Floor 3 (%) <span class="cfg-note" id="cfgFloor3Val">{{ "%.1f"|format(snap.config.ladder_floor_pcts[2]*100) }}</span>
-        <input type="range" id="cfgFloor3" min="3" max="40" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[2]*100) }}">
-      </label>
+      <div class="cfg-field">
+        <span class="cfg-label">IV flat</span>
+        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgIv">−</button><input type="number" id="cfgIv" class="stepper-input" min="0.05" max="0.25" step="0.005" value="{{ snap.config.iv_flat }}" aria-label="IV flat"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgIv">+</button></div>
+      </div>
+      <div class="cfg-field">
+        <span class="cfg-label">Stop 1 (%)</span>
+        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgStop1">−</button><input type="number" id="cfgStop1" class="stepper-input" min="1" max="12" step="1" value="{{ "%.0f"|format(snap.config.ladder_stop_pcts[0]*100) }}" aria-label="Stop 1 percent"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgStop1">+</button></div>
+      </div>
+      <div class="cfg-field">
+        <span class="cfg-label">Stop 2 (%)</span>
+        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgStop2">−</button><input type="number" id="cfgStop2" class="stepper-input" min="1" max="20" step="1" value="{{ "%.0f"|format(snap.config.ladder_stop_pcts[1]*100) }}" aria-label="Stop 2 percent"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgStop2">+</button></div>
+      </div>
+      <div class="cfg-field">
+        <span class="cfg-label">Floor 1 (%)</span>
+        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgFloor1">−</button><input type="number" id="cfgFloor1" class="stepper-input" min="3" max="25" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[0]*100) }}" aria-label="Floor 1 percent"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgFloor1">+</button></div>
+      </div>
+      <div class="cfg-field">
+        <span class="cfg-label">Floor 2 (%)</span>
+        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgFloor2">−</button><input type="number" id="cfgFloor2" class="stepper-input" min="3" max="30" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[1]*100) }}" aria-label="Floor 2 percent"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgFloor2">+</button></div>
+      </div>
+      <div class="cfg-field">
+        <span class="cfg-label">Floor 3 (%)</span>
+        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgFloor3">−</button><input type="number" id="cfgFloor3" class="stepper-input" min="3" max="40" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[2]*100) }}" aria-label="Floor 3 percent"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgFloor3">+</button></div>
+      </div>
       <label class="cfg-check"><input type="checkbox" id="cfgRollover" {{ 'checked' if snap.config.ladder_rollover }}> Ladder rollover</label>
       <label class="cfg-check"><input type="checkbox" id="cfgCosts"> Apply costs (₹ + slippage)</label>
-      <label>Brokerage ₹/trade <input type="number" id="cfgBrokerage" min="0" step="5" value="40" disabled></label>
-      <label>Slippage % <input type="number" id="cfgSlippage" min="0" max="5" step="0.1" value="0.5" disabled></label>
+      <div class="cfg-field">
+        <span class="cfg-label">Brokerage ₹/trade</span>
+        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgBrokerage">−</button><input type="number" id="cfgBrokerage" class="stepper-input" min="0" step="5" value="40" disabled aria-label="Brokerage per trade"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgBrokerage">+</button></div>
+      </div>
+      <div class="cfg-field">
+        <span class="cfg-label">Slippage %</span>
+        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgSlippage">−</button><input type="number" id="cfgSlippage" class="stepper-input" min="0" max="5" step="0.1" value="0.5" disabled aria-label="Slippage percent"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgSlippage">+</button></div>
+      </div>
     </div>
     <p class="cfg-hint">Excluded pairs: <span id="cfgExcluded">{{ snap.config.excluded_pairs | join(", ") }}</span></p>
     <div class="config-actions">
@@ -121,7 +133,7 @@
       <input type="number" id="filterDaysMin" placeholder="Days ≥" aria-label="Minimum days held">
       <input type="number" id="filterDaysMax" placeholder="Days ≤" aria-label="Maximum days held">
     </div>
-    <div class="table-wrap">
+    <div class="table-wrap collapsed" id="tradesWrap">
       <table id="tradesTable">
         <thead>
           <tr>
@@ -155,6 +167,7 @@
         </tbody>
       </table>
     </div>
+    <button id="tradesToggle" class="btn-secondary trades-toggle">Show all {{ snap.trades|length }} trades</button>
   </section>
 </div>
 
@@ -193,9 +206,7 @@
 
 {% block scripts %}
 <script>
-  if (window.Chart) {
-    Chart.register(ChartErrorBars.BarWithErrorBarsController, ChartErrorBars.BarWithErrorBar);
-  }
+  try { if (window.Chart && window.ChartErrorBars) { Chart.register(ChartErrorBars.BarWithErrorBarsController, ChartErrorBars.BarWithErrorBar); } } catch (e) {}
   var snap = {{ snap | tojson }};
   var chartInstances = [];
 
@@ -239,6 +250,8 @@
         '<td>' + t.exit_reason + '</td><td>' + t.days_held + '</td>' +
         '<td class="' + cls + '">' + sign + '\u20B9' + pnl + '</td></tr>';
     }).join('');
+    tradesWrap.classList.add('collapsed');
+    tradesToggle.textContent = 'Show all ' + s.trades.length + ' trades';
     filterTrades();
   }
 
@@ -384,18 +397,26 @@
     document.getElementById('cfgFloor3').value = Math.round(c.ladder_floor_pcts[2] * 100);
     document.getElementById('cfgRollover').checked = c.ladder_rollover;
     document.getElementById('cfgExcluded').textContent = c.excluded_pairs.join(', ');
-    updateCfgLabels();
   }
 
-  function updateCfgLabels() {
-    document.getElementById('cfgStop1Val').textContent = (parseFloat(document.getElementById('cfgStop1').value) / 100).toFixed(2);
-    document.getElementById('cfgStop2Val').textContent = (parseFloat(document.getElementById('cfgStop2').value) / 100).toFixed(2);
-    document.getElementById('cfgFloor1Val').textContent = (parseFloat(document.getElementById('cfgFloor1').value) / 100).toFixed(2);
-    document.getElementById('cfgFloor2Val').textContent = (parseFloat(document.getElementById('cfgFloor2').value) / 100).toFixed(2);
-    document.getElementById('cfgFloor3Val').textContent = (parseFloat(document.getElementById('cfgFloor3').value) / 100).toFixed(2);
-  }
-  ['cfgStop1', 'cfgStop2', 'cfgFloor1', 'cfgFloor2', 'cfgFloor3'].forEach(function (id) {
-    document.getElementById(id).addEventListener('input', updateCfgLabels);
+  document.querySelectorAll('.stepper-btn').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      var input = document.getElementById(btn.dataset.target);
+      if (!input || input.disabled) return;
+      var step = parseFloat(input.step) || 1;
+      var val = parseFloat(input.value) || 0;
+      if (btn.dataset.action === 'inc') val = Math.min(parseFloat(input.max) || Infinity, val + step);
+      else val = Math.max(parseFloat(input.min) || -Infinity, val - step);
+      input.value = Math.round(val * 1000) / 1000;
+      input.dispatchEvent(new Event('input', { bubbles: true }));
+    });
+  });
+
+  var tradesWrap = document.getElementById('tradesWrap');
+  var tradesToggle = document.getElementById('tradesToggle');
+  tradesToggle.addEventListener('click', function () {
+    var isCollapsed = tradesWrap.classList.toggle('collapsed');
+    tradesToggle.textContent = isCollapsed ? 'Show all ' + tbody.querySelectorAll('tr').length + ' trades' : 'Show fewer';
   });
 
   var cfgCosts = document.getElementById('cfgCosts');
