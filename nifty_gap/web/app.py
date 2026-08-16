@@ -17,7 +17,7 @@ from starlette.requests import Request
 
 from nifty_gap.backtest.engine import Trade
 from nifty_gap.config import Config
-from nifty_gap.web.snapshot import OUTPUT_DIR, build_snapshot, generate_snapshot
+from nifty_gap.web.snapshot import OUTPUT_DIR, build_snapshot_and_charts, generate_snapshot
 from nifty_gap.web.state import (
     compute_live_positions,
     compute_premium_series,
@@ -48,6 +48,7 @@ _SPOT_CACHE_TTL = 60
 
 
 class RecomputeRequest(BaseModel):
+    seq: int | None = None
     iv_flat: float | None = None
     ladder_stop_pcts: list[float] | None = None
     ladder_floor_pcts: list[float] | None = None
@@ -55,6 +56,11 @@ class RecomputeRequest(BaseModel):
     excluded_pairs: list[str] | None = None
     brokerage_per_trade: float = 0.0
     slippage_pct: float = 0.0
+
+
+# Last-served recompute seq — stale requests (older seq) are dropped early
+# so superseded recomputes don't burn CPU server-side. Single user, no lock.
+_recompute_seq = 0
 
 
 @app.get("/favicon.ico")
@@ -140,6 +146,12 @@ def api_dashboard() -> dict:
 def api_recompute(body: RecomputeRequest) -> dict:
     from dataclasses import replace
 
+    global snapshot, _recompute_seq
+    if body.seq is not None:
+        if body.seq < _recompute_seq:
+            return snapshot
+        _recompute_seq = body.seq
+
     cfg = Config()
     kwargs = {}
     if body.iv_flat is not None:
@@ -153,7 +165,8 @@ def api_recompute(body: RecomputeRequest) -> dict:
     if body.excluded_pairs is not None:
         kwargs["excluded_pairs"] = frozenset(body.excluded_pairs)
     cfg = replace(cfg, **kwargs)
-    return build_snapshot(cfg, body.brokerage_per_trade, body.slippage_pct)
+    snapshot = build_snapshot_and_charts(cfg, body.brokerage_per_trade, body.slippage_pct)
+    return snapshot
 
 
 @app.post("/api/refresh")

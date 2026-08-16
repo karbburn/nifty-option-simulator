@@ -60,6 +60,12 @@ def exit_reasons_chart(trades: pd.DataFrame, path) -> None:
     if not labels:
         labels = list(counts.index)
     fig, ax = plt.subplots(figsize=(9, 5))
+    if not labels:
+        ax.text(0.5, 0.5, "No trades to display", ha="center", va="center", transform=ax.transAxes)
+        ax.set_axis_off()
+        ax.set_title("Exit reason distribution with average P&L per reason")
+        _save(fig, path)
+        return
     counts_ax = ax
     counts_ax.bar(labels, [counts[r] for r in labels], color="#455a64", alpha=0.85)
     for i, r in enumerate(labels):

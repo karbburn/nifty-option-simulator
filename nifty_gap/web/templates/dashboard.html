@@ -26,8 +26,7 @@
   <section class="card" aria-label="Pairs to trade">
     <h2>Pairs to Trade</h2>
     <div class="pair-grid" id="pairGrid">
-      {% set all_pairs = ["Mon→Tue", "Tue→Wed", "Tue→Thu", "Wed→Thu", "Wed→Fri", "Thu→Mon", "Thu→Fri", "Fri→Mon", "Fri→Tue"] %}
-      {% for pair in all_pairs %}
+      {% for pair in snap.config.pair_universe %}
       <label class="pair-chip"><input type="checkbox" value="{{ pair }}" {{ 'checked' if pair not in snap.config.excluded_pairs }}> {{ pair }}</label>
       {% endfor %}
     </div>
@@ -148,7 +147,7 @@
       <table id="tradesTable">
         <thead>
           <tr>
-            <th data-sort="entry_date" aria-sort="none">Entry</th>
+            <th data-sort="entry_date" aria-sort="descending">Entry</th>
             <th data-sort="exit_date" aria-sort="none">Exit</th>
             <th data-sort="pair" aria-sort="none">Pair</th>
             <th data-sort="side" aria-sort="none">Side</th>
@@ -228,13 +227,21 @@
 
   function fmtInr(v) { return '\u20B9' + v.toLocaleString('en-IN', { maximumFractionDigits: 0 }); }
 
+  function esc(s) {
+    return String(s).replace(/[&<>"']/g, function (c) {
+      return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
+    });
+  }
+
   function updateKpis(s) {
     var pnl = s.trade_stats.total_pnl || 0;
     var kpiPnl = document.getElementById('kpiPnl');
     kpiPnl.textContent = '\u20B9' + pnl.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     kpiPnl.className = 'kpi-value ' + (pnl >= 0 ? 'profit' : 'loss');
-    document.getElementById('kpiWinRate').textContent = (s.trade_stats.win_rate * 100).toFixed(1) + '%';
-    document.getElementById('kpiSharpe').textContent = s.equity_stats.sharpe_annualized.toFixed(2);
+    var wr = s.trade_stats.win_rate;
+    document.getElementById('kpiWinRate').textContent = (isFinite(wr) ? (wr * 100).toFixed(1) : '—') + '%';
+    var sh = s.equity_stats.sharpe_annualized;
+    document.getElementById('kpiSharpe').textContent = isFinite(sh) ? sh.toFixed(2) : '—';
     document.getElementById('kpiMaxDD').textContent = '\u20B9' + s.equity_stats.max_drawdown.toLocaleString('en-IN', { maximumFractionDigits: 0 });
   }
 
@@ -257,13 +264,13 @@
       var cls = (t.pnl || 0) >= 0 ? 'pnl-positive' : 'pnl-negative';
       var sign = (t.pnl || 0) >= 0 ? '+' : '-';
       var pnl = Math.abs(t.pnl).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-      return '<tr data-pair="' + t.pair + '" data-reason="' + t.exit_reason + '" data-side="' + t.side + '" data-date="' + t.entry_date + '" data-pnl="' + t.pnl + '" data-days="' + t.days_held + '">' +
-        '<td><a href="/trade/' + t.entry_date + '">' + t.entry_date.slice(5) + '</a></td>' +
-        '<td>' + t.exit_date.slice(5) + '</td>' +
-        '<td>' + t.pair + '</td><td>' + t.side + '</td>' +
+      return '<tr data-pair="' + esc(t.pair) + '" data-reason="' + esc(t.exit_reason) + '" data-side="' + esc(t.side) + '" data-date="' + esc(t.entry_date) + '" data-pnl="' + t.pnl + '" data-days="' + t.days_held + '">' +
+        '<td><a href="/trade/' + esc(t.entry_date) + '">' + esc(t.entry_date.slice(5)) + '</a></td>' +
+        '<td>' + esc(t.exit_date.slice(5)) + '</td>' +
+        '<td>' + esc(t.pair) + '</td><td>' + esc(t.side) + '</td>' +
         '<td>' + t.strike.toLocaleString('en-IN', { maximumFractionDigits: 0 }) + '</td>' +
         '<td>' + t.entry_premium.toFixed(2) + '</td><td>' + t.exit_premium.toFixed(2) + '</td>' +
-        '<td>' + t.exit_reason + '</td><td>' + t.days_held + '</td>' +
+        '<td>' + esc(t.exit_reason) + '</td><td>' + t.days_held + '</td>' +
         '<td class="' + cls + '">' + sign + '\u20B9' + pnl + '</td></tr>';
     }).join('');
     if (!tradesWrap.classList.contains('collapsed')) {
@@ -281,12 +288,17 @@
     window.chartInstances = chartInstances;
   }
 
+  function showPngFallbacks() {
+    document.querySelectorAll('.chart-png-fallback').forEach(function (el) { el.classList.add('show'); });
+  }
+
   function buildCharts(s) {
     if (!window.Chart) return;
     destroyCharts();
-    var gridColor = cssVar('--chart-grid') || '#e9ecef';
-    var textColor = cssVar('--text-secondary') || '#6c757d';
-    var equityCurve = s.equity_curve;
+    try {
+      var gridColor = cssVar('--chart-grid') || '#e9ecef';
+      var textColor = cssVar('--text-secondary') || '#6c757d';
+      var equityCurve = s.equity_curve;
     var peak = 0;
     var drawdown = equityCurve.map(function (d) { peak = Math.max(peak, d.equity); return peak - d.equity; });
     chartInstances.push(new Chart(document.getElementById('equityChart'), {
@@ -329,7 +341,7 @@
           ctx.fillStyle = cssVar('--neutral-grey') || '#757575'; ctx.font = '11px sans-serif'; ctx.textAlign = 'right'; ctx.fillText('50%', chart.chartArea.right - 4, y - 4); ctx.restore();
         }
       }]
-    });
+    }));
 
     var bench = s.benchmark_equity;
     var ladderEq = s.equity_curve;
@@ -349,6 +361,10 @@
         scales: { x: { type: 'time', time: { unit: 'month', displayFormats: { month: 'MMM yyyy' } }, grid: { display: false }, ticks: { font: { size: 11 }, color: textColor, maxTicksLimit: 12 } }, y: { grid: { color: gridColor }, ticks: { font: { size: 11 }, color: textColor, callback: function (v) { return fmtInr(v); } } } }
       }
     }));
+    } catch (e) {
+      destroyCharts();
+      showPngFallbacks();
+    }
   }
 
   function sortAndRender() {
@@ -430,6 +446,14 @@
     document.getElementById('cfgFloor3').value = Math.round(c.ladder_floor_pcts[2] * 100);
     document.getElementById('cfgRollover').checked = c.ladder_rollover;
     document.getElementById('cfgExcluded').textContent = c.excluded_pairs.join(', ');
+    var grid = document.getElementById('pairGrid');
+    var current = Array.prototype.map.call(grid.querySelectorAll('input'), function (el) { return el.value; });
+    if (current.join('\u0001') !== c.pair_universe.join('\u0001')) {
+      grid.innerHTML = c.pair_universe.map(function (p) {
+        return '<label class="pair-chip"><input type="checkbox" value="' + esc(p) + '"' + (c.excluded_pairs.indexOf(p) === -1 ? ' checked' : '') + '> ' + esc(p) + '</label>';
+      }).join('');
+      grid.querySelectorAll('input').forEach(function (el) { el.addEventListener('change', scheduleRecompute); });
+    }
     document.querySelectorAll('#pairGrid .pair-chip input').forEach(function (el) {
       el.checked = c.excluded_pairs.indexOf(el.value) === -1;
     });
@@ -493,6 +517,7 @@
       return Math.max(mn, Math.min(mx, v));
     };
     var body = {
+      seq: seq,
       iv_flat: clampNum('cfgIv'),
       ladder_stop_pcts: [clampNum('cfgStop1') / 100, clampNum('cfgStop2') / 100],
       ladder_floor_pcts: [clampNum('cfgFloor1') / 100, clampNum('cfgFloor2') / 100, clampNum('cfgFloor3') / 100],
@@ -507,6 +532,8 @@
       var s = await resp.json();
       if (seq !== recomputeSeq) return;
       snap = s;
+      var bust = '?v=' + Date.now();
+      document.querySelectorAll('.chart-png-fallback').forEach(function (el) { el.src = el.src.split('?')[0] + bust; });
       updateKpis(s);
       buildTrades(s);
       buildCharts(s);
@@ -529,10 +556,14 @@
   document.querySelectorAll('#pairGrid .pair-chip input').forEach(function (el) { el.addEventListener('change', scheduleRecompute); });
   applyBtn.addEventListener('click', recompute);
   document.getElementById('cfgReset').addEventListener('click', function () {
+    recomputeSeq++;
+    if (recomputeAbort) recomputeAbort.abort();
+    recomputeAbort = null;
     updateConfigUI(snap);
     cfgCosts.checked = false;
     setCostFields(false);
     statusEl.textContent = '';
+    applyBtn.disabled = false;
   });
 
   document.getElementById('cfgRefresh').addEventListener('click', async function () {
@@ -556,7 +587,7 @@
   buildCharts(snap);
   buildPositions(snap);
   if (!window.Chart) {
-    document.querySelectorAll('.chart-png-fallback').forEach(function (el) { el.classList.add('show'); });
+    showPngFallbacks();
   }
 
 function buildPositions(s) {
@@ -583,22 +614,22 @@ function buildPositions(s) {
       var pnl = p.live_pnl || 0;
       var pnlCls = pnl >= 0 ? 'profit' : 'loss';
       var pnlSign = pnl >= 0 ? '+' : '-';
-      return '<div class="position-card" data-pair="' + p.pair + '" data-side="' + p.side + '">' +
+      return '<div class="position-card" data-pair="' + esc(p.pair) + '" data-side="' + esc(p.side) + '">' +
         '<div class="position-header">' +
-        '<span class="pair-label">' + p.pair + '</span>' +
+        '<span class="pair-label">' + esc(p.pair) + '</span>' +
         '<span class="side-badge ' + sideBadge + '">' + arrow + '</span>' +
         '<span class="dte-badge">' + p.days_to_expiry + ' DTE</span>' +
         '</div>' +
         '<div class="position-body">' +
         '<div class="position-stat"><span class="stat-label">Strike</span><span class="stat-value">\u20B9' + p.strike.toLocaleString('en-IN', { maximumFractionDigits: 0 }) + '</span></div>' +
         '<div class="position-stat"><span class="stat-label">Entry</span><span class="stat-value">\u20B9' + p.entry_premium.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span></div>' +
-        '<div class="position-stat"><span class="stat-label">Live</span><span class="stat-value" data-live-premium="true" data-entry="' + p.entry_premium + '" data-side="' + p.side + '">\u20B9' + p.live_premium.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span></div>' +
+        '<div class="position-stat"><span class="stat-label">Live</span><span class="stat-value" data-live-premium="true" data-entry="' + p.entry_premium + '" data-side="' + esc(p.side) + '">\u20B9' + p.live_premium.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span></div>' +
         '<div class="position-stat"><span class="stat-label">P&L</span><span class="stat-value ' + pnlCls + '" data-live-pnl="true">' + pnlSign + '\u20B9' + Math.abs(pnl).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span></div>' +
         '</div>' +
-        '<div class="position-chart"><canvas id="spark-' + i + '" height="48" aria-label="Premium path for ' + p.pair + '"></canvas></div>' +
+        '<div class="position-chart"><canvas id="spark-' + i + '" height="48" aria-label="Premium path for ' + esc(p.pair) + '"></canvas></div>' +
         '<div class="position-footer">' +
         '<span class="pct-move">' + ((p.pct_move || 0) >= 0 ? '+' : '') + (p.pct_move || 0).toFixed(1) + '% move</span>' +
-        '<span class="banked-floor">Floor: ' + (p.banked_floor == null ? 'none' : p.banked_floor) + '</span>' +
+        '<span class="banked-floor">Floor: ' + (p.banked_floor == null ? 'none' : esc(p.banked_floor)) + '</span>' +
         '</div>' +
         '</div>';
     }).join('');

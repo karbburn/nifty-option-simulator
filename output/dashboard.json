@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-16T07:36:04Z",
+  "generated_at": "2026-08-16T09:04:51Z",
   "last_trading_date": "2026-08-14",
-  "git_sha": "59dc28b50e6d271daf4eb0c1a5c9ebf3fe939a61",
+  "git_sha": "dc5af8c1459844dc6923a1fe5dfc9a43a681b360",
   "config": {
     "iv_flat": 0.125,
     "lot_size": 75,
@@ -20,6 +20,18 @@
       "Fri\u2192Tue",
       "Thu\u2192Mon",
       "Tue\u2192Thu",
+      "Wed\u2192Fri",
+      "Wed\u2192Thu"
+    ],
+    "pair_universe": [
+      "Fri\u2192Mon",
+      "Fri\u2192Tue",
+      "Mon\u2192Tue",
+      "Mon\u2192Wed",
+      "Thu\u2192Fri",
+      "Thu\u2192Mon",
+      "Tue\u2192Thu",
+      "Tue\u2192Wed",
       "Wed\u2192Fri",
       "Wed\u2192Thu"
     ]

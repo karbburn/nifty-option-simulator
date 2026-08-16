@@ -17,8 +17,11 @@ def test_health():
 def test_dashboard_snapshot():
     snap = _snapshot()
     assert snap["last_trading_date"] >= "2026-01-01"
-    assert len(snap["trades"]) > 100
-    assert snap["trade_stats"]["total_pnl"] > 0
+    excluded = set(snap["config"]["excluded_pairs"])
+    assert excluded <= set(snap["config"]["pair_universe"])
+    traded = {t["pair"] for t in snap["trades"]}
+    assert traded
+    assert traded.isdisjoint(excluded)
 
 
 def test_api_spot():
@@ -135,6 +138,122 @@ def test_recompute_changes_config():
 def test_recompute_bad_excluded_pair_list():
     rec = client.post("/api/recompute", json={"excluded_pairs": ["Fri→Mon", "Tue→Wed"]}).json()
     assert rec["config"]["excluded_pairs"] == ["Fri→Mon", "Tue→Wed"]
+
+
+def test_recompute_default_restores_snapshot():
+    client.post("/api/recompute", json={})
+    assert _snapshot()["trade_stats"]["n_trades"] > 0
+
+
+def test_recompute_excluding_one_pair_drops_its_trades():
+    client.post("/api/recompute", json={})
+    base = _snapshot()
+    traded = sorted({t["pair"] for t in base["trades"]})
+    drop = traded[0]
+    try:
+        rec = client.post(
+            "/api/recompute", json={"excluded_pairs": sorted(base["config"]["excluded_pairs"]) + [drop]}
+        ).json()
+        assert drop not in {t["pair"] for t in rec["trades"]}
+        assert len(rec["trades"]) < len(base["trades"])
+    finally:
+        client.post("/api/recompute", json={})
+
+
+def test_recompute_all_pairs_excluded_returns_zero_trades():
+    import json as _json
+
+    client.post("/api/recompute", json={})
+    base = _snapshot()
+    try:
+        rec = client.post(
+            "/api/recompute", json={"excluded_pairs": list(base["config"]["pair_universe"])}
+        ).json()
+        assert rec["trade_stats"]["n_trades"] == 0
+        assert rec["trades"] == []
+        assert rec["trade_stats"]["win_rate"] is None
+        _json.dumps(rec)  # no bare NaN
+    finally:
+        client.post("/api/recompute", json={})
+
+
+def test_recompute_stale_seq_dropped_server_side():
+    client.post("/api/recompute", json={"seq": 1})
+    current = client.post("/api/recompute", json={"seq": 2, "iv_flat": 0.11}).json()
+    stale = client.post("/api/recompute", json={"seq": 1, "iv_flat": 0.05}).json()
+    assert stale["config"]["iv_flat"] == current["config"]["iv_flat"]
+    assert stale["trade_stats"] == current["trade_stats"]
+
+
+def test_recompute_updates_global_snapshot():
+    client.post("/api/recompute", json={})
+    client.post("/api/recompute", json={"iv_flat": 0.11})
+    assert _snapshot()["config"]["iv_flat"] == 0.11
+    client.post("/api/recompute", json={})
+
+
+def test_pair_chips_render_from_universe():
+    import re
+
+    resp = client.get("/")
+    snap = _snapshot()
+    for pair in snap["config"]["pair_universe"]:
+        assert f'value="{pair}"' in resp.text
+    for m in re.finditer(
+        r'<label class="pair-chip"><input type="checkbox" value="([^"]+)"( checked)?>',
+        resp.text,
+    ):
+        pair, checked = m.groups()
+        assert (checked is not None) == (pair not in snap["config"]["excluded_pairs"])
+
+
+def test_dashboard_aria_sort_initial_state():
+    resp = client.get("/")
+    assert 'data-sort="entry_date" aria-sort="descending"' in resp.text
+
+
+def test_dashboard_script_delimiters_balanced():
+    import re
+
+    resp = client.get("/")
+    m = re.search(r"<script>\n(.*?)</script>", resp.text, re.S)
+    assert m
+    src = m.group(1)
+    code = []
+    i, n = 0, len(src)
+    while i < n:
+        c = src[i]
+        if src[i : i + 2] == "//":
+            j = src.find("\n", i)
+            i = j if j != -1 else n
+            continue
+        if src[i : i + 2] == "/*":
+            j = src.find("*/", i)
+            i = j + 2 if j != -1 else n
+            continue
+        if c in "\"'`":
+            q = c
+            i += 1
+            while i < n:
+                if src[i] == "\\":
+                    i += 2
+                    continue
+                if src[i] == q:
+                    break
+                i += 1
+            i += 1
+            continue
+        code.append(c)
+        i += 1
+    pairs = {")": "(", "]": "[", "}": "{"}
+    stack = []
+    for ch in code:
+        if ch in "([{":
+            stack.append(ch)
+        elif ch in ")]}":
+            assert stack and stack[-1] == pairs[ch], f"unbalanced {ch}"
+            stack.pop()
+    assert not stack
 
 
 def test_report_charts_served():

@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import json
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, fields
 from pathlib import Path
 
 import pandas as pd
@@ -166,6 +166,9 @@ def run_backtest(df: pd.DataFrame, table: pd.DataFrame, cfg: Config, mode: str =
 
 
 def trades_frame(trades: list[Trade]) -> pd.DataFrame:
+    if not trades:
+        cols = [f.name for f in fields(Trade) if f.name != "legs"]
+        return pd.DataFrame(columns=cols)
     return pd.DataFrame([asdict(t) for t in trades]).drop(columns=["legs"])
 
 
