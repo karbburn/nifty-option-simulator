@@ -1,0 +1,301 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="tab-panel" id="tab-live">
+  <div class="kpi-row">
+    <div class="kpi-card">
+      <span class="kpi-label">Total P&L</span>
+      <span class="kpi-value {{ 'profit' if (snap.trade_stats.total_pnl or 0) >= 0 else 'loss' }}">
+        {{ "₹{:,.2f}".format(snap.trade_stats.total_pnl) }}
+      </span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Win Rate</span>
+      <span class="kpi-value">{{ "{:.1f}".format(snap.trade_stats.win_rate * 100) }}%</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Sharpe (Ann.)</span>
+      <span class="kpi-value">{{ "{:.2f}".format(snap.equity_stats.sharpe_annualized) }}</span>
+    </div>
+    <div class="kpi-card">
+      <span class="kpi-label">Max Drawdown</span>
+      <span class="kpi-value loss">{{ "₹{:,.0f}".format(snap.equity_stats.max_drawdown) }}</span>
+    </div>
+  </div>
+
+  <section class="card" aria-label="Live positions">
+    <h2>Live Positions</h2>
+    {% if snap.live_positions %}
+    <div class="positions-grid" id="positionsGrid">
+      {% for p in snap.live_positions %}
+      <div class="position-card" data-pair="{{ p.pair }}" data-side="{{ p.side }}">
+        <div class="position-header">
+          <span class="pair-label">{{ p.pair }}</span>
+          <span class="side-badge {{ 'ce' if p.side == 'CE' else 'pe' }}">{{ 'CE ▲' if p.side == 'CE' else 'PE ▼' }}</span>
+          <span class="dte-badge">{{ p.days_to_expiry }} DTE</span>
+        </div>
+        <div class="position-body">
+          <div class="position-stat"><span class="stat-label">Strike</span><span class="stat-value">₹{{ "{:,.0f}".format(p.strike) }}</span></div>
+          <div class="position-stat"><span class="stat-label">Entry</span><span class="stat-value">₹{{ "{:,.2f}".format(p.entry_premium) }}</span></div>
+          <div class="position-stat"><span class="stat-label">Live</span><span class="stat-value" data-live-premium="true" data-entry="{{ p.entry_premium }}" data-side="{{ p.side }}">₹{{ "{:,.2f}".format(p.live_premium) }}</span></div>
+          <div class="position-stat"><span class="stat-label">P&L</span><span class="stat-value {{ 'profit' if (p.live_pnl or 0) >= 0 else 'loss' }}" data-live-pnl="true">₹{{ "{:,.2f}".format(p.live_pnl or 0) }}</span></div>
+        </div>
+        <div class="position-chart"><canvas id="spark-{{ loop.index0 }}" height="48" aria-label="Premium path for {{ p.pair }}"></canvas></div>
+        <div class="position-footer">
+          <span class="pct-move">{{ "+" if (p.pct_move or 0) >= 0 else "" }}{{ "{:.1f}".format(p.pct_move or 0) }}% move</span>
+          <span class="banked-floor">Floor: {{ "none" if p.banked_floor is none else p.banked_floor }}</span>
+        </div>
+      </div>
+      {% endfor %}
+    </div>
+    {% else %}
+    <div class="empty-state" id="noPositions">
+      <p>No live positions currently open.</p>
+      <p class="empty-sub">Positions appear here when a tradeable weekday pair signals and the entry date passes.</p>
+    </div>
+    {% endif %}
+  </section>
+
+  {% if snap.next_trade_preview and snap.next_trade_preview.pair %}
+  <section class="card" aria-label="Next trade preview">
+    <h2>Next Trade Preview</h2>
+    <p>
+      <strong>{{ snap.next_trade_preview.pair }}</strong> ·
+      <span class="side-badge {{ 'ce' if snap.next_trade_preview.side == 'CE' else 'pe' }}">{{ 'CE ▲' if snap.next_trade_preview.side == 'CE' else 'PE ▼' }}</span> ·
+      Strike ₹{{ "{:,.0f}".format(snap.next_trade_preview.strike) }} ·
+      Entry premium ₹{{ "{:,.2f}".format(snap.next_trade_preview.entry_premium) }} ·
+      {{ snap.next_trade_preview.tte_days }}d to expiry
+    </p>
+    <p class="empty-sub">{{ snap.next_trade_preview.note }}</p>
+  </section>
+  {% endif %}
+</div>
+
+<div class="tab-panel" id="tab-trades">
+  <div class="coming-soon-mobile">Full data export &amp; signals — coming soon.</div>
+  <section class="card" aria-label="Past trades">
+    <h2>Past Trades</h2>
+    <div class="filters">
+      <select id="filterPair" aria-label="Filter by pair"><option value="">All Pairs</option></select>
+      <select id="filterReason" aria-label="Filter by exit reason"><option value="">All Reasons</option></select>
+      <select id="filterSide" aria-label="Filter by side"><option value="">All Sides</option><option value="CE">CE</option><option value="PE">PE</option></select>
+    </div>
+    <div class="table-wrap">
+      <table id="tradesTable">
+        <thead>
+          <tr>
+            <th data-sort="entry_date" aria-sort="none">Entry</th>
+            <th data-sort="exit_date" aria-sort="none">Exit</th>
+            <th data-sort="pair" aria-sort="none">Pair</th>
+            <th data-sort="side" aria-sort="none">Side</th>
+            <th data-sort="strike" aria-sort="none">Strike</th>
+            <th data-sort="entry_premium" aria-sort="none">Entry ₹</th>
+            <th data-sort="exit_premium" aria-sort="none">Exit ₹</th>
+            <th data-sort="exit_reason" aria-sort="none">Reason</th>
+            <th data-sort="days_held" aria-sort="none">Days</th>
+            <th data-sort="pnl" aria-sort="none">P&L</th>
+          </tr>
+        </thead>
+        <tbody id="tradesBody">
+          {% for t in snap.trades %}
+          <tr data-pair="{{ t.pair }}" data-reason="{{ t.exit_reason }}" data-side="{{ t.side }}">
+            <td><a href="/trade/{{ t.entry_date }}">{{ t.entry_date[5:] }}</a></td>
+            <td>{{ t.exit_date[5:] }}</td>
+            <td>{{ t.pair }}</td>
+            <td>{{ t.side }}</td>
+            <td>{{ "{:,.0f}".format(t.strike) }}</td>
+            <td>{{ "{:,.2f}".format(t.entry_premium) }}</td>
+            <td>{{ "{:,.2f}".format(t.exit_premium) }}</td>
+            <td>{{ t.exit_reason }}</td>
+            <td>{{ t.days_held }}</td>
+            <td class="{{ 'pnl-positive' if (t.pnl or 0) >= 0 else 'pnl-negative' }}">{{ "+" if (t.pnl or 0) >= 0 else "-" }}₹{{ "{:,.2f}".format(t.pnl|abs) }}</td>
+          </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </section>
+</div>
+
+<div class="tab-panel" id="tab-charts">
+  <section class="card" aria-label="Equity curve showing cumulative P&L from Aug 2025 to Aug 2026">
+    <h2>Equity Curve</h2>
+    <div class="chart-container"><canvas id="equityChart"></canvas></div>
+  </section>
+  <div class="two-col">
+    <section class="card" aria-label="Probability and out-of-sample win rates with confidence intervals">
+      <h2>Probability &amp; OOS</h2>
+      <div class="chart-container"><canvas id="probabilityChart"></canvas></div>
+    </section>
+    <section class="card" aria-label="Benchmark comparison of ladder strategy versus hold-to-expiry">
+      <h2>Benchmark</h2>
+      <div class="chart-container"><canvas id="benchmarkChart"></canvas></div>
+    </section>
+  </div>
+</div>
+
+<div class="tab-panel" id="tab-expiry">
+  {% include "expiry_content.html" %}
+</div>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  if (window.Chart) {
+    Chart.register(ChartErrorBars.BarWithErrorBarsController, ChartErrorBars.BarWithErrorBar);
+  }
+  var snap = {{ snap | tojson }};
+
+  var trades = snap.trades;
+  var tbody = document.getElementById('tradesBody');
+  var pairs = new Set(trades.map(function (t) { return t.pair; }));
+  var reasons = new Set(trades.map(function (t) { return t.exit_reason; }));
+  var pairSel = document.getElementById('filterPair');
+  var reasonSel = document.getElementById('filterReason');
+  Array.from(pairs).sort().forEach(function (p) { pairSel.add(new Option(p, p)); });
+  Array.from(reasons).sort().forEach(function (r) { reasonSel.add(new Option(r, r)); });
+
+  var currentSort = { col: 'entry_date', dir: 'desc' };
+  document.querySelectorAll('#tradesTable th').forEach(function (th) {
+    th.addEventListener('click', function () {
+      var col = th.dataset.sort;
+      if (!col) return;
+      if (currentSort.col === col) { currentSort.dir = currentSort.dir === 'asc' ? 'desc' : 'asc'; }
+      else { currentSort = { col: col, dir: 'desc' }; }
+      document.querySelectorAll('#tradesTable th').forEach(function (h) { h.setAttribute('aria-sort', h.dataset.sort === currentSort.col ? (currentSort.dir === 'asc' ? 'ascending' : 'descending') : 'none'); });
+      sortAndRender();
+    });
+  });
+  function sortAndRender() {
+    var rows = Array.from(tbody.querySelectorAll('tr'));
+    var ths = document.querySelectorAll('#tradesTable th');
+    var colIdx = Array.from(ths).findIndex(function (h) { return h.dataset.sort === currentSort.col; });
+    var numeric = ['strike', 'entry_premium', 'exit_premium', 'days_held', 'pnl'].includes(currentSort.col);
+    rows.sort(function (a, b) {
+      var va = a.cells[colIdx].textContent.trim();
+      var vb = b.cells[colIdx].textContent.trim();
+      if (numeric) {
+        va = parseFloat(va.replace(/[₹,+\-]/g, '').trim());
+        vb = parseFloat(vb.replace(/[₹,+\-]/g, '').trim());
+        if (a.cells[colIdx].textContent.trim().startsWith('-')) va = -va;
+        if (b.cells[colIdx].textContent.trim().startsWith('-')) vb = -vb;
+      }
+      if (va < vb) return currentSort.dir === 'asc' ? -1 : 1;
+      if (va > vb) return currentSort.dir === 'asc' ? 1 : -1;
+      return 0;
+    });
+    rows.forEach(function (r) { tbody.appendChild(r); });
+    filterTrades();
+  }
+  function filterTrades() {
+    var pair = document.getElementById('filterPair').value;
+    var reason = document.getElementById('filterReason').value;
+    var side = document.getElementById('filterSide').value;
+    tbody.querySelectorAll('tr').forEach(function (row) {
+      row.style.display = (!pair || row.dataset.pair === pair) && (!reason || row.dataset.reason === reason) && (!side || row.dataset.side === side) ? '' : 'none';
+    });
+  }
+  document.getElementById('filterPair').addEventListener('change', filterTrades);
+  document.getElementById('filterReason').addEventListener('change', filterTrades);
+  document.getElementById('filterSide').addEventListener('change', filterTrades);
+
+  function fmtInr(v) { return '\u20B9' + v.toLocaleString('en-IN', { maximumFractionDigits: 0 }); }
+
+  if (window.Chart) {
+    var equityCurve = snap.equity_curve;
+    var peak = 0;
+    var drawdown = equityCurve.map(function (d) { peak = Math.max(peak, d.equity); return peak - d.equity; });
+    new Chart(document.getElementById('equityChart'), {
+      type: 'line',
+      data: {
+        labels: equityCurve.map(function (d) { return d.date; }),
+        datasets: [
+          { label: 'Strategy Equity', data: equityCurve.map(function (d) { return d.equity; }), borderColor: '#1565c0', backgroundColor: 'rgba(21,101,192,0.08)', borderWidth: 1.5, pointRadius: 0, tension: 0.1, order: 1 },
+          { label: 'Drawdown', data: drawdown, borderColor: 'transparent', backgroundColor: 'rgba(198,40,40,0.18)', borderWidth: 0, pointRadius: 0, fill: true, tension: 0.1, order: 2 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: { legend: { display: true, position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: function (c) { return c.dataset.label + ': ' + fmtInr(c.parsed.y); } } } },
+        scales: { x: { type: 'time', time: { unit: 'month', displayFormats: { month: 'MMM yyyy' } }, grid: { display: false }, ticks: { font: { size: 11 }, maxTicksLimit: 12 } }, y: { grid: { color: '#e9ecef' }, ticks: { font: { size: 11 }, callback: function (v) { return fmtInr(v); } } } }
+      }
+    });
+
+    var oosData = snap.oos_data;
+    new Chart(document.getElementById('probabilityChart'), {
+      type: 'barWithErrorBars',
+      data: {
+        labels: oosData.map(function (d) { return d.weekday_pair; }),
+        datasets: [
+          { label: 'Table (IS p_up)', data: oosData.map(function (d) { return { y: d.p_up, yMin: d.ci_low, yMax: d.ci_high }; }), backgroundColor: 'rgba(25,118,210,0.8)', borderColor: '#1976d2', borderWidth: 1 },
+          { label: 'Realized (OOS)', data: oosData.map(function (d) { return { y: d.realized_p_up, yMin: d.realized_ci_low, yMax: d.realized_ci_high }; }), backgroundColor: 'rgba(249,168,37,0.8)', borderColor: '#f9a825', borderWidth: 1 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: function (c) { var v = c.raw; var ci = ' [' + (v.yMin * 100).toFixed(1) + '%\u2013' + (v.yMax * 100).toFixed(1) + '%]'; return c.dataset.label + ': ' + (v.y * 100).toFixed(1) + '%' + ci; } } } },
+        scales: { x: { grid: { display: false }, ticks: { font: { size: 11 }, maxRotation: 20 } }, y: { min: 0, max: 1.05, grid: { color: '#e9ecef' }, ticks: { font: { size: 11 }, callback: function (v) { return (v * 100).toFixed(0) + '%'; } } } }
+      },
+      plugins: [{
+        id: 'refLine50', afterDraw: function (chart) {
+          var ys = chart.scales.y, ctx = chart.ctx, y = ys.getPixelForValue(0.5);
+          ctx.save(); ctx.strokeStyle = '#757575'; ctx.lineWidth = 1; ctx.setLineDash([6, 4]);
+          ctx.beginPath(); ctx.moveTo(chart.chartArea.left, y); ctx.lineTo(chart.chartArea.right, y); ctx.stroke();
+          ctx.fillStyle = '#757575'; ctx.font = '11px sans-serif'; ctx.textAlign = 'right'; ctx.fillText('50%', chart.chartArea.right - 4, y - 4); ctx.restore();
+        }
+      }]
+    });
+
+    var bench = snap.benchmark_equity;
+    var ladderEq = snap.equity_curve;
+    new Chart(document.getElementById('benchmarkChart'), {
+      type: 'line',
+      data: {
+        labels: ladderEq.map(function (d) { return d.date; }),
+        datasets: [
+          { label: 'Ladder Strategy', data: ladderEq.map(function (d) { return d.equity; }), borderColor: '#1565c0', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.1 },
+          { label: 'Hold-to-Expiry (benchmark)', data: bench.map(function (d) { return d.equity; }), borderColor: '#757575', backgroundColor: 'transparent', borderWidth: 1.4, borderDash: [6, 3], pointRadius: 0, tension: 0.1 }
+        ]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        interaction: { mode: 'index', intersect: false },
+        plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 } } }, tooltip: { callbacks: { label: function (c) { return c.dataset.label + ': ' + fmtInr(c.parsed.y); } } } },
+        scales: { x: { type: 'time', time: { unit: 'month', displayFormats: { month: 'MMM yyyy' } }, grid: { display: false }, ticks: { font: { size: 11 }, maxTicksLimit: 12 } }, y: { grid: { color: '#e9ecef' }, ticks: { font: { size: 11 }, callback: function (v) { return fmtInr(v); } } } }
+      }
+    });
+
+    var livePositions = snap.live_positions;
+    livePositions.forEach(function (p, i) {
+      var canvas = document.getElementById('spark-' + i);
+      if (!canvas) return;
+      var color = p.side === 'CE' ? '#2e7d32' : '#c62828';
+      var premiums = [p.entry_premium, p.live_premium];
+      new Chart(canvas, {
+        type: 'line',
+        data: { labels: premiums.map(function (_, k) { return k; }), datasets: [{ data: premiums, borderColor: color, backgroundColor: color + '18', borderWidth: 1.5, pointRadius: 2, pointBackgroundColor: color, fill: true, tension: 0.2 }] },
+        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false } }, scales: { x: { display: false }, y: { display: false } } }
+      });
+    });
+  }
+
+  async function remarkPositions() {
+    try {
+      var resp = await fetch('/api/live-positions?spot=' + lastSpot);
+      var positions = await resp.json();
+      positions.forEach(function (p) {
+        var card = document.querySelector('.position-card[data-pair="' + p.pair + '"]');
+        if (!card) return;
+        var live = card.querySelector('[data-live-premium]');
+        var pnl = card.querySelector('[data-live-pnl]');
+        if (live) live.textContent = '\u20B9' + p.live_premium.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+        if (pnl) { pnl.textContent = (p.live_pnl >= 0 ? '+' : '-') + '\u20B9' + Math.abs(p.live_pnl).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); pnl.className = 'stat-value ' + (p.live_pnl >= 0 ? 'profit' : 'loss'); }
+      });
+    } catch (e) {}
+  }
+  setInterval(function () { remarkPositions(); }, 60000);
+  remarkPositions();
+</script>
+{% endblock %}

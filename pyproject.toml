@@ -18,6 +18,7 @@ dependencies = [
 
 [project.optional-dependencies]
 dev = ["pytest", "ruff"]
+web = ["fastapi", "uvicorn[standard]", "jinja2", "httpx"]
 
 [tool.setuptools.packages.find]
 include = ["nifty_gap*"]

@@ -16,11 +16,13 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: "3.12"
-      - run: pip install -e .
+      - run: pip install -e ".[web]"
       - run: python -m nifty_gap.data.refresh
-      - name: Commit updated history if changed
+      - name: Regenerate dashboard snapshot
+        run: python -m nifty_gap.web.snapshot
+      - name: Commit updated history + snapshot if changed
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-          git add -f data/nifty50_history.csv
-          if ! git diff --cached --quiet; then git commit -m "chore(data): refresh nifty50 history" && git push; fi
+          git add -f data/nifty50_history.csv output/dashboard.json
+          if ! git diff --cached --quiet; then git commit -m "chore(data): refresh nifty50 history + dashboard snapshot" && git push; fi

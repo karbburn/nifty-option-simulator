@@ -1,0 +1,37 @@
+<section class="card" aria-label="Expiry weekday and out-of-sample performance">
+  <h2>Expiry Weekday Pairs</h2>
+  <p>
+    The ladder strategy holds a directional CE or PE option from a weekday pair (e.g. Mon→Thu, Thu→Fri) into
+    expiry, rolling to ladder stop/floor levels. The table below shows the in-sample probability of the
+    underlying moving in the strategy's direction for each weekday pair, alongside the realized
+    out-of-sample (OOS) result with 95% confidence intervals.
+  </p>
+  <div class="table-wrap">
+    <table id="oosTable">
+      <thead>
+        <tr>
+          <th>Pair</th>
+          <th>Side</th>
+          <th>In-sample</th>
+          <th>OOS Realized</th>
+          <th>OOS CI</th>
+          <th>n (in)</th>
+          <th>n (oos)</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for d in snap.oos_data %}
+        <tr>
+          <td>{{ d.weekday_pair }}</td>
+          <td>{{ d.side }}</td>
+          <td>{{ "{:.1f}".format(d.p_up * 100) }}%</td>
+          <td class="{{ 'pnl-positive' if (d.realized_p_up or 0) >= 0.5 else 'pnl-negative' }}">{{ "{:.1f}".format((d.realized_p_up or 0) * 100) }}%</td>
+          <td>{{ "{:.1f}".format((d.realized_ci_low or 0) * 100) }}%–{{ "{:.1f}".format((d.realized_ci_high or 0) * 100) }}%</td>
+          <td>{{ d.n_in }}</td>
+          <td>{{ d.n_oos }}</td>
+        </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </div>
+</section>

@@ -1,0 +1,85 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="card" aria-label="Trade summary">
+  <h2>Trade — {{ trade.entry_date }}</h2>
+  <p>
+    <strong>{{ trade.pair }}</strong> ·
+    <span class="side-badge {{ 'ce' if trade.side == 'CE' else 'pe' }}">{{ 'CE ▲' if trade.side == 'CE' else 'PE ▼' }}</span> ·
+    Strike ₹{{ "{:,.0f}".format(trade.strike) }} ·
+    {{ trade.entry_date }} → {{ trade.exit_date }} ·
+    {{ trade.days_held }}d held ·
+    Exit: <code>{{ trade.exit_reason }}</code>
+  </p>
+  <p>
+    Entry premium <strong>₹{{ "{:,.2f}".format(trade.entry_premium) }}</strong> →
+    Exit premium <strong>₹{{ "{:,.2f}".format(trade.exit_premium) }}</strong>
+    · P&L <strong class="{{ 'profit' if (trade.pnl or 0) >= 0 else 'loss' }}">{{ "+" if (trade.pnl or 0) >= 0 else "-" }}₹{{ "{:,.2f}".format(trade.pnl|abs) }}</strong>
+  </p>
+</section>
+
+<section class="card" aria-label="Premium path chart with ladder entry stop and floor levels">
+  <h2>Premium Path</h2>
+  <div class="chart-container"><canvas id="premiumChart"></canvas></div>
+</section>
+
+{% endblock %}
+
+{% block scripts %}
+<script>
+  if (window.Chart) {
+    var series = {{ premium_series | tojson }};
+    var entryPremium = {{ trade.entry_premium }};
+    var exitDate = "{{ trade.exit_date }}";
+    var premiumChart = new Chart(document.getElementById('premiumChart'), {
+      type: 'line',
+      data: {
+        labels: series.map(function (d) { return d.date; }),
+        datasets: [{
+          label: 'Premium Path',
+          data: series.map(function (d) { return d.premium; }),
+          borderColor: '#1565c0', backgroundColor: 'rgba(21,101,192,0.08)', borderWidth: 1.8,
+          pointRadius: 3, pointBackgroundColor: series.map(function (d) { return d.date === exitDate ? '#c62828' : '#1565c0'; }),
+          fill: false, tension: 0.15
+        }]
+      },
+      options: {
+        responsive: true, maintainAspectRatio: false,
+        plugins: { legend: { display: false }, tooltip: { callbacks: { label: function (c) { return '\u20B9' + c.parsed.y.toFixed(2); } } } },
+        scales: { x: { grid: { display: false }, ticks: { font: { size: 11 } } }, y: { grid: { color: '#e9ecef' }, ticks: { font: { size: 11 }, callback: function (v) { return '\u20B9' + v.toFixed(0); } } } }
+      },
+      plugins: [
+        { id: 'ladderLines', afterDraw: function (chart) {
+          var ctx = chart.ctx, ys = chart.scales.y;
+          var levels = [
+            { value: entryPremium, color: '#1565c0', label: 'Entry' },
+            { value: entryPremium * 0.97, color: '#c62828', label: '-3% SL' },
+            { value: entryPremium * 0.95, color: '#c62828', label: '-5% SL' },
+            { value: entryPremium * 1.05, color: '#2e7d32', label: '+5% Floor' },
+            { value: entryPremium * 1.10, color: '#2e7d32', label: '+10% Floor' },
+            { value: entryPremium * 1.15, color: '#2e7d32', label: '+15% Target' }
+          ];
+          ctx.save();
+          levels.forEach(function (lv) {
+            var y = ys.getPixelForValue(lv.value);
+            if (y < chart.chartArea.top || y > chart.chartArea.bottom) return;
+            ctx.strokeStyle = lv.color; ctx.lineWidth = 1; ctx.setLineDash([4, 3]); ctx.globalAlpha = 0.6;
+            ctx.beginPath(); ctx.moveTo(chart.chartArea.left, y); ctx.lineTo(chart.chartArea.right, y); ctx.stroke();
+            ctx.globalAlpha = 1; ctx.fillStyle = lv.color; ctx.font = '10px sans-serif'; ctx.textAlign = 'left';
+            ctx.fillText(lv.label + ' \u20B9' + lv.value.toFixed(0), chart.chartArea.left + 4, y - 3);
+          });
+          ctx.restore();
+        }},
+        { id: 'exitLine', afterDraw: function (chart) {
+          var idx = series.findIndex(function (d) { return d.date === exitDate; });
+          if (idx < 0) return;
+          var x = chart.scales.x.getPixelForValue(idx);
+          var ctx = chart.ctx;
+          ctx.save(); ctx.strokeStyle = '#c62828'; ctx.lineWidth = 1.5;
+          ctx.beginPath(); ctx.moveTo(x, chart.chartArea.top); ctx.lineTo(x, chart.chartArea.bottom); ctx.stroke(); ctx.restore();
+        }}
+      ]
+    });
+  }
+</script>
+{% endblock %}

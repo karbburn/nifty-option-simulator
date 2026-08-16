@@ -1,0 +1,7311 @@
+{
+  "generated_at": "2026-08-15T18:48:51Z",
+  "last_trading_date": "2026-08-14",
+  "git_sha": "e4d55d7db4d603efbdd569fe127dd81aa734e9d3",
+  "config": {
+    "iv_flat": 0.125,
+    "lot_size": 75,
+    "ladder_floor_pcts": [
+      0.05,
+      0.1,
+      0.15
+    ],
+    "ladder_stop_pcts": [
+      0.03,
+      0.05
+    ],
+    "ladder_rollover": false,
+    "excluded_pairs": [
+      "Fri\u2192Mon"
+    ]
+  },
+  "trade_stats": {
+    "n_trades": 187,
+    "total_pnl": 126796.59318053447,
+    "win_rate": 0.2620320855614973,
+    "avg_win": 14456.298343267053,
+    "avg_loss": -4214.217577098198,
+    "profit_factor": 1.2180276352141366,
+    "exit_reasons": [
+      {
+        "exit_reason": "expiry",
+        "count": 89,
+        "pct": 47.593582887700535,
+        "avg_pnl": 5903.93950308359
+      },
+      {
+        "exit_reason": "floor_15",
+        "count": 6,
+        "pct": 3.2085561497326207,
+        "avg_pnl": 712.3785183464861
+      },
+      {
+        "exit_reason": "stop_5",
+        "count": 90,
+        "pct": 48.1283422459893,
+        "avg_pnl": -4474.277761129156
+      },
+      {
+        "exit_reason": "stop_3",
+        "count": 1,
+        "pct": 0.53475935828877,
+        "avg_pnl": -403.37912896388843
+      },
+      {
+        "exit_reason": "floor_10",
+        "count": 1,
+        "pct": 0.53475935828877,
+        "avg_pnl": 160.08392660396566
+      }
+    ]
+  },
+  "equity_stats": {
+    "n_days": 246,
+    "final_equity": 126796.59318053444,
+    "max_drawdown": 117565.5848210102,
+    "max_drawdown_pct": 2.2991325983058117,
+    "sharpe_annualized": 0.6653834432781884,
+    "annualization": 252,
+    "sharpe_note": "mean/std of daily-dollar equity changes \u00d7 \u221a252 (portfolio MTM; ties/flat count as zero)"
+  },
+  "trades": [
+    {
+      "entry_date": "2025-08-18",
+      "exit_date": "2025-08-21",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24900,
+      "entry_close": 24876.95,
+      "expiry": "2025-08-21",
+      "entry_premium": 107.68191577373727,
+      "exit_premium": 183.75,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 5705.1063169697045,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-08-18",
+          "exit_date": "2025-08-21",
+          "expiry": "2025-08-21",
+          "strike": 24900,
+          "entry_premium": 107.68191577373727,
+          "exit_premium": 183.75,
+          "exit_reason": "expiry",
+          "pnl": 5705.1063169697045
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-08-19",
+      "exit_date": "2025-08-21",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25000,
+      "entry_close": 24980.65,
+      "expiry": "2025-08-21",
+      "entry_premium": 87.10242086389007,
+      "exit_premium": 83.75,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": -251.4315647917556,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-08-19",
+          "exit_date": "2025-08-21",
+          "expiry": "2025-08-21",
+          "strike": 25000,
+          "entry_premium": 87.10242086389007,
+          "exit_premium": 83.75,
+          "exit_reason": "expiry",
+          "pnl": -251.4315647917556
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-08-20",
+      "exit_date": "2025-08-21",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 25050,
+      "entry_close": 25050.55,
+      "expiry": "2025-08-21",
+      "entry_premium": 67.91610447538005,
+      "exit_premium": 33.75,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -2562.457835653504,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-08-20",
+          "exit_date": "2025-08-21",
+          "expiry": "2025-08-21",
+          "strike": 25050,
+          "entry_premium": 67.91610447538005,
+          "exit_premium": 33.75,
+          "exit_reason": "expiry",
+          "pnl": -2562.457835653504
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-08-21",
+      "exit_date": "2025-08-25",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25100,
+      "entry_close": 25083.75,
+      "expiry": "2025-08-28",
+      "entry_premium": 165.76666873913382,
+      "exit_premium": 182.3596126649536,
+      "exit_reason": "floor_15",
+      "days_held": 4,
+      "pnl": 1244.4707944364836,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-08-21",
+          "exit_date": "2025-08-25",
+          "expiry": "2025-08-28",
+          "strike": 25100,
+          "entry_premium": 165.76666873913382,
+          "exit_premium": 182.3596126649536,
+          "exit_reason": "floor_15",
+          "pnl": 1244.4707944364836
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-08-25",
+      "exit_date": "2025-08-26",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24950,
+      "entry_close": 24967.75,
+      "expiry": "2025-08-28",
+      "entry_premium": 129.02676728491133,
+      "exit_premium": 19.24231446782005,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -8233.833961281845,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-08-25",
+          "exit_date": "2025-08-26",
+          "expiry": "2025-08-28",
+          "strike": 24950,
+          "entry_premium": 129.02676728491133,
+          "exit_premium": 19.24231446782005,
+          "exit_reason": "stop_5",
+          "pnl": -8233.833961281845
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-08-28",
+      "exit_date": "2025-09-01",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 24500,
+      "entry_close": 24500.9,
+      "expiry": "2025-09-04",
+      "entry_premium": 153.8444765393142,
+      "exit_premium": 55.3524849444957,
+      "exit_reason": "stop_5",
+      "days_held": 4,
+      "pnl": -7386.899369611388,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-08-28",
+          "exit_date": "2025-09-01",
+          "expiry": "2025-09-04",
+          "strike": 24500,
+          "entry_premium": 153.8444765393142,
+          "exit_premium": 55.3524849444957,
+          "exit_reason": "stop_5",
+          "pnl": -7386.899369611388
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-01",
+      "exit_date": "2025-09-02",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24650,
+      "entry_close": 24625.05,
+      "expiry": "2025-09-04",
+      "entry_premium": 105.56288771338586,
+      "exit_premium": 63.341048723839776,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -3166.6379242159564,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-01",
+          "exit_date": "2025-09-02",
+          "expiry": "2025-09-04",
+          "strike": 24650,
+          "entry_premium": 105.56288771338586,
+          "exit_premium": 63.341048723839776,
+          "exit_reason": "stop_5",
+          "pnl": -3166.6379242159564
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-02",
+      "exit_date": "2025-09-04",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 24600,
+      "entry_close": 24579.6,
+      "expiry": "2025-09-04",
+      "entry_premium": 85.05259732907689,
+      "exit_premium": 134.29999999999927,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 3693.5552003191788,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-02",
+          "exit_date": "2025-09-04",
+          "expiry": "2025-09-04",
+          "strike": 24600,
+          "entry_premium": 85.05259732907689,
+          "exit_premium": 134.29999999999927,
+          "exit_reason": "expiry",
+          "pnl": 3693.5552003191788
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-03",
+      "exit_date": "2025-09-04",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24700,
+      "entry_close": 24715.05,
+      "expiry": "2025-09-04",
+      "entry_premium": 74.67601279507471,
+      "exit_premium": 34.29999999999927,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -3028.200959630658,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-03",
+          "exit_date": "2025-09-04",
+          "expiry": "2025-09-04",
+          "strike": 24700,
+          "entry_premium": 74.67601279507471,
+          "exit_premium": 34.29999999999927,
+          "exit_reason": "expiry",
+          "pnl": -3028.200959630658
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-04",
+      "exit_date": "2025-09-05",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 24750,
+      "entry_close": 24734.3,
+      "expiry": "2025-09-11",
+      "entry_premium": 163.2991059596643,
+      "exit_premium": 149.565364328113,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -1030.0306223663483,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-04",
+          "exit_date": "2025-09-05",
+          "expiry": "2025-09-11",
+          "strike": 24750,
+          "entry_premium": 163.2991059596643,
+          "exit_premium": 149.565364328113,
+          "exit_reason": "stop_5",
+          "pnl": -1030.0306223663483
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-08",
+      "exit_date": "2025-09-11",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24750,
+      "entry_close": 24773.15,
+      "expiry": "2025-09-11",
+      "entry_premium": 131.04024377604765,
+      "exit_premium": 255.5,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 9334.481716796427,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-08",
+          "exit_date": "2025-09-11",
+          "expiry": "2025-09-11",
+          "strike": 24750,
+          "entry_premium": 131.04024377604765,
+          "exit_premium": 255.5,
+          "exit_reason": "expiry",
+          "pnl": 9334.481716796427
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-09",
+      "exit_date": "2025-09-11",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 24850,
+      "entry_close": 24868.6,
+      "expiry": "2025-09-11",
+      "entry_premium": 106.12571358018431,
+      "exit_premium": 155.5,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 3703.0714814861767,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-09",
+          "exit_date": "2025-09-11",
+          "expiry": "2025-09-11",
+          "strike": 24850,
+          "entry_premium": 106.12571358018431,
+          "exit_premium": 155.5,
+          "exit_reason": "expiry",
+          "pnl": 3703.0714814861767
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-10",
+      "exit_date": "2025-09-11",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24950,
+      "entry_close": 24973.1,
+      "expiry": "2025-09-11",
+      "entry_premium": 79.84449783313539,
+      "exit_premium": 55.5,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -1825.8373374851544,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-10",
+          "exit_date": "2025-09-11",
+          "expiry": "2025-09-11",
+          "strike": 24950,
+          "entry_premium": 79.84449783313539,
+          "exit_premium": 55.5,
+          "exit_reason": "expiry",
+          "pnl": -1825.8373374851544
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-11",
+      "exit_date": "2025-09-12",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25000,
+      "entry_close": 25005.5,
+      "expiry": "2025-09-18",
+      "entry_premium": 154.85413244161828,
+      "exit_premium": 99.50821434764475,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4150.943857048014,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-11",
+          "exit_date": "2025-09-12",
+          "expiry": "2025-09-18",
+          "strike": 25000,
+          "entry_premium": 154.85413244161828,
+          "exit_premium": 99.50821434764475,
+          "exit_reason": "stop_5",
+          "pnl": -4150.943857048014
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-15",
+      "exit_date": "2025-09-18",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25050,
+      "entry_close": 25069.2,
+      "expiry": "2025-09-18",
+      "entry_premium": 130.29809230356295,
+      "exit_premium": 373.59999999999854,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 18247.64307723267,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-15",
+          "exit_date": "2025-09-18",
+          "expiry": "2025-09-18",
+          "strike": 25050,
+          "entry_premium": 130.29809230356295,
+          "exit_premium": 373.59999999999854,
+          "exit_reason": "expiry",
+          "pnl": 18247.64307723267
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-16",
+      "exit_date": "2025-09-18",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25250,
+      "entry_close": 25239.1,
+      "expiry": "2025-09-18",
+      "entry_premium": 92.21916073650573,
+      "exit_premium": 173.59999999999854,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 6103.562944761961,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-16",
+          "exit_date": "2025-09-18",
+          "expiry": "2025-09-18",
+          "strike": 25250,
+          "entry_premium": 92.21916073650573,
+          "exit_premium": 173.59999999999854,
+          "exit_reason": "expiry",
+          "pnl": 6103.562944761961
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-17",
+      "exit_date": "2025-09-18",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 25350,
+      "entry_close": 25330.25,
+      "expiry": "2025-09-18",
+      "entry_premium": 58.797868744495645,
+      "exit_premium": 73.59999999999854,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 1110.1598441627175,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-17",
+          "exit_date": "2025-09-18",
+          "expiry": "2025-09-18",
+          "strike": 25350,
+          "entry_premium": 58.797868744495645,
+          "exit_premium": 73.59999999999854,
+          "exit_reason": "expiry",
+          "pnl": 1110.1598441627175
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-18",
+      "exit_date": "2025-09-25",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25400,
+      "entry_close": 25423.6,
+      "expiry": "2025-09-25",
+      "entry_premium": 149.14206342892794,
+      "exit_premium": 509.15000000000146,
+      "exit_reason": "expiry",
+      "days_held": 7,
+      "pnl": 27000.595242830514,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-18",
+          "exit_date": "2025-09-25",
+          "expiry": "2025-09-25",
+          "strike": 25400,
+          "entry_premium": 149.14206342892794,
+          "exit_premium": 509.15000000000146,
+          "exit_reason": "expiry",
+          "pnl": 27000.595242830514
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-22",
+      "exit_date": "2025-09-23",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25200,
+      "entry_close": 25202.35,
+      "expiry": "2025-09-25",
+      "entry_premium": 121.98269367398825,
+      "exit_premium": 82.58286508471429,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -2954.9871441955474,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-22",
+          "exit_date": "2025-09-23",
+          "expiry": "2025-09-25",
+          "strike": 25200,
+          "entry_premium": 121.98269367398825,
+          "exit_premium": 82.58286508471429,
+          "exit_reason": "stop_5",
+          "pnl": -2954.9871441955474
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-23",
+      "exit_date": "2025-09-24",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25150,
+      "entry_close": 25169.5,
+      "expiry": "2025-09-25",
+      "entry_premium": 107.77834670154152,
+      "exit_premium": 30.52225454442305,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -5794.2069117838855,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-23",
+          "exit_date": "2025-09-24",
+          "expiry": "2025-09-25",
+          "strike": 25150,
+          "entry_premium": 107.77834670154152,
+          "exit_premium": 30.52225454442305,
+          "exit_reason": "stop_5",
+          "pnl": -5794.2069117838855
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-24",
+      "exit_date": "2025-09-25",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 25050,
+      "entry_close": 25056.9,
+      "expiry": "2025-09-25",
+      "entry_premium": 71.22584118415762,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -5341.938088811821,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-24",
+          "exit_date": "2025-09-25",
+          "expiry": "2025-09-25",
+          "strike": 25050,
+          "entry_premium": 71.22584118415762,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -5341.938088811821
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-25",
+      "exit_date": "2025-10-01",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 24900,
+      "entry_close": 24890.85,
+      "expiry": "2025-10-02",
+      "entry_premium": 161.10328041469802,
+      "exit_premium": 98.79748271319113,
+      "exit_reason": "stop_5",
+      "days_held": 6,
+      "pnl": -4672.934827613017,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-25",
+          "exit_date": "2025-10-01",
+          "expiry": "2025-10-02",
+          "strike": 24900,
+          "entry_premium": 161.10328041469802,
+          "exit_premium": 98.79748271319113,
+          "exit_reason": "stop_5",
+          "pnl": -4672.934827613017
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-29",
+      "exit_date": "2025-09-30",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24650,
+      "entry_close": 24634.9,
+      "expiry": "2025-10-02",
+      "entry_premium": 110.41360344968234,
+      "exit_premium": 76.63623589551935,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -2533.3025665622245,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-29",
+          "exit_date": "2025-09-30",
+          "expiry": "2025-10-02",
+          "strike": 24650,
+          "entry_premium": 110.41360344968234,
+          "exit_premium": 76.63623589551935,
+          "exit_reason": "stop_5",
+          "pnl": -2533.3025665622245
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-09-30",
+      "exit_date": "2025-10-01",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 24600,
+      "entry_close": 24611.1,
+      "expiry": "2025-10-02",
+      "entry_premium": 101.08736599130498,
+      "exit_premium": 245.54696567133942,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 10834.469976002583,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-09-30",
+          "exit_date": "2025-10-01",
+          "expiry": "2025-10-02",
+          "strike": 24600,
+          "entry_premium": 101.08736599130498,
+          "exit_premium": 245.54696567133942,
+          "exit_reason": "expiry",
+          "pnl": 10834.469976002583
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-01",
+      "exit_date": "2025-10-01",
+      "pair": "Wed\u2192Fri",
+      "side": "PE",
+      "strike": 24850,
+      "entry_close": 24836.3,
+      "expiry": "2025-10-02",
+      "entry_premium": 69.5827552122555,
+      "exit_premium": 69.5827552122555,
+      "exit_reason": "expiry",
+      "days_held": 0,
+      "pnl": 0.0,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-01",
+          "exit_date": "2025-10-01",
+          "expiry": "2025-10-02",
+          "strike": 24850,
+          "entry_premium": 69.5827552122555,
+          "exit_premium": 69.5827552122555,
+          "exit_reason": "expiry",
+          "pnl": 0.0
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-06",
+      "exit_date": "2025-10-07",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25100,
+      "entry_close": 25077.65,
+      "expiry": "2025-10-09",
+      "entry_premium": 108.9797418804792,
+      "exit_premium": 101.52627286701318,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -559.0101760099515,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-06",
+          "exit_date": "2025-10-07",
+          "expiry": "2025-10-09",
+          "strike": 25100,
+          "entry_premium": 108.9797418804792,
+          "exit_premium": 101.52627286701318,
+          "exit_reason": "stop_5",
+          "pnl": -559.0101760099515
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-07",
+      "exit_date": "2025-10-08",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25100,
+      "entry_close": 25108.3,
+      "expiry": "2025-10-09",
+      "entry_premium": 101.52627286701318,
+      "exit_premium": 43.69253021529403,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4337.530698878936,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-07",
+          "exit_date": "2025-10-08",
+          "expiry": "2025-10-09",
+          "strike": 25100,
+          "entry_premium": 101.52627286701318,
+          "exit_premium": 43.69253021529403,
+          "exit_reason": "stop_5",
+          "pnl": -4337.530698878936
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-08",
+      "exit_date": "2025-10-09",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 25050,
+      "entry_close": 25046.15,
+      "expiry": "2025-10-09",
+      "entry_premium": 65.68026102622935,
+      "exit_premium": 131.79999999999927,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 4958.9804230327445,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-08",
+          "exit_date": "2025-10-09",
+          "expiry": "2025-10-09",
+          "strike": 25050,
+          "entry_premium": 65.68026102622935,
+          "exit_premium": 131.79999999999927,
+          "exit_reason": "expiry",
+          "pnl": 4958.9804230327445
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-09",
+      "exit_date": "2025-10-10",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25200,
+      "entry_close": 25181.8,
+      "expiry": "2025-10-16",
+      "entry_premium": 167.33882514514335,
+      "exit_premium": 111.35184893738915,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4199.023215581565,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-09",
+          "exit_date": "2025-10-10",
+          "expiry": "2025-10-16",
+          "strike": 25200,
+          "entry_premium": 167.33882514514335,
+          "exit_premium": 111.35184893738915,
+          "exit_reason": "stop_5",
+          "pnl": -4199.023215581565
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-13",
+      "exit_date": "2025-10-14",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25250,
+      "entry_close": 25227.35,
+      "expiry": "2025-10-16",
+      "entry_premium": 109.54953028864838,
+      "exit_premium": 52.941337167661914,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4245.614484073985,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-13",
+          "exit_date": "2025-10-14",
+          "expiry": "2025-10-16",
+          "strike": 25250,
+          "entry_premium": 109.54953028864838,
+          "exit_premium": 52.941337167661914,
+          "exit_reason": "stop_5",
+          "pnl": -4245.614484073985
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-14",
+      "exit_date": "2025-10-16",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25150,
+      "entry_close": 25145.5,
+      "expiry": "2025-10-16",
+      "entry_premium": 95.05800960295164,
+      "exit_premium": 435.2999999999993,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 25518.149279778572,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-14",
+          "exit_date": "2025-10-16",
+          "expiry": "2025-10-16",
+          "strike": 25150,
+          "entry_premium": 95.05800960295164,
+          "exit_premium": 435.2999999999993,
+          "exit_reason": "expiry",
+          "pnl": 25518.149279778572
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-15",
+      "exit_date": "2025-10-16",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 25300,
+      "entry_close": 25323.55,
+      "expiry": "2025-10-16",
+      "entry_premium": 81.03615243157583,
+      "exit_premium": 285.2999999999993,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 15319.788567631758,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-15",
+          "exit_date": "2025-10-16",
+          "expiry": "2025-10-16",
+          "strike": 25300,
+          "entry_premium": 81.03615243157583,
+          "exit_premium": 285.2999999999993,
+          "exit_reason": "expiry",
+          "pnl": 15319.788567631758
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-16",
+      "exit_date": "2025-10-17",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25600,
+      "entry_close": 25585.3,
+      "expiry": "2025-10-23",
+      "entry_premium": 168.16584431220326,
+      "exit_premium": 104.3966616833477,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4782.688697164167,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-16",
+          "exit_date": "2025-10-17",
+          "expiry": "2025-10-23",
+          "strike": 25600,
+          "entry_premium": 168.16584431220326,
+          "exit_premium": 104.3966616833477,
+          "exit_reason": "stop_5",
+          "pnl": -4782.688697164167
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-20",
+      "exit_date": "2025-10-21",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25850,
+      "entry_close": 25843.15,
+      "expiry": "2025-10-23",
+      "entry_premium": 120.33172430771265,
+      "exit_premium": 109.98565730331757,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -775.9550253296311,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-20",
+          "exit_date": "2025-10-21",
+          "expiry": "2025-10-23",
+          "strike": 25850,
+          "entry_premium": 120.33172430771265,
+          "exit_premium": 109.98565730331757,
+          "exit_reason": "stop_5",
+          "pnl": -775.9550253296311
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-23",
+      "exit_date": "2025-10-27",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25900,
+      "entry_close": 25891.4,
+      "expiry": "2025-10-30",
+      "entry_premium": 167.13667235563116,
+      "exit_premium": 81.57545915604533,
+      "exit_reason": "stop_5",
+      "days_held": 4,
+      "pnl": -6417.090989968938,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-23",
+          "exit_date": "2025-10-27",
+          "expiry": "2025-10-30",
+          "strike": 25900,
+          "entry_premium": 167.13667235563116,
+          "exit_premium": 81.57545915604533,
+          "exit_reason": "stop_5",
+          "pnl": -6417.090989968938
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-27",
+      "exit_date": "2025-10-28",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25950,
+      "entry_close": 25966.05,
+      "expiry": "2025-10-30",
+      "entry_premium": 132.88545782277652,
+      "exit_premium": 93.48610367610854,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -2954.951561000098,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-27",
+          "exit_date": "2025-10-28",
+          "expiry": "2025-10-30",
+          "strike": 25950,
+          "entry_premium": 132.88545782277652,
+          "exit_premium": 93.48610367610854,
+          "exit_reason": "stop_5",
+          "pnl": -2954.951561000098
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-28",
+      "exit_date": "2025-10-30",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25950,
+      "entry_close": 25936.2,
+      "expiry": "2025-10-30",
+      "entry_premium": 93.48610367610854,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": -7011.457775708141,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-28",
+          "exit_date": "2025-10-30",
+          "expiry": "2025-10-30",
+          "strike": 25950,
+          "entry_premium": 93.48610367610854,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -7011.457775708141
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-29",
+      "exit_date": "2025-10-30",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 26050,
+      "entry_close": 26053.9,
+      "expiry": "2025-10-30",
+      "entry_premium": 72.34922665560225,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -5426.191999170169,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-29",
+          "exit_date": "2025-10-30",
+          "expiry": "2025-10-30",
+          "strike": 26050,
+          "entry_premium": 72.34922665560225,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -5426.191999170169
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-10-30",
+      "exit_date": "2025-11-03",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25900,
+      "entry_close": 25877.85,
+      "expiry": "2025-11-06",
+      "entry_premium": 173.66114404052132,
+      "exit_premium": 188.2939614316747,
+      "exit_reason": "floor_15",
+      "days_held": 4,
+      "pnl": 1097.4613043365025,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-10-30",
+          "exit_date": "2025-11-03",
+          "expiry": "2025-11-06",
+          "strike": 25900,
+          "entry_premium": 173.66114404052132,
+          "exit_premium": 188.2939614316747,
+          "exit_reason": "floor_15",
+          "pnl": 1097.4613043365025
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-11-03",
+      "exit_date": "2025-11-04",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25750,
+      "entry_close": 25763.35,
+      "expiry": "2025-11-06",
+      "entry_premium": 130.46750928968322,
+      "exit_premium": 39.87809984339856,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -6794.20570847135,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-11-03",
+          "exit_date": "2025-11-04",
+          "expiry": "2025-11-06",
+          "strike": 25750,
+          "entry_premium": 130.46750928968322,
+          "exit_premium": 39.87809984339856,
+          "exit_reason": "stop_5",
+          "pnl": -6794.20570847135
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-11-06",
+      "exit_date": "2025-11-10",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25500,
+      "entry_close": 25509.7,
+      "expiry": "2025-11-13",
+      "entry_premium": 156.06587361865604,
+      "exit_premium": 76.73183845503627,
+      "exit_reason": "stop_5",
+      "days_held": 4,
+      "pnl": -5950.052637271483,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-11-06",
+          "exit_date": "2025-11-10",
+          "expiry": "2025-11-13",
+          "strike": 25500,
+          "entry_premium": 156.06587361865604,
+          "exit_premium": 76.73183845503627,
+          "exit_reason": "stop_5",
+          "pnl": -5950.052637271483
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-11-10",
+      "exit_date": "2025-11-13",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25550,
+      "entry_close": 25574.35,
+      "expiry": "2025-11-13",
+      "entry_premium": 135.52619532810968,
+      "exit_premium": 329.15000000000146,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 14521.785350391883,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-11-10",
+          "exit_date": "2025-11-13",
+          "expiry": "2025-11-13",
+          "strike": 25550,
+          "entry_premium": 135.52619532810968,
+          "exit_premium": 329.15000000000146,
+          "exit_reason": "expiry",
+          "pnl": 14521.785350391883
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-11-11",
+      "exit_date": "2025-11-13",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25700,
+      "entry_close": 25694.95,
+      "expiry": "2025-11-13",
+      "entry_premium": 96.90690512985566,
+      "exit_premium": 179.15000000000146,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 6168.232115260935,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-11-11",
+          "exit_date": "2025-11-13",
+          "expiry": "2025-11-13",
+          "strike": 25700,
+          "entry_premium": 96.90690512985566,
+          "exit_premium": 179.15000000000146,
+          "exit_reason": "expiry",
+          "pnl": 6168.232115260935
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-11-12",
+      "exit_date": "2025-11-13",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 25900,
+      "entry_close": 25875.8,
+      "expiry": "2025-11-13",
+      "entry_premium": 58.2237888847867,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4366.7841663590025,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-11-12",
+          "exit_date": "2025-11-13",
+          "expiry": "2025-11-13",
+          "strike": 25900,
+          "entry_premium": 58.2237888847867,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -4366.7841663590025
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-11-13",
+      "exit_date": "2025-11-14",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25900,
+      "entry_close": 25879.15,
+      "expiry": "2025-11-20",
+      "entry_premium": 173.02809664119195,
+      "exit_premium": 147.36610933847987,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -1924.6490477034058,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-11-13",
+          "exit_date": "2025-11-14",
+          "expiry": "2025-11-20",
+          "strike": 25900,
+          "entry_premium": 173.02809664119195,
+          "exit_premium": 147.36610933847987,
+          "exit_reason": "stop_5",
+          "pnl": -1924.6490477034058
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-11-17",
+      "exit_date": "2025-11-18",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 26000,
+      "entry_close": 26013.45,
+      "expiry": "2025-11-20",
+      "entry_premium": 131.7182166239072,
+      "exit_premium": 60.805265143830184,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -5318.471361005777,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-11-17",
+          "exit_date": "2025-11-18",
+          "expiry": "2025-11-20",
+          "strike": 26000,
+          "entry_premium": 131.7182166239072,
+          "exit_premium": 60.805265143830184,
+          "exit_reason": "stop_5",
+          "pnl": -5318.471361005777
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-11-18",
+      "exit_date": "2025-11-20",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25900,
+      "entry_close": 25910.05,
+      "expiry": "2025-11-20",
+      "entry_premium": 105.55340835319657,
+      "exit_premium": 292.15000000000146,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 13994.744373510366,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-11-18",
+          "exit_date": "2025-11-20",
+          "expiry": "2025-11-20",
+          "strike": 25900,
+          "entry_premium": 105.55340835319657,
+          "exit_premium": 292.15000000000146,
+          "exit_reason": "expiry",
+          "pnl": 13994.744373510366
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-11-19",
+      "exit_date": "2025-11-20",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 26050,
+      "entry_close": 26052.65,
+      "expiry": "2025-11-20",
+      "entry_premium": 71.69945102571364,
+      "exit_premium": 142.15000000000146,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 5283.791173071586,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-11-19",
+          "exit_date": "2025-11-20",
+          "expiry": "2025-11-20",
+          "strike": 26050,
+          "entry_premium": 71.69945102571364,
+          "exit_premium": 142.15000000000146,
+          "exit_reason": "expiry",
+          "pnl": 5283.791173071586
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-11-20",
+      "exit_date": "2025-11-26",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 26200,
+      "entry_close": 26192.15,
+      "expiry": "2025-11-27",
+      "entry_premium": 168.66895461298918,
+      "exit_premium": 63.52077871793881,
+      "exit_reason": "stop_5",
+      "days_held": 6,
+      "pnl": -7886.113192128778,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-11-20",
+          "exit_date": "2025-11-26",
+          "expiry": "2025-11-27",
+          "strike": 26200,
+          "entry_premium": 168.66895461298918,
+          "exit_premium": 63.52077871793881,
+          "exit_reason": "stop_5",
+          "pnl": -7886.113192128778
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-11-24",
+      "exit_date": "2025-11-25",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25950,
+      "entry_close": 25959.5,
+      "expiry": "2025-11-27",
+      "entry_premium": 129.35937045553328,
+      "exit_premium": 70.26730737391154,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4431.904731121631,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-11-24",
+          "exit_date": "2025-11-25",
+          "expiry": "2025-11-27",
+          "strike": 25950,
+          "entry_premium": 129.35937045553328,
+          "exit_premium": 70.26730737391154,
+          "exit_reason": "stop_5",
+          "pnl": -4431.904731121631
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-11-25",
+      "exit_date": "2025-11-27",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25900,
+      "entry_close": 25884.8,
+      "expiry": "2025-11-27",
+      "entry_premium": 92.60255401087306,
+      "exit_premium": 315.5499999999993,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 16721.058449184464,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-11-25",
+          "exit_date": "2025-11-27",
+          "expiry": "2025-11-27",
+          "strike": 25900,
+          "entry_premium": 92.60255401087306,
+          "exit_premium": 315.5499999999993,
+          "exit_reason": "expiry",
+          "pnl": 16721.058449184464
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-11-26",
+      "exit_date": "2025-11-27",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 26200,
+      "entry_close": 26205.3,
+      "expiry": "2025-11-27",
+      "entry_premium": 73.48611672345578,
+      "exit_premium": 15.549999999999272,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4345.208754259238,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-11-26",
+          "exit_date": "2025-11-27",
+          "expiry": "2025-11-27",
+          "strike": 26200,
+          "entry_premium": 73.48611672345578,
+          "exit_premium": 15.549999999999272,
+          "exit_reason": "expiry",
+          "pnl": -4345.208754259238
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-11-27",
+      "exit_date": "2025-11-28",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 26200,
+      "entry_close": 26215.55,
+      "expiry": "2025-12-04",
+      "entry_premium": 157.8000339909504,
+      "exit_premium": 152.42164560476522,
+      "exit_reason": "stop_3",
+      "days_held": 1,
+      "pnl": -403.37912896388843,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-11-27",
+          "exit_date": "2025-11-28",
+          "expiry": "2025-12-04",
+          "strike": 26200,
+          "entry_premium": 157.8000339909504,
+          "exit_premium": 152.42164560476522,
+          "exit_reason": "stop_3",
+          "pnl": -403.37912896388843
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-01",
+      "exit_date": "2025-12-02",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 26200,
+      "entry_close": 26175.75,
+      "expiry": "2025-12-04",
+      "entry_premium": 113.30553064696505,
+      "exit_premium": 37.172276044464525,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -5709.99409518754,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-01",
+          "exit_date": "2025-12-02",
+          "expiry": "2025-12-04",
+          "strike": 26200,
+          "entry_premium": 113.30553064696505,
+          "exit_premium": 37.172276044464525,
+          "exit_reason": "stop_5",
+          "pnl": -5709.99409518754
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-02",
+      "exit_date": "2025-12-03",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 26050,
+      "entry_close": 26032.2,
+      "expiry": "2025-12-04",
+      "entry_premium": 91.90846888304259,
+      "exit_premium": 42.31335264162408,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -3719.633718106388,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-02",
+          "exit_date": "2025-12-03",
+          "expiry": "2025-12-04",
+          "strike": 26050,
+          "entry_premium": 91.90846888304259,
+          "exit_premium": 42.31335264162408,
+          "exit_reason": "stop_5",
+          "pnl": -3719.633718106388
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-03",
+      "exit_date": "2025-12-04",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 26000,
+      "entry_close": 25986.0,
+      "expiry": "2025-12-04",
+      "entry_premium": 63.258571428714276,
+      "exit_premium": 33.75,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -2213.1428571535707,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-03",
+          "exit_date": "2025-12-04",
+          "expiry": "2025-12-04",
+          "strike": 26000,
+          "entry_premium": 63.258571428714276,
+          "exit_premium": 33.75,
+          "exit_reason": "expiry",
+          "pnl": -2213.1428571535707
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-04",
+      "exit_date": "2025-12-05",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 26050,
+      "entry_close": 26033.75,
+      "expiry": "2025-12-11",
+      "entry_premium": 171.74396351550422,
+      "exit_premium": 97.46832297809851,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -5570.673040305428,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-04",
+          "exit_date": "2025-12-05",
+          "expiry": "2025-12-11",
+          "strike": 26050,
+          "entry_premium": 171.74396351550422,
+          "exit_premium": 97.46832297809851,
+          "exit_reason": "stop_5",
+          "pnl": -5570.673040305428
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-08",
+      "exit_date": "2025-12-09",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25950,
+      "entry_close": 25960.55,
+      "expiry": "2025-12-11",
+      "entry_premium": 129.92072296795232,
+      "exit_premium": 53.40370426145091,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -5738.776402987605,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-08",
+          "exit_date": "2025-12-09",
+          "expiry": "2025-12-11",
+          "strike": 25950,
+          "entry_premium": 129.92072296795232,
+          "exit_premium": 53.40370426145091,
+          "exit_reason": "stop_5",
+          "pnl": -5738.776402987605
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-09",
+      "exit_date": "2025-12-10",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25850,
+      "entry_close": 25839.65,
+      "expiry": "2025-12-11",
+      "entry_premium": 94.81441391163025,
+      "exit_premium": 32.47790190608248,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4675.238400416083,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-09",
+          "exit_date": "2025-12-10",
+          "expiry": "2025-12-11",
+          "strike": 25850,
+          "entry_premium": 94.81441391163025,
+          "exit_premium": 32.47790190608248,
+          "exit_reason": "stop_5",
+          "pnl": -4675.238400416083
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-10",
+      "exit_date": "2025-12-11",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 25750,
+      "entry_close": 25758.0,
+      "expiry": "2025-12-11",
+      "entry_premium": 73.69699417207812,
+      "exit_premium": 148.54999999999927,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 5613.975437094086,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-10",
+          "exit_date": "2025-12-11",
+          "expiry": "2025-12-11",
+          "strike": 25750,
+          "entry_premium": 73.69699417207812,
+          "exit_premium": 148.54999999999927,
+          "exit_reason": "expiry",
+          "pnl": 5613.975437094086
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-11",
+      "exit_date": "2025-12-12",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25900,
+      "entry_close": 25898.55,
+      "expiry": "2025-12-18",
+      "entry_premium": 163.75963659425724,
+      "exit_premium": 93.07701534928856,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -5301.1965933726515,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-11",
+          "exit_date": "2025-12-12",
+          "expiry": "2025-12-18",
+          "strike": 25900,
+          "entry_premium": 163.75963659425724,
+          "exit_premium": 93.07701534928856,
+          "exit_reason": "stop_5",
+          "pnl": -5301.1965933726515
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-15",
+      "exit_date": "2025-12-16",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 26050,
+      "entry_close": 26027.3,
+      "expiry": "2025-12-18",
+      "entry_premium": 113.34749385122632,
+      "exit_premium": 31.373593667306523,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -6148.042513793985,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-15",
+          "exit_date": "2025-12-16",
+          "expiry": "2025-12-18",
+          "strike": 26050,
+          "entry_premium": 113.34749385122632,
+          "exit_premium": 31.373593667306523,
+          "exit_reason": "stop_5",
+          "pnl": -6148.042513793985
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-16",
+      "exit_date": "2025-12-17",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25850,
+      "entry_close": 25860.1,
+      "expiry": "2025-12-18",
+      "entry_premium": 105.38669393289638,
+      "exit_premium": 54.85184232577376,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -3790.1138705341964,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-16",
+          "exit_date": "2025-12-17",
+          "expiry": "2025-12-18",
+          "strike": 25850,
+          "entry_premium": 105.38669393289638,
+          "exit_premium": 54.85184232577376,
+          "exit_reason": "stop_5",
+          "pnl": -3790.1138705341964
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-17",
+      "exit_date": "2025-12-18",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 25800,
+      "entry_close": 25818.55,
+      "expiry": "2025-12-18",
+      "entry_premium": 79.56508676993508,
+      "exit_premium": 15.549999999999272,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4801.131507745185,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-17",
+          "exit_date": "2025-12-18",
+          "expiry": "2025-12-18",
+          "strike": 25800,
+          "entry_premium": 79.56508676993508,
+          "exit_premium": 15.549999999999272,
+          "exit_reason": "expiry",
+          "pnl": -4801.131507745185
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-18",
+      "exit_date": "2025-12-19",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25800,
+      "entry_close": 25815.55,
+      "expiry": "2025-12-25",
+      "entry_premium": 155.28305830585668,
+      "exit_premium": 86.19731227874036,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -5181.430952033725,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-18",
+          "exit_date": "2025-12-19",
+          "expiry": "2025-12-25",
+          "strike": 25800,
+          "entry_premium": 155.28305830585668,
+          "exit_premium": 86.19731227874036,
+          "exit_reason": "stop_5",
+          "pnl": -5181.430952033725
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-22",
+      "exit_date": "2025-12-23",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 26150,
+      "entry_close": 26172.4,
+      "expiry": "2025-12-25",
+      "entry_premium": 137.31486740747278,
+      "exit_premium": 115.88671193730443,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -1607.1116602626262,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-22",
+          "exit_date": "2025-12-23",
+          "expiry": "2025-12-25",
+          "strike": 26150,
+          "entry_premium": 137.31486740747278,
+          "exit_premium": 115.88671193730443,
+          "exit_reason": "stop_5",
+          "pnl": -1607.1116602626262
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-23",
+      "exit_date": "2025-12-24",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 26200,
+      "entry_close": 26177.15,
+      "expiry": "2025-12-25",
+      "entry_premium": 90.04477244335249,
+      "exit_premium": 44.96334152378404,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -3381.1073189676335,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-23",
+          "exit_date": "2025-12-24",
+          "expiry": "2025-12-25",
+          "strike": 26200,
+          "entry_premium": 90.04477244335249,
+          "exit_premium": 44.96334152378404,
+          "exit_reason": "stop_5",
+          "pnl": -3381.1073189676335
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-24",
+      "exit_date": "2025-12-24",
+      "pair": "Wed\u2192Fri",
+      "side": "PE",
+      "strike": 26150,
+      "entry_close": 26142.1,
+      "expiry": "2025-12-25",
+      "entry_premium": 69.87424988406565,
+      "exit_premium": 69.87424988406565,
+      "exit_reason": "expiry",
+      "days_held": 0,
+      "pnl": 0.0,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-24",
+          "exit_date": "2025-12-24",
+          "expiry": "2025-12-25",
+          "strike": 26150,
+          "entry_premium": 69.87424988406565,
+          "exit_premium": 69.87424988406565,
+          "exit_reason": "expiry",
+          "pnl": 0.0
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-29",
+      "exit_date": "2025-12-30",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25950,
+      "entry_close": 25942.1,
+      "expiry": "2026-01-01",
+      "entry_premium": 120.27417204210906,
+      "exit_premium": 94.8017491029932,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -1910.4317204336894,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-29",
+          "exit_date": "2025-12-30",
+          "expiry": "2026-01-01",
+          "strike": 25950,
+          "entry_premium": 120.27417204210906,
+          "exit_premium": 94.8017491029932,
+          "exit_reason": "stop_5",
+          "pnl": -1910.4317204336894
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-30",
+      "exit_date": "2026-01-01",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25950,
+      "entry_close": 25938.85,
+      "expiry": "2026-01-01",
+      "entry_premium": 94.8017491029932,
+      "exit_premium": 196.54999999999927,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 7631.1188172754555,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-30",
+          "exit_date": "2026-01-01",
+          "expiry": "2026-01-01",
+          "strike": 25950,
+          "entry_premium": 94.8017491029932,
+          "exit_premium": 196.54999999999927,
+          "exit_reason": "expiry",
+          "pnl": 7631.1188172754555
+        }
+      ]
+    },
+    {
+      "entry_date": "2025-12-31",
+      "exit_date": "2026-01-01",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 26150,
+      "entry_close": 26129.6,
+      "expiry": "2026-01-01",
+      "entry_premium": 60.641004477303795,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4548.075335797785,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2025-12-31",
+          "exit_date": "2026-01-01",
+          "expiry": "2026-01-01",
+          "strike": 26150,
+          "entry_premium": 60.641004477303795,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -4548.075335797785
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-01",
+      "exit_date": "2026-01-02",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 26150,
+      "entry_close": 26146.55,
+      "expiry": "2026-01-08",
+      "entry_premium": 166.27377395089934,
+      "exit_premium": 84.2708729670012,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -6150.217573792361,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-01",
+          "exit_date": "2026-01-02",
+          "expiry": "2026-01-08",
+          "strike": 26150,
+          "entry_premium": 166.27377395089934,
+          "exit_premium": 84.2708729670012,
+          "exit_reason": "stop_5",
+          "pnl": -6150.217573792361
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-05",
+      "exit_date": "2026-01-06",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 26250,
+      "entry_close": 26250.3,
+      "expiry": "2026-01-08",
+      "entry_premium": 125.94216511768536,
+      "exit_premium": 68.91310170796532,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4277.179755729003,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-05",
+          "exit_date": "2026-01-06",
+          "expiry": "2026-01-08",
+          "strike": 26250,
+          "entry_premium": 125.94216511768536,
+          "exit_premium": 68.91310170796532,
+          "exit_reason": "stop_5",
+          "pnl": -4277.179755729003
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-06",
+      "exit_date": "2026-01-07",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 26200,
+      "entry_close": 26178.7,
+      "expiry": "2026-01-08",
+      "entry_premium": 90.79011593096584,
+      "exit_premium": 44.45348100235242,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -3475.2476196460066,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-06",
+          "exit_date": "2026-01-07",
+          "expiry": "2026-01-08",
+          "strike": 26200,
+          "entry_premium": 90.79011593096584,
+          "exit_premium": 44.45348100235242,
+          "exit_reason": "stop_5",
+          "pnl": -3475.2476196460066
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-07",
+      "exit_date": "2026-01-08",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 26150,
+      "entry_close": 26140.75,
+      "expiry": "2026-01-08",
+      "entry_premium": 65.96626001225377,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4947.469500919033,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-07",
+          "exit_date": "2026-01-08",
+          "expiry": "2026-01-08",
+          "strike": 26150,
+          "entry_premium": 65.96626001225377,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -4947.469500919033
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-08",
+      "exit_date": "2026-01-12",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25900,
+      "entry_close": 25876.85,
+      "expiry": "2026-01-15",
+      "entry_premium": 174.14912722542795,
+      "exit_premium": 170.98398763003024,
+      "exit_reason": "floor_15",
+      "days_held": 4,
+      "pnl": -237.38546965482783,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-08",
+          "exit_date": "2026-01-12",
+          "expiry": "2026-01-15",
+          "strike": 25900,
+          "entry_premium": 174.14912722542795,
+          "exit_premium": 170.98398763003024,
+          "exit_reason": "floor_15",
+          "pnl": -237.38546965482783
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-12",
+      "exit_date": "2026-01-13",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25800,
+      "entry_close": 25790.25,
+      "expiry": "2026-01-15",
+      "entry_premium": 118.61394867348099,
+      "exit_premium": 68.689726209117,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -3744.3166848272995,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-12",
+          "exit_date": "2026-01-13",
+          "expiry": "2026-01-15",
+          "strike": 25800,
+          "entry_premium": 118.61394867348099,
+          "exit_premium": 68.689726209117,
+          "exit_reason": "stop_5",
+          "pnl": -3744.3166848272995
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-13",
+      "exit_date": "2026-01-14",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25750,
+      "entry_close": 25732.3,
+      "expiry": "2026-01-15",
+      "entry_premium": 90.79882397650363,
+      "exit_premium": 34.60567086370065,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4214.486483460223,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-13",
+          "exit_date": "2026-01-14",
+          "expiry": "2026-01-15",
+          "strike": 25750,
+          "entry_premium": 90.79882397650363,
+          "exit_premium": 34.60567086370065,
+          "exit_reason": "stop_5",
+          "pnl": -4214.486483460223
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-14",
+      "exit_date": "2026-01-14",
+      "pair": "Wed\u2192Fri",
+      "side": "PE",
+      "strike": 25650,
+      "entry_close": 25665.6,
+      "expiry": "2026-01-15",
+      "entry_premium": 57.36492488254771,
+      "exit_premium": 57.36492488254771,
+      "exit_reason": "expiry",
+      "days_held": 0,
+      "pnl": 0.0,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-14",
+          "exit_date": "2026-01-14",
+          "expiry": "2026-01-15",
+          "strike": 25650,
+          "entry_premium": 57.36492488254771,
+          "exit_premium": 57.36492488254771,
+          "exit_reason": "expiry",
+          "pnl": 0.0
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-19",
+      "exit_date": "2026-01-20",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25600,
+      "entry_close": 25585.5,
+      "expiry": "2026-01-22",
+      "entry_premium": 115.26023398545112,
+      "exit_premium": 6.519345412769553,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -8155.5666429511175,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-19",
+          "exit_date": "2026-01-20",
+          "expiry": "2026-01-22",
+          "strike": 25600,
+          "entry_premium": 115.26023398545112,
+          "exit_premium": 6.519345412769553,
+          "exit_reason": "stop_5",
+          "pnl": -8155.5666429511175
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-20",
+      "exit_date": "2026-01-21",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25250,
+      "entry_close": 25232.5,
+      "expiry": "2026-01-22",
+      "entry_premium": 88.96570089652596,
+      "exit_premium": 30.931642839639608,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4352.554354266476,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-20",
+          "exit_date": "2026-01-21",
+          "expiry": "2026-01-22",
+          "strike": 25250,
+          "entry_premium": 88.96570089652596,
+          "exit_premium": 30.931642839639608,
+          "exit_reason": "stop_5",
+          "pnl": -4352.554354266476
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-21",
+      "exit_date": "2026-01-22",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 25150,
+      "entry_close": 25157.5,
+      "expiry": "2026-01-22",
+      "entry_premium": 71.81336124419977,
+      "exit_premium": 139.90000000000146,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 5106.4979066851265,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-21",
+          "exit_date": "2026-01-22",
+          "expiry": "2026-01-22",
+          "strike": 25150,
+          "entry_premium": 71.81336124419977,
+          "exit_premium": 139.90000000000146,
+          "exit_reason": "expiry",
+          "pnl": 5106.4979066851265
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-22",
+      "exit_date": "2026-01-27",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25300,
+      "entry_close": 25289.9,
+      "expiry": "2026-01-29",
+      "entry_premium": 164.07405492974794,
+      "exit_premium": 162.12758049295735,
+      "exit_reason": "floor_15",
+      "days_held": 5,
+      "pnl": -145.98558275929463,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-22",
+          "exit_date": "2026-01-27",
+          "expiry": "2026-01-29",
+          "strike": 25300,
+          "entry_premium": 164.07405492974794,
+          "exit_premium": 162.12758049295735,
+          "exit_reason": "floor_15",
+          "pnl": -145.98558275929463
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-27",
+      "exit_date": "2026-01-29",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25200,
+      "entry_close": 25175.4,
+      "expiry": "2026-01-29",
+      "entry_premium": 85.35627158644456,
+      "exit_premium": 218.90000000000146,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 10015.779631016767,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-27",
+          "exit_date": "2026-01-29",
+          "expiry": "2026-01-29",
+          "strike": 25200,
+          "entry_premium": 85.35627158644456,
+          "exit_premium": 218.90000000000146,
+          "exit_reason": "expiry",
+          "pnl": 10015.779631016767
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-28",
+      "exit_date": "2026-01-29",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 25350,
+      "entry_close": 25342.75,
+      "expiry": "2026-01-29",
+      "entry_premium": 64.79407312460717,
+      "exit_premium": 68.90000000000146,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 307.94451565457166,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-28",
+          "exit_date": "2026-01-29",
+          "expiry": "2026-01-29",
+          "strike": 25350,
+          "entry_premium": 64.79407312460717,
+          "exit_premium": 68.90000000000146,
+          "exit_reason": "expiry",
+          "pnl": 307.94451565457166
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-01-29",
+      "exit_date": "2026-02-03",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25400,
+      "entry_close": 25418.9,
+      "expiry": "2026-02-05",
+      "entry_premium": 151.2508983093212,
+      "exit_premium": 8.236749573475208,
+      "exit_reason": "stop_5",
+      "days_held": 5,
+      "pnl": -10726.06115518845,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-01-29",
+          "exit_date": "2026-02-03",
+          "expiry": "2026-02-05",
+          "strike": 25400,
+          "entry_premium": 151.2508983093212,
+          "exit_premium": 8.236749573475208,
+          "exit_reason": "stop_5",
+          "pnl": -10726.06115518845
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-02",
+      "exit_date": "2026-02-05",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25100,
+      "entry_close": 25088.4,
+      "expiry": "2026-02-05",
+      "entry_premium": 114.32519835534913,
+      "exit_premium": 542.7999999999993,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 32135.61012334876,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-02",
+          "exit_date": "2026-02-05",
+          "expiry": "2026-02-05",
+          "strike": 25100,
+          "entry_premium": 114.32519835534913,
+          "exit_premium": 542.7999999999993,
+          "exit_reason": "expiry",
+          "pnl": 32135.61012334876
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-03",
+      "exit_date": "2026-02-04",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25750,
+      "entry_close": 25727.55,
+      "expiry": "2026-02-05",
+      "entry_premium": 88.50181721579611,
+      "exit_premium": 83.63711389970376,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -364.8527487069259,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-03",
+          "exit_date": "2026-02-04",
+          "expiry": "2026-02-05",
+          "strike": 25750,
+          "entry_premium": 88.50181721579611,
+          "exit_premium": 83.63711389970376,
+          "exit_reason": "stop_5",
+          "pnl": -364.8527487069259
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-04",
+      "exit_date": "2026-02-05",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 25800,
+      "entry_close": 25776.0,
+      "expiry": "2026-02-05",
+      "entry_premium": 58.04751404647868,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4353.563553485901,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-04",
+          "exit_date": "2026-02-05",
+          "expiry": "2026-02-05",
+          "strike": 25800,
+          "entry_premium": 58.04751404647868,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -4353.563553485901
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-05",
+      "exit_date": "2026-02-06",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25650,
+      "entry_close": 25642.8,
+      "expiry": "2026-02-12",
+      "entry_premium": 164.8979505073985,
+      "exit_premium": 130.94704011313297,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -2546.318279569914,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-05",
+          "exit_date": "2026-02-06",
+          "expiry": "2026-02-12",
+          "strike": 25650,
+          "entry_premium": 164.8979505073985,
+          "exit_premium": 130.94704011313297,
+          "exit_reason": "stop_5",
+          "pnl": -2546.318279569914
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-09",
+      "exit_date": "2026-02-11",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25850,
+      "entry_close": 25867.3,
+      "expiry": "2026-02-12",
+      "entry_premium": 133.08654864375058,
+      "exit_premium": 135.22100099847012,
+      "exit_reason": "floor_10",
+      "days_held": 2,
+      "pnl": 160.08392660396566,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-09",
+          "exit_date": "2026-02-11",
+          "expiry": "2026-02-12",
+          "strike": 25850,
+          "entry_premium": 133.08654864375058,
+          "exit_premium": 135.22100099847012,
+          "exit_reason": "floor_10",
+          "pnl": 160.08392660396566
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-10",
+      "exit_date": "2026-02-11",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25950,
+      "entry_close": 25935.15,
+      "expiry": "2026-02-12",
+      "entry_premium": 92.96803901821477,
+      "exit_premium": 72.05323608435901,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -1568.6102200391815,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-10",
+          "exit_date": "2026-02-11",
+          "expiry": "2026-02-12",
+          "strike": 25950,
+          "entry_premium": 92.96803901821477,
+          "exit_premium": 72.05323608435901,
+          "exit_reason": "stop_5",
+          "pnl": -1568.6102200391815
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-11",
+      "exit_date": "2026-02-12",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 25950,
+      "entry_close": 25953.85,
+      "expiry": "2026-02-12",
+      "entry_premium": 72.05323608435901,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -5403.992706326926,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-11",
+          "exit_date": "2026-02-12",
+          "expiry": "2026-02-12",
+          "strike": 25950,
+          "entry_premium": 72.05323608435901,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -5403.992706326926
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-12",
+      "exit_date": "2026-02-16",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25800,
+      "entry_close": 25807.2,
+      "expiry": "2026-02-19",
+      "entry_premium": 159.1051856649683,
+      "exit_premium": 175.32669866823562,
+      "exit_reason": "floor_15",
+      "days_held": 4,
+      "pnl": 1216.613475245049,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-12",
+          "exit_date": "2026-02-16",
+          "expiry": "2026-02-19",
+          "strike": 25800,
+          "entry_premium": 159.1051856649683,
+          "exit_premium": 175.32669866823562,
+          "exit_reason": "floor_15",
+          "pnl": 1216.613475245049
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-16",
+      "exit_date": "2026-02-19",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25700,
+      "entry_close": 25682.75,
+      "expiry": "2026-02-19",
+      "entry_premium": 114.36573702962232,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": -8577.430277221674,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-16",
+          "exit_date": "2026-02-19",
+          "expiry": "2026-02-19",
+          "strike": 25700,
+          "entry_premium": 114.36573702962232,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -8577.430277221674
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-17",
+      "exit_date": "2026-02-19",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25750,
+      "entry_close": 25725.4,
+      "expiry": "2026-02-19",
+      "entry_premium": 87.47453531217434,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": -6560.590148413075,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-17",
+          "exit_date": "2026-02-19",
+          "expiry": "2026-02-19",
+          "strike": 25750,
+          "entry_premium": 87.47453531217434,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -6560.590148413075
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-18",
+      "exit_date": "2026-02-19",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 25800,
+      "entry_close": 25819.35,
+      "expiry": "2026-02-19",
+      "entry_premium": 80.01047855385877,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -6000.785891539408,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-18",
+          "exit_date": "2026-02-19",
+          "expiry": "2026-02-19",
+          "strike": 25800,
+          "entry_premium": 80.01047855385877,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -6000.785891539408
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-19",
+      "exit_date": "2026-02-20",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25450,
+      "entry_close": 25454.35,
+      "expiry": "2026-02-26",
+      "entry_premium": 158.22025070093878,
+      "exit_premium": 99.44060428304692,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4408.473481341889,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-19",
+          "exit_date": "2026-02-20",
+          "expiry": "2026-02-26",
+          "strike": 25450,
+          "entry_premium": 158.22025070093878,
+          "exit_premium": 99.44060428304692,
+          "exit_reason": "stop_5",
+          "pnl": -4408.473481341889
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-23",
+      "exit_date": "2026-02-24",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 25700,
+      "entry_close": 25713.0,
+      "expiry": "2026-02-26",
+      "entry_premium": 130.03948675421634,
+      "exit_premium": 15.420582371760247,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -8596.417828684207,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-23",
+          "exit_date": "2026-02-24",
+          "expiry": "2026-02-26",
+          "strike": 25700,
+          "entry_premium": 130.03948675421634,
+          "exit_premium": 15.420582371760247,
+          "exit_reason": "stop_5",
+          "pnl": -8596.417828684207
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-24",
+      "exit_date": "2026-02-26",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 25400,
+      "entry_close": 25424.65,
+      "expiry": "2026-02-26",
+      "entry_premium": 111.59862835048625,
+      "exit_premium": 96.54999999999927,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": -1128.6471262865234,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-24",
+          "exit_date": "2026-02-26",
+          "expiry": "2026-02-26",
+          "strike": 25400,
+          "entry_premium": 111.59862835048625,
+          "exit_premium": 96.54999999999927,
+          "exit_reason": "expiry",
+          "pnl": -1128.6471262865234
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-25",
+      "exit_date": "2026-02-26",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 25500,
+      "entry_close": 25482.5,
+      "expiry": "2026-02-26",
+      "entry_premium": 60.252314295416,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4518.9235721562,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-25",
+          "exit_date": "2026-02-26",
+          "expiry": "2026-02-26",
+          "strike": 25500,
+          "entry_premium": 60.252314295416,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -4518.9235721562
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-02-26",
+      "exit_date": "2026-03-05",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 25500,
+      "entry_close": 25496.55,
+      "expiry": "2026-03-05",
+      "entry_premium": 162.18115800641863,
+      "exit_premium": 734.0999999999985,
+      "exit_reason": "expiry",
+      "days_held": 7,
+      "pnl": 42893.91314951849,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-02-26",
+          "exit_date": "2026-03-05",
+          "expiry": "2026-03-05",
+          "strike": 25500,
+          "entry_premium": 162.18115800641863,
+          "exit_premium": 734.0999999999985,
+          "exit_reason": "expiry",
+          "pnl": 42893.91314951849
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-03-04",
+      "exit_date": "2026-03-05",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24500,
+      "entry_close": 24480.5,
+      "expiry": "2026-03-05",
+      "entry_premium": 56.63499613042586,
+      "exit_premium": 265.90000000000146,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 15694.87529021817,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-03-04",
+          "exit_date": "2026-03-05",
+          "expiry": "2026-03-05",
+          "strike": 24500,
+          "entry_premium": 56.63499613042586,
+          "exit_premium": 265.90000000000146,
+          "exit_reason": "expiry",
+          "pnl": 15694.87529021817
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-03-05",
+      "exit_date": "2026-03-12",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 24750,
+      "entry_close": 24765.9,
+      "expiry": "2026-03-12",
+      "entry_premium": 148.51759811607917,
+      "exit_premium": 1110.8499999999985,
+      "exit_reason": "expiry",
+      "days_held": 7,
+      "pnl": 72174.93014129395,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-03-05",
+          "exit_date": "2026-03-12",
+          "expiry": "2026-03-12",
+          "strike": 24750,
+          "entry_premium": 148.51759811607917,
+          "exit_premium": 1110.8499999999985,
+          "exit_reason": "expiry",
+          "pnl": 72174.93014129395
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-03-09",
+      "exit_date": "2026-03-11",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24050,
+      "entry_close": 24028.05,
+      "expiry": "2026-03-12",
+      "entry_premium": 104.15906341425944,
+      "exit_premium": 9.908437033102018,
+      "exit_reason": "stop_5",
+      "days_held": 2,
+      "pnl": -7068.796978586806,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-03-09",
+          "exit_date": "2026-03-11",
+          "expiry": "2026-03-12",
+          "strike": 24050,
+          "entry_premium": 104.15906341425944,
+          "exit_premium": 9.908437033102018,
+          "exit_reason": "stop_5",
+          "pnl": -7068.796978586806
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-03-10",
+      "exit_date": "2026-03-11",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 24250,
+      "entry_close": 24261.6,
+      "expiry": "2026-03-12",
+      "entry_premium": 100.00255789366201,
+      "exit_premium": 0.419311254629406,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -7468.743497927446,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-03-10",
+          "exit_date": "2026-03-11",
+          "expiry": "2026-03-12",
+          "strike": 24250,
+          "entry_premium": 100.00255789366201,
+          "exit_premium": 0.419311254629406,
+          "exit_reason": "stop_5",
+          "pnl": -7468.743497927446
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-03-11",
+      "exit_date": "2026-03-12",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 23850,
+      "entry_close": 23866.85,
+      "expiry": "2026-03-12",
+      "entry_premium": 73.38594843210376,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -5503.946132407782,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-03-11",
+          "exit_date": "2026-03-12",
+          "expiry": "2026-03-12",
+          "strike": 23850,
+          "entry_premium": 73.38594843210376,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -5503.946132407782
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-03-12",
+      "exit_date": "2026-03-17",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 23650,
+      "entry_close": 23639.15,
+      "expiry": "2026-03-19",
+      "entry_premium": 154.04653326661173,
+      "exit_premium": 120.68511904436673,
+      "exit_reason": "stop_5",
+      "days_held": 5,
+      "pnl": -2502.106066668375,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-03-12",
+          "exit_date": "2026-03-17",
+          "expiry": "2026-03-19",
+          "strike": 23650,
+          "entry_premium": 154.04653326661173,
+          "exit_premium": 120.68511904436673,
+          "exit_reason": "stop_5",
+          "pnl": -2502.106066668375
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-03-16",
+      "exit_date": "2026-03-19",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 23400,
+      "entry_close": 23408.8,
+      "expiry": "2026-03-19",
+      "entry_premium": 116.77247924900075,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": -8757.935943675056,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-03-16",
+          "exit_date": "2026-03-19",
+          "expiry": "2026-03-19",
+          "strike": 23400,
+          "entry_premium": 116.77247924900075,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -8757.935943675056
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-03-17",
+      "exit_date": "2026-03-19",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 23600,
+      "entry_close": 23581.15,
+      "expiry": "2026-03-19",
+      "entry_premium": 81.94263781207701,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": -6145.697835905776,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-03-17",
+          "exit_date": "2026-03-19",
+          "expiry": "2026-03-19",
+          "strike": 23600,
+          "entry_premium": 81.94263781207701,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -6145.697835905776
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-03-18",
+      "exit_date": "2026-03-19",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 23800,
+      "entry_close": 23777.8,
+      "expiry": "2026-03-19",
+      "entry_premium": 53.52016897835165,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4014.0126733763736,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-03-18",
+          "exit_date": "2026-03-19",
+          "expiry": "2026-03-19",
+          "strike": 23800,
+          "entry_premium": 53.52016897835165,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -4014.0126733763736
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-03-19",
+      "exit_date": "2026-03-20",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 23000,
+      "entry_close": 23002.15,
+      "expiry": "2026-03-26",
+      "entry_premium": 143.81678228411874,
+      "exit_premium": 88.13133500965341,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4176.4085455849,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-03-19",
+          "exit_date": "2026-03-20",
+          "expiry": "2026-03-26",
+          "strike": 23000,
+          "entry_premium": 143.81678228411874,
+          "exit_premium": 88.13133500965341,
+          "exit_reason": "stop_5",
+          "pnl": -4176.4085455849
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-03-23",
+      "exit_date": "2026-03-25",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 22500,
+      "entry_close": 22512.65,
+      "expiry": "2026-03-26",
+      "entry_premium": 114.53262680646185,
+      "exit_premium": 810.4564933858455,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 52194.28999345378,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-03-23",
+          "exit_date": "2026-03-25",
+          "expiry": "2026-03-26",
+          "strike": 22500,
+          "entry_premium": 114.53262680646185,
+          "exit_premium": 810.4564933858455,
+          "exit_reason": "expiry",
+          "pnl": 52194.28999345378
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-03-24",
+      "exit_date": "2026-03-25",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 22900,
+      "entry_close": 22912.4,
+      "expiry": "2026-03-26",
+      "entry_premium": 95.21484825739753,
+      "exit_premium": 410.67967588542524,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 23659.862072102078,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-03-24",
+          "exit_date": "2026-03-25",
+          "expiry": "2026-03-26",
+          "strike": 22900,
+          "entry_premium": 95.21484825739753,
+          "exit_premium": 410.67967588542524,
+          "exit_reason": "expiry",
+          "pnl": 23659.862072102078
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-03-25",
+      "exit_date": "2026-03-25",
+      "pair": "Wed\u2192Fri",
+      "side": "PE",
+      "strike": 23300,
+      "entry_close": 23306.45,
+      "expiry": "2026-03-26",
+      "entry_premium": 55.667984522840925,
+      "exit_premium": 55.667984522840925,
+      "exit_reason": "expiry",
+      "days_held": 0,
+      "pnl": 0.0,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-03-25",
+          "exit_date": "2026-03-25",
+          "expiry": "2026-03-26",
+          "strike": 23300,
+          "entry_premium": 55.667984522840925,
+          "exit_premium": 55.667984522840925,
+          "exit_reason": "expiry",
+          "pnl": 0.0
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-04-01",
+      "exit_date": "2026-04-02",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 22700,
+      "entry_close": 22679.4,
+      "expiry": "2026-04-02",
+      "entry_premium": 51.30833890422218,
+      "exit_premium": 13.099999999998545,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -2865.625417816773,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-04-01",
+          "exit_date": "2026-04-02",
+          "expiry": "2026-04-02",
+          "strike": 22700,
+          "entry_premium": 51.30833890422218,
+          "exit_premium": 13.099999999998545,
+          "exit_reason": "expiry",
+          "pnl": -2865.625417816773
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-04-06",
+      "exit_date": "2026-04-09",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 22950,
+      "entry_close": 22968.25,
+      "expiry": "2026-04-09",
+      "entry_premium": 119.73663006390962,
+      "exit_premium": 825.0999999999985,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 52902.25274520667,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-04-06",
+          "exit_date": "2026-04-09",
+          "expiry": "2026-04-09",
+          "strike": 22950,
+          "entry_premium": 119.73663006390962,
+          "exit_premium": 825.0999999999985,
+          "exit_reason": "expiry",
+          "pnl": 52902.25274520667
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-04-07",
+      "exit_date": "2026-04-09",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 23100,
+      "entry_close": 23123.65,
+      "expiry": "2026-04-09",
+      "entry_premium": 102.18314146428929,
+      "exit_premium": 675.0999999999985,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 42968.76439017819,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-04-07",
+          "exit_date": "2026-04-09",
+          "expiry": "2026-04-09",
+          "strike": 23100,
+          "entry_premium": 102.18314146428929,
+          "exit_premium": 675.0999999999985,
+          "exit_reason": "expiry",
+          "pnl": 42968.76439017819
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-04-08",
+      "exit_date": "2026-04-09",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24000,
+      "entry_close": 23997.35,
+      "expiry": "2026-04-09",
+      "entry_premium": 63.45077732574646,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4758.808299430984,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-04-08",
+          "exit_date": "2026-04-09",
+          "expiry": "2026-04-09",
+          "strike": 24000,
+          "entry_premium": 63.45077732574646,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -4758.808299430984
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-04-09",
+      "exit_date": "2026-04-10",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 23800,
+      "entry_close": 23775.1,
+      "expiry": "2026-04-16",
+      "entry_premium": 161.80684346061025,
+      "exit_premium": 52.90264341764578,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -8167.815003222336,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-04-09",
+          "exit_date": "2026-04-10",
+          "expiry": "2026-04-16",
+          "strike": 23800,
+          "entry_premium": 161.80684346061025,
+          "exit_premium": 52.90264341764578,
+          "exit_reason": "stop_5",
+          "pnl": -8167.815003222336
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-04-15",
+      "exit_date": "2026-04-16",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24250,
+      "entry_close": 24231.3,
+      "expiry": "2026-04-16",
+      "entry_premium": 56.33621222682814,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4225.21591701211,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-04-15",
+          "exit_date": "2026-04-16",
+          "expiry": "2026-04-16",
+          "strike": 24250,
+          "entry_premium": 56.33621222682814,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -4225.21591701211
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-04-16",
+      "exit_date": "2026-04-17",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 24200,
+      "entry_close": 24196.75,
+      "expiry": "2026-04-23",
+      "entry_premium": 153.90174074622155,
+      "exit_premium": 81.65712625877586,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -5418.346086558427,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-04-16",
+          "exit_date": "2026-04-17",
+          "expiry": "2026-04-23",
+          "strike": 24200,
+          "entry_premium": 153.90174074622155,
+          "exit_premium": 81.65712625877586,
+          "exit_reason": "stop_5",
+          "pnl": -5418.346086558427
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-04-20",
+      "exit_date": "2026-04-22",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24350,
+      "entry_close": 24364.85,
+      "expiry": "2026-04-23",
+      "entry_premium": 124.5779690182444,
+      "exit_premium": 81.11928937141238,
+      "exit_reason": "stop_5",
+      "days_held": 2,
+      "pnl": -3259.400973512402,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-04-20",
+          "exit_date": "2026-04-22",
+          "expiry": "2026-04-23",
+          "strike": 24350,
+          "entry_premium": 124.5779690182444,
+          "exit_premium": 81.11928937141238,
+          "exit_reason": "stop_5",
+          "pnl": -3259.400973512402
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-04-21",
+      "exit_date": "2026-04-22",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 24600,
+      "entry_close": 24576.6,
+      "expiry": "2026-04-23",
+      "entry_premium": 83.61616226005572,
+      "exit_premium": 6.443755399402562,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -5787.930514548987,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-04-21",
+          "exit_date": "2026-04-22",
+          "expiry": "2026-04-23",
+          "strike": 24600,
+          "entry_premium": 83.61616226005572,
+          "exit_premium": 6.443755399402562,
+          "exit_reason": "stop_5",
+          "pnl": -5787.930514548987
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-04-22",
+      "exit_date": "2026-04-23",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24400,
+      "entry_close": 24378.1,
+      "expiry": "2026-04-23",
+      "entry_premium": 55.26178817831169,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4144.634113373377,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-04-22",
+          "exit_date": "2026-04-23",
+          "expiry": "2026-04-23",
+          "strike": 24400,
+          "entry_premium": 55.26178817831169,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -4144.634113373377
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-04-23",
+      "exit_date": "2026-04-27",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 24150,
+      "entry_close": 24173.05,
+      "expiry": "2026-04-30",
+      "entry_premium": 141.52952721706242,
+      "exit_premium": 132.6593487424925,
+      "exit_reason": "stop_5",
+      "days_held": 4,
+      "pnl": -665.2633855927434,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-04-23",
+          "exit_date": "2026-04-27",
+          "expiry": "2026-04-30",
+          "strike": 24150,
+          "entry_premium": 141.52952721706242,
+          "exit_premium": 132.6593487424925,
+          "exit_reason": "stop_5",
+          "pnl": -665.2633855927434
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-04-27",
+      "exit_date": "2026-04-28",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24100,
+      "entry_close": 24092.7,
+      "expiry": "2026-04-30",
+      "entry_premium": 111.71849534571265,
+      "exit_premium": 48.984761535856705,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4705.030035739196,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-04-27",
+          "exit_date": "2026-04-28",
+          "expiry": "2026-04-30",
+          "strike": 24100,
+          "entry_premium": 111.71849534571265,
+          "exit_premium": 48.984761535856705,
+          "exit_reason": "stop_5",
+          "pnl": -4705.030035739196
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-04-28",
+      "exit_date": "2026-04-30",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 24000,
+      "entry_close": 23995.7,
+      "expiry": "2026-04-30",
+      "entry_premium": 90.70848333139293,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": -6803.1362498544695,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-04-28",
+          "exit_date": "2026-04-30",
+          "expiry": "2026-04-30",
+          "strike": 24000,
+          "entry_premium": 90.70848333139293,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -6803.1362498544695
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-04-29",
+      "exit_date": "2026-04-30",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24200,
+      "entry_close": 24177.65,
+      "expiry": "2026-04-30",
+      "entry_premium": 54.52132400166374,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4089.0993001247807,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-04-29",
+          "exit_date": "2026-04-30",
+          "expiry": "2026-04-30",
+          "strike": 24200,
+          "entry_premium": 54.52132400166374,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -4089.0993001247807
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-04",
+      "exit_date": "2026-05-05",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24100,
+      "entry_close": 24119.3,
+      "expiry": "2026-05-07",
+      "entry_premium": 125.81090432533892,
+      "exit_premium": 62.57380385986835,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4742.782534910293,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-04",
+          "exit_date": "2026-05-05",
+          "expiry": "2026-05-07",
+          "strike": 24100,
+          "entry_premium": 125.81090432533892,
+          "exit_premium": 62.57380385986835,
+          "exit_reason": "stop_5",
+          "pnl": -4742.782534910293
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-05",
+      "exit_date": "2026-05-07",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 24050,
+      "entry_close": 24032.8,
+      "expiry": "2026-05-07",
+      "entry_premium": 84.47878598302486,
+      "exit_premium": 276.65000000000146,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 14412.841051273244,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-05",
+          "exit_date": "2026-05-07",
+          "expiry": "2026-05-07",
+          "strike": 24050,
+          "entry_premium": 84.47878598302486,
+          "exit_premium": 276.65000000000146,
+          "exit_reason": "expiry",
+          "pnl": 14412.841051273244
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-06",
+      "exit_date": "2026-05-07",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24350,
+      "entry_close": 24330.95,
+      "expiry": "2026-05-07",
+      "entry_premium": 56.44168067444116,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4233.126050583087,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-06",
+          "exit_date": "2026-05-07",
+          "expiry": "2026-05-07",
+          "strike": 24350,
+          "entry_premium": 56.44168067444116,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -4233.126050583087
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-07",
+      "exit_date": "2026-05-14",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 24350,
+      "entry_close": 24326.65,
+      "expiry": "2026-05-14",
+      "entry_premium": 164.5026316012718,
+      "exit_premium": 660.4000000000015,
+      "exit_reason": "expiry",
+      "days_held": 7,
+      "pnl": 37192.30262990473,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-07",
+          "exit_date": "2026-05-14",
+          "expiry": "2026-05-14",
+          "strike": 24350,
+          "entry_premium": 164.5026316012718,
+          "exit_premium": 660.4000000000015,
+          "exit_reason": "expiry",
+          "pnl": 37192.30262990473
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-11",
+      "exit_date": "2026-05-12",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 23800,
+      "entry_close": 23815.85,
+      "expiry": "2026-05-14",
+      "entry_premium": 122.48980233419024,
+      "exit_premium": 2.4898233509748025,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -8999.998423741159,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-11",
+          "exit_date": "2026-05-12",
+          "expiry": "2026-05-14",
+          "strike": 23800,
+          "entry_premium": 122.48980233419024,
+          "exit_premium": 2.4898233509748025,
+          "exit_reason": "stop_5",
+          "pnl": -8999.998423741159
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-12",
+      "exit_date": "2026-05-13",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 23400,
+      "entry_close": 23379.55,
+      "expiry": "2026-05-14",
+      "entry_premium": 80.40153307865148,
+      "exit_premium": 69.83876814359974,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -792.2073701288809,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-12",
+          "exit_date": "2026-05-13",
+          "expiry": "2026-05-14",
+          "strike": 23400,
+          "entry_premium": 80.40153307865148,
+          "exit_premium": 69.83876814359974,
+          "exit_reason": "stop_5",
+          "pnl": -792.2073701288809
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-13",
+      "exit_date": "2026-05-14",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 23400,
+      "entry_close": 23412.6,
+      "expiry": "2026-05-14",
+      "entry_premium": 69.83876814359974,
+      "exit_premium": 289.59999999999854,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 16482.09238922991,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-13",
+          "exit_date": "2026-05-14",
+          "expiry": "2026-05-14",
+          "strike": 23400,
+          "entry_premium": 69.83876814359974,
+          "exit_premium": 289.59999999999854,
+          "exit_reason": "expiry",
+          "pnl": 16482.09238922991
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-14",
+      "exit_date": "2026-05-18",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 23700,
+      "entry_close": 23689.6,
+      "expiry": "2026-05-21",
+      "entry_premium": 154.1460657944026,
+      "exit_premium": 126.73925128228439,
+      "exit_reason": "stop_5",
+      "days_held": 4,
+      "pnl": -2055.5110884088663,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-14",
+          "exit_date": "2026-05-18",
+          "expiry": "2026-05-21",
+          "strike": 23700,
+          "entry_premium": 154.1460657944026,
+          "exit_premium": 126.73925128228439,
+          "exit_reason": "stop_5",
+          "pnl": -2055.5110884088663
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-18",
+      "exit_date": "2026-05-19",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 23650,
+      "entry_close": 23649.95,
+      "expiry": "2026-05-21",
+      "entry_premium": 113.30095363557666,
+      "exit_premium": 75.94377662782426,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -2801.78827558143,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-18",
+          "exit_date": "2026-05-19",
+          "expiry": "2026-05-21",
+          "strike": 23650,
+          "entry_premium": 113.30095363557666,
+          "exit_premium": 75.94377662782426,
+          "exit_reason": "stop_5",
+          "pnl": -2801.78827558143
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-19",
+      "exit_date": "2026-05-21",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 23600,
+      "entry_close": 23618.0,
+      "expiry": "2026-05-21",
+      "entry_premium": 100.97186428401073,
+      "exit_premium": 54.70000000000073,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": -3470.3898213007506,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-19",
+          "exit_date": "2026-05-21",
+          "expiry": "2026-05-21",
+          "strike": 23600,
+          "entry_premium": 100.97186428401073,
+          "exit_premium": 54.70000000000073,
+          "exit_reason": "expiry",
+          "pnl": -3470.3898213007506
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-20",
+      "exit_date": "2026-05-21",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 23650,
+      "entry_close": 23659.0,
+      "expiry": "2026-05-21",
+      "entry_premium": 68.56781964256334,
+      "exit_premium": 4.700000000000728,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4790.086473192196,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-20",
+          "exit_date": "2026-05-21",
+          "expiry": "2026-05-21",
+          "strike": 23650,
+          "entry_premium": 68.56781964256334,
+          "exit_premium": 4.700000000000728,
+          "exit_reason": "expiry",
+          "pnl": -4790.086473192196
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-21",
+      "exit_date": "2026-05-22",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 23650,
+      "entry_close": 23654.7,
+      "expiry": "2026-05-28",
+      "entry_premium": 146.724921817653,
+      "exit_premium": 108.74759780463319,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -2848.299300976487,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-21",
+          "exit_date": "2026-05-22",
+          "expiry": "2026-05-28",
+          "strike": 23650,
+          "entry_premium": 146.724921817653,
+          "exit_premium": 108.74759780463319,
+          "exit_reason": "stop_5",
+          "pnl": -2848.299300976487
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-25",
+      "exit_date": "2026-05-26",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24050,
+      "entry_close": 24031.7,
+      "expiry": "2026-05-28",
+      "entry_premium": 105.95339587929811,
+      "exit_premium": 38.91948652345127,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -5027.543201688513,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-25",
+          "exit_date": "2026-05-26",
+          "expiry": "2026-05-28",
+          "strike": 24050,
+          "entry_premium": 105.95339587929811,
+          "exit_premium": 38.91948652345127,
+          "exit_reason": "stop_5",
+          "pnl": -5027.543201688513
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-26",
+      "exit_date": "2026-05-27",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 23900,
+      "entry_close": 23913.7,
+      "expiry": "2026-05-28",
+      "entry_premium": 99.78317419265295,
+      "exit_premium": 68.25618113352357,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -2364.5244794347036,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-26",
+          "exit_date": "2026-05-27",
+          "expiry": "2026-05-28",
+          "strike": 23900,
+          "entry_premium": 99.78317419265295,
+          "exit_premium": 68.25618113352357,
+          "exit_reason": "stop_5",
+          "pnl": -2364.5244794347036
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-05-27",
+      "exit_date": "2026-05-27",
+      "pair": "Wed\u2192Fri",
+      "side": "PE",
+      "strike": 23900,
+      "entry_close": 23907.15,
+      "expiry": "2026-05-28",
+      "entry_premium": 56.85039570100162,
+      "exit_premium": 56.85039570100162,
+      "exit_reason": "expiry",
+      "days_held": 0,
+      "pnl": 0.0,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-05-27",
+          "exit_date": "2026-05-27",
+          "expiry": "2026-05-28",
+          "strike": 23900,
+          "entry_premium": 56.85039570100162,
+          "exit_premium": 56.85039570100162,
+          "exit_reason": "expiry",
+          "pnl": 0.0
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-01",
+      "exit_date": "2026-06-03",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 23400,
+      "entry_close": 23382.6,
+      "expiry": "2026-06-04",
+      "entry_premium": 103.29029442472893,
+      "exit_premium": 66.08803153253757,
+      "exit_reason": "stop_5",
+      "days_held": 2,
+      "pnl": -2790.1697169143517,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-01",
+          "exit_date": "2026-06-03",
+          "expiry": "2026-06-04",
+          "strike": 23400,
+          "entry_premium": 103.29029442472893,
+          "exit_premium": 66.08803153253757,
+          "exit_reason": "stop_5",
+          "pnl": -2790.1697169143517
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-02",
+      "exit_date": "2026-06-03",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 23500,
+      "entry_close": 23483.55,
+      "expiry": "2026-06-04",
+      "entry_premium": 82.72041648389677,
+      "exit_premium": 26.389421720022256,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4224.824607290589,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-02",
+          "exit_date": "2026-06-03",
+          "expiry": "2026-06-04",
+          "strike": 23500,
+          "entry_premium": 82.72041648389677,
+          "exit_premium": 26.389421720022256,
+          "exit_reason": "stop_5",
+          "pnl": -4224.824607290589
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-03",
+      "exit_date": "2026-06-04",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 23400,
+      "entry_close": 23405.6,
+      "expiry": "2026-06-04",
+      "entry_premium": 66.08803153253757,
+      "exit_premium": 16.549999999999272,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -3715.3523649403724,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-03",
+          "exit_date": "2026-06-04",
+          "expiry": "2026-06-04",
+          "strike": 23400,
+          "entry_premium": 66.08803153253757,
+          "exit_premium": 16.549999999999272,
+          "exit_reason": "expiry",
+          "pnl": -3715.3523649403724
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-04",
+      "exit_date": "2026-06-11",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 23400,
+      "entry_close": 23416.55,
+      "expiry": "2026-06-11",
+      "entry_premium": 139.73024727174925,
+      "exit_premium": 238.40000000000146,
+      "exit_reason": "expiry",
+      "days_held": 7,
+      "pnl": 7400.231454618915,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-04",
+          "exit_date": "2026-06-11",
+          "expiry": "2026-06-11",
+          "strike": 23400,
+          "entry_premium": 139.73024727174925,
+          "exit_premium": 238.40000000000146,
+          "exit_reason": "expiry",
+          "pnl": 7400.231454618915
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-08",
+      "exit_date": "2026-06-10",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 23100,
+      "entry_close": 23123.0,
+      "expiry": "2026-06-11",
+      "entry_premium": 123.07734175756195,
+      "exit_premium": 137.73196293722867,
+      "exit_reason": "floor_15",
+      "days_held": 2,
+      "pnl": 1099.096588475004,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-08",
+          "exit_date": "2026-06-10",
+          "expiry": "2026-06-11",
+          "strike": 23100,
+          "entry_premium": 123.07734175756195,
+          "exit_premium": 137.73196293722867,
+          "exit_reason": "floor_15",
+          "pnl": 1099.096588475004
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-09",
+      "exit_date": "2026-06-10",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 23250,
+      "entry_close": 23242.1,
+      "expiry": "2026-06-11",
+      "entry_premium": 85.98420225225345,
+      "exit_premium": 46.43046809698899,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -2966.530061644835,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-09",
+          "exit_date": "2026-06-10",
+          "expiry": "2026-06-11",
+          "strike": 23250,
+          "entry_premium": 85.98420225225345,
+          "exit_premium": 46.43046809698899,
+          "exit_reason": "stop_5",
+          "pnl": -2966.530061644835
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-10",
+      "exit_date": "2026-06-11",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 23200,
+      "entry_close": 23214.95,
+      "expiry": "2026-06-11",
+      "entry_premium": 70.58890973242887,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -5294.168229932166,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-10",
+          "exit_date": "2026-06-11",
+          "expiry": "2026-06-11",
+          "strike": 23200,
+          "entry_premium": 70.58890973242887,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -5294.168229932166
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-11",
+      "exit_date": "2026-06-12",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 23150,
+      "entry_close": 23161.6,
+      "expiry": "2026-06-18",
+      "entry_premium": 140.40443498079185,
+      "exit_premium": 16.048047750785827,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -9326.729042250452,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-11",
+          "exit_date": "2026-06-12",
+          "expiry": "2026-06-18",
+          "strike": 23150,
+          "entry_premium": 140.40443498079185,
+          "exit_premium": 16.048047750785827,
+          "exit_reason": "stop_5",
+          "pnl": -9326.729042250452
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-15",
+      "exit_date": "2026-06-18",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 23850,
+      "entry_close": 23853.9,
+      "expiry": "2026-06-18",
+      "entry_premium": 116.32870499422279,
+      "exit_premium": 318.0,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 15125.34712543329,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-15",
+          "exit_date": "2026-06-18",
+          "expiry": "2026-06-18",
+          "strike": 23850,
+          "entry_premium": 116.32870499422279,
+          "exit_premium": 318.0,
+          "exit_reason": "expiry",
+          "pnl": 15125.34712543329
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-16",
+      "exit_date": "2026-06-18",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 24000,
+      "entry_close": 23989.15,
+      "expiry": "2026-06-18",
+      "entry_premium": 87.40996164691751,
+      "exit_premium": 168.0,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 6044.252876481187,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-16",
+          "exit_date": "2026-06-18",
+          "expiry": "2026-06-18",
+          "strike": 24000,
+          "entry_premium": 87.40996164691751,
+          "exit_premium": 168.0,
+          "exit_reason": "expiry",
+          "pnl": 6044.252876481187
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-17",
+      "exit_date": "2026-06-18",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24100,
+      "entry_close": 24085.7,
+      "expiry": "2026-06-18",
+      "entry_premium": 58.00384942026176,
+      "exit_premium": 68.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 749.7112934803681,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-17",
+          "exit_date": "2026-06-18",
+          "expiry": "2026-06-18",
+          "strike": 24100,
+          "entry_premium": 58.00384942026176,
+          "exit_premium": 68.0,
+          "exit_reason": "expiry",
+          "pnl": 749.7112934803681
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-18",
+      "exit_date": "2026-06-22",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 24150,
+      "entry_close": 24168.0,
+      "expiry": "2026-06-25",
+      "entry_premium": 143.7938717262332,
+      "exit_premium": 126.99907404596706,
+      "exit_reason": "stop_5",
+      "days_held": 4,
+      "pnl": -1259.6098260199597,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-18",
+          "exit_date": "2026-06-22",
+          "expiry": "2026-06-25",
+          "strike": 24150,
+          "entry_premium": 143.7938717262332,
+          "exit_premium": 126.99907404596706,
+          "exit_reason": "stop_5",
+          "pnl": -1259.6098260199597
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-22",
+      "exit_date": "2026-06-23",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24100,
+      "entry_close": 24102.9,
+      "expiry": "2026-06-25",
+      "entry_premium": 117.00053318504615,
+      "exit_premium": 12.286947640706785,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -7853.5189158254525,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-22",
+          "exit_date": "2026-06-23",
+          "expiry": "2026-06-25",
+          "strike": 24100,
+          "entry_premium": 117.00053318504615,
+          "exit_premium": 12.286947640706785,
+          "exit_reason": "stop_5",
+          "pnl": -7853.5189158254525
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-23",
+      "exit_date": "2026-06-25",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 23800,
+      "entry_close": 23824.1,
+      "expiry": "2026-06-25",
+      "entry_premium": 105.13004242548232,
+      "exit_premium": 256.0,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 11315.246818088826,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-23",
+          "exit_date": "2026-06-25",
+          "expiry": "2026-06-25",
+          "strike": 23800,
+          "entry_premium": 105.13004242548232,
+          "exit_premium": 256.0,
+          "exit_reason": "expiry",
+          "pnl": 11315.246818088826
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-24",
+      "exit_date": "2026-06-25",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24000,
+      "entry_close": 24021.65,
+      "expiry": "2026-06-25",
+      "entry_premium": 76.4805782109488,
+      "exit_premium": 56.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -1536.0433658211605,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-24",
+          "exit_date": "2026-06-25",
+          "expiry": "2026-06-25",
+          "strike": 24000,
+          "entry_premium": 76.4805782109488,
+          "exit_premium": 56.0,
+          "exit_reason": "expiry",
+          "pnl": -1536.0433658211605
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-29",
+      "exit_date": "2026-06-30",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 23950,
+      "entry_close": 23946.25,
+      "expiry": "2026-07-02",
+      "entry_premium": 112.82091235162625,
+      "exit_premium": 55.49731606203386,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4299.269721719429,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-29",
+          "exit_date": "2026-06-30",
+          "expiry": "2026-07-02",
+          "strike": 23950,
+          "entry_premium": 112.82091235162625,
+          "exit_premium": 55.49731606203386,
+          "exit_reason": "stop_5",
+          "pnl": -4299.269721719429
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-06-30",
+      "exit_date": "2026-07-02",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 23850,
+      "entry_close": 23865.75,
+      "expiry": "2026-07-02",
+      "entry_premium": 100.70458915127529,
+      "exit_premium": 325.7000000000007,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 16874.655813654408,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-06-30",
+          "exit_date": "2026-07-02",
+          "expiry": "2026-07-02",
+          "strike": 23850,
+          "entry_premium": 100.70458915127529,
+          "exit_premium": 325.7000000000007,
+          "exit_reason": "expiry",
+          "pnl": 16874.655813654408
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-01",
+      "exit_date": "2026-07-02",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24000,
+      "entry_close": 24005.85,
+      "expiry": "2026-07-02",
+      "entry_premium": 67.8386606776894,
+      "exit_premium": 175.70000000000073,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 8089.600449173349,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-01",
+          "exit_date": "2026-07-02",
+          "expiry": "2026-07-02",
+          "strike": 24000,
+          "entry_premium": 67.8386606776894,
+          "exit_premium": 175.70000000000073,
+          "exit_reason": "expiry",
+          "pnl": 8089.600449173349
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-02",
+      "exit_date": "2026-07-03",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 24200,
+      "entry_close": 24175.7,
+      "expiry": "2026-07-09",
+      "entry_premium": 164.02574304055815,
+      "exit_premium": 111.30117180969864,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -3954.3428423144633,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-02",
+          "exit_date": "2026-07-03",
+          "expiry": "2026-07-09",
+          "strike": 24200,
+          "entry_premium": 164.02574304055815,
+          "exit_premium": 111.30117180969864,
+          "exit_reason": "stop_5",
+          "pnl": -3954.3428423144633
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-06",
+      "exit_date": "2026-07-07",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24450,
+      "entry_close": 24430.35,
+      "expiry": "2026-07-09",
+      "entry_premium": 107.19957555290421,
+      "exit_premium": 70.44327962669377,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -2756.722194465783,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-06",
+          "exit_date": "2026-07-07",
+          "expiry": "2026-07-09",
+          "strike": 24450,
+          "entry_premium": 107.19957555290421,
+          "exit_premium": 70.44327962669377,
+          "exit_reason": "stop_5",
+          "pnl": -2756.722194465783
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-07",
+      "exit_date": "2026-07-08",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 24400,
+      "entry_close": 24398.7,
+      "expiry": "2026-07-09",
+      "entry_premium": 93.79356385043138,
+      "exit_premium": 0.024084051040604848,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -7032.7109849543085,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-07",
+          "exit_date": "2026-07-08",
+          "expiry": "2026-07-09",
+          "strike": 24400,
+          "entry_premium": 93.79356385043138,
+          "exit_premium": 0.024084051040604848,
+          "exit_reason": "stop_5",
+          "pnl": -7032.7109849543085
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-08",
+      "exit_date": "2026-07-09",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 23900,
+      "entry_close": 23882.05,
+      "expiry": "2026-07-09",
+      "entry_premium": 55.74673517642441,
+      "exit_premium": 62.79999999999927,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 528.9948617681148,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-08",
+          "exit_date": "2026-07-09",
+          "expiry": "2026-07-09",
+          "strike": 23900,
+          "entry_premium": 55.74673517642441,
+          "exit_premium": 62.79999999999927,
+          "exit_reason": "expiry",
+          "pnl": 528.9948617681148
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-09",
+      "exit_date": "2026-07-10",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 23950,
+      "entry_close": 23962.8,
+      "expiry": "2026-07-16",
+      "entry_premium": 144.89203505601108,
+      "exit_premium": 52.14384045997849,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -6956.114594702444,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-09",
+          "exit_date": "2026-07-10",
+          "expiry": "2026-07-16",
+          "strike": 23950,
+          "entry_premium": 144.89203505601108,
+          "exit_premium": 52.14384045997849,
+          "exit_reason": "stop_5",
+          "pnl": -6956.114594702444
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-13",
+      "exit_date": "2026-07-14",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24200,
+      "entry_close": 24211.0,
+      "expiry": "2026-07-16",
+      "entry_premium": 121.78195412817331,
+      "exit_premium": 36.18344304915627,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -6419.888330926278,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-13",
+          "exit_date": "2026-07-14",
+          "expiry": "2026-07-16",
+          "strike": 24200,
+          "entry_premium": 121.78195412817331,
+          "exit_premium": 36.18344304915627,
+          "exit_reason": "stop_5",
+          "pnl": -6419.888330926278
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-14",
+      "exit_date": "2026-07-15",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 24050,
+      "entry_close": 24052.05,
+      "expiry": "2026-07-16",
+      "entry_premium": 94.17342055725749,
+      "exit_premium": 80.55478007431157,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -1021.398036220944,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-14",
+          "exit_date": "2026-07-15",
+          "expiry": "2026-07-16",
+          "strike": 24050,
+          "entry_premium": 94.17342055725749,
+          "exit_premium": 80.55478007431157,
+          "exit_reason": "stop_5",
+          "pnl": -1021.398036220944
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-15",
+      "exit_date": "2026-07-16",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24100,
+      "entry_close": 24078.5,
+      "expiry": "2026-07-16",
+      "entry_premium": 54.6421730428101,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4098.1629782107575,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-15",
+          "exit_date": "2026-07-16",
+          "expiry": "2026-07-16",
+          "strike": 24100,
+          "entry_premium": 54.6421730428101,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -4098.1629782107575
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-16",
+      "exit_date": "2026-07-17",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 24050,
+      "entry_close": 24072.75,
+      "expiry": "2026-07-23",
+      "entry_premium": 141.03473461735484,
+      "exit_premium": 46.58399131199894,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -7083.8057479016925,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-16",
+          "exit_date": "2026-07-17",
+          "expiry": "2026-07-23",
+          "strike": 24050,
+          "entry_premium": 141.03473461735484,
+          "exit_premium": 46.58399131199894,
+          "exit_reason": "stop_5",
+          "pnl": -7083.8057479016925
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-20",
+      "exit_date": "2026-07-21",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24250,
+      "entry_close": 24238.5,
+      "expiry": "2026-07-23",
+      "entry_premium": 110.30587181164083,
+      "exit_premium": 65.10410522569327,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -3390.1324939460665,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-20",
+          "exit_date": "2026-07-21",
+          "expiry": "2026-07-23",
+          "strike": 24250,
+          "entry_premium": 110.30587181164083,
+          "exit_premium": 65.10410522569327,
+          "exit_reason": "stop_5",
+          "pnl": -3390.1324939460665
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-21",
+      "exit_date": "2026-07-22",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 24200,
+      "entry_close": 24187.7,
+      "expiry": "2026-07-23",
+      "entry_premium": 87.46335295311292,
+      "exit_premium": 7.727710393653979,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -5980.17319195942,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-21",
+          "exit_date": "2026-07-22",
+          "expiry": "2026-07-23",
+          "strike": 24200,
+          "entry_premium": 87.46335295311292,
+          "exit_premium": 7.727710393653979,
+          "exit_reason": "stop_5",
+          "pnl": -5980.17319195942
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-22",
+      "exit_date": "2026-07-23",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24000,
+      "entry_close": 23996.25,
+      "expiry": "2026-07-23",
+      "entry_premium": 62.89634102194759,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4717.225576646069,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-22",
+          "exit_date": "2026-07-23",
+          "expiry": "2026-07-23",
+          "strike": 24000,
+          "entry_premium": 62.89634102194759,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -4717.225576646069
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-23",
+      "exit_date": "2026-07-27",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 23850,
+      "entry_close": 23869.6,
+      "expiry": "2026-07-30",
+      "entry_premium": 141.1871744526179,
+      "exit_premium": 46.80312030455207,
+      "exit_reason": "stop_5",
+      "days_held": 4,
+      "pnl": -7078.804061104938,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-23",
+          "exit_date": "2026-07-27",
+          "expiry": "2026-07-30",
+          "strike": 23850,
+          "entry_premium": 141.1871744526179,
+          "exit_premium": 46.80312030455207,
+          "exit_reason": "stop_5",
+          "pnl": -7078.804061104938
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-27",
+      "exit_date": "2026-07-28",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24000,
+      "entry_close": 23995.95,
+      "expiry": "2026-07-30",
+      "entry_premium": 112.90587990578206,
+      "exit_premium": 85.53165602714762,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -2053.066790897583,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-27",
+          "exit_date": "2026-07-28",
+          "expiry": "2026-07-30",
+          "strike": 24000,
+          "entry_premium": 112.90587990578206,
+          "exit_premium": 85.53165602714762,
+          "exit_reason": "stop_5",
+          "pnl": -2053.066790897583
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-28",
+      "exit_date": "2026-07-30",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 24000,
+      "entry_close": 23985.35,
+      "expiry": "2026-07-30",
+      "entry_premium": 85.53165602714762,
+      "exit_premium": 317.15000000000146,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 17371.375797964036,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-28",
+          "exit_date": "2026-07-30",
+          "expiry": "2026-07-30",
+          "strike": 24000,
+          "entry_premium": 85.53165602714762,
+          "exit_premium": 317.15000000000146,
+          "exit_reason": "expiry",
+          "pnl": 17371.375797964036
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-29",
+      "exit_date": "2026-07-30",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24250,
+      "entry_close": 24250.2,
+      "expiry": "2026-07-30",
+      "entry_premium": 65.57656060865156,
+      "exit_premium": 67.15000000000146,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 118.007954351242,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-29",
+          "exit_date": "2026-07-30",
+          "expiry": "2026-07-30",
+          "strike": 24250,
+          "entry_premium": 65.57656060865156,
+          "exit_premium": 67.15000000000146,
+          "exit_reason": "expiry",
+          "pnl": 118.007954351242
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-07-30",
+      "exit_date": "2026-07-31",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 24300,
+      "entry_close": 24317.15,
+      "expiry": "2026-08-06",
+      "entry_premium": 145.12099053499696,
+      "exit_premium": 106.87267376842829,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -2868.623757492651,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-07-30",
+          "exit_date": "2026-07-31",
+          "expiry": "2026-08-06",
+          "strike": 24300,
+          "entry_premium": 145.12099053499696,
+          "exit_premium": 106.87267376842829,
+          "exit_reason": "stop_5",
+          "pnl": -2868.623757492651
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-08-03",
+      "exit_date": "2026-08-04",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24750,
+      "entry_close": 24774.3,
+      "expiry": "2026-08-06",
+      "entry_premium": 131.67806298706637,
+      "exit_premium": 41.539494071769695,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -6760.3926686472505,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-08-03",
+          "exit_date": "2026-08-04",
+          "expiry": "2026-08-06",
+          "strike": 24750,
+          "entry_premium": 131.67806298706637,
+          "exit_premium": 41.539494071769695,
+          "exit_reason": "stop_5",
+          "pnl": -6760.3926686472505
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-08-04",
+      "exit_date": "2026-08-05",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 24600,
+      "entry_close": 24614.9,
+      "expiry": "2026-08-06",
+      "entry_premium": 103.13903537295482,
+      "exit_premium": 79.7936519437153,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -1750.903757192964,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-08-04",
+          "exit_date": "2026-08-05",
+          "expiry": "2026-08-06",
+          "strike": 24600,
+          "entry_premium": 103.13903537295482,
+          "exit_premium": 79.7936519437153,
+          "exit_reason": "stop_5",
+          "pnl": -1750.903757192964
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-08-05",
+      "exit_date": "2026-08-06",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24600,
+      "entry_close": 24624.65,
+      "expiry": "2026-08-06",
+      "entry_premium": 79.7936519437153,
+      "exit_premium": 36.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -3284.523895778648,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-08-05",
+          "exit_date": "2026-08-06",
+          "expiry": "2026-08-06",
+          "strike": 24600,
+          "entry_premium": 79.7936519437153,
+          "exit_premium": 36.0,
+          "exit_reason": "expiry",
+          "pnl": -3284.523895778648
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-08-06",
+      "exit_date": "2026-08-10",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 24650,
+      "entry_close": 24636.0,
+      "expiry": "2026-08-13",
+      "entry_premium": 161.85100564781533,
+      "exit_premium": 139.78533934913503,
+      "exit_reason": "stop_5",
+      "days_held": 4,
+      "pnl": -1654.9249724010224,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-08-06",
+          "exit_date": "2026-08-10",
+          "expiry": "2026-08-13",
+          "strike": 24650,
+          "entry_premium": 161.85100564781533,
+          "exit_premium": 139.78533934913503,
+          "exit_reason": "stop_5",
+          "pnl": -1654.9249724010224
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-08-10",
+      "exit_date": "2026-08-11",
+      "pair": "Mon\u2192Tue",
+      "side": "CE",
+      "strike": 24600,
+      "entry_close": 24583.8,
+      "expiry": "2026-08-13",
+      "entry_premium": 109.62581096043505,
+      "exit_premium": 43.059700431239435,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4992.458289689671,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-08-10",
+          "exit_date": "2026-08-11",
+          "expiry": "2026-08-13",
+          "strike": 24600,
+          "entry_premium": 109.62581096043505,
+          "exit_premium": 43.059700431239435,
+          "exit_reason": "stop_5",
+          "pnl": -4992.458289689671
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-08-11",
+      "exit_date": "2026-08-12",
+      "pair": "Tue\u2192Wed",
+      "side": "CE",
+      "strike": 24450,
+      "entry_close": 24471.7,
+      "expiry": "2026-08-13",
+      "entry_premium": 106.2949555411833,
+      "exit_premium": 59.06433811002353,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -3542.296307336983,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-08-11",
+          "exit_date": "2026-08-12",
+          "expiry": "2026-08-13",
+          "strike": 24450,
+          "entry_premium": 106.2949555411833,
+          "exit_premium": 59.06433811002353,
+          "exit_reason": "stop_5",
+          "pnl": -3542.296307336983
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-08-12",
+      "exit_date": "2026-08-13",
+      "pair": "Wed\u2192Thu",
+      "side": "CE",
+      "strike": 24450,
+      "entry_close": 24435.95,
+      "expiry": "2026-08-13",
+      "entry_premium": 59.06433811002353,
+      "exit_premium": 0.0,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": -4429.825358251765,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-08-12",
+          "exit_date": "2026-08-13",
+          "expiry": "2026-08-13",
+          "strike": 24450,
+          "entry_premium": 59.06433811002353,
+          "exit_premium": 0.0,
+          "exit_reason": "expiry",
+          "pnl": -4429.825358251765
+        }
+      ]
+    },
+    {
+      "entry_date": "2026-08-13",
+      "exit_date": "2026-08-14",
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 24400,
+      "entry_close": 24395.85,
+      "expiry": "2026-08-20",
+      "entry_premium": 155.5852113013625,
+      "exit_premium": 159.8151109026512,
+      "exit_reason": "expiry",
+      "days_held": 1,
+      "pnl": 317.24247009665305,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-08-13",
+          "exit_date": "2026-08-14",
+          "expiry": "2026-08-20",
+          "strike": 24400,
+          "entry_premium": 155.5852113013625,
+          "exit_premium": 159.8151109026512,
+          "exit_reason": "expiry",
+          "pnl": 317.24247009665305
+        }
+      ]
+    }
+  ],
+  "equity_curve": [
+    {
+      "date": "2025-08-14",
+      "equity": 0.0
+    },
+    {
+      "date": "2025-08-18",
+      "equity": 0.0
+    },
+    {
+      "date": "2025-08-19",
+      "equity": 2697.4522060708296
+    },
+    {
+      "date": "2025-08-20",
+      "equity": 5375.054227227565
+    },
+    {
+      "date": "2025-08-21",
+      "equity": 2891.216916524445
+    },
+    {
+      "date": "2025-08-22",
+      "equity": 11558.75847115899
+    },
+    {
+      "date": "2025-08-25",
+      "equity": 4135.687710960929
+    },
+    {
+      "date": "2025-08-26",
+      "equity": -4098.146250320917
+    },
+    {
+      "date": "2025-08-28",
+      "equity": -4098.146250320917
+    },
+    {
+      "date": "2025-08-29",
+      "equity": -2065.923124987614
+    },
+    {
+      "date": "2025-09-01",
+      "equity": -11485.045619932305
+    },
+    {
+      "date": "2025-09-02",
+      "equity": -14651.683544148262
+    },
+    {
+      "date": "2025-09-03",
+      "equity": -10459.808406977152
+    },
+    {
+      "date": "2025-09-04",
+      "equity": -13986.329303459741
+    },
+    {
+      "date": "2025-09-05",
+      "equity": -15016.35992582609
+    },
+    {
+      "date": "2025-09-08",
+      "equity": -15016.35992582609
+    },
+    {
+      "date": "2025-09-09",
+      "equity": -12167.274456325948
+    },
+    {
+      "date": "2025-09-10",
+      "equity": -4212.640235884863
+    },
+    {
+      "date": "2025-09-11",
+      "equity": -3804.6440650286404
+    },
+    {
+      "date": "2025-09-12",
+      "equity": -7955.587922076655
+    },
+    {
+      "date": "2025-09-15",
+      "equity": -7955.587922076655
+    },
+    {
+      "date": "2025-09-16",
+      "equity": -962.203834618811
+    },
+    {
+      "date": "2025-09-17",
+      "equity": 5684.161285052289
+    },
+    {
+      "date": "2025-09-18",
+      "equity": 17505.777944080695
+    },
+    {
+      "date": "2025-09-19",
+      "equity": 20271.584117828264
+    },
+    {
+      "date": "2025-09-22",
+      "equity": 23510.09896452066
+    },
+    {
+      "date": "2025-09-23",
+      "equity": 21590.28203531185
+    },
+    {
+      "date": "2025-09-24",
+      "equity": 23055.694253495232
+    },
+    {
+      "date": "2025-09-25",
+      "equity": 30415.241042119957
+    },
+    {
+      "date": "2025-09-26",
+      "equity": 40167.650357739934
+    },
+    {
+      "date": "2025-09-29",
+      "equity": 39341.290202620046
+    },
+    {
+      "date": "2025-09-30",
+      "equity": 37721.17053603917
+    },
+    {
+      "date": "2025-10-01",
+      "equity": 34043.4736239473
+    },
+    {
+      "date": "2025-10-03",
+      "equity": 34043.4736239473
+    },
+    {
+      "date": "2025-10-06",
+      "equity": 34043.4736239473
+    },
+    {
+      "date": "2025-10-07",
+      "equity": 33484.46344793735
+    },
+    {
+      "date": "2025-10-08",
+      "equity": 29146.93274905841
+    },
+    {
+      "date": "2025-10-09",
+      "equity": 34105.913172091154
+    },
+    {
+      "date": "2025-10-10",
+      "equity": 29906.88995650959
+    },
+    {
+      "date": "2025-10-13",
+      "equity": 29906.88995650959
+    },
+    {
+      "date": "2025-10-14",
+      "equity": 25661.275472435605
+    },
+    {
+      "date": "2025-10-15",
+      "equity": 32770.875054495555
+    },
+    {
+      "date": "2025-10-16",
+      "equity": 66499.21331984593
+    },
+    {
+      "date": "2025-10-17",
+      "equity": 61716.52462268177
+    },
+    {
+      "date": "2025-10-20",
+      "equity": 61716.52462268177
+    },
+    {
+      "date": "2025-10-21",
+      "equity": 60940.569597352136
+    },
+    {
+      "date": "2025-10-23",
+      "equity": 60940.569597352136
+    },
+    {
+      "date": "2025-10-24",
+      "equity": 63902.42078269663
+    },
+    {
+      "date": "2025-10-27",
+      "equity": 54523.4786073832
+    },
+    {
+      "date": "2025-10-28",
+      "equity": 51568.527046383104
+    },
+    {
+      "date": "2025-10-29",
+      "equity": 54718.364528638645
+    },
+    {
+      "date": "2025-10-30",
+      "equity": 39130.877271504796
+    },
+    {
+      "date": "2025-10-31",
+      "equity": 44918.46563380834
+    },
+    {
+      "date": "2025-11-03",
+      "equity": 40228.3385758413
+    },
+    {
+      "date": "2025-11-04",
+      "equity": 33434.132867369946
+    },
+    {
+      "date": "2025-11-06",
+      "equity": 33434.132867369946
+    },
+    {
+      "date": "2025-11-07",
+      "equity": 33230.07451352109
+    },
+    {
+      "date": "2025-11-10",
+      "equity": 27484.080230098465
+    },
+    {
+      "date": "2025-11-11",
+      "equity": 31635.962696887596
+    },
+    {
+      "date": "2025-11-12",
+      "equity": 49396.52707186619
+    },
+    {
+      "date": "2025-11-13",
+      "equity": 43807.31352939228
+    },
+    {
+      "date": "2025-11-14",
+      "equity": 41882.66448168887
+    },
+    {
+      "date": "2025-11-17",
+      "equity": 41882.66448168887
+    },
+    {
+      "date": "2025-11-18",
+      "equity": 36564.19312068309
+    },
+    {
+      "date": "2025-11-19",
+      "equity": 41663.920949681495
+    },
+    {
+      "date": "2025-11-20",
+      "equity": 55842.728667265044
+    },
+    {
+      "date": "2025-11-21",
+      "equity": 59996.37643201812
+    },
+    {
+      "date": "2025-11-24",
+      "equity": 63004.68531346449
+    },
+    {
+      "date": "2025-11-25",
+      "equity": 62578.21275621781
+    },
+    {
+      "date": "2025-11-26",
+      "equity": 59997.15675173569
+    },
+    {
+      "date": "2025-11-27",
+      "equity": 55900.560438939865
+    },
+    {
+      "date": "2025-11-28",
+      "equity": 55497.181309975975
+    },
+    {
+      "date": "2025-12-01",
+      "equity": 55497.181309975975
+    },
+    {
+      "date": "2025-12-02",
+      "equity": 49787.187214788435
+    },
+    {
+      "date": "2025-12-03",
+      "equity": 46067.55349668205
+    },
+    {
+      "date": "2025-12-04",
+      "equity": 43854.410639528476
+    },
+    {
+      "date": "2025-12-05",
+      "equity": 38283.73759922305
+    },
+    {
+      "date": "2025-12-08",
+      "equity": 38283.73759922305
+    },
+    {
+      "date": "2025-12-09",
+      "equity": 32544.961196235447
+    },
+    {
+      "date": "2025-12-10",
+      "equity": 27869.72279581936
+    },
+    {
+      "date": "2025-12-11",
+      "equity": 33483.69823291345
+    },
+    {
+      "date": "2025-12-12",
+      "equity": 28182.501639540795
+    },
+    {
+      "date": "2025-12-15",
+      "equity": 28182.501639540795
+    },
+    {
+      "date": "2025-12-16",
+      "equity": 22034.45912574681
+    },
+    {
+      "date": "2025-12-17",
+      "equity": 18244.34525521261
+    },
+    {
+      "date": "2025-12-18",
+      "equity": 13443.213747467425
+    },
+    {
+      "date": "2025-12-19",
+      "equity": 8261.7827954337
+    },
+    {
+      "date": "2025-12-22",
+      "equity": 8261.7827954337
+    },
+    {
+      "date": "2025-12-23",
+      "equity": 6654.671135171075
+    },
+    {
+      "date": "2025-12-24",
+      "equity": 3273.563816203441
+    },
+    {
+      "date": "2025-12-26",
+      "equity": 3273.563816203441
+    },
+    {
+      "date": "2025-12-29",
+      "equity": 3273.563816203441
+    },
+    {
+      "date": "2025-12-30",
+      "equity": 1363.1320957697517
+    },
+    {
+      "date": "2025-12-31",
+      "equity": 8979.058828498373
+    },
+    {
+      "date": "2026-01-01",
+      "equity": 4446.175577247423
+    },
+    {
+      "date": "2026-01-02",
+      "equity": -1704.0419965449382
+    },
+    {
+      "date": "2026-01-05",
+      "equity": -1704.0419965449382
+    },
+    {
+      "date": "2026-01-06",
+      "equity": -5981.221752273941
+    },
+    {
+      "date": "2026-01-07",
+      "equity": -9456.469371919948
+    },
+    {
+      "date": "2026-01-08",
+      "equity": -14403.93887283898
+    },
+    {
+      "date": "2026-01-09",
+      "equity": -6743.191661198571
+    },
+    {
+      "date": "2026-01-12",
+      "equity": -14641.324342493808
+    },
+    {
+      "date": "2026-01-13",
+      "equity": -18385.641027321108
+    },
+    {
+      "date": "2026-01-14",
+      "equity": -22600.12751078133
+    },
+    {
+      "date": "2026-01-16",
+      "equity": -22600.12751078133
+    },
+    {
+      "date": "2026-01-19",
+      "equity": -22600.12751078133
+    },
+    {
+      "date": "2026-01-20",
+      "equity": -30755.69415373245
+    },
+    {
+      "date": "2026-01-21",
+      "equity": -35108.24850799893
+    },
+    {
+      "date": "2026-01-22",
+      "equity": -30001.7506013138
+    },
+    {
+      "date": "2026-01-23",
+      "equity": -20009.474140776478
+    },
+    {
+      "date": "2026-01-27",
+      "equity": -30147.736184073096
+    },
+    {
+      "date": "2026-01-28",
+      "equity": -24239.65993929148
+    },
+    {
+      "date": "2026-01-29",
+      "equity": -19824.012037401757
+    },
+    {
+      "date": "2026-01-30",
+      "equity": -16954.83987680234
+    },
+    {
+      "date": "2026-02-02",
+      "equity": -7166.891107097694
+    },
+    {
+      "date": "2026-02-03",
+      "equity": 8630.395143068468
+    },
+    {
+      "date": "2026-02-04",
+      "equity": 11545.953925110643
+    },
+    {
+      "date": "2026-02-05",
+      "equity": -3132.8793714342737
+    },
+    {
+      "date": "2026-02-06",
+      "equity": -5679.197651004188
+    },
+    {
+      "date": "2026-02-09",
+      "equity": -5679.197651004188
+    },
+    {
+      "date": "2026-02-10",
+      "equity": -4406.277101923979
+    },
+    {
+      "date": "2026-02-11",
+      "equity": -7087.723944439404
+    },
+    {
+      "date": "2026-02-12",
+      "equity": -12491.71665076633
+    },
+    {
+      "date": "2026-02-13",
+      "equity": 2329.602511386429
+    },
+    {
+      "date": "2026-02-16",
+      "equity": -11275.10317552128
+    },
+    {
+      "date": "2026-02-17",
+      "equity": -11364.535121843392
+    },
+    {
+      "date": "2026-02-18",
+      "equity": -7121.413819266445
+    },
+    {
+      "date": "2026-02-19",
+      "equity": -32413.909492695442
+    },
+    {
+      "date": "2026-02-20",
+      "equity": -36822.38297403733
+    },
+    {
+      "date": "2026-02-23",
+      "equity": -36822.38297403733
+    },
+    {
+      "date": "2026-02-24",
+      "equity": -45418.80080272154
+    },
+    {
+      "date": "2026-02-25",
+      "equity": -44879.69917363194
+    },
+    {
+      "date": "2026-02-26",
+      "equity": -51066.37150116426
+    },
+    {
+      "date": "2026-02-27",
+      "equity": -37000.4950368526
+    },
+    {
+      "date": "2026-03-02",
+      "equity": -16566.87959011252
+    },
+    {
+      "date": "2026-03-04",
+      "equity": 12891.989781087243
+    },
+    {
+      "date": "2026-03-05",
+      "equity": 7522.416938572398
+    },
+    {
+      "date": "2026-03-06",
+      "equity": 21139.31475067474
+    },
+    {
+      "date": "2026-03-09",
+      "equity": 49572.29302234408
+    },
+    {
+      "date": "2026-03-10",
+      "equity": 42594.493561343275
+    },
+    {
+      "date": "2026-03-11",
+      "equity": 47751.771000288514
+    },
+    {
+      "date": "2026-03-12",
+      "equity": 59655.86047094432
+    },
+    {
+      "date": "2026-03-13",
+      "equity": 85007.50046334477
+    },
+    {
+      "date": "2026-03-16",
+      "equity": 67414.40169845498
+    },
+    {
+      "date": "2026-03-17",
+      "equity": 64329.87228868685
+    },
+    {
+      "date": "2026-03-18",
+      "equity": 85259.95326468252
+    },
+    {
+      "date": "2026-03-19",
+      "equity": 38236.107951318736
+    },
+    {
+      "date": "2026-03-20",
+      "equity": 34059.69940573384
+    },
+    {
+      "date": "2026-03-23",
+      "equity": 34059.69940573384
+    },
+    {
+      "date": "2026-03-24",
+      "equity": 57133.92036008611
+    },
+    {
+      "date": "2026-03-25",
+      "equity": 109913.8514712897
+    },
+    {
+      "date": "2026-03-27",
+      "equity": 109913.8514712897
+    },
+    {
+      "date": "2026-03-30",
+      "equity": 109913.8514712897
+    },
+    {
+      "date": "2026-04-01",
+      "equity": 109913.8514712897
+    },
+    {
+      "date": "2026-04-02",
+      "equity": 107048.22605347293
+    },
+    {
+      "date": "2026-04-06",
+      "equity": 107048.22605347293
+    },
+    {
+      "date": "2026-04-07",
+      "equity": 113452.4980855388
+    },
+    {
+      "date": "2026-04-08",
+      "equity": 236871.7398016762
+    },
+    {
+      "date": "2026-04-09",
+      "equity": 198160.4348894268
+    },
+    {
+      "date": "2026-04-10",
+      "equity": 189992.61988620445
+    },
+    {
+      "date": "2026-04-13",
+      "equity": 189992.61988620445
+    },
+    {
+      "date": "2026-04-15",
+      "equity": 189992.61988620445
+    },
+    {
+      "date": "2026-04-16",
+      "equity": 185767.40396919235
+    },
+    {
+      "date": "2026-04-17",
+      "equity": 180349.05788263393
+    },
+    {
+      "date": "2026-04-20",
+      "equity": 180349.05788263393
+    },
+    {
+      "date": "2026-04-21",
+      "equity": 189961.79482364873
+    },
+    {
+      "date": "2026-04-22",
+      "equity": 171301.72639457253
+    },
+    {
+      "date": "2026-04-23",
+      "equity": 167157.09228119915
+    },
+    {
+      "date": "2026-04-24",
+      "equity": 178475.65631090922
+    },
+    {
+      "date": "2026-04-27",
+      "equity": 166491.8288956064
+    },
+    {
+      "date": "2026-04-28",
+      "equity": 161786.7988598672
+    },
+    {
+      "date": "2026-04-29",
+      "equity": 169355.50388342535
+    },
+    {
+      "date": "2026-04-30",
+      "equity": 150894.56330988798
+    },
+    {
+      "date": "2026-05-04",
+      "equity": 150894.56330988798
+    },
+    {
+      "date": "2026-05-05",
+      "equity": 146151.7807749777
+    },
+    {
+      "date": "2026-05-06",
+      "equity": 161376.75729543337
+    },
+    {
+      "date": "2026-05-07",
+      "equity": 156331.49577566786
+    },
+    {
+      "date": "2026-05-08",
+      "equity": 161997.78435729333
+    },
+    {
+      "date": "2026-05-11",
+      "equity": 183299.96049710616
+    },
+    {
+      "date": "2026-05-12",
+      "equity": 207127.24352865882
+    },
+    {
+      "date": "2026-05-13",
+      "equity": 204181.39896759362
+    },
+    {
+      "date": "2026-05-14",
+      "equity": 200213.68500093246
+    },
+    {
+      "date": "2026-05-15",
+      "equity": 201205.7116821352
+    },
+    {
+      "date": "2026-05-18",
+      "equity": 198158.17391252358
+    },
+    {
+      "date": "2026-05-19",
+      "equity": 195356.38563694214
+    },
+    {
+      "date": "2026-05-20",
+      "equity": 195160.26502947565
+    },
+    {
+      "date": "2026-05-21",
+      "equity": 187095.9093424492
+    },
+    {
+      "date": "2026-05-22",
+      "equity": 184247.6100414727
+    },
+    {
+      "date": "2026-05-25",
+      "equity": 184247.6100414727
+    },
+    {
+      "date": "2026-05-26",
+      "equity": 179220.0668397842
+    },
+    {
+      "date": "2026-05-27",
+      "equity": 176855.5423603495
+    },
+    {
+      "date": "2026-05-29",
+      "equity": 176855.5423603495
+    },
+    {
+      "date": "2026-06-01",
+      "equity": 176855.5423603495
+    },
+    {
+      "date": "2026-06-02",
+      "equity": 179616.96418271118
+    },
+    {
+      "date": "2026-06-03",
+      "equity": 169840.54803614455
+    },
+    {
+      "date": "2026-06-04",
+      "equity": 166125.1956712042
+    },
+    {
+      "date": "2026-06-05",
+      "equity": 167166.60445451268
+    },
+    {
+      "date": "2026-06-08",
+      "equity": 177118.34078764496
+    },
+    {
+      "date": "2026-06-09",
+      "equity": 173537.20449229705
+    },
+    {
+      "date": "2026-06-10",
+      "equity": 168004.11764938387
+    },
+    {
+      "date": "2026-06-11",
+      "equity": 166363.8254227211
+    },
+    {
+      "date": "2026-06-12",
+      "equity": 157037.09638047064
+    },
+    {
+      "date": "2026-06-15",
+      "equity": 157037.09638047064
+    },
+    {
+      "date": "2026-06-16",
+      "equity": 161891.44224504224
+    },
+    {
+      "date": "2026-06-17",
+      "equity": 168904.22270507048
+    },
+    {
+      "date": "2026-06-18",
+      "equity": 178956.40767586548
+    },
+    {
+      "date": "2026-06-19",
+      "equity": 184355.36105477565
+    },
+    {
+      "date": "2026-06-22",
+      "equity": 177696.79784984552
+    },
+    {
+      "date": "2026-06-23",
+      "equity": 169843.27893402005
+    },
+    {
+      "date": "2026-06-24",
+      "equity": 179290.26786642667
+    },
+    {
+      "date": "2026-06-25",
+      "equity": 179622.48238628774
+    },
+    {
+      "date": "2026-06-29",
+      "equity": 179622.48238628774
+    },
+    {
+      "date": "2026-06-30",
+      "equity": 175323.2126645683
+    },
+    {
+      "date": "2026-07-01",
+      "equity": 180714.2188959467
+    },
+    {
+      "date": "2026-07-02",
+      "equity": 200287.46892739608
+    },
+    {
+      "date": "2026-07-03",
+      "equity": 196333.12608508163
+    },
+    {
+      "date": "2026-07-06",
+      "equity": 196333.12608508163
+    },
+    {
+      "date": "2026-07-07",
+      "equity": 193576.40389061585
+    },
+    {
+      "date": "2026-07-08",
+      "equity": 186543.69290566153
+    },
+    {
+      "date": "2026-07-09",
+      "equity": 187072.68776742966
+    },
+    {
+      "date": "2026-07-10",
+      "equity": 180116.57317272722
+    },
+    {
+      "date": "2026-07-13",
+      "equity": 180116.57317272722
+    },
+    {
+      "date": "2026-07-14",
+      "equity": 173696.68484180095
+    },
+    {
+      "date": "2026-07-15",
+      "equity": 172675.28680558
+    },
+    {
+      "date": "2026-07-16",
+      "equity": 168577.12382736924
+    },
+    {
+      "date": "2026-07-17",
+      "equity": 161493.31807946754
+    },
+    {
+      "date": "2026-07-20",
+      "equity": 161493.31807946754
+    },
+    {
+      "date": "2026-07-21",
+      "equity": 158103.18558552148
+    },
+    {
+      "date": "2026-07-22",
+      "equity": 152123.01239356206
+    },
+    {
+      "date": "2026-07-23",
+      "equity": 147405.786816916
+    },
+    {
+      "date": "2026-07-24",
+      "equity": 150495.45017009715
+    },
+    {
+      "date": "2026-07-27",
+      "equity": 140326.98275581104
+    },
+    {
+      "date": "2026-07-28",
+      "equity": 138273.91596491347
+    },
+    {
+      "date": "2026-07-29",
+      "equity": 151211.78461364197
+    },
+    {
+      "date": "2026-07-30",
+      "equity": 155763.29971722874
+    },
+    {
+      "date": "2026-07-31",
+      "equity": 152894.67595973608
+    },
+    {
+      "date": "2026-08-03",
+      "equity": 152894.67595973608
+    },
+    {
+      "date": "2026-08-04",
+      "equity": 146134.28329108882
+    },
+    {
+      "date": "2026-08-05",
+      "equity": 144383.37953389587
+    },
+    {
+      "date": "2026-08-06",
+      "equity": 141098.85563811724
+    },
+    {
+      "date": "2026-08-07",
+      "equity": 142849.84542403097
+    },
+    {
+      "date": "2026-08-10",
+      "equity": 139443.9306657162
+    },
+    {
+      "date": "2026-08-11",
+      "equity": 134451.47237602653
+    },
+    {
+      "date": "2026-08-12",
+      "equity": 130909.17606868956
+    },
+    {
+      "date": "2026-08-13",
+      "equity": 126479.3507104378
+    },
+    {
+      "date": "2026-08-14",
+      "equity": 126796.59318053444
+    }
+  ],
+  "probability_table": [
+    {
+      "weekday_pair": "Mon\u2192Tue",
+      "n": 48,
+      "p_up": 0.5208333333333334,
+      "ci_low": 0.3832923230334281,
+      "ci_high": 0.6552868382304838,
+      "side": "CE",
+      "tradeable": true
+    },
+    {
+      "weekday_pair": "Mon\u2192Wed",
+      "n": 3,
+      "p_up": 0.6666666666666666,
+      "ci_low": 0.2076596008020477,
+      "ci_high": 0.9385080552796037,
+      "side": "CE",
+      "tradeable": false
+    },
+    {
+      "weekday_pair": "Tue\u2192Wed",
+      "n": 46,
+      "p_up": 0.5652173913043478,
+      "ci_low": 0.4224743369429499,
+      "ci_high": 0.6979073722198005,
+      "side": "CE",
+      "tradeable": true
+    },
+    {
+      "weekday_pair": "Tue\u2192Thu",
+      "n": 3,
+      "p_up": 0.3333333333333333,
+      "ci_low": 0.06149194472039621,
+      "ci_high": 0.7923403991979522,
+      "side": "PE",
+      "tradeable": false
+    },
+    {
+      "weekday_pair": "Wed\u2192Thu",
+      "n": 44,
+      "p_up": 0.5454545454545454,
+      "ci_low": 0.40066183198961974,
+      "ci_high": 0.6829476585777909,
+      "side": "CE",
+      "tradeable": true
+    },
+    {
+      "weekday_pair": "Wed\u2192Fri",
+      "n": 5,
+      "p_up": 0.2,
+      "ci_low": 0.03622410863243014,
+      "ci_high": 0.6244653702374747,
+      "side": "PE",
+      "tradeable": true
+    },
+    {
+      "weekday_pair": "Thu\u2192Mon",
+      "n": 4,
+      "p_up": 1.0,
+      "ci_low": 0.5101091635454027,
+      "ci_high": 1.0,
+      "side": "CE",
+      "tradeable": false
+    },
+    {
+      "weekday_pair": "Thu\u2192Fri",
+      "n": 44,
+      "p_up": 0.4090909090909091,
+      "ci_low": 0.2768785562754973,
+      "ci_high": 0.555902462589681,
+      "side": "PE",
+      "tradeable": true
+    },
+    {
+      "weekday_pair": "Fri\u2192Mon",
+      "n": 47,
+      "p_up": 0.574468085106383,
+      "ci_low": 0.4328191934549279,
+      "ci_high": 0.7048637165632003,
+      "side": "CE",
+      "tradeable": false
+    },
+    {
+      "weekday_pair": "Fri\u2192Tue",
+      "n": 1,
+      "p_up": 1.0,
+      "ci_low": 0.20654931437723745,
+      "ci_high": 1.0,
+      "side": "CE",
+      "tradeable": false
+    }
+  ],
+  "oos_data": [
+    {
+      "weekday_pair": "Mon\u2192Tue",
+      "side": "CE",
+      "n_in": 25,
+      "p_up": 0.64,
+      "ci_low": 0.44518497748164865,
+      "ci_high": 0.7975211922554178,
+      "n_oos": 23,
+      "realized_p_up": 0.391304347826087,
+      "realized_ci_low": 0.22157622792477952,
+      "realized_ci_high": 0.592144776086183
+    },
+    {
+      "weekday_pair": "Tue\u2192Wed",
+      "side": "CE",
+      "n_in": 23,
+      "p_up": 0.5652173913043478,
+      "ci_low": 0.3681137508501646,
+      "ci_high": 0.743653646743258,
+      "n_oos": 23,
+      "realized_p_up": 0.5652173913043478,
+      "realized_ci_low": 0.3681137508501646,
+      "realized_ci_high": 0.743653646743258
+    },
+    {
+      "weekday_pair": "Tue\u2192Thu",
+      "side": "PE",
+      "n_in": 3,
+      "p_up": 0.3333333333333333,
+      "ci_low": 0.06149194472039621,
+      "ci_high": 0.7923403991979522,
+      "n_oos": 0,
+      "realized_p_up": null,
+      "realized_ci_low": null,
+      "realized_ci_high": null
+    },
+    {
+      "weekday_pair": "Wed\u2192Thu",
+      "side": "CE",
+      "n_in": 20,
+      "p_up": 0.6,
+      "ci_low": 0.3865815007622531,
+      "ci_high": 0.781193467627183,
+      "n_oos": 24,
+      "realized_p_up": 0.5,
+      "realized_ci_low": 0.3142742581957335,
+      "realized_ci_high": 0.6857257418042665
+    },
+    {
+      "weekday_pair": "Wed\u2192Fri",
+      "side": "PE",
+      "n_in": 3,
+      "p_up": 0.3333333333333333,
+      "ci_low": 0.06149194472039621,
+      "ci_high": 0.7923403991979522,
+      "n_oos": 2,
+      "realized_p_up": 0.0,
+      "realized_ci_low": 0.0,
+      "realized_ci_high": 0.6576197724933469
+    },
+    {
+      "weekday_pair": "Thu\u2192Mon",
+      "side": "CE",
+      "n_in": 1,
+      "p_up": 1.0,
+      "ci_low": 0.20654931437723745,
+      "ci_high": 1.0,
+      "n_oos": 3,
+      "realized_p_up": 1.0,
+      "realized_ci_low": 0.4385029682449546,
+      "realized_ci_high": 1.0
+    },
+    {
+      "weekday_pair": "Thu\u2192Fri",
+      "side": "PE",
+      "n_in": 22,
+      "p_up": 0.36363636363636365,
+      "ci_low": 0.19733204670366125,
+      "ci_high": 0.5704829190986899,
+      "n_oos": 22,
+      "realized_p_up": 0.45454545454545453,
+      "realized_ci_low": 0.2692029418081331,
+      "realized_ci_high": 0.6534020467926505
+    },
+    {
+      "weekday_pair": "Fri\u2192Mon",
+      "side": "CE",
+      "n_in": 24,
+      "p_up": 0.6666666666666666,
+      "ci_low": 0.4670631683813174,
+      "ci_high": 0.8202780967270225,
+      "n_oos": 23,
+      "realized_p_up": 0.4782608695652174,
+      "realized_ci_low": 0.29237157416646653,
+      "realized_ci_high": 0.6703726266357259
+    },
+    {
+      "weekday_pair": "Fri\u2192Tue",
+      "side": "CE",
+      "n_in": 1,
+      "p_up": 1.0,
+      "ci_low": 0.20654931437723745,
+      "ci_high": 1.0,
+      "n_oos": 0,
+      "realized_p_up": null,
+      "realized_ci_low": null,
+      "realized_ci_high": null
+    }
+  ],
+  "benchmark_equity": [
+    {
+      "date": "2025-08-14",
+      "equity": 0.0
+    },
+    {
+      "date": "2025-08-18",
+      "equity": 0.0
+    },
+    {
+      "date": "2025-08-19",
+      "equity": 2697.4522060708296
+    },
+    {
+      "date": "2025-08-20",
+      "equity": 5375.054227227565
+    },
+    {
+      "date": "2025-08-21",
+      "equity": 2891.216916524445
+    },
+    {
+      "date": "2025-08-22",
+      "equity": 11558.75847115899
+    },
+    {
+      "date": "2025-08-25",
+      "equity": 4135.687710960929
+    },
+    {
+      "date": "2025-08-26",
+      "equity": 11011.714044610051
+    },
+    {
+      "date": "2025-08-28",
+      "equity": 25714.209214720944
+    },
+    {
+      "date": "2025-08-29",
+      "equity": 27746.43234005425
+    },
+    {
+      "date": "2025-09-01",
+      "equity": 18327.309845109558
+    },
+    {
+      "date": "2025-09-02",
+      "equity": 14997.451507002637
+    },
+    {
+      "date": "2025-09-03",
+      "equity": 18806.14738618041
+    },
+    {
+      "date": "2025-09-04",
+      "equity": 13246.511136456906
+    },
+    {
+      "date": "2025-09-05",
+      "equity": 12216.480514090557
+    },
+    {
+      "date": "2025-09-08",
+      "equity": 8099.416124921294
+    },
+    {
+      "date": "2025-09-09",
+      "equity": 6969.254996227432
+    },
+    {
+      "date": "2025-09-10",
+      "equity": 12251.314146672508
+    },
+    {
+      "date": "2025-09-11",
+      "equity": 12210.794050279532
+    },
+    {
+      "date": "2025-09-12",
+      "equity": 8059.850193231518
+    },
+    {
+      "date": "2025-09-15",
+      "equity": 6344.245815903463
+    },
+    {
+      "date": "2025-09-16",
+      "equity": 8865.691209203835
+    },
+    {
+      "date": "2025-09-17",
+      "equity": 14332.40314949345
+    },
+    {
+      "date": "2025-09-18",
+      "equity": 26058.09998331551
+    },
+    {
+      "date": "2025-09-19",
+      "equity": 28823.90615706308
+    },
+    {
+      "date": "2025-09-22",
+      "equity": 32062.421003755477
+    },
+    {
+      "date": "2025-09-23",
+      "equity": 30142.604074546667
+    },
+    {
+      "date": "2025-09-24",
+      "equity": 26786.940289686296
+    },
+    {
+      "date": "2025-09-25",
+      "equity": 30484.679109169465
+    },
+    {
+      "date": "2025-09-26",
+      "equity": 40237.08842478944
+    },
+    {
+      "date": "2025-09-29",
+      "equity": 39410.728269669555
+    },
+    {
+      "date": "2025-09-30",
+      "equity": 37790.60860308868
+    },
+    {
+      "date": "2025-10-01",
+      "equity": 43379.30283588743
+    },
+    {
+      "date": "2025-10-03",
+      "equity": 43379.30283588743
+    },
+    {
+      "date": "2025-10-06",
+      "equity": 43379.30283588743
+    },
+    {
+      "date": "2025-10-07",
+      "equity": 42820.29265987748
+    },
+    {
+      "date": "2025-10-08",
+      "equity": 34145.2312621196
+    },
+    {
+      "date": "2025-10-09",
+      "equity": 44820.33215285813
+    },
+    {
+      "date": "2025-10-10",
+      "equity": 40621.30893727657
+    },
+    {
+      "date": "2025-10-13",
+      "equity": 39373.63264437043
+    },
+    {
+      "date": "2025-10-14",
+      "equity": 36832.15926474302
+    },
+    {
+      "date": "2025-10-15",
+      "equity": 41138.18897964123
+    },
+    {
+      "date": "2025-10-16",
+      "equity": 90039.14334273402
+    },
+    {
+      "date": "2025-10-17",
+      "equity": 85256.45464556986
+    },
+    {
+      "date": "2025-10-20",
+      "equity": 79697.84725207754
+    },
+    {
+      "date": "2025-10-21",
+      "equity": 77723.23493610772
+    },
+    {
+      "date": "2025-10-23",
+      "equity": 71506.82569624044
+    },
+    {
+      "date": "2025-10-24",
+      "equity": 74468.67688158494
+    },
+    {
+      "date": "2025-10-27",
+      "equity": 65089.734706271505
+    },
+    {
+      "date": "2025-10-28",
+      "equity": 61615.82092617621
+    },
+    {
+      "date": "2025-10-29",
+      "equity": 63521.427127471296
+    },
+    {
+      "date": "2025-10-30",
+      "equity": 38228.76615798166
+    },
+    {
+      "date": "2025-10-31",
+      "equity": 44016.354520285204
+    },
+    {
+      "date": "2025-11-03",
+      "equity": 39326.227462318166
+    },
+    {
+      "date": "2025-11-04",
+      "equity": 41335.56256371708
+    },
+    {
+      "date": "2025-11-06",
+      "equity": 44691.617158216264
+    },
+    {
+      "date": "2025-11-07",
+      "equity": 44487.55880436741
+    },
+    {
+      "date": "2025-11-10",
+      "equity": 38741.56452094478
+    },
+    {
+      "date": "2025-11-11",
+      "equity": 39051.360146215484
+    },
+    {
+      "date": "2025-11-12",
+      "equity": 54950.492976996844
+    },
+    {
+      "date": "2025-11-13",
+      "equity": 49309.90993611088
+    },
+    {
+      "date": "2025-11-14",
+      "equity": 47385.26088840747
+    },
+    {
+      "date": "2025-11-17",
+      "equity": 41170.1041634922
+    },
+    {
+      "date": "2025-11-18",
+      "equity": 37485.360829853686
+    },
+    {
+      "date": "2025-11-19",
+      "equity": 40303.407494475556
+    },
+    {
+      "date": "2025-11-20",
+      "equity": 60143.72198781051
+    },
+    {
+      "date": "2025-11-21",
+      "equity": 64297.36975256359
+    },
+    {
+      "date": "2025-11-24",
+      "equity": 67305.67863400996
+    },
+    {
+      "date": "2025-11-25",
+      "equity": 66879.20607676328
+    },
+    {
+      "date": "2025-11-26",
+      "equity": 78877.48983508666
+    },
+    {
+      "date": "2025-11-27",
+      "equity": 70083.69730259651
+    },
+    {
+      "date": "2025-11-28",
+      "equity": 69680.31817363262
+    },
+    {
+      "date": "2025-12-01",
+      "equity": 67515.84540588142
+    },
+    {
+      "date": "2025-12-02",
+      "equity": 67211.88296606798
+    },
+    {
+      "date": "2025-12-03",
+      "equity": 63092.00940212999
+    },
+    {
+      "date": "2025-12-04",
+      "equity": 53113.25193137109
+    },
+    {
+      "date": "2025-12-05",
+      "equity": 47542.578891065656
+    },
+    {
+      "date": "2025-12-08",
+      "equity": 52168.54914301357
+    },
+    {
+      "date": "2025-12-09",
+      "equity": 51597.87111291039
+    },
+    {
+      "date": "2025-12-10",
+      "equity": 48457.26191205282
+    },
+    {
+      "date": "2025-12-11",
+      "equity": 43991.294838833666
+    },
+    {
+      "date": "2025-12-12",
+      "equity": 38690.09824546101
+    },
+    {
+      "date": "2025-12-15",
+      "equity": 36212.08035039931
+    },
+    {
+      "date": "2025-12-16",
+      "equity": 33934.06703558564
+    },
+    {
+      "date": "2025-12-17",
+      "equity": 28410.210958678672
+    },
+    {
+      "date": "2025-12-18",
+      "equity": 16836.876502710038
+    },
+    {
+      "date": "2025-12-19",
+      "equity": 11655.445550676313
+    },
+    {
+      "date": "2025-12-22",
+      "equity": 6171.077350439702
+    },
+    {
+      "date": "2025-12-23",
+      "equity": 3995.8449112668295
+    },
+    {
+      "date": "2025-12-24",
+      "equity": -3394.7724314043335
+    },
+    {
+      "date": "2025-12-26",
+      "equity": -3394.7724314043335
+    },
+    {
+      "date": "2025-12-29",
+      "equity": -3394.7724314043335
+    },
+    {
+      "date": "2025-12-30",
+      "equity": -5305.204151838023
+    },
+    {
+      "date": "2025-12-31",
+      "equity": 9926.64931361922
+    },
+    {
+      "date": "2026-01-01",
+      "equity": 5408.9581469151035
+    },
+    {
+      "date": "2026-01-02",
+      "equity": -741.2594268772573
+    },
+    {
+      "date": "2026-01-05",
+      "equity": -1815.136312233397
+    },
+    {
+      "date": "2026-01-06",
+      "equity": -5432.710708634357
+    },
+    {
+      "date": "2026-01-07",
+      "equity": -12558.308380196757
+    },
+    {
+      "date": "2026-01-08",
+      "equity": -7777.715478970111
+    },
+    {
+      "date": "2026-01-09",
+      "equity": -116.96826732970112
+    },
+    {
+      "date": "2026-01-12",
+      "equity": -8015.100948624939
+    },
+    {
+      "date": "2026-01-13",
+      "equity": -9976.442840769885
+    },
+    {
+      "date": "2026-01-14",
+      "equity": -14614.846901249955
+    },
+    {
+      "date": "2026-01-16",
+      "equity": -14614.846901249955
+    },
+    {
+      "date": "2026-01-19",
+      "equity": -14614.846901249955
+    },
+    {
+      "date": "2026-01-20",
+      "equity": -22770.413544201074
+    },
+    {
+      "date": "2026-01-21",
+      "equity": -27595.764519175624
+    },
+    {
+      "date": "2026-01-22",
+      "equity": -21832.794110713003
+    },
+    {
+      "date": "2026-01-23",
+      "equity": -11840.51765017568
+    },
+    {
+      "date": "2026-01-27",
+      "equity": -21978.779693472297
+    },
+    {
+      "date": "2026-01-28",
+      "equity": -24845.444356058142
+    },
+    {
+      "date": "2026-01-29",
+      "equity": -23814.62408377276
+    },
+    {
+      "date": "2026-01-30",
+      "equity": -20945.451923173343
+    },
+    {
+      "date": "2026-02-02",
+      "equity": -11157.503153468697
+    },
+    {
+      "date": "2026-02-03",
+      "equity": 4639.783096697465
+    },
+    {
+      "date": "2026-02-04",
+      "equity": 6987.302588039802
+    },
+    {
+      "date": "2026-02-05",
+      "equity": -14014.031178293699
+    },
+    {
+      "date": "2026-02-06",
+      "equity": -16560.349457863613
+    },
+    {
+      "date": "2026-02-09",
+      "equity": -23711.040051673575
+    },
+    {
+      "date": "2026-02-10",
+      "equity": -24171.17348271881
+    },
+    {
+      "date": "2026-02-11",
+      "equity": -27621.15086355222
+    },
+    {
+      "date": "2026-02-12",
+      "equity": -48739.46424732292
+    },
+    {
+      "date": "2026-02-13",
+      "equity": -33918.14508517016
+    },
+    {
+      "date": "2026-02-16",
+      "equity": -47522.85077207787
+    },
+    {
+      "date": "2026-02-17",
+      "equity": -50910.71548553921
+    },
+    {
+      "date": "2026-02-18",
+      "equity": -52313.68628473235
+    },
+    {
+      "date": "2026-02-19",
+      "equity": -55887.409489369595
+    },
+    {
+      "date": "2026-02-20",
+      "equity": -60295.882970711486
+    },
+    {
+      "date": "2026-02-23",
+      "equity": -65779.991165191
+    },
+    {
+      "date": "2026-02-24",
+      "equity": -68681.58676870537
+    },
+    {
+      "date": "2026-02-25",
+      "equity": -72642.04716595501
+    },
+    {
+      "date": "2026-02-26",
+      "equity": -83154.46049694894
+    },
+    {
+      "date": "2026-02-27",
+      "equity": -69088.58403263727
+    },
+    {
+      "date": "2026-03-02",
+      "equity": -48654.9685858972
+    },
+    {
+      "date": "2026-03-04",
+      "equity": -19196.09921469744
+    },
+    {
+      "date": "2026-03-05",
+      "equity": -24565.672057212283
+    },
+    {
+      "date": "2026-03-06",
+      "equity": -10948.77424510994
+    },
+    {
+      "date": "2026-03-09",
+      "equity": 17484.2040265594
+    },
+    {
+      "date": "2026-03-10",
+      "equity": 10506.40456555859
+    },
+    {
+      "date": "2026-03-11",
+      "equity": 15663.682004503837
+    },
+    {
+      "date": "2026-03-12",
+      "equity": 26793.19035357978
+    },
+    {
+      "date": "2026-03-13",
+      "equity": 52144.83034598023
+    },
+    {
+      "date": "2026-03-16",
+      "equity": 34551.73158109044
+    },
+    {
+      "date": "2026-03-17",
+      "equity": 31467.202171322308
+    },
+    {
+      "date": "2026-03-18",
+      "equity": 44623.38473220293
+    },
+    {
+      "date": "2026-03-19",
+      "equity": 44910.80390562659
+    },
+    {
+      "date": "2026-03-20",
+      "equity": 40734.39536004169
+    },
+    {
+      "date": "2026-03-23",
+      "equity": 70002.15990188034
+    },
+    {
+      "date": "2026-03-24",
+      "equity": 66970.07573156287
+    },
+    {
+      "date": "2026-03-25",
+      "equity": 110062.92809573832
+    },
+    {
+      "date": "2026-03-27",
+      "equity": 110062.92809573832
+    },
+    {
+      "date": "2026-03-30",
+      "equity": 110062.92809573832
+    },
+    {
+      "date": "2026-04-01",
+      "equity": 110062.92809573832
+    },
+    {
+      "date": "2026-04-02",
+      "equity": 107197.30267792154
+    },
+    {
+      "date": "2026-04-06",
+      "equity": 107197.30267792154
+    },
+    {
+      "date": "2026-04-07",
+      "equity": 113601.57470998741
+    },
+    {
+      "date": "2026-04-08",
+      "equity": 237020.81642612483
+    },
+    {
+      "date": "2026-04-09",
+      "equity": 198309.51151387542
+    },
+    {
+      "date": "2026-04-10",
+      "equity": 190141.69651065307
+    },
+    {
+      "date": "2026-04-13",
+      "equity": 192342.24965054603
+    },
+    {
+      "date": "2026-04-15",
+      "equity": 186183.8415283385
+    },
+    {
+      "date": "2026-04-16",
+      "equity": 181948.78233731756
+    },
+    {
+      "date": "2026-04-17",
+      "equity": 176530.43625075914
+    },
+    {
+      "date": "2026-04-20",
+      "equity": 173632.1154567747
+    },
+    {
+      "date": "2026-04-21",
+      "equity": 180322.81068853717
+    },
+    {
+      "date": "2026-04-22",
+      "equity": 162102.05075244958
+    },
+    {
+      "date": "2026-04-23",
+      "equity": 152668.20782210512
+    },
+    {
+      "date": "2026-04-24",
+      "equity": 163986.7718518152
+    },
+    {
+      "date": "2026-04-27",
+      "equity": 152002.94443651236
+    },
+    {
+      "date": "2026-04-28",
+      "equity": 150852.9203175286
+    },
+    {
+      "date": "2026-04-29",
+      "equity": 153291.53634347455
+    },
+    {
+      "date": "2026-04-30",
+      "equity": 134216.12057991783
+    },
+    {
+      "date": "2026-05-04",
+      "equity": 134216.12057991783
+    },
+    {
+      "date": "2026-05-05",
+      "equity": 129473.33804500753
+    },
+    {
+      "date": "2026-05-06",
+      "equity": 158008.75136916825
+    },
+    {
+      "date": "2026-05-07",
+      "equity": 151958.76775620767
+    },
+    {
+      "date": "2026-05-08",
+      "equity": 157625.05633783317
+    },
+    {
+      "date": "2026-05-11",
+      "equity": 178927.23247764597
+    },
+    {
+      "date": "2026-05-12",
+      "equity": 202754.51550919862
+    },
+    {
+      "date": "2026-05-13",
+      "equity": 199646.54511371272
+    },
+    {
+      "date": "2026-05-14",
+      "equity": 212136.31261937908
+    },
+    {
+      "date": "2026-05-15",
+      "equity": 213128.33930058184
+    },
+    {
+      "date": "2026-05-18",
+      "equity": 210080.8015309702
+    },
+    {
+      "date": "2026-05-19",
+      "equity": 207447.37774782194
+    },
+    {
+      "date": "2026-05-20",
+      "equity": 203168.71532615923
+    },
+    {
+      "date": "2026-05-21",
+      "equity": 187567.30986763767
+    },
+    {
+      "date": "2026-05-22",
+      "equity": 184719.0105666612
+    },
+    {
+      "date": "2026-05-25",
+      "equity": 177212.9383642588
+    },
+    {
+      "date": "2026-05-26",
+      "equity": 172393.2757188452
+    },
+    {
+      "date": "2026-05-27",
+      "equity": 167694.0316544836
+    },
+    {
+      "date": "2026-05-29",
+      "equity": 167694.0316544836
+    },
+    {
+      "date": "2026-06-01",
+      "equity": 167694.0316544836
+    },
+    {
+      "date": "2026-06-02",
+      "equity": 170455.4534768453
+    },
+    {
+      "date": "2026-06-03",
+      "equity": 160679.03733027866
+    },
+    {
+      "date": "2026-06-04",
+      "equity": 151269.12597139625
+    },
+    {
+      "date": "2026-06-05",
+      "equity": 152310.53475470474
+    },
+    {
+      "date": "2026-06-08",
+      "equity": 162262.27108783706
+    },
+    {
+      "date": "2026-06-09",
+      "equity": 158681.13479248912
+    },
+    {
+      "date": "2026-06-10",
+      "equity": 153148.04794957594
+    },
+    {
+      "date": "2026-06-11",
+      "equity": 142315.57339534673
+    },
+    {
+      "date": "2026-06-12",
+      "equity": 132988.84435309627
+    },
+    {
+      "date": "2026-06-15",
+      "equity": 131807.09286464303
+    },
+    {
+      "date": "2026-06-16",
+      "equity": 136639.77857623002
+    },
+    {
+      "date": "2026-06-17",
+      "equity": 143652.36709745484
+    },
+    {
+      "date": "2026-06-18",
+      "equity": 153704.55206718217
+    },
+    {
+      "date": "2026-06-19",
+      "equity": 159103.50544609234
+    },
+    {
+      "date": "2026-06-22",
+      "equity": 152444.9422411622
+    },
+    {
+      "date": "2026-06-23",
+      "equity": 159435.20488859963
+    },
+    {
+      "date": "2026-06-24",
+      "equity": 156793.00613450984
+    },
+    {
+      "date": "2026-06-25",
+      "equity": 150974.1751511039
+    },
+    {
+      "date": "2026-06-29",
+      "equity": 150974.1751511039
+    },
+    {
+      "date": "2026-06-30",
+      "equity": 146674.90542938447
+    },
+    {
+      "date": "2026-07-01",
+      "equity": 155192.0069735571
+    },
+    {
+      "date": "2026-07-02",
+      "equity": 184404.36298755978
+    },
+    {
+      "date": "2026-07-03",
+      "equity": 180450.02014524533
+    },
+    {
+      "date": "2026-07-06",
+      "equity": 174242.3859583652
+    },
+    {
+      "date": "2026-07-07",
+      "equity": 170971.0469901896
+    },
+    {
+      "date": "2026-07-08",
+      "equity": 180655.07861591023
+    },
+    {
+      "date": "2026-07-09",
+      "equity": 175346.94166603594
+    },
+    {
+      "date": "2026-07-10",
+      "equity": 168390.8270713335
+    },
+    {
+      "date": "2026-07-13",
+      "equity": 166173.1657359783
+    },
+    {
+      "date": "2026-07-14",
+      "equity": 161364.25049549987
+    },
+    {
+      "date": "2026-07-15",
+      "equity": 157207.28310019098
+    },
+    {
+      "date": "2026-07-16",
+      "equity": 145891.47295721705
+    },
+    {
+      "date": "2026-07-17",
+      "equity": 138807.66720931535
+    },
+    {
+      "date": "2026-07-20",
+      "equity": 138070.13203022085
+    },
+    {
+      "date": "2026-07-21",
+      "equity": 134500.1198534828
+    },
+    {
+      "date": "2026-07-22",
+      "equity": 128137.2583229006
+    },
+    {
+      "date": "2026-07-23",
+      "equity": 129293.95042691295
+    },
+    {
+      "date": "2026-07-24",
+      "equity": 132383.6137800941
+    },
+    {
+      "date": "2026-07-27",
+      "equity": 122215.14636580802
+    },
+    {
+      "date": "2026-07-28",
+      "equity": 119229.88927248522
+    },
+    {
+      "date": "2026-07-29",
+      "equity": 142546.5466740915
+    },
+    {
+      "date": "2026-07-30",
+      "equity": 151512.60510234837
+    },
+    {
+      "date": "2026-07-31",
+      "equity": 148643.9813448557
+    },
+    {
+      "date": "2026-08-03",
+      "equity": 140963.3066586582
+    },
+    {
+      "date": "2026-08-04",
+      "equity": 134450.36987616797
+    },
+    {
+      "date": "2026-08-05",
+      "equity": 130681.51834508496
+    },
+    {
+      "date": "2026-08-06",
+      "equity": 122432.72453944337
+    },
+    {
+      "date": "2026-08-07",
+      "equity": 124183.7143253571
+    },
+    {
+      "date": "2026-08-10",
+      "equity": 120777.79956704236
+    },
+    {
+      "date": "2026-08-11",
+      "equity": 120266.03148604328
+    },
+    {
+      "date": "2026-08-12",
+      "equity": 115806.80588831696
+    },
+    {
+      "date": "2026-08-13",
+      "equity": 108731.2662699842
+    },
+    {
+      "date": "2026-08-14",
+      "equity": 109048.50874008086
+    }
+  ],
+  "live_positions": [
+    {
+      "pair": "Thu\u2192Fri",
+      "side": "PE",
+      "strike": 24400,
+      "entry_date": "2026-08-13",
+      "entry_premium": 155.59,
+      "live_premium": 135.73,
+      "live_pnl": -1489.27,
+      "pct_move": -12.76,
+      "banked_floor": null,
+      "days_to_expiry": 4
+    }
+  ],
+  "next_trade_preview": {}
+}

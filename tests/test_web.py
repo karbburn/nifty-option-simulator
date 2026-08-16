@@ -1,6 +1,3 @@
-import json
-from pathlib import Path
-
 from fastapi.testclient import TestClient
 
 from nifty_gap.web.app import app
@@ -57,6 +54,20 @@ def test_dashboard_page():
     assert "Live Positions" in resp.text
 
 
+def test_dashboard_page_mobile_layout_meta():
+    resp = client.get("/")
+    assert 'name="viewport"' in resp.text
+    assert 'content="width=device-width, initial-scale=1"' in resp.text
+    assert "bottom-nav" in resp.text
+    assert "data-tab=" in resp.text
+
+
+def test_dashboard_page_has_theme_color():
+    resp = client.get("/")
+    assert 'name="theme-color"' in resp.text
+    assert "Chart" in resp.text
+
+
 def test_trade_page():
     snap = _snapshot()
     entry = snap["trades"][0]["entry_date"]
@@ -80,6 +91,10 @@ def test_static_favicon():
     resp = client.get("/favicon.ico")
     assert resp.status_code == 200
     assert resp.headers["content-type"].startswith("image/")
+    resp2 = client.get("/static/favicon.ico")
+    assert resp2.status_code == 200
+    resp3 = client.get("/static/icon-192.png")
+    assert resp3.status_code == 200
 
 
 def test_snapshot_legs_are_dicts():

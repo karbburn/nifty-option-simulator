@@ -63,7 +63,37 @@ Console output prints: total trades, total P&L, win rate, profit factor, max dra
 
 ---
 
-## 4. Configuration (`nifty_gap/config.py`)
+## 4. Web Dashboard
+
+The project ships a read‑only web dashboard that serves the backtest results as interactive HTML charts.
+
+```bash
+pip install -e ".[web]"
+uvicorn nifty_gap.web.app:app --host 0.0.0.0 --port 8000
+```
+
+Open `http://localhost:8000/`. Routes:
+
+| Route | Purpose |
+|---|---|
+| `/` | Dashboard — KPIs, live positions, trades table, equity curve, OOS, benchmark |
+| `/trade/{entry_date}` | Per‑trade premium path chart with ladder stop/floor lines |
+| `/expiry` | Expiry weekday explainer with OOS table |
+| `/api/dashboard` | Full `dashboard.json` snapshot (JSON) |
+| `/api/spot` | Live NIFTY spot (yfinance, 60s cache, history fallback) |
+| `/api/live-positions?spot=X` | Re‑mark open positions at a given spot |
+| `/health` | Liveness check |
+
+### Deploy (Render)
+
+1. Push `main`; create a Render Web Service from the repo (Python runtime).
+2. Start command: `uvicorn nifty_gap.web.app:app --host 0.0.0.0 --port 8000`.
+3. Add a cron ping (e.g. UptimeRobot) to `/health` every 5 min to keep the free tier awake.
+4. The `refresh-data` GitHub Action runs on weekdays at 11:30 UTC, regenerates `output/dashboard.json`, and commits it — Render auto‑deploys on push.
+
+---
+
+## 5. Configuration (`nifty_gap/config.py`)
 
 Key parameters you may want to adjust:
 
@@ -76,7 +106,7 @@ All parameters are exposed in `config.py` and are individually reversible.
 
 ---
 
-## 5. Limitations (abridged)
+## 6. Limitations (abridged)
 
 1. **Sample size** is small (~245 pairs across 5 buckets) ⇒ noisy `p_up` estimates
 2. **BS with flat 12.5% IV** is not a market price; real premium reflects skew, term structure, supply‑demand
@@ -88,7 +118,7 @@ See `REPORT.md` for the complete, unabridged limitations register.
 
 ---
 
-## 6. Acknowledgement
+## 7. Acknowledgement
 
 Data sourced from NSE via yfinance (delayed, best‑effort). The project is built as a research backtesting tool, not a live trading system.
 
