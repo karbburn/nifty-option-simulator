@@ -209,6 +209,7 @@
   try { if (window.Chart && window.ChartErrorBars) { Chart.register(ChartErrorBars.BarWithErrorBarsController, ChartErrorBars.BarWithErrorBar); } } catch (e) {}
   var snap = {{ snap | tojson }};
   var chartInstances = [];
+  window.chartInstances = chartInstances;
 
   function fmtInr(v) { return '\u20B9' + v.toLocaleString('en-IN', { maximumFractionDigits: 0 }); }
 
@@ -429,7 +430,10 @@
 
   var applyBtn = document.getElementById('cfgApply');
   var statusEl = document.getElementById('cfgStatus');
+  var recomputeSeq = 0;
+  var liveTimer = null;
   async function recompute() {
+    var seq = ++recomputeSeq;
     applyBtn.disabled = true;
     statusEl.textContent = 'Running backtest…';
     var body = {
@@ -443,6 +447,7 @@
     try {
       var resp = await fetch('/api/recompute', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
       var s = await resp.json();
+      if (seq !== recomputeSeq) return;
       snap = s;
       updateKpis(s);
       buildTrades(s);
@@ -450,11 +455,18 @@
       updateConfigUI(s);
       statusEl.textContent = 'Done — ' + s.trade_stats.n_trades + ' trades, ' + fmtInr(s.trade_stats.total_pnl);
     } catch (e) {
-      statusEl.textContent = 'Recompute failed: ' + e;
+      if (seq === recomputeSeq) statusEl.textContent = 'Recompute failed: ' + e;
     } finally {
-      applyBtn.disabled = false;
+      if (seq === recomputeSeq) applyBtn.disabled = false;
     }
   }
+  function scheduleRecompute() {
+    if (liveTimer) clearTimeout(liveTimer);
+    liveTimer = setTimeout(recompute, 350);
+  }
+  var liveInputs = ['cfgIv', 'cfgStop1', 'cfgStop2', 'cfgFloor1', 'cfgFloor2', 'cfgFloor3', 'cfgBrokerage', 'cfgSlippage'];
+  liveInputs.forEach(function (id) { document.getElementById(id).addEventListener('input', scheduleRecompute); });
+  [cfgRollover, cfgCosts].forEach(function (el) { el.addEventListener('change', scheduleRecompute); });
   applyBtn.addEventListener('click', recompute);
   document.getElementById('cfgReset').addEventListener('click', function () {
     updateConfigUI(snap);
