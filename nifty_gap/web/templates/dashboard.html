@@ -28,37 +28,37 @@
     <div class="config-grid">
       <div class="cfg-field">
         <span class="cfg-label">IV flat</span>
-        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgIv">−</button><input type="number" id="cfgIv" class="stepper-input" min="0.05" max="0.25" step="0.005" value="{{ snap.config.iv_flat }}" aria-label="IV flat"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgIv">+</button></div>
+        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgIv',-1)">−</button><input type="number" id="cfgIv" class="stepper-input" min="0.05" max="0.25" step="0.005" value="{{ snap.config.iv_flat }}" aria-label="IV flat"><button type="button" class="stepper-btn" onclick="stepVal('cfgIv',1)">+</button></div>
       </div>
       <div class="cfg-field">
         <span class="cfg-label">Stop 1 (%)</span>
-        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgStop1">−</button><input type="number" id="cfgStop1" class="stepper-input" min="1" max="12" step="1" value="{{ "%.0f"|format(snap.config.ladder_stop_pcts[0]*100) }}" aria-label="Stop 1 percent"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgStop1">+</button></div>
+        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgStop1',-1)">−</button><input type="number" id="cfgStop1" class="stepper-input" min="1" max="12" step="1" value="{{ "%.0f"|format(snap.config.ladder_stop_pcts[0]*100) }}" aria-label="Stop 1 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgStop1',1)">+</button></div>
       </div>
       <div class="cfg-field">
         <span class="cfg-label">Stop 2 (%)</span>
-        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgStop2">−</button><input type="number" id="cfgStop2" class="stepper-input" min="1" max="20" step="1" value="{{ "%.0f"|format(snap.config.ladder_stop_pcts[1]*100) }}" aria-label="Stop 2 percent"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgStop2">+</button></div>
+        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgStop2',-1)">−</button><input type="number" id="cfgStop2" class="stepper-input" min="1" max="20" step="1" value="{{ "%.0f"|format(snap.config.ladder_stop_pcts[1]*100) }}" aria-label="Stop 2 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgStop2',1)">+</button></div>
       </div>
       <div class="cfg-field">
         <span class="cfg-label">Floor 1 (%)</span>
-        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgFloor1">−</button><input type="number" id="cfgFloor1" class="stepper-input" min="3" max="25" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[0]*100) }}" aria-label="Floor 1 percent"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgFloor1">+</button></div>
+        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor1',-1)">−</button><input type="number" id="cfgFloor1" class="stepper-input" min="3" max="25" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[0]*100) }}" aria-label="Floor 1 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor1',1)">+</button></div>
       </div>
       <div class="cfg-field">
         <span class="cfg-label">Floor 2 (%)</span>
-        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgFloor2">−</button><input type="number" id="cfgFloor2" class="stepper-input" min="3" max="30" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[1]*100) }}" aria-label="Floor 2 percent"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgFloor2">+</button></div>
+        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor2',-1)">−</button><input type="number" id="cfgFloor2" class="stepper-input" min="3" max="30" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[1]*100) }}" aria-label="Floor 2 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor2',1)">+</button></div>
       </div>
       <div class="cfg-field">
         <span class="cfg-label">Floor 3 (%)</span>
-        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgFloor3">−</button><input type="number" id="cfgFloor3" class="stepper-input" min="3" max="40" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[2]*100) }}" aria-label="Floor 3 percent"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgFloor3">+</button></div>
+        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor3',-1)">−</button><input type="number" id="cfgFloor3" class="stepper-input" min="3" max="40" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[2]*100) }}" aria-label="Floor 3 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor3',1)">+</button></div>
       </div>
       <label class="cfg-check"><input type="checkbox" id="cfgRollover" {{ 'checked' if snap.config.ladder_rollover }}> Ladder rollover</label>
       <label class="cfg-check"><input type="checkbox" id="cfgCosts"> Apply costs (₹ + slippage)</label>
       <div class="cfg-field">
         <span class="cfg-label">Brokerage ₹/trade</span>
-        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgBrokerage">−</button><input type="number" id="cfgBrokerage" class="stepper-input" min="0" step="5" value="40" disabled aria-label="Brokerage per trade"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgBrokerage">+</button></div>
+        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgBrokerage',-1)">−</button><input type="number" id="cfgBrokerage" class="stepper-input" min="0" step="5" value="40" disabled aria-label="Brokerage per trade"><button type="button" class="stepper-btn" onclick="stepVal('cfgBrokerage',1)">+</button></div>
       </div>
       <div class="cfg-field">
         <span class="cfg-label">Slippage %</span>
-        <div class="stepper"><button type="button" class="stepper-btn" data-action="dec" data-target="cfgSlippage">−</button><input type="number" id="cfgSlippage" class="stepper-input" min="0" max="5" step="0.1" value="0.5" disabled aria-label="Slippage percent"><button type="button" class="stepper-btn" data-action="inc" data-target="cfgSlippage">+</button></div>
+        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgSlippage',-1)">−</button><input type="number" id="cfgSlippage" class="stepper-input" min="0" max="5" step="0.1" value="0.5" disabled aria-label="Slippage percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgSlippage',1)">+</button></div>
       </div>
     </div>
     <p class="cfg-hint">Excluded pairs: <span id="cfgExcluded">{{ snap.config.excluded_pairs | join(", ") }}</span></p>
@@ -399,18 +399,18 @@
     document.getElementById('cfgExcluded').textContent = c.excluded_pairs.join(', ');
   }
 
-  document.querySelectorAll('.stepper-btn').forEach(function (btn) {
-    btn.addEventListener('click', function () {
-      var input = document.getElementById(btn.dataset.target);
-      if (!input || input.disabled) return;
-      var step = parseFloat(input.step) || 1;
-      var val = parseFloat(input.value) || 0;
-      if (btn.dataset.action === 'inc') val = Math.min(parseFloat(input.max) || Infinity, val + step);
-      else val = Math.max(parseFloat(input.min) || -Infinity, val - step);
-      input.value = Math.round(val * 1000) / 1000;
-      input.dispatchEvent(new Event('input', { bubbles: true }));
-    });
-  });
+  function stepVal(id, dir) {
+    var el = document.getElementById(id);
+    if (!el || el.disabled) return;
+    var s = parseFloat(el.step) || 1;
+    var v = parseFloat(el.value) || 0;
+    v = dir > 0 ? v + s : v - s;
+    var mn = el.hasAttribute('min') ? parseFloat(el.min) : -Infinity;
+    var mx = el.hasAttribute('max') ? parseFloat(el.max) : Infinity;
+    v = Math.max(mn, Math.min(mx, v));
+    el.value = Math.round(v * 1000) / 1000;
+    el.dispatchEvent(new Event('input', { bubbles: true }));
+  }
 
   var tradesWrap = document.getElementById('tradesWrap');
   var tradesToggle = document.getElementById('tradesToggle');
