@@ -154,7 +154,8 @@ def test_dashboard_page_has_config_explorer():
 
 def test_dashboard_page_has_report_gallery():
     resp = client.get("/")
-    assert "Report Charts" in resp.text
+    assert "Equity Curve" in resp.text
+    assert "Exit Reasons" in resp.text
     assert "/charts/equity.png" in resp.text
 
 

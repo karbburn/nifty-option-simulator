@@ -25,7 +25,9 @@ class Config:
     ladder_stop_pcts: tuple[float, ...] = (0.03, 0.05)
     ladder_fill_mode: str = "observed_close"
     ladder_rollover: bool = False
-    excluded_pairs: frozenset = frozenset({"Fri→Mon"})
+    excluded_pairs: frozenset = frozenset(
+        {"Tue→Thu", "Wed→Thu", "Wed→Fri", "Thu→Mon", "Fri→Mon", "Fri→Tue"}
+    )
     data_path: Path = PROJECT_ROOT / "assets" / "NIFTY 50-14-08-2025-to-14-08-2026.csv"
     data_history_path: Path = PROJECT_ROOT / "data" / "nifty50_history.csv"
     refresh_provider_order: tuple[str, ...] = ("nse", "yfinance")

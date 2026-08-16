@@ -57,7 +57,7 @@ def engine_df():
     return df
 
 
-def _table(engine_df, min_pair_sample=1, excluded=cfg.excluded_pairs):
+def _table(engine_df, min_pair_sample=1, excluded=frozenset({"Fri→Mon"})):
     return build_probability_table(engine_df, min_pair_sample=min_pair_sample, excluded_pairs=excluded)
 
 
@@ -65,7 +65,7 @@ def _ts(s: str) -> pd.Timestamp:
     return pd.Timestamp(s)
 
 
-def _trade_for(engine_df, entry_date, rollover=True, excluded=cfg.excluded_pairs):
+def _trade_for(engine_df, entry_date, rollover=True, excluded=frozenset({"Fri→Mon"})):
     local = replace(cfg, ladder_rollover=rollover, excluded_pairs=excluded)
     trades = run_backtest(engine_df, _table(engine_df, excluded=excluded), local)
     return next(t for t in trades if t.entry_date == _ts(entry_date))

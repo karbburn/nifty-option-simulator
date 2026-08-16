@@ -23,6 +23,17 @@
     </div>
   </div>
 
+  <section class="card" aria-label="Pairs to trade">
+    <h2>Pairs to Trade</h2>
+    <div class="pair-grid" id="pairGrid">
+      {% set all_pairs = ["Mon→Tue", "Tue→Wed", "Tue→Thu", "Wed→Thu", "Wed→Fri", "Thu→Mon", "Thu→Fri", "Fri→Mon", "Fri→Tue"] %}
+      {% for pair in all_pairs %}
+      <label class="pair-chip"><input type="checkbox" value="{{ pair }}" {{ 'checked' if pair not in snap.config.excluded_pairs }}> {{ pair }}</label>
+      {% endfor %}
+    </div>
+    <p class="cfg-hint">Uncheck a pair to exclude it from the backtest.</p>
+  </section>
+
   <section class="card" aria-label="Config explorer">
     <h2>Config Explorer</h2>
     <div class="config-grid">
@@ -173,28 +184,31 @@
 </div>
 
 <div class="tab-panel" id="tab-charts">
-  <section class="card" aria-label="Report PNG charts">
-    <h2>Report Charts</h2>
-    <div class="report-grid">
-      <figure><img src="/charts/equity.png" alt="Portfolio equity with drawdown shading and per-pair cumulative P&L"><figcaption>Equity &amp; per-pair P&amp;L</figcaption></figure>
-      <figure><img src="/charts/benchmark.png" alt="Ladder strategy vs hold-to-expiry benchmark"><figcaption>Ladder vs benchmark</figcaption></figure>
-      <figure><img src="/charts/exit_reasons.png" alt="Exit reason distribution with average P&L"><figcaption>Exit reasons</figcaption></figure>
-      <figure><img src="/charts/probability.png" alt="Weekday pair gap probability with Wilson confidence intervals"><figcaption>Probability table</figcaption></figure>
-      <figure><img src="/charts/oos.png" alt="In-sample table probability vs realized out-of-sample win rates"><figcaption>IS vs OOS</figcaption></figure>
-    </div>
-  </section>
-  <section class="card" aria-label="Equity curve showing cumulative P&L from Aug 2025 to Aug 2026">
+  <section class="card" aria-label="Equity curve">
     <h2>Equity Curve</h2>
     <div class="chart-container"><canvas id="equityChart"></canvas></div>
+    <img class="chart-png-fallback" src="/charts/equity.png" alt="Equity & per-pair P&L">
   </section>
   <div class="two-col">
-    <section class="card" aria-label="Probability and out-of-sample win rates with confidence intervals">
-      <h2>Probability &amp; OOS</h2>
+    <section class="card" aria-label="Probability table">
+      <h2>Probability Table</h2>
       <div class="chart-container"><canvas id="probabilityChart"></canvas></div>
+      <img class="chart-png-fallback" src="/charts/probability.png" alt="Weekday pair gap probability">
     </section>
-    <section class="card" aria-label="Benchmark comparison of ladder strategy versus hold-to-expiry">
+    <section class="card" aria-label="In-sample vs out-of-sample">
+      <h2>IS vs OOS</h2>
+      <img class="chart-png-fallback" src="/charts/oos.png" alt="In-sample vs out-of-sample win rates" style="display:block">
+    </section>
+  </div>
+  <div class="two-col">
+    <section class="card" aria-label="Benchmark comparison">
       <h2>Benchmark</h2>
       <div class="chart-container"><canvas id="benchmarkChart"></canvas></div>
+      <img class="chart-png-fallback" src="/charts/benchmark.png" alt="Ladder vs benchmark">
+    </section>
+    <section class="card" aria-label="Exit reason distribution">
+      <h2>Exit Reasons</h2>
+      <img class="chart-png-fallback" src="/charts/exit_reasons.png" alt="Exit reason distribution" style="display:block">
     </section>
   </div>
 </div>
@@ -416,6 +430,9 @@
     document.getElementById('cfgFloor3').value = Math.round(c.ladder_floor_pcts[2] * 100);
     document.getElementById('cfgRollover').checked = c.ladder_rollover;
     document.getElementById('cfgExcluded').textContent = c.excluded_pairs.join(', ');
+    document.querySelectorAll('#pairGrid .pair-chip input').forEach(function (el) {
+      el.checked = c.excluded_pairs.indexOf(el.value) === -1;
+    });
   }
 
   function stepVal(id, dir) {
@@ -480,6 +497,7 @@
       ladder_stop_pcts: [clampNum('cfgStop1') / 100, clampNum('cfgStop2') / 100],
       ladder_floor_pcts: [clampNum('cfgFloor1') / 100, clampNum('cfgFloor2') / 100, clampNum('cfgFloor3') / 100],
       ladder_rollover: document.getElementById('cfgRollover').checked,
+      excluded_pairs: Array.prototype.filter.call(document.querySelectorAll('#pairGrid .pair-chip input'), function (el) { return !el.checked; }).map(function (el) { return el.value; }),
       brokerage_per_trade: cfgCosts.checked ? clampNum('cfgBrokerage') : 0,
       slippage_pct: cfgCosts.checked ? clampNum('cfgSlippage') / 100 : 0
     };
@@ -508,6 +526,7 @@
   var liveInputs = ['cfgIv', 'cfgStop1', 'cfgStop2', 'cfgFloor1', 'cfgFloor2', 'cfgFloor3', 'cfgBrokerage', 'cfgSlippage'];
   liveInputs.forEach(function (id) { document.getElementById(id).addEventListener('input', scheduleRecompute); });
   [cfgRollover, cfgCosts].forEach(function (el) { el.addEventListener('change', scheduleRecompute); });
+  document.querySelectorAll('#pairGrid .pair-chip input').forEach(function (el) { el.addEventListener('change', scheduleRecompute); });
   applyBtn.addEventListener('click', recompute);
   document.getElementById('cfgReset').addEventListener('click', function () {
     updateConfigUI(snap);
@@ -536,6 +555,9 @@
   buildTrades(snap);
   buildCharts(snap);
   buildPositions(snap);
+  if (!window.Chart) {
+    document.querySelectorAll('.chart-png-fallback').forEach(function (el) { el.classList.add('show'); });
+  }
 
 function buildPositions(s) {
     var grid = document.getElementById('positionsGrid');

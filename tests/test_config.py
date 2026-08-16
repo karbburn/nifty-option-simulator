@@ -17,7 +17,14 @@ def test_defaults():
     assert cfg.ladder_stop_pcts == (0.03, 0.05)
     assert cfg.ladder_fill_mode == "observed_close"
     assert cfg.ladder_rollover is False
-    assert cfg.excluded_pairs == {"Fri→Mon"}
+    assert cfg.excluded_pairs == {
+        "Tue→Thu",
+        "Wed→Thu",
+        "Wed→Fri",
+        "Thu→Mon",
+        "Fri→Mon",
+        "Fri→Tue",
+    }
     assert cfg.refresh_provider_order == ("nse", "yfinance")
     assert cfg.validation_mode == "full_sample"
 

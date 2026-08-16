@@ -120,6 +120,9 @@
     }
     .coming-soon-mobile { display: none; background: var(--bg-tertiary); border: 1px solid var(--border); border-radius: var(--radius-md); padding: var(--sp-3) var(--sp-4); font-size: 12px; color: var(--text-secondary); margin-bottom: var(--sp-4); }
     .config-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: var(--sp-4); }
+    .pair-grid { display: flex; flex-wrap: wrap; gap: var(--sp-2); }
+    .pair-chip { display: inline-flex; align-items: center; gap: var(--sp-2); padding: var(--sp-2) var(--sp-3); border: 1px solid var(--border); border-radius: var(--radius-sm); background: var(--bg-primary); font-size: 13px; cursor: pointer; min-height: 44px; }
+    .pair-chip input { min-height: 20px; width: 18px; }
     .cfg-field { display: flex; flex-direction: column; gap: var(--sp-1); }
     .cfg-label { font-size: 12px; color: var(--text-secondary); }
     .stepper { display: flex; align-items: center; gap: 0; }
@@ -150,6 +153,8 @@
     .report-grid figure { margin: 0; }
     .report-grid img { width: 100%; height: auto; border: 1px solid var(--border); border-radius: var(--radius-md); background: #fff; }
     .report-grid figcaption { font-size: 12px; color: var(--text-secondary); text-align: center; margin-top: var(--sp-2); }
+    .chart-png-fallback { display: none; width: 100%; margin-top: var(--sp-4); border: 1px solid var(--border); border-radius: var(--radius-md); background: #fff; }
+    .chart-png-fallback.show { display: block; }
   </style>
 </head>
 <body>
