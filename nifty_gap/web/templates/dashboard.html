@@ -66,7 +66,7 @@
       <button id="cfgApply" class="btn-primary">Recompute</button>
       <button id="cfgReset" class="btn-secondary">Reset</button>
       <button id="cfgRefresh" class="btn-secondary">Refresh data now</button>
-      <span id="cfgStatus" class="cfg-status"></span>
+      <span id="cfgStatus" class="cfg-status" aria-live="polite"></span>
     </div>
   </section>
 
@@ -167,6 +167,7 @@
         </tbody>
       </table>
     </div>
+    <p id="tradesEmpty" class="empty-state" style="display:none;">No trades match the current filters.</p>
     <button id="tradesToggle" class="btn-secondary trades-toggle">Show all {{ snap.trades|length }} trades</button>
   </section>
 </div>
@@ -251,17 +252,23 @@
         '<td>' + t.exit_reason + '</td><td>' + t.days_held + '</td>' +
         '<td class="' + cls + '">' + sign + '\u20B9' + pnl + '</td></tr>';
     }).join('');
-    tradesWrap.classList.add('collapsed');
-    tradesToggle.textContent = 'Show all ' + s.trades.length + ' trades';
+    if (!tradesWrap.classList.contains('collapsed')) {
+      tradesToggle.textContent = 'Show fewer';
+    } else {
+      tradesWrap.classList.add('collapsed');
+      tradesToggle.textContent = 'Show all ' + s.trades.length + ' trades';
+    }
     filterTrades();
   }
 
   function destroyCharts() {
     chartInstances.forEach(function (c) { c.destroy(); });
     chartInstances = [];
+    window.chartInstances = chartInstances;
   }
 
   function buildCharts(s) {
+    if (!window.Chart) return;
     destroyCharts();
     var gridColor = cssVar('--chart-grid') || '#e9ecef';
     var textColor = cssVar('--text-secondary') || '#6c757d';
@@ -362,6 +369,7 @@
     var pnlMax = parseFloat(document.getElementById('filterPnlMax').value);
     var daysMin = parseInt(document.getElementById('filterDaysMin').value, 10);
     var daysMax = parseInt(document.getElementById('filterDaysMax').value, 10);
+    var visible = 0;
     tbody.querySelectorAll('tr').forEach(function (row) {
       var pnl = parseFloat(row.dataset.pnl);
       var days = parseInt(row.dataset.days, 10);
@@ -370,17 +378,27 @@
         (isNaN(pnlMin) || pnl >= pnlMin) && (isNaN(pnlMax) || pnl <= pnlMax) &&
         (isNaN(daysMin) || days >= daysMin) && (isNaN(daysMax) || days <= daysMax);
       row.style.display = show ? '' : 'none';
+      if (show) visible++;
     });
+    document.getElementById('tradesEmpty').style.display = visible ? 'none' : 'block';
+    if (tradesWrap.classList.contains('collapsed')) {
+      tradesToggle.textContent = 'Show all ' + visible + ' trades';
+    }
   }
 
   document.querySelectorAll('#tradesTable th').forEach(function (th) {
-    th.addEventListener('click', function () {
+    th.setAttribute('tabindex', '0');
+    var doSort = function () {
       var col = th.dataset.sort;
       if (!col) return;
       if (currentSort.col === col) { currentSort.dir = currentSort.dir === 'asc' ? 'desc' : 'asc'; }
       else { currentSort = { col: col, dir: 'desc' }; }
       document.querySelectorAll('#tradesTable th').forEach(function (h) { h.setAttribute('aria-sort', h.dataset.sort === currentSort.col ? (currentSort.dir === 'asc' ? 'ascending' : 'descending') : 'none'); });
       sortAndRender();
+    };
+    th.addEventListener('click', doSort);
+    th.addEventListener('keydown', function (e) {
+      if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); doSort(); }
     });
   });
   ['filterPair', 'filterReason', 'filterSide', 'filterDateFrom', 'filterDateTo', 'filterPnlMin', 'filterPnlMax', 'filterDaysMin', 'filterDaysMax'].forEach(function (id) {
@@ -417,45 +435,68 @@
   var tradesToggle = document.getElementById('tradesToggle');
   tradesToggle.addEventListener('click', function () {
     var isCollapsed = tradesWrap.classList.toggle('collapsed');
-    tradesToggle.textContent = isCollapsed ? 'Show all ' + tbody.querySelectorAll('tr').length + ' trades' : 'Show fewer';
+    var visible = tbody.querySelectorAll('tr').length - tbody.querySelectorAll('tr[style*="display: none"]').length;
+    tradesToggle.textContent = isCollapsed ? 'Show all ' + visible + ' trades' : 'Show fewer';
   });
 
   var cfgCosts = document.getElementById('cfgCosts');
   var cfgBrokerage = document.getElementById('cfgBrokerage');
   var cfgSlippage = document.getElementById('cfgSlippage');
+  function setCostFields(enabled) {
+    cfgBrokerage.disabled = !enabled;
+    cfgSlippage.disabled = !enabled;
+    document.querySelectorAll('.config-grid .stepper').forEach(function (st) {
+      var input = st.querySelector('.stepper-input');
+      if (input === cfgBrokerage || input === cfgSlippage) {
+        st.querySelectorAll('.stepper-btn').forEach(function (b) { b.disabled = !enabled; });
+      }
+    });
+  }
   cfgCosts.addEventListener('change', function () {
-    cfgBrokerage.disabled = !cfgCosts.checked;
-    cfgSlippage.disabled = !cfgCosts.checked;
+    setCostFields(cfgCosts.checked);
   });
 
   var applyBtn = document.getElementById('cfgApply');
   var statusEl = document.getElementById('cfgStatus');
   var recomputeSeq = 0;
   var liveTimer = null;
+  var recomputeAbort = null;
   async function recompute() {
     var seq = ++recomputeSeq;
+    if (recomputeAbort) recomputeAbort.abort();
+    recomputeAbort = new AbortController();
     applyBtn.disabled = true;
     statusEl.textContent = 'Running backtest…';
+    var clampNum = function (id) {
+      var el = document.getElementById(id);
+      var v = parseFloat(el.value);
+      if (isNaN(v)) return 0;
+      var mn = el.hasAttribute('min') ? parseFloat(el.min) : -Infinity;
+      var mx = el.hasAttribute('max') ? parseFloat(el.max) : Infinity;
+      return Math.max(mn, Math.min(mx, v));
+    };
     var body = {
-      iv_flat: parseFloat(document.getElementById('cfgIv').value),
-      ladder_stop_pcts: [parseFloat(document.getElementById('cfgStop1').value) / 100, parseFloat(document.getElementById('cfgStop2').value) / 100],
-      ladder_floor_pcts: [parseFloat(document.getElementById('cfgFloor1').value) / 100, parseFloat(document.getElementById('cfgFloor2').value) / 100, parseFloat(document.getElementById('cfgFloor3').value) / 100],
+      iv_flat: clampNum('cfgIv'),
+      ladder_stop_pcts: [clampNum('cfgStop1') / 100, clampNum('cfgStop2') / 100],
+      ladder_floor_pcts: [clampNum('cfgFloor1') / 100, clampNum('cfgFloor2') / 100, clampNum('cfgFloor3') / 100],
       ladder_rollover: document.getElementById('cfgRollover').checked,
-      brokerage_per_trade: cfgCosts.checked ? parseFloat(cfgBrokerage.value) || 0 : 0,
-      slippage_pct: cfgCosts.checked ? (parseFloat(cfgSlippage.value) || 0) / 100 : 0
+      brokerage_per_trade: cfgCosts.checked ? clampNum('cfgBrokerage') : 0,
+      slippage_pct: cfgCosts.checked ? clampNum('cfgSlippage') / 100 : 0
     };
     try {
-      var resp = await fetch('/api/recompute', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body) });
+      var resp = await fetch('/api/recompute', { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify(body), signal: recomputeAbort.signal });
+      if (!resp.ok) throw new Error(resp.status + ' ' + resp.statusText);
       var s = await resp.json();
       if (seq !== recomputeSeq) return;
       snap = s;
       updateKpis(s);
       buildTrades(s);
       buildCharts(s);
+      buildPositions(s);
       updateConfigUI(s);
       statusEl.textContent = 'Done — ' + s.trade_stats.n_trades + ' trades, ' + fmtInr(s.trade_stats.total_pnl);
     } catch (e) {
-      if (seq === recomputeSeq) statusEl.textContent = 'Recompute failed: ' + e;
+      if (seq === recomputeSeq) statusEl.textContent = 'Recompute failed: ' + e.message;
     } finally {
       if (seq === recomputeSeq) applyBtn.disabled = false;
     }
@@ -471,8 +512,7 @@
   document.getElementById('cfgReset').addEventListener('click', function () {
     updateConfigUI(snap);
     cfgCosts.checked = false;
-    cfgBrokerage.disabled = true;
-    cfgSlippage.disabled = true;
+    setCostFields(false);
     statusEl.textContent = '';
   });
 
@@ -495,26 +535,72 @@
   updateKpis(snap);
   buildTrades(snap);
   buildCharts(snap);
+  buildPositions(snap);
 
-  if (window.Chart) {
-    var livePositions = snap.live_positions;
-    livePositions.forEach(function (p, i) {
-      var canvas = document.getElementById('spark-' + i);
-      if (!canvas) return;
-      var color = p.side === 'CE' ? '#2e7d32' : '#c62828';
-      var premiums = [p.entry_premium, p.live_premium];
-      chartInstances.push(new Chart(canvas, {
-        type: 'line',
-        data: { labels: premiums.map(function (_, k) { return k; }), datasets: [{ data: premiums, borderColor: color, backgroundColor: color + '18', borderWidth: 1.5, pointRadius: 2, pointBackgroundColor: color, fill: true, tension: 0.2 }] },
-        options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false } }, scales: { x: { display: false }, y: { display: false } } }
+function buildPositions(s) {
+    var grid = document.getElementById('positionsGrid');
+    var noPos = document.getElementById('noPositions');
+    var positions = s.live_positions || [];
+    if (!positions.length) {
+      if (grid) grid.innerHTML = '';
+      if (noPos) noPos.style.display = '';
+      return;
+    }
+    if (noPos) noPos.style.display = 'none';
+    if (!grid) {
+      var section = document.querySelector('section[aria-label="Live positions"]');
+      grid = document.createElement('div');
+      grid.className = 'positions-grid';
+      grid.id = 'positionsGrid';
+      var empty = section.querySelector('.empty-state');
+      if (empty) section.insertBefore(grid, empty); else section.appendChild(grid);
+    }
+    grid.innerHTML = positions.map(function (p, i) {
+      var sideBadge = p.side === 'CE' ? 'ce' : 'pe';
+      var arrow = p.side === 'CE' ? 'CE \u25B2' : 'PE \u25BC';
+      var pnl = p.live_pnl || 0;
+      var pnlCls = pnl >= 0 ? 'profit' : 'loss';
+      var pnlSign = pnl >= 0 ? '+' : '-';
+      return '<div class="position-card" data-pair="' + p.pair + '" data-side="' + p.side + '">' +
+        '<div class="position-header">' +
+        '<span class="pair-label">' + p.pair + '</span>' +
+        '<span class="side-badge ' + sideBadge + '">' + arrow + '</span>' +
+        '<span class="dte-badge">' + p.days_to_expiry + ' DTE</span>' +
+        '</div>' +
+        '<div class="position-body">' +
+        '<div class="position-stat"><span class="stat-label">Strike</span><span class="stat-value">\u20B9' + p.strike.toLocaleString('en-IN', { maximumFractionDigits: 0 }) + '</span></div>' +
+        '<div class="position-stat"><span class="stat-label">Entry</span><span class="stat-value">\u20B9' + p.entry_premium.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span></div>' +
+        '<div class="position-stat"><span class="stat-label">Live</span><span class="stat-value" data-live-premium="true" data-entry="' + p.entry_premium + '" data-side="' + p.side + '">\u20B9' + p.live_premium.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span></div>' +
+        '<div class="position-stat"><span class="stat-label">P&L</span><span class="stat-value ' + pnlCls + '" data-live-pnl="true">' + pnlSign + '\u20B9' + Math.abs(pnl).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span></div>' +
+        '</div>' +
+        '<div class="position-chart"><canvas id="spark-' + i + '" height="48" aria-label="Premium path for ' + p.pair + '"></canvas></div>' +
+        '<div class="position-footer">' +
+        '<span class="pct-move">' + ((p.pct_move || 0) >= 0 ? '+' : '') + (p.pct_move || 0).toFixed(1) + '% move</span>' +
+        '<span class="banked-floor">Floor: ' + (p.banked_floor == null ? 'none' : p.banked_floor) + '</span>' +
+        '</div>' +
+        '</div>';
+    }).join('');
+    if (window.Chart) {
+      positions.forEach(function (p, i) {
+        var canvas = document.getElementById('spark-' + i);
+        var color = p.side === 'CE' ? '#2e7d32' : '#c62828';
+        var premiums = [p.entry_premium, p.live_premium];
+        chartInstances.push(new Chart(canvas, {
+          type: 'line',
+          data: { labels: premiums.map(function (_, k) { return k; }), datasets: [{ data: premiums, borderColor: color, backgroundColor: color + '18', borderWidth: 1.5, pointRadius: 2, pointBackgroundColor: color, fill: true, tension: 0.2 }] },
+          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false } }, scales: { x: { display: false }, y: { display: false } } }
+        }));
       });
-    });
+    }
   }
 
+  var remarkSeq = 0;
   async function remarkPositions() {
+    var seq = ++remarkSeq;
     try {
       var resp = await fetch('/api/live-positions?spot=' + lastSpot);
       var positions = await resp.json();
+      if (seq !== remarkSeq) return;
       positions.forEach(function (p) {
         var card = document.querySelector('.position-card[data-pair="' + p.pair + '"]');
         if (!card) return;

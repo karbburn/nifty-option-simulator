@@ -57,7 +57,7 @@ def test_dashboard_page():
 def test_dashboard_page_mobile_layout_meta():
     resp = client.get("/")
     assert 'name="viewport"' in resp.text
-    assert 'content="width=device-width, initial-scale=1"' in resp.text
+    assert 'content="width=device-width, initial-scale=1, viewport-fit=cover"' in resp.text
     assert "bottom-nav" in resp.text
     assert "data-tab=" in resp.text
 

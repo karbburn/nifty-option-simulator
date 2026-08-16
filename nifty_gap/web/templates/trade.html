@@ -75,13 +75,14 @@
         { id: 'exitLine', afterDraw: function (chart) {
           var idx = series.findIndex(function (d) { return d.date === exitDate; });
           if (idx < 0) return;
-          var x = chart.scales.x.getPixelForValue(idx);
+          var x = chart.scales.x.getPixelForValue(series[idx].date);
           var ctx = chart.ctx;
           ctx.save(); ctx.strokeStyle = '#c62828'; ctx.lineWidth = 1.5;
           ctx.beginPath(); ctx.moveTo(x, chart.chartArea.top); ctx.lineTo(x, chart.chartArea.bottom); ctx.stroke(); ctx.restore();
         }}
       ]
     });
+    if (window.chartInstances) window.chartInstances.push(premiumChart);
   }
 </script>
 {% endblock %}
