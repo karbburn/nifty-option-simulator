@@ -21,11 +21,13 @@
       </thead>
       <tbody>
         {% for d in snap.oos_data %}
+        {% set p = d.realized_p_up %}
+        {% set ok = p is not none and ((p >= 0.5) if d.side == 'CE' else (p <= 0.5)) %}
         <tr>
           <td>{{ d.weekday_pair }}</td>
           <td>{{ d.side }}</td>
           <td>{{ "{:.1f}".format(d.p_up * 100) }}%</td>
-          <td class="{{ 'pnl-positive' if d.realized_p_up is not none and d.realized_p_up >= 0.5 else 'pnl-negative' }}">{{ "{:.1f}".format(d.realized_p_up * 100) if d.realized_p_up is not none else "—" }}%</td>
+          <td class="{{ 'pnl-positive' if ok else 'pnl-negative' }}">{{ "{:.1f}".format(p * 100) if p is not none else "—" }}%</td>
           <td>{{ "{:.1f}".format(d.realized_ci_low * 100) if d.realized_ci_low is not none else "—" }}%–{{ "{:.1f}".format(d.realized_ci_high * 100) if d.realized_ci_high is not none else "—" }}%</td>
           <td>{{ d.n_in }}</td>
           <td>{{ d.n_oos }}</td>
