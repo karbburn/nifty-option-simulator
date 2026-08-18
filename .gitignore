@@ -3,6 +3,9 @@ __pycache__/
 .pytest_cache/
 .ruff_cache/
 *.egg-info/
-output/
-assets/
-data/nifty50_history.csv
+build/
+assets/icon.png
+output/equity.csv
+output/params.json
+output/stats.json
+output/trades.csv

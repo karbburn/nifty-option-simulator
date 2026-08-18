@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+Disallow: /api/
+Disallow: /trade/
+
+Sitemap: https://nifty-option-sim.onrender.com/sitemap.xml

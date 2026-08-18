@@ -25,8 +25,8 @@
           <td>{{ d.weekday_pair }}</td>
           <td>{{ d.side }}</td>
           <td>{{ "{:.1f}".format(d.p_up * 100) }}%</td>
-          <td class="{{ 'pnl-positive' if (d.realized_p_up or 0) >= 0.5 else 'pnl-negative' }}">{{ "{:.1f}".format((d.realized_p_up or 0) * 100) }}%</td>
-          <td>{{ "{:.1f}".format((d.realized_ci_low or 0) * 100) }}%–{{ "{:.1f}".format((d.realized_ci_high or 0) * 100) }}%</td>
+          <td class="{{ 'pnl-positive' if d.realized_p_up is not none and d.realized_p_up >= 0.5 else 'pnl-negative' }}">{{ "{:.1f}".format(d.realized_p_up * 100) if d.realized_p_up is not none else "—" }}%</td>
+          <td>{{ "{:.1f}".format(d.realized_ci_low * 100) if d.realized_ci_low is not none else "—" }}%–{{ "{:.1f}".format(d.realized_ci_high * 100) if d.realized_ci_high is not none else "—" }}%</td>
           <td>{{ d.n_in }}</td>
           <td>{{ d.n_oos }}</td>
         </tr>

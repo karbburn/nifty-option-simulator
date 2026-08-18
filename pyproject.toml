@@ -23,6 +23,9 @@ web = ["fastapi", "uvicorn[standard]", "jinja2", "httpx"]
 [tool.setuptools.packages.find]
 include = ["nifty_gap*"]
 
+[tool.setuptools.package-data]
+"nifty_gap.web" = ["templates/*.html", "static/*"]
+
 [tool.pytest.ini_options]
 testpaths = ["tests"]
 

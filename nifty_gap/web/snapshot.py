@@ -24,7 +24,7 @@ def _clean(obj):
         return {k: _clean(v) for k, v in obj.items()}
     if isinstance(obj, (list, tuple)):
         return [_clean(v) for v in obj]
-    if isinstance(obj, float) and math.isnan(obj):
+    if isinstance(obj, float) and (math.isnan(obj) or math.isinf(obj)):
         return None
     if isinstance(obj, (pd.Timestamp,)):
         return obj.strftime("%Y-%m-%d")

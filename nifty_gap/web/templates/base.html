@@ -170,7 +170,7 @@
       <button class="theme-toggle" id="themeToggle" aria-label="Toggle dark mode">🌙</button>
       <span class="spot-ticker">
         <span class="spot-label">NIFTY 50</span>
-        <span class="spot-value" id="spotValue">₹{{ "%.2f"|format(spot.spot) }}</span>
+        <span class="spot-value" id="spotValue">₹{{ "%.2f"|format(spot.spot) if spot.spot is not none else "—" }}</span>
         <span class="spot-change" id="spotChange">—</span>
       </span>
       <span class="fresh-badge {{ badge_class }}" title="Last trading date: {{ snap.last_trading_date }}">{{ badge_text }}</span>

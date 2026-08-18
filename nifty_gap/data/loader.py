@@ -74,7 +74,7 @@ def write_history(path, df: pd.DataFrame) -> None:
 
 def seed_history(history_path, seed_path) -> pd.DataFrame | None:
     history = load_history(history_path)
-    if history is not None:
+    if history is not None and not history.empty:
         return history
     if not seed_path.exists():
         return None

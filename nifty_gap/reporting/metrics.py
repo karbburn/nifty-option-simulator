@@ -103,6 +103,15 @@ def pair_stats(trades: pd.DataFrame, table: pd.DataFrame) -> pd.DataFrame:
     return out
 
 
+def _opt_float(v) -> float | None:
+    """Return v as a finite float, or None for NaN/inf/missing."""
+    try:
+        f = float(v)
+    except (TypeError, ValueError):
+        return None
+    return f if math.isfinite(f) else None
+
+
 def oos_summary(oos: pd.DataFrame) -> list[dict]:
     return [
         {
@@ -113,27 +122,36 @@ def oos_summary(oos: pd.DataFrame) -> list[dict]:
             "ci_low": float(r.ci_low),
             "ci_high": float(r.ci_high),
             "n_oos": int(r.n_oos) if pd.notna(r.n_oos) else 0,
-            "realized_p_up": float(r.realized_p_up) if pd.notna(r.realized_p_up) else float("nan"),
-            "realized_ci_low": float(r.realized_ci_low) if pd.notna(r.realized_ci_low) else float("nan"),
-            "realized_ci_high": float(r.realized_ci_high) if pd.notna(r.realized_ci_high) else float("nan"),
+            "realized_p_up": _opt_float(r.realized_p_up),
+            "realized_ci_low": _opt_float(r.realized_ci_low),
+            "realized_ci_high": _opt_float(r.realized_ci_high),
         }
         for _, r in oos.iterrows()
     ]
 
 
+_GIT_SHA: str | None = None
+
+
+def _git_sha() -> str:
+    global _GIT_SHA
+    if _GIT_SHA is None:
+        _GIT_SHA = "unknown"
+        try:
+            proc = subprocess.run(
+                ["git", "rev-parse", "HEAD"], capture_output=True, text=True, timeout=10
+            )
+            if proc.returncode == 0:
+                _GIT_SHA = proc.stdout.strip()
+        except (FileNotFoundError, subprocess.SubprocessError):
+            pass
+    return _GIT_SHA
+
+
 def provenance() -> dict:
-    sha = "unknown"
-    try:
-        proc = subprocess.run(
-            ["git", "rev-parse", "HEAD"], capture_output=True, text=True, timeout=10
-        )
-        if proc.returncode == 0:
-            sha = proc.stdout.strip()
-    except (FileNotFoundError, subprocess.SubprocessError):
-        pass
     return {
         "generated_at": dt.datetime.now(dt.timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
-        "git_sha": sha,
+        "git_sha": _git_sha(),
     }
 
 
