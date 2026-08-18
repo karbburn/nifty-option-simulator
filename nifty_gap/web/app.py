@@ -1,10 +1,8 @@
 """FastAPI app: serves the dashboard HTML pages and JSON API."""
 
 import json
-import html
 import logging
 import threading
-import traceback
 import datetime as dt
 import time
 from contextlib import asynccontextmanager
@@ -117,13 +115,7 @@ app.mount("/charts", StaticFiles(directory=str(OUTPUT_DIR)), name="charts")
 
 @app.exception_handler(Exception)
 async def _unhandled_exception(request: Request, exc: Exception):
-    logger.exception("unhandled error on %s", request.url.path)
-    detail = traceback.format_exc()
-    if request.query_params.get("debug") == "1":
-        return HTMLResponse(
-            "<!DOCTYPE html><html><body><pre>" + html.escape(detail) + "</pre></body></html>",
-            status_code=500,
-        )
+    logger.exception("unhandled error on %s: %s", request.url.path, exc)
     return HTMLResponse("Internal Server Error", status_code=500)
 
 # 60s in-memory spot cache (single user, no Redis)
