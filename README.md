@@ -3,6 +3,7 @@
 [![GitHub](https://img.shields.io/github/stars/karbburn/nifty-option-simulator?style=social)](https://github.com/karbburn/nifty-option-simulator)
 [![Tests](https://img.shields.io/badge/tests-116‑green.svg)](https://github.com/karbburn/nifty-option-simulator)
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
+[![Live](https://img.shields.io/badge/live-nifty--opt--sim.onrender.com-brightgreen)](https://nifty-opt-sim.onrender.com/)
 
 A research/backtesting tool that measures weekday‑pair gap probabilities, converts them to CE/PE trade rules, prices options with Black‑Scholes, manages trades via a GTT‑style premium‑% ladder, and honestly reports results and limitations.
 
@@ -85,6 +86,8 @@ Open `http://localhost:8000/`. Routes:
 | `/health` | Liveness check |
 
 ### Deploy (Render)
+
+**Live:** <https://nifty-opt-sim.onrender.com/> · **Health:** <https://nifty-opt-sim.onrender.com/health>
 
 1. Push `main`; create a Render Web Service from the repo (Python runtime).
 2. Build command: `pip install -e ".[web]"`.
