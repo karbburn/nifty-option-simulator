@@ -270,6 +270,25 @@ def test_methodology_page():
     assert "research" in resp.text.lower()
 
 
+def test_missed_weekday_sessions_is_weekend_immune():
+    import datetime as dt
+
+    from nifty_gap.web.app import _missed_weekday_sessions
+
+    thu = dt.date(2026, 8, 20)
+    fri = dt.date(2026, 8, 21)
+    sat = dt.date(2026, 8, 22)
+    sun = dt.date(2026, 8, 23)
+    mon = dt.date(2026, 8, 24)
+    # Friday-close data stays current all weekend...
+    assert _missed_weekday_sessions(fri, sat) == 0
+    assert _missed_weekday_sessions(fri, sun) == 0
+    assert _missed_weekday_sessions(fri, mon) == 0
+    # ...but a genuinely missed Friday session counts exactly once.
+    assert _missed_weekday_sessions(thu, sat) == 1
+    assert _missed_weekday_sessions(dt.date(2026, 8, 18), sat) == 3
+
+
 def test_dashboard_page_has_config_explorer():
     resp = client.get("/")
     assert "Strategy parameters" in resp.text

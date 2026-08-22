@@ -316,6 +316,20 @@ def api_live_positions(spot: float | None = None) -> list:
     return compute_live_positions(trades, spot)
 
 
+def _missed_weekday_sessions(last: dt.date, today: dt.date) -> int:
+    """Weekday sessions fully elapsed since the last one we hold data for.
+
+    Weekends never count toward staleness: a Friday-close snapshot stays
+    'current' through Sunday regardless of calendar days.
+    """
+    n, d = 0, last + dt.timedelta(days=1)
+    while d < today:
+        if d.weekday() < 5:
+            n += 1
+        d += dt.timedelta(days=1)
+    return n
+
+
 @app.get("/", response_class=HTMLResponse)
 def dashboard(request: Request) -> HTMLResponse:
     snap = _ensure_snapshot()
@@ -323,13 +337,13 @@ def dashboard(request: Request) -> HTMLResponse:
         return _degraded()
     today = dt.date.today()
     last_trading = dt.date.fromisoformat(snap["last_trading_date"])
-    age = (today - last_trading).days
-    if age <= 1:
+    missed = _missed_weekday_sessions(last_trading, today)
+    if missed == 0:
         badge = ("fresh", "Data current")
-    elif age <= 5:
-        badge = ("stale", f"{age}d stale")
+    elif missed <= 4:
+        badge = ("stale", f"{missed} session{'s' if missed > 1 else ''} behind")
     else:
-        badge = ("stale-red", f"{age}d old")
+        badge = ("stale-red", f"{missed} sessions behind")
     ctx = {
         "request": request,
         "snap": snap,
