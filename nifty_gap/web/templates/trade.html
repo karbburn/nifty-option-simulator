@@ -1,25 +1,34 @@
 {% extends "base.html" %}
+{% set MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'] %}
+{% set reason_labels = {'expiry':'Expiry','stop_3':'Stop −3%','stop_5':'Stop −5%','floor_10':'Floor +10%','floor_15':'Floor +15%'} %}
+{% set reason_cls = {'expiry':'rn-expiry','stop_3':'rn-loss','stop_5':'rn-loss','floor_10':'rn-profit','floor_15':'rn-profit'} %}
+{% macro fdate(iso) %}{{ iso[8:10]|int }} {{ MONTHS[iso[5:7]|int - 1] }} {{ iso[2:4] }}{% endmacro %}
 {% block content %}
 
+<p style="margin:0 0 12px;"><a href="/">&larr; All trades</a></p>
+
 <section class="card" aria-label="Trade summary">
-  <h2>Trade — {{ trade.entry_date }}</h2>
-  <p>
-    <strong>{{ trade.pair }}</strong> ·
-    <span class="side-badge {{ 'ce' if trade.side == 'CE' else 'pe' }}">{{ 'CE ▲' if trade.side == 'CE' else 'PE ▼' }}</span> ·
-    Strike ₹{{ "{:,.0f}".format(trade.strike) }} ·
-    {{ trade.entry_date }} → {{ trade.exit_date }} ·
-    {{ trade.days_held }}d held ·
-    Exit: <code>{{ trade.exit_reason }}</code>
-  </p>
-  <p>
-    Entry premium <strong>₹{{ "{:,.2f}".format(trade.entry_premium) }}</strong> →
-    Exit premium <strong>₹{{ "{:,.2f}".format(trade.exit_premium) }}</strong>
-    · P&L <strong class="{{ 'profit' if (trade.pnl or 0) >= 0 else 'loss' }}">{{ "+" if (trade.pnl or 0) >= 0 else "-" }}₹{{ "{:,.2f}".format(trade.pnl|abs) }}</strong>
-  </p>
+  <div class="trade-head">
+    <span class="pair-label" style="font-size:18px;">{{ trade.pair }}</span>
+    <span class="side-badge {{ 'ce' if trade.side == 'CE' else 'pe' }}">{{ trade.side }}</span>
+    <span class="rb {{ reason_cls.get(trade.exit_reason, 'rn-neutral') }}">{{ reason_labels.get(trade.exit_reason, trade.exit_reason.replace('_',' ')) }}</span>
+    <span class="num" style="margin-left:auto;font-size:12.5px;color:var(--text-3);">{{ fdate(trade.entry_date) }} &rarr; {{ fdate(trade.exit_date) }} &middot; {{ trade.days_held }}d held</span>
+  </div>
+  <div class="position-body" style="grid-template-columns:repeat(auto-fit,minmax(130px,1fr));margin-bottom:0;">
+    <div><span class="stat-label">Strike</span><span class="stat-value">₹{{ "{:,.0f}".format(trade.strike) }}</span></div>
+    <div><span class="stat-label">Entry premium</span><span class="stat-value">₹{{ "{:,.2f}".format(trade.entry_premium) }}</span></div>
+    <div><span class="stat-label">Exit premium</span><span class="stat-value">₹{{ "{:,.2f}".format(trade.exit_premium) }}</span></div>
+    <div><span class="stat-label">P&amp;L</span>
+      <span class="stat-value {{ 'profit' if (trade.pnl or 0) >= 0 else 'loss' }}">{{ "+" if (trade.pnl or 0) >= 0 else "−" }}₹{{ "{:,.2f}".format(trade.pnl|abs) }}</span>
+    </div>
+  </div>
 </section>
 
 <section class="card" aria-label="Premium path chart with ladder entry stop and floor levels">
-  <h2>Premium Path</h2>
+  <div class="card-head">
+    <h2>Premium Path</h2>
+    <p class="card-sub">Daily settlement vs ladder levels &middot; dashed vertical marks exit day</p>
+  </div>
   <div class="chart-container"><canvas id="premiumChart"></canvas></div>
 </section>
 
@@ -27,47 +36,72 @@
 
 {% block scripts %}
 <script>
-  if (window.Chart) {
-    var gridColor = cssVar('--chart-grid') || '#e9ecef';
-    var textColor = cssVar('--text-secondary') || '#6c757d';
-    var series = {{ premium_series | tojson }};
-    var entryPremium = {{ trade.entry_premium }};
-    var exitDate = "{{ trade.exit_date }}";
-    var premiumChart = new Chart(document.getElementById('premiumChart'), {
+  var series = {{ premium_series | tojson }};
+  var entryPremium = {{ trade.entry_premium }};
+  var exitDate = "{{ trade.exit_date }}";
+  var pnlPositive = {{ 'true' if (trade.pnl or 0) >= 0 else 'false' }};
+
+  function buildPremiumChart() {
+    if (!window.Chart || !document.getElementById('premiumChart')) return;
+    if (window.__premiumChartInstance) { window.__premiumChartInstance.destroy(); }
+    var TT = {
+      backgroundColor: '#14181d', titleColor: '#e8ebef', bodyColor: '#c6ccd4',
+      borderColor: 'rgba(255,255,255,.09)', borderWidth: 1, padding: 10,
+      cornerRadius: 8, displayColors: false
+    };
+    var lineColor = cssVar('--chart-line') || '#0e5a63';
+    var stopColor = cssVar('--loss') || '#bb3a3a';
+    var floorColor = cssVar('--profit') || '#157347';
+    var pointColors = series.map(function (d) {
+      if (d.date === exitDate) return pnlPositive ? floorColor : stopColor;
+      if (d.date === series[0].date) return lineColor;
+      return 'transparent';
+    });
+    window.__premiumChartInstance = new Chart(document.getElementById('premiumChart'), {
       type: 'line',
       data: {
         labels: series.map(function (d) { return d.date; }),
         datasets: [{
-          label: 'Premium Path',
+          label: 'Premium',
           data: series.map(function (d) { return d.premium; }),
-          borderColor: '#1565c0', backgroundColor: 'rgba(21,101,192,0.08)', borderWidth: 1.8,
-          pointRadius: 3, pointBackgroundColor: series.map(function (d) { return d.date === exitDate ? '#c62828' : '#1565c0'; }),
-          fill: false, tension: 0.15
+          borderColor: lineColor,
+          backgroundColor: cssVar('--accent-soft'),
+          borderWidth: 1.8,
+          pointRadius: series.map(function (d) { return (d.date === exitDate || d.date === series[0].date) ? 4 : 2.5; }),
+          pointBackgroundColor: pointColors,
+          pointBorderColor: pointColors,
+          fill: true, tension: 0.18
         }]
       },
       options: {
         responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { display: false }, tooltip: { callbacks: { label: function (c) { return '\u20B9' + c.parsed.y.toFixed(2); } } } },
-        scales: { x: { grid: { display: false }, ticks: { font: { size: 11 }, color: textColor } }, y: { grid: { color: gridColor }, ticks: { font: { size: 11 }, color: textColor, callback: function (v) { return '\u20B9' + v.toFixed(0); } } } }
+        plugins: {
+          legend: { display: false },
+          tooltip: Object.assign({}, TT, { callbacks: { label: function (c) { return '\u20B9' + c.parsed.y.toFixed(2); } } })
+        },
+        scales: {
+          x: { grid: { display: false }, border: { display: false }, ticks: { font: { family: "'IBM Plex Mono', monospace", size: 10.5, color: cssVar('--text-3') }, maxRotation: 0 } },
+          y: { grid: { color: cssVar('--chart-grid') || '#eae6dc' }, border: { display: false }, ticks: { font: { family: "'IBM Plex Mono', monospace", size: 10.5, color: cssVar('--text-3') }, callback: function (v) { return '\u20B9' + v.toFixed(0); } } }
+        }
       },
       plugins: [
         { id: 'ladderLines', afterDraw: function (chart) {
           var ctx = chart.ctx, ys = chart.scales.y;
           var levels = [
-            { value: entryPremium, color: '#1565c0', label: 'Entry' },
-            { value: entryPremium * 0.97, color: '#c62828', label: '-3% SL' },
-            { value: entryPremium * 0.95, color: '#c62828', label: '-5% SL' },
-            { value: entryPremium * 1.05, color: '#2e7d32', label: '+5% Floor' },
-            { value: entryPremium * 1.10, color: '#2e7d32', label: '+10% Floor' },
-            { value: entryPremium * 1.15, color: '#2e7d32', label: '+15% Target' }
+            { value: entryPremium, color: lineColor, label: 'Entry' },
+            { value: entryPremium * 0.97, color: stopColor, label: '\u22123% SL' },
+            { value: entryPremium * 0.95, color: stopColor, label: '\u22125% SL' },
+            { value: entryPremium * 1.05, color: floorColor, label: '+5% Floor' },
+            { value: entryPremium * 1.10, color: floorColor, label: '+10% Floor' },
+            { value: entryPremium * 1.15, color: floorColor, label: '+15% Target' }
           ];
           ctx.save();
           levels.forEach(function (lv) {
             var y = ys.getPixelForValue(lv.value);
             if (y < chart.chartArea.top || y > chart.chartArea.bottom) return;
-            ctx.strokeStyle = lv.color; ctx.lineWidth = 1; ctx.setLineDash([4, 3]); ctx.globalAlpha = 0.6;
+            ctx.strokeStyle = lv.color; ctx.lineWidth = 1; ctx.setLineDash([4, 3]); ctx.globalAlpha = 0.55;
             ctx.beginPath(); ctx.moveTo(chart.chartArea.left, y); ctx.lineTo(chart.chartArea.right, y); ctx.stroke();
-            ctx.globalAlpha = 1; ctx.fillStyle = lv.color; ctx.font = '10px sans-serif'; ctx.textAlign = 'left';
+            ctx.globalAlpha = 1; ctx.fillStyle = lv.color; ctx.font = '10px "IBM Plex Mono", monospace'; ctx.textAlign = 'left';
             ctx.fillText(lv.label + ' \u20B9' + lv.value.toFixed(0), chart.chartArea.left + 4, y - 3);
           });
           ctx.restore();
@@ -77,12 +111,13 @@
           if (idx < 0) return;
           var x = chart.scales.x.getPixelForValue(series[idx].date);
           var ctx = chart.ctx;
-          ctx.save(); ctx.strokeStyle = '#c62828'; ctx.lineWidth = 1.5;
+          ctx.save(); ctx.strokeStyle = stopColor; ctx.lineWidth = 1.4; ctx.setLineDash([4, 3]); ctx.globalAlpha = 0.8;
           ctx.beginPath(); ctx.moveTo(x, chart.chartArea.top); ctx.lineTo(x, chart.chartArea.bottom); ctx.stroke(); ctx.restore();
         }}
       ]
     });
-    if (window.chartInstances) window.chartInstances.push(premiumChart);
   }
+  buildPremiumChart();
+  window.__onThemeChange = buildPremiumChart;
 </script>
 {% endblock %}
