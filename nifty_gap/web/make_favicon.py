@@ -1,8 +1,8 @@
-"""Generate favicon files from the source icon.
+"""Generate favicon files for Nifty Gap Lab.
 
-Source `assets/icon.png` is gitignored (4.7MB, 2048x2048). Run once and
-commit the small outputs under `nifty_gap/web/static/` so Render deploys
-from git without the source.
+Draws the brand mark directly (petrol tile + white candles, mirroring the
+header logo) so no large source asset is required. Outputs land under
+``nifty_gap/web/static/`` and are committed so Render deploys from git.
 
 Usage: python -m nifty_gap.web.make_favicon
 """
@@ -11,11 +11,11 @@ from __future__ import annotations
 
 from pathlib import Path
 
-from PIL import Image
+from PIL import Image, ImageDraw
 
-ROOT = Path(__file__).resolve().parents[2]
-SRC = ROOT / "assets" / "icon.png"
 OUT = Path(__file__).resolve().parent / "static"
+
+BG = (14, 90, 99, 255)  # --accent petrol (#0e5a63)
 
 SIZES: dict[str, tuple[int, ...]] = {
     "favicon.ico": (16, 32, 48),
@@ -24,17 +24,45 @@ SIZES: dict[str, tuple[int, ...]] = {
 }
 
 
+def brand_mark(size: int) -> Image.Image:
+    """Render the two-candle glyph on a rounded tile at any size."""
+    k = size / 24.0  # design grid: 24x24 like the header SVG
+    img = Image.new("RGBA", (size, size), (0, 0, 0, 0))
+    d = ImageDraw.Draw(img)
+    radius = max(2, int(5.5 * k))
+    d.rounded_rectangle([0, 0, size - 1, size - 1], radius=radius, fill=BG)
+
+    def wick(x: float, y0: float, y1: float, alpha: int = 255) -> None:
+        d.line(
+            [(round(x * k), round(y0 * k)), (round(x * k), round(y1 * k))],
+            fill=(255, 255, 255, alpha),
+            width=max(1, round(1.8 * k)),
+        )
+
+    def body(x0: float, y0: float, x1: float, y1: float, alpha: int = 255) -> None:
+        d.rounded_rectangle(
+            [round(x0 * k), round(y0 * k), round(x1 * k), round(y1 * k)],
+            radius=max(1, int(1.2 * k)),
+            fill=(255, 255, 255, alpha),
+        )
+
+    # left candle (lower), right candle (higher, dimmed) — same as header mark
+    wick(9, 4.5, 19.5)
+    body(6, 9, 12, 16)
+    wick(17, 3, 21, 150)
+    body(14, 6, 20, 14, 150)
+    return img
+
+
 def main() -> None:
-    if not SRC.exists():
-        raise SystemExit(f"source icon not found: {SRC}")
-    img = Image.open(SRC).convert("RGBA")
     OUT.mkdir(parents=True, exist_ok=True)
     for name, sizes in SIZES.items():
         if name.endswith(".ico"):
-            img.save(OUT / name, sizes=[(s, s) for s in sizes])
+            master = brand_mark(max(sizes))
+            master.save(OUT / name, sizes=[(s, s) for s in sizes])
         else:
             (s,) = sizes
-            img.resize((s, s), Image.LANCZOS).save(OUT / name)
+            brand_mark(s).save(OUT / name)
     for f in sorted(OUT.iterdir()):
         print(f"{f.name}: {f.stat().st_size} bytes")
 
