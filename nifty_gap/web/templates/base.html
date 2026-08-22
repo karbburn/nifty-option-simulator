@@ -371,11 +371,27 @@
           window.chartInstances.forEach(function (c) { if (c && c.resize) c.resize(); });
         }
       };
+      var TABS = ['live', 'trades', 'charts', 'config', 'expiry'];
+      var isHome = function () { return window.location.pathname === '/'; };
+      var openConfigPanel = function () {
+        var box = document.getElementById('configBox');
+        if (box) box.open = true;
+      };
       window.addEventListener('resize', function () { if (window.location.pathname === '/') applyTab(currentTab); });
       tabButtons.forEach(function (btn) {
-        btn.addEventListener('click', function () { applyTab(btn.dataset.tab); });
+        btn.addEventListener('click', function () {
+          var t = btn.dataset.tab;
+          // Off the dashboard there are no tab panels — navigate to it instead.
+          if (!isHome()) { window.location.href = '/#tab-' + t; return; }
+          applyTab(t);
+          if (t === 'config') openConfigPanel();
+        });
       });
-      if (window.location.pathname === '/') applyTab('live');
+      if (isHome()) {
+        var h = (location.hash || '').replace('#tab-', '');
+        applyTab(TABS.indexOf(h) > -1 ? h : 'live');
+        if (h === 'config') openConfigPanel();
+      }
     });
 
     var lastSpot = {{ spot.spot }};
