@@ -135,7 +135,7 @@ The suite covers signal computation, Black–Scholes pricing (parity, intrinsic�
 1. **Sample size**: ~245 pairs across 5 buckets ⇒ noisy `p_up` estimates
 2. **Flat 12.5% IV** is not a market price; real premiums reflect skew, term structure, and supply–demand
 3. **Costs omitted** (slippage, brokerage, STT, bid–ask spread) make backtest results an upper bound
-4. **Data sourcing** is best‑effort: NSE APIs sit behind Akamai Bot Manager; yfinance is the reliable nightly provider
+4. **Data sourcing** is best-effort: nightly refresh runs on Yahoo Finance (`^NSEI`, validated against official NSE reports for overlapping dates). Direct NSE fetching is opt-in via `REFRESH_PROVIDER_ORDER=nse,yfinance` and typically blocked by Akamai Bot Manager from server IPs.
 5. **No live/paper components**: no broker API, no real orders, no stakes
 
 ---
