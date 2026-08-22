@@ -4,7 +4,8 @@ __pycache__/
 .ruff_cache/
 *.egg-info/
 build/
-assets/icon.png
+assets/
+temp_results/
 output/equity.csv
 output/params.json
 output/stats.json
