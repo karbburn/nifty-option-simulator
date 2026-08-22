@@ -3,6 +3,9 @@ name: refresh-data
 on:
   schedule:
     - cron: "30 11 * * 1-5"
+    # Same-evening catch-up: yfinance sometimes publishes the daily candle
+    # well after the 11:30 UTC run, leaving data a session short all weekend.
+    - cron: "5 13 * * 1-5"
   workflow_dispatch:
 
 permissions:
