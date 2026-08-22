@@ -5,7 +5,7 @@
 [![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
 [![Live](https://img.shields.io/badge/live-nifty--opt--sim.onrender.com-brightgreen)](https://nifty-opt-sim.onrender.com/)
 
-A research and backtesting tool for NIFTY 50 that measures weekday‑pair gap probabilities, converts them into CE/PE trade rules, prices options with Black–Scholes, manages trades through a GTT‑style premium‑percentage exit ladder, and reports results — including their limitations — honestly.
+A research and backtesting tool for NIFTY 50 that measures weekday‑pair gap probabilities, converts them into CE/PE trade rules, prices options with Black–Scholes, manages trades through a GTT‑style premium‑percentage exit ladder, and reports results , including their limitations, honestly.
 
 **This is not a live trading system.** No broker API, no real orders, no capital at risk.
 
@@ -15,13 +15,13 @@ A research and backtesting tool for NIFTY 50 that measures weekday‑pair gap pr
 
 ## Features
 
-- **Gap‑probability research** — per‑weekday‑pair probability of an up‑open, with Wilson 95% confidence intervals and minimum‑sample guards
-- **Rule generation** — each pair maps to a long ATM Call (bullish edge) or Put (bearish edge) at the nearest ₹50 strike
-- **Black–Scholes pricing** — flat implied volatility, with an IV sweep mode for sensitivity analysis
-- **GTT‑style exit ladder** — ratcheting stop/floor levels on the option premium's own % move, plus forced exit at weekly expiry
-- **Benchmark comparison** — ladder strategy vs. hold‑to‑expiry baseline to isolate what the exit logic adds or costs
-- **In‑sample vs. out‑of‑sample diagnostics** — realised OOS win rates against IS probabilities
-- **Interactive web dashboard** — KPIs, live position re‑marking, trade explorer, equity curve, and a config explorer that recomputes the backtest on parameter changes
+- **Gap‑probability research**: per‑weekday‑pair probability of an up‑open, with Wilson 95% confidence intervals and minimum‑sample guards
+- **Rule generation**: each pair maps to a long ATM Call (bullish edge) or Put (bearish edge) at the nearest ₹50 strike
+- **Black–Scholes pricing**: flat implied volatility, with an IV sweep mode for sensitivity analysis
+- **GTT‑style exit ladder**: ratcheting stop/floor levels on the option premium's own % move, plus forced exit at weekly expiry
+- **Benchmark comparison**: ladder strategy vs. hold‑to‑expiry baseline to isolate what the exit logic adds or costs
+- **In‑sample vs. out‑of‑sample diagnostics**: realised OOS win rates against IS probabilities
+- **Interactive web dashboard**: KPIs, live position re‑marking, trade explorer, equity curve, and a config explorer that recomputes the backtest on parameter changes
 
 ---
 
@@ -53,7 +53,7 @@ git clone https://github.com/karbburn/nifty-option-simulator.git
 cd nifty-option-simulator
 python -m pip install -e .
 
-# 2. (Optional) Refresh daily data — exits 0 even if NSE APIs are unavailable
+# 2. (Optional) Refresh daily data (exits 0 even if NSE APIs are unavailable)
 python -m nifty_gap.data.refresh
 
 # 3. Run the full pipeline
@@ -79,7 +79,7 @@ uvicorn nifty_gap.web.app:app --host 0.0.0.0 --port 8000
 
 | Route | Method | Purpose |
 |---|---|---|
-| `/` | GET | Dashboard — KPIs, live positions, trades table, equity curve, config explorer |
+| `/` | GET | Dashboard: KPIs, live positions, trades table, equity curve, config explorer |
 | `/trade/{entry_date}` | GET | Per‑trade premium path chart with ladder stop/floor lines |
 | `/expiry` | GET | Expiry weekday explainer with IS vs. OOS table |
 | `/health` | GET | Liveness check |
@@ -99,9 +99,9 @@ The service deploys from `main` via the repository blueprint (`render.yaml`):
 
 1. Push `main`; create a Render Web Service from the repo (Python runtime).
 2. Build command: `pip install -e ".[web]"`.
-3. Start command: `uvicorn nifty_gap.web.app:app --host 0.0.0.0 --port $PORT` (Render injects `$PORT` — do not hardcode).
+3. Start command: `uvicorn nifty_gap.web.app:app --host 0.0.0.0 --port $PORT` (Render injects `$PORT` ; do not hardcode).
 4. Optional: external cron ping (e.g. UptimeRobot) to `/health` every 5 minutes keeps the free tier awake.
-5. A scheduled GitHub Action refreshes history and regenerates `output/dashboard.json` + PNGs on weekdays, committing the results — Render auto‑deploys on push. Committed snapshots mean the app boots instantly without regenerating on startup. No environment variables or secrets required.
+5. A scheduled GitHub Action refreshes history and regenerates `output/dashboard.json` + PNGs on weekdays, committing the results; Render auto‑deploys on push. Committed snapshots mean the app boots instantly without regenerating on startup. No environment variables or secrets required.
 
 Embedding: the app sets `Content-Security-Policy: frame-ancestors 'self' https://sourabh08.vercel.app`, so the dashboard can be framed from the portfolio site while remaining protected elsewhere.
 
@@ -137,17 +137,17 @@ The suite covers signal computation, Black–Scholes pricing (parity, intrinsic�
 
 ## Limitations (abridged)
 
-1. **Sample size** — ~245 pairs across 5 buckets ⇒ noisy `p_up` estimates
+1. **Sample size**: ~245 pairs across 5 buckets ⇒ noisy `p_up` estimates
 2. **Flat 12.5% IV** is not a market price; real premiums reflect skew, term structure, and supply–demand
 3. **Costs omitted** (slippage, brokerage, STT, bid–ask spread) make backtest results an upper bound
 4. **Data sourcing** is best‑effort: NSE APIs sit behind Akamai Bot Manager; yfinance is the reliable nightly provider
-5. **No live/paper components** — no broker API, no real orders, no stakes
+5. **No live/paper components**: no broker API, no real orders, no stakes
 
 ---
 
 ## Disclaimer
 
-This project is published for educational and research purposes only. Nothing here constitutes investment advice, a recommendation, or an offer to transact. Options trading involves substantial risk of loss. Past performance — simulated or real — does not guarantee future results.
+This project is published for educational and research purposes only. Nothing here constitutes investment advice, a recommendation, or an offer to transact. Options trading involves substantial risk of loss. Past performance (simulated or real) does not guarantee future results.
 
 ---
 
