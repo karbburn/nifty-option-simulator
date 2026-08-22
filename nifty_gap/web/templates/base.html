@@ -236,6 +236,26 @@
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { animation:none !important; transition:none !important; }
     }
+
+    /* ---------- recompute feedback ---------- */
+    .kpi-card, .chart-container, #tradesWrap { transition:opacity .2s ease; }
+    body.computing .kpi-card, body.computing .chart-container, body.computing #tradesWrap { opacity:.5; pointer-events:none; }
+
+    /* ---------- toasts ---------- */
+    .toast-wrap { position:fixed; right:20px; bottom:20px; z-index:60; display:flex; flex-direction:column; gap:8px; align-items:flex-end; }
+    .toast { display:flex; align-items:center; gap:10px; background:#14181d; color:#e8ebef; border:1px solid rgba(255,255,255,.09);
+      border-radius:10px; padding:11px 16px; font-size:13px; box-shadow:0 8px 24px rgba(0,0,0,.28); animation:toastIn .18s ease;
+      max-width:min(440px, calc(100vw - 40px)); cursor:default; }
+    .t-dot { width:7px; height:7px; border-radius:50%; flex:none; background:var(--accent); }
+    .toast.busy { cursor:progress; }
+    .toast.busy .t-dot { background:#e8b64c; animation:pulse 1s ease infinite; }
+    .toast.success .t-dot { background:#46b881; }
+    .toast.error .t-dot { background:#e06d64; }
+    @keyframes toastIn { from { opacity:0; transform:translateY(6px); } to { opacity:1; transform:none; } }
+    @keyframes pulse { 50% { opacity:.3; } }
+    @media (max-width:767px) {
+      .toast-wrap { left:12px; right:12px; bottom:calc(72px + env(safe-area-inset-bottom)); align-items:stretch; }
+    }
   </style>
 </head>
 <body>
@@ -253,6 +273,7 @@
       <nav class="nav" aria-label="Primary">
         <a href="/" class="{{ 'active' if request.url.path == '/' else '' }}">Dashboard</a>
         <a href="/expiry" class="{{ 'active' if request.url.path == '/expiry' else '' }}">Expiry</a>
+        <a href="/methodology" class="{{ 'active' if request.url.path == '/methodology' else '' }}">Methodology</a>
       </nav>
     </div>
     <div class="header-right">
@@ -283,10 +304,38 @@
     <span>{{ snap.git_sha[:7] }} · generated {{ snap.generated_at }} · by <a href="https://sourabh08.vercel.app/" target="_blank" rel="noopener noreferrer">Sourabh</a></span>
   </footer>
 
+  <div class="toast-wrap" id="toastWrap" aria-live="polite"></div>
+
   <script>
     function cssVar(name) {
       return getComputedStyle(document.documentElement).getPropertyValue(name).trim();
     }
+    window.showToast = function (msg, kind, opts) {
+      opts = opts || {};
+      var wrap = document.getElementById('toastWrap');
+      if (!wrap) return null;
+      if (kind === 'busy' && window.__busyToast && document.body.contains(window.__busyToast)) {
+        window.__busyToast.querySelector('.t-msg').textContent = msg;
+        return window.__busyToast;
+      }
+      var el = document.createElement('div');
+      el.className = 'toast ' + (kind || '');
+      el.innerHTML = '<span class="t-dot"></span><span class="t-msg">' + msg + '</span>';
+      wrap.appendChild(el);
+      if (kind === 'busy') {
+        window.__busyToast = el;
+      } else if (opts.sticky) {
+        el.style.cursor = 'pointer';
+        el.title = 'Dismiss';
+        el.addEventListener('click', function () { el.remove(); });
+      } else {
+        setTimeout(function () { el.remove(); }, opts.ms || 4000);
+      }
+      return el;
+    };
+    window.clearBusyToast = function () {
+      if (window.__busyToast) { window.__busyToast.remove(); window.__busyToast = null; }
+    };
 
     var ICON_SUN = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/></svg>';
     var ICON_MOON = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>';

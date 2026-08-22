@@ -263,6 +263,13 @@ def test_report_charts_served():
         assert resp.headers["content-type"].startswith("image/")
 
 
+def test_methodology_page():
+    resp = client.get("/methodology")
+    assert resp.status_code == 200
+    assert "The daily rulebook" in resp.text
+    assert "research" in resp.text.lower()
+
+
 def test_dashboard_page_has_config_explorer():
     resp = client.get("/")
     assert "Strategy parameters" in resp.text

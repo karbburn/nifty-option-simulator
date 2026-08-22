@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+{% block content %}
+
+<section class="card">
+  <div class="card-head">
+    <h2>What this is</h2>
+    <p class="card-sub">A transparent research project &mdash; every number here is reproducible from public data</p>
+  </div>
+  <p style="margin:12px 0 0;">Nifty Gap Lab studies a single, simple question about NIFTY&nbsp;50: <strong>when the index
+    closes on one weekday and opens on the next, how often does it gap up?</strong> It turns that measured tendency into a
+    mechanical options rulebook, replays it day-by-day across a year of history, and shows you everything &mdash; the wins,
+    the losses, and the places where the evidence is too thin to trust.</p>
+  <p style="margin:10px 0 0;color:var(--text-2);">It is a research notebook, not a trading system. There is no broker
+    connection, no live orders, and no advice. The point is to show the full anatomy of a backtest &mdash; honestly.</p>
+</section>
+
+<section class="card">
+  <div class="card-head">
+    <h2>The daily rulebook</h2>
+    <p class="card-sub">The strategy runs the same four checks on every eligible trading day</p>
+  </div>
+  <div style="display:grid;gap:14px;margin-top:14px;">
+    <div style="display:flex;gap:12px;"><span class="num" style="color:var(--accent);font-weight:600;">01</span>
+      <p style="margin:0;"><strong>Measure the gap.</strong> For each weekday pair (Mon&rarr;Tue, Tue&rarr;Wed, Wed&rarr;Thu, Thu&rarr;Fri),
+      count how often the index opened higher than the previous close over the sample. Pairs with fewer than five
+      observations are flagged as untradeable rather than silently used.</p></div>
+    <div style="display:flex;gap:12px;"><span class="num" style="color:var(--accent);font-weight:600;">02</span>
+      <p style="margin:0;"><strong>Pick a side.</strong> If a pair's gap-up probability beats 50%, the rule buys an ATM Call
+      (CE) the next evening; below 50%, it buys an ATM Put (PE). Strike rounds to the nearest ₹50.</p></div>
+    <div style="display:flex;gap:12px;"><span class="num" style="color:var(--accent);font-weight:600;">03</span>
+      <p style="margin:0;"><strong>Price it.</strong> Entry premium comes from Black&ndash;Scholes at a flat 12.5% implied
+      volatility. That is deliberately simplistic &mdash; real option prices carry skew and demand pressure &mdash; but it keeps
+      the experiment interpretable.</p></div>
+    <div style="display:flex;gap:12px;"><span class="num" style="color:var(--accent);font-weight:600;">04</span>
+      <p style="margin:0;"><strong>Manage the exit.</strong> Every position lives on the ratcheting premium ladder below,
+      or expires at the next weekly expiry, whichever arrives first.</p></div>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head">
+    <h2>The exit ladder</h2>
+    <p class="card-sub">Exits key off the option premium's own percentage move, not the index level</p>
+  </div>
+  <div style="display:flex;flex-wrap:wrap;gap:8px;margin:14px 0 12px;">
+    <span class="rb rn-loss">Stop &minus;3%</span>
+    <span class="rb rn-loss">Stop &minus;5%</span>
+    <span class="rb rn-profit">Floor +5%</span>
+    <span class="rb rn-profit">Floor +10%</span>
+    <span class="rb rn-profit">Floor +15%</span>
+    <span class="rb rn-expiry">Expiry</span>
+  </div>
+  <p style="margin:0;">Losses cascade: breach &minus;3% and you are out if it touches &minus;5%. Gains ratchet upward: once
+  premium banks +5%, that becomes the new floor &mdash; reach +10% and the floor climbs again. If price falls back through the
+  highest banked floor, the trade exits with the profit locked. Nothing is discretionary; the ladder either fires or the
+  contract expires.</p>
+</section>
+
+<section class="card">
+  <div class="card-head">
+    <h2>Reading the numbers</h2>
+    <p class="card-sub">Why the headline stats look the way they do</p>
+  </div>
+  <div style="display:grid;gap:12px;margin-top:12px;">
+    <p style="margin:0;"><strong>A ~26% win rate is not a typo.</strong> Most trades die quickly at the tight &minus;5% stop.
+    The strategy stays afloat because winners run to expiry and occasionally land multiples &mdash; the payoff distribution is
+    deliberately asymmetric, so average loss and average win sizes matter more than hit rate.</p>
+    <p style="margin:0;"><strong>In-sample vs out-of-sample.</strong> Probabilities are fitted on the first part of history
+    and scored on the rest. The Gap Probabilities chart draws both with 95% confidence intervals &mdash; when the bars overlap
+    the coin-flip line, the honest read is "no reliable edge", not a trading signal.</p>
+    <p style="margin:0;"><strong>The benchmark line exists for accountability.</strong> Hold-to-expiry is what you get with
+    no exit skill at all. The ladder must beat it to justify its complexity &mdash; check the Benchmark chart before trusting
+    the equity curve.</p>
+  </div>
+</section>
+
+<section class="card">
+  <div class="card-head">
+    <h2>Try it yourself</h2>
+    <p class="card-sub">The Params tab re-runs the whole backtest in your browser session</p>
+  </div>
+  <p style="margin:12px 0 0;">Change the IV assumption, widen the stops, drop weak pairs, or switch on cost modelling
+  (brokerage + slippage) and watch every table and chart recompute live. Nothing you change is saved server-side &mdash;
+  refresh returns you to the published baseline.</p>
+</section>
+
+<section class="card">
+  <div class="card-head">
+    <h2>Known limitations</h2>
+    <p class="card-sub">The parts a brochure would leave out</p>
+  </div>
+  <ul style="margin:12px 0 0;padding-left:18px;display:grid;gap:8px;">
+    <li>Roughly 245 pair observations across five buckets &mdash; the probability estimates are noisy by construction.</li>
+    <li>Flat IV is not a market price; real premiums reflect skew, term structure, and order-flow pressure.</li>
+    <li>Baseline results exclude brokerage, STT, and slippage &mdash; treat them as a ceiling, not a forecast. Cost modelling is one checkbox away.</li>
+    <li>Data comes from yfinance (delayed, best-effort). NSE's own APIs sit behind aggressive bot protection.</li>
+    <li>Simulated fills assume you get the modelled price. Real fills at stops can be worse.</li>
+  </ul>
+</section>
+
+{% endblock %}

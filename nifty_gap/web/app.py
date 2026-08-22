@@ -325,11 +325,11 @@ def dashboard(request: Request) -> HTMLResponse:
     last_trading = dt.date.fromisoformat(snap["last_trading_date"])
     age = (today - last_trading).days
     if age <= 1:
-        badge = ("fresh", "● Data current")
+        badge = ("fresh", "Data current")
     elif age <= 5:
-        badge = ("stale", f"● {age}d stale")
+        badge = ("stale", f"{age}d stale")
     else:
-        badge = ("stale-red", f"● {age}d old")
+        badge = ("stale-red", f"{age}d old")
     ctx = {
         "request": request,
         "snap": snap,
@@ -361,3 +361,12 @@ def expiry(request: Request) -> HTMLResponse:
         return _degraded()
     ctx = {"request": request, "snap": snap, "spot": _fetch_spot()}
     return templates.TemplateResponse("expiry.html", ctx)
+
+
+@app.get("/methodology", response_class=HTMLResponse)
+def methodology(request: Request) -> HTMLResponse:
+    snap = _ensure_snapshot()
+    if not snap:
+        return _degraded()
+    ctx = {"request": request, "snap": snap, "spot": _fetch_spot()}
+    return templates.TemplateResponse("methodology.html", ctx)

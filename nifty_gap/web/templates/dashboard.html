@@ -2,6 +2,7 @@
 {% block content %}
 
 <div class="tab-panel" id="tab-live">
+  <p style="margin:-6px 0 14px;font-size:12.5px;color:var(--text-3);">First look? <a href="/methodology">How this strategy works</a></p>
   <div class="kpi-row">
     <div class="kpi-card">
       <span class="kpi-label">Total P&amp;L</span>
@@ -620,6 +621,12 @@
   var liveTimer = null;
   var recomputeAbort = null;
 
+  var busyCount = 0;
+  function setComputing(on) {
+    busyCount = Math.max(0, busyCount + (on ? 1 : -1));
+    document.body.classList.toggle('computing', busyCount > 0);
+  }
+
   function setDirty(on) {
     var hint = document.getElementById('cfgDirtyHint');
     if (hint) hint.hidden = !on;
@@ -632,6 +639,8 @@
     recomputeAbort = new AbortController();
     applyBtn.disabled = true;
     applyBtn.classList.add('btn-busy');
+    setComputing(true);
+    showToast('Re-running backtest\u2026', 'busy');
     statusEl.textContent = 'Running backtest\u2026';
     var clampNum = function (id) {
       var el = document.getElementById(id);
@@ -664,11 +673,18 @@
       buildCharts(s);
       buildPositions(s);
       updateConfigUI(s);
+      clearBusyToast();
+      showToast('Done \u2014 ' + s.trade_stats.n_trades + ' trades \u00B7 ' + fmtInrShort(s.trade_stats.total_pnl), 'success', { ms: 3500 });
       statusEl.textContent = 'Done \u2014 ' + s.trade_stats.n_trades + ' trades, ' + fmtInrShort(s.trade_stats.total_pnl);
     } catch (e) {
-      if (seq === recomputeSeq) statusEl.textContent = 'Recompute failed: ' + e.message;
+      if (seq === recomputeSeq) {
+        clearBusyToast();
+        showToast('Recompute failed: ' + e.message, 'error', { sticky: true });
+        statusEl.textContent = 'Recompute failed: ' + e.message;
+      }
     } finally {
       if (seq === recomputeSeq) { applyBtn.disabled = false; applyBtn.classList.remove('btn-busy'); }
+      setComputing(false);
     }
   }
   function scheduleRecompute() {
