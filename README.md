@@ -1,10 +1,5 @@
 # NIFTY Weekday‑Gap Options Simulator
 
-[![GitHub](https://img.shields.io/github/stars/karbburn/nifty-option-simulator?style=social)](https://github.com/karbburn/nifty-option-simulator)
-[![Tests](https://img.shields.io/badge/tests-155-green.svg)](https://github.com/karbburn/nifty-option-simulator/actions)
-[![Python](https://img.shields.io/badge/python-3.10+-blue.svg)](https://www.python.org/)
-[![Live](https://img.shields.io/badge/live-nifty--opt--sim.onrender.com-brightgreen)](https://nifty-opt-sim.onrender.com/)
-
 A research and backtesting tool for NIFTY 50 that measures weekday‑pair gap probabilities, converts them into CE/PE trade rules, prices options with Black–Scholes, manages trades through a GTT‑style premium‑percentage exit ladder, and reports results , including their limitations, honestly.
 
 **This is not a live trading system.** No broker API, no real orders, no capital at risk.
