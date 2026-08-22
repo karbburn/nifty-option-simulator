@@ -118,6 +118,19 @@ async def _unhandled_exception(request: Request, exc: Exception):
     logger.exception("unhandled error on %s: %s", request.url.path, exc)
     return HTMLResponse("Internal Server Error", status_code=500)
 
+
+# Embedding allow-list: same origin + the portfolio site. Modern browsers use
+# CSP frame-ancestors; X-Frame-Options is omitted because it has no supported
+# cross-origin allow-list syntax (ALLOW-FROM was never standardised).
+_FRAME_ANCESTORS = "'self' https://sourabh08.vercel.app"
+
+
+@app.middleware("http")
+async def _set_frame_ancestors(request: Request, call_next):
+    response = await call_next(request)
+    response.headers["Content-Security-Policy"] = f"frame-ancestors {_FRAME_ANCESTORS}"
+    return response
+
 # 60s in-memory spot cache (single user, no Redis)
 _spot_cache: dict = {"value": None, "ts": 0.0}
 _SPOT_CACHE_TTL = 60
