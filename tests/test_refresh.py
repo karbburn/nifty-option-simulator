@@ -104,7 +104,7 @@ def test_run_refresh_appends_new_row_and_writes(tmp_path, monkeypatch):
     monkeypatch.setattr(refresh, "seed_history", fake_seed)
     monkeypatch.setattr(refresh, "fetch_nse", lambda f, t: _frame(["2026-08-17"]))
     hp = tmp_path / "history.csv"
-    result = refresh.run_refresh(hp, tmp_path / "seed.csv", to_date=dt.date(2026, 8, 17))
+    result = refresh.run_refresh(hp, tmp_path / "seed.csv", to_date=dt.date(2026, 8, 17), provider_order=("nse", "yfinance"))
     assert result["status"] == "ok"
     assert result["provider"] == "nse"
     assert result["rows_added"] == 1
@@ -121,10 +121,34 @@ def test_run_refresh_falls_back_to_yfinance(tmp_path, monkeypatch):
     monkeypatch.setattr(refresh, "fetch_nse", lambda f, t: None)
     monkeypatch.setattr(refresh, "fetch_yfinance", lambda f, t: _frame(["2026-08-17", "2026-08-18"], source="yfinance"))
     hp = tmp_path / "history.csv"
-    result = refresh.run_refresh(hp, tmp_path / "seed.csv", to_date=dt.date(2026, 8, 18))
+    result = refresh.run_refresh(hp, tmp_path / "seed.csv", to_date=dt.date(2026, 8, 18), provider_order=("nse", "yfinance"))
     assert result["status"] == "ok"
     assert result["provider"] == "yfinance"
     assert result["rows_added"] == 2
+
+
+def test_run_refresh_defaults_to_yfinance_only(tmp_path, monkeypatch):
+    """Without an explicit order (or env override), NSE is never dialled."""
+    def _no_nse(f, t):
+        raise AssertionError("fetch_nse must not run under the default order")
+
+    monkeypatch.setattr(refresh, "seed_history", lambda hp, sp: _frame(BASE_DATES))
+    monkeypatch.setattr(refresh, "fetch_nse", _no_nse)
+    monkeypatch.setattr(refresh, "fetch_yfinance", lambda f, t: _frame(["2026-08-17"], source="yfinance"))
+    hp = tmp_path / "history.csv"
+    result = refresh.run_refresh(hp, tmp_path / "seed.csv", to_date=dt.date(2026, 8, 17))
+    assert result["status"] == "ok"
+    assert result["provider"] == "yfinance"
+
+
+def test_run_refresh_env_overrides_provider_order(tmp_path, monkeypatch):
+    monkeypatch.setenv("REFRESH_PROVIDER_ORDER", "nse,yfinance")
+    monkeypatch.setattr(refresh, "seed_history", lambda hp, sp: _frame(BASE_DATES))
+    monkeypatch.setattr(refresh, "fetch_nse", lambda f, t: _frame(["2026-08-17"]))
+    monkeypatch.setattr(refresh, "fetch_yfinance", lambda f, t: _frame([], source="yfinance"))
+    hp = tmp_path / "history.csv"
+    result = refresh.run_refresh(hp, tmp_path / "seed.csv", to_date=dt.date(2026, 8, 17))
+    assert result["provider"] == "nse"
 
 
 def test_run_refresh_warns_when_all_providers_fail(tmp_path, monkeypatch):
@@ -132,7 +156,7 @@ def test_run_refresh_warns_when_all_providers_fail(tmp_path, monkeypatch):
     monkeypatch.setattr(refresh, "fetch_nse", lambda f, t: None)
     monkeypatch.setattr(refresh, "fetch_yfinance", lambda f, t: _frame([], source="yfinance"))
     hp = tmp_path / "history.csv"
-    result = refresh.run_refresh(hp, tmp_path / "seed.csv", to_date=dt.date(2026, 8, 17))
+    result = refresh.run_refresh(hp, tmp_path / "seed.csv", to_date=dt.date(2026, 8, 17), provider_order=("nse", "yfinance"))
     assert result["status"] == "warn"
     assert result["rows_added"] == 0
     assert result["provider"] is None
@@ -233,6 +257,7 @@ def test_fetch_nse_returns_data_on_200(monkeypatch):
 
 
 def test_fetch_nse_returns_none_on_503(monkeypatch):
+    monkeypatch.setattr(refresh, "_NSE_RETRY_SLEEP", 0)
     fake = _FakeSession(_FakeResponse(200), _FakeResponse(503))
     monkeypatch.setattr(refresh, "_nse_session", lambda timeout=20: fake)
     assert refresh.fetch_nse(dt.date(2026, 8, 13), dt.date(2026, 8, 14)) is None

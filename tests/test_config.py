@@ -25,7 +25,7 @@ def test_defaults():
         "Fri→Mon",
         "Fri→Tue",
     }
-    assert cfg.refresh_provider_order == ("nse", "yfinance")
+    assert cfg.refresh_provider_order == ("yfinance",)
     assert cfg.validation_mode == "full_sample"
 
 

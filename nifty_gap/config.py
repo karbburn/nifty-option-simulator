@@ -30,7 +30,7 @@ class Config:
     )
     data_path: Path = PROJECT_ROOT / "assets" / "NIFTY 50-14-08-2025-to-14-08-2026.csv"
     data_history_path: Path = PROJECT_ROOT / "data" / "nifty50_history.csv"
-    refresh_provider_order: tuple[str, ...] = ("nse", "yfinance")
+    refresh_provider_order: tuple[str, ...] = ("yfinance",)
 
     @property
     def z_score(self) -> float:

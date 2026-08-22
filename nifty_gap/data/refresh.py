@@ -1,10 +1,12 @@
-"""NIFTY 50 data refresh pipeline with NSE API + Yahoo Finance fallback."""
+"""NIFTY 50 data refresh pipeline: Yahoo Finance primary, NSE API opt-in."""
 
 from __future__ import annotations
 
 import argparse
 import datetime as dt
 import json
+import logging
+import os
 import time
 
 import pandas as pd
@@ -12,6 +14,10 @@ import pandas as pd
 from nifty_gap.config import Config
 from nifty_gap.data.loader import seed_history, write_history
 from nifty_gap.data.validation import validate_integrity
+
+logger = logging.getLogger(__name__)
+
+_NSE_RETRY_SLEEP = 1.5
 
 OUTPUT_COLUMNS = ["Date", "Open", "High", "Low", "Close", "Shares_Traded", "Turnover_Cr", "data_source"]
 
@@ -50,10 +56,12 @@ def normalise_yfinance(raw: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(
         {
             "Date": pd.DatetimeIndex(idx).normalize(),
-            "Open": raw["Open"].astype("float64").to_numpy(),
-            "High": raw["High"].astype("float64").to_numpy(),
-            "Low": raw["Low"].astype("float64").to_numpy(),
-            "Close": raw["Close"].astype("float64").to_numpy(),
+            # Round to NSE's 2-dp convention — yfinance floats carry
+            # float32 transport artifacts (e.g. 24284.05078125).
+            "Open": raw["Open"].astype("float64").round(2).to_numpy(),
+            "High": raw["High"].astype("float64").round(2).to_numpy(),
+            "Low": raw["Low"].astype("float64").round(2).to_numpy(),
+            "Close": raw["Close"].astype("float64").round(2).to_numpy(),
             "Shares_Traded": pd.array([pd.NA] * len(raw), dtype="Int64"),
             "Turnover_Cr": pd.Series([float("nan")] * len(raw), dtype="float64").to_numpy(),
             "data_source": pd.Series(["yfinance"] * len(raw)).to_numpy(),
@@ -87,22 +95,31 @@ def _nse_session(timeout: float = 20):
 
 
 def fetch_nse(from_date: dt.date, to_date: dt.date, requests_timeout: float = 20) -> pd.DataFrame | None:
+    """Best-effort NSE direct fetch. Usually fails from server IPs: the
+    historical API sits behind Akamai Bot Manager, whose ``_abck`` sensor
+    challenge cannot be solved without a real browser. Failures are logged
+    with a reason and returned as ``None`` so callers can fall back."""
     session = _nse_session(requests_timeout)
+    home_url = "https://www.nseindia.com"
     reports_url = "https://www.nseindia.com/reports-indices-historical-index-data"
     api_url = "https://www.nseindia.com/api/historical/indicesHistory"
-    try:
+    params = {
+        "indexType": "NIFTY 50",
+        "from": from_date.strftime("%d-%m-%Y"),
+        "to": to_date.strftime("%d-%m-%Y"),
+    }
+
+    def _attempt() -> tuple[pd.DataFrame | None, str | None]:
+        res = session.get(home_url)
+        if res.status_code != 200:
+            return None, f"homepage returned {res.status_code}"
         res = session.get(reports_url)
         if res.status_code != 200:
-            return None
+            return None, f"reports page returned {res.status_code}"
         time.sleep(2.0)
-        params = {
-            "indexType": "NIFTY 50",
-            "from": from_date.strftime("%d-%m-%Y"),
-            "to": to_date.strftime("%d-%m-%Y"),
-        }
         res = session.get(api_url, params=params, headers={"Referer": reports_url})
         if res.status_code != 200:
-            return None
+            return None, f"api returned {res.status_code}"
         items = res.json().get("indexHistoricalData") or []
         records = [
             {
@@ -119,12 +136,23 @@ def fetch_nse(from_date: dt.date, to_date: dt.date, requests_timeout: float = 20
         ]
         df = pd.DataFrame(records)
         if df.empty:
-            return _empty_output()
+            return _empty_output(), None
         df["Shares_Traded"] = df["Shares_Traded"].astype("Int64")
         df["Turnover_Cr"] = df["Turnover_Cr"].astype("float64")
-        return df.sort_values("Date").reset_index(drop=True)
-    except Exception:
-        return None
+        return df.sort_values("Date").reset_index(drop=True), None
+
+    reason = "unknown"
+    for attempt in (1, 2):
+        try:
+            df, reason = _attempt()
+        except Exception as exc:
+            df, reason = None, f"{type(exc).__name__}: {exc}"
+        if df is not None:
+            return df
+        if attempt == 1:
+            time.sleep(_NSE_RETRY_SLEEP)
+    logger.warning("NSE direct fetch failed (%s .. %s): %s", from_date, to_date, reason)
+    return None
 
 
 def upsert(history: pd.DataFrame, new: pd.DataFrame) -> pd.DataFrame:
@@ -139,11 +167,14 @@ BOOTSTRAP_WINDOW_DAYS = 400
 def run_refresh(
     history_path,
     seed_path,
-    provider_order: tuple[str, ...] = ("nse", "yfinance"),
+    provider_order: tuple[str, ...] | None = None,
     backfill_from: dt.date | None = None,
     to_date: dt.date | None = None,
     dry_run: bool = False,
 ) -> dict:
+    if provider_order is None:
+        raw = os.getenv("REFRESH_PROVIDER_ORDER", "")
+        provider_order = tuple(p.strip().lower() for p in raw.split(",") if p.strip()) or ("yfinance",)
     history = seed_history(history_path, seed_path)
     if history is None:
         end = to_date or dt.date.today()
