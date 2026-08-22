@@ -224,6 +224,18 @@
       .footer { padding-bottom:120px; }
     }
     .coming-soon-mobile { display:none; }
+
+    /* ---------- motion & busy states ---------- */
+    .btn-primary.btn-busy { position:relative; color:transparent !important; }
+    .btn-primary.btn-busy::after { content:""; position:absolute; inset:0; margin:auto; width:15px; height:15px;
+      border-radius:50%; border:2px solid rgba(255,255,255,.35); border-top-color:#fff; animation:spin .7s linear infinite; }
+    html[data-theme="dark"] .btn-primary.btn-busy::after { border-color:rgba(8,38,42,.3); border-top-color:#08262a; }
+    @keyframes spin { to { transform:rotate(360deg); } }
+    .chart-fade { animation:fadein .3s ease; }
+    @keyframes fadein { from { opacity:.25; } to { opacity:1; } }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { animation:none !important; transition:none !important; }
+    }
   </style>
 </head>
 <body>

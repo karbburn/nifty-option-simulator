@@ -1,19 +1,16 @@
 <section class="card" aria-label="Expiry weekday and out-of-sample performance">
-  <h2>Expiry Weekday Pairs</h2>
-  <p>
-    The ladder strategy holds a directional CE or PE option from a weekday pair (e.g. Mon→Thu, Thu→Fri) into
-    expiry, rolling to ladder stop/floor levels. The table below shows the in-sample probability of the
-    underlying moving in the strategy's direction for each weekday pair, alongside the realized
-    out-of-sample (OOS) result with 95% confidence intervals.
-  </p>
-  <div class="table-wrap">
+  <div class="card-head">
+    <h2>Expiry Weekday Pairs</h2>
+    <p class="card-sub">In-sample probability of a favourable open vs realised out-of-sample result, with 95% confidence intervals. Green means the OOS result landed on the strategy's side of the coin flip.</p>
+  </div>
+  <div class="table-wrap" style="margin-top:14px;">
     <table id="oosTable">
       <thead>
         <tr>
           <th>Pair</th>
           <th>Side</th>
           <th>In-sample</th>
-          <th>OOS Realized</th>
+          <th>OOS Realised</th>
           <th>OOS CI</th>
           <th>n (in)</th>
           <th>n (oos)</th>
@@ -24,16 +21,17 @@
         {% set p = d.realized_p_up %}
         {% set ok = p is not none and ((p >= 0.5) if d.side == 'CE' else (p <= 0.5)) %}
         <tr>
-          <td>{{ d.weekday_pair }}</td>
-          <td>{{ d.side }}</td>
-          <td>{{ "{:.1f}".format(d.p_up * 100) }}%</td>
-          <td class="{{ 'pnl-positive' if ok else 'pnl-negative' }}">{{ "{:.1f}".format(p * 100) if p is not none else "—" }}%</td>
-          <td>{{ "{:.1f}".format(d.realized_ci_low * 100) if d.realized_ci_low is not none else "—" }}%–{{ "{:.1f}".format(d.realized_ci_high * 100) if d.realized_ci_high is not none else "—" }}%</td>
-          <td>{{ d.n_in }}</td>
-          <td>{{ d.n_oos }}</td>
+          <td style="font-family:var(--font-body);font-weight:550;">{{ d.weekday_pair }}</td>
+          <td><span class="side-badge {{ 'ce' if d.side == 'CE' else 'pe' }}">{{ d.side }}</span></td>
+          <td class="num">{{ "{:.1f}".format(d.p_up * 100) }}%</td>
+          <td class="num {{ 'pnl-positive' if ok else 'pnl-negative' }}">{{ "{:.1f}".format(p * 100) if p is not none else "—" }}{% if p is not none %}%{% endif %}</td>
+          <td class="num" style="color:var(--text-3);">{% if d.realized_ci_low is not none %}{{ "{:.1f}".format(d.realized_ci_low * 100) }}–{{ "{:.1f}".format(d.realized_ci_high * 100) }}%{% else %}—{% endif %}</td>
+          <td class="num">{{ d.n_in }}</td>
+          <td class="num">{{ d.n_oos }}</td>
         </tr>
         {% endfor %}
       </tbody>
     </table>
   </div>
+  <p class="card-sub" style="margin-top:12px;">Pairs with tiny samples (n &lt; 5) are shown for completeness — treat them as noise, not signal.</p>
 </section>

@@ -370,6 +370,9 @@
   function buildCharts(s) {
     if (!window.Chart) { showPngFallbacks(); return; }
     destroyCharts();
+    document.querySelectorAll('.chart-container').forEach(function (el) {
+      el.classList.remove('chart-fade'); void el.offsetWidth; el.classList.add('chart-fade');
+    });
     Chart.defaults.font.family = "'IBM Plex Sans', sans-serif";
     try {
       /* equity */
@@ -628,6 +631,7 @@
     if (recomputeAbort) recomputeAbort.abort();
     recomputeAbort = new AbortController();
     applyBtn.disabled = true;
+    applyBtn.classList.add('btn-busy');
     statusEl.textContent = 'Running backtest\u2026';
     var clampNum = function (id) {
       var el = document.getElementById(id);
@@ -664,7 +668,7 @@
     } catch (e) {
       if (seq === recomputeSeq) statusEl.textContent = 'Recompute failed: ' + e.message;
     } finally {
-      if (seq === recomputeSeq) applyBtn.disabled = false;
+      if (seq === recomputeSeq) { applyBtn.disabled = false; applyBtn.classList.remove('btn-busy'); }
     }
   }
   function scheduleRecompute() {
