@@ -4,123 +4,78 @@
 <div class="tab-panel" id="tab-live">
   <div class="kpi-row">
     <div class="kpi-card">
-      <span class="kpi-label">Total P&L</span>
+      <span class="kpi-label">Total P&amp;L</span>
       <span class="kpi-value {{ 'profit' if (snap.trade_stats.total_pnl or 0) >= 0 else 'loss' }}" id="kpiPnl">
         {{ "₹{:,.2f}".format(snap.trade_stats.total_pnl) }}
       </span>
+      <span class="kpi-caption" id="capPnl">ladder strategy</span>
     </div>
     <div class="kpi-card">
       <span class="kpi-label">Win Rate</span>
-      <span class="kpi-value" id="kpiWinRate">{{ "{:.1f}".format(snap.trade_stats.win_rate * 100) }}%</span>
+      <span class="kpi-value num" id="kpiWinRate">{{ "{:.1f}".format(snap.trade_stats.win_rate * 100) }}%</span>
+      <span class="kpi-caption" id="capTrades">{{ snap.trades|length }} trades</span>
     </div>
     <div class="kpi-card">
       <span class="kpi-label">Sharpe (Ann.)</span>
-      <span class="kpi-value" id="kpiSharpe">{{ "{:.2f}".format(snap.equity_stats.sharpe_annualized) }}</span>
+      <span class="kpi-value num" id="kpiSharpe">{{ "{:.2f}".format(snap.equity_stats.sharpe_annualized) }}</span>
+      <span class="kpi-caption">daily returns, annualised</span>
     </div>
     <div class="kpi-card">
       <span class="kpi-label">Max Drawdown</span>
-      <span class="kpi-value loss" id="kpiMaxDD">{{ "₹{:,.0f}".format(snap.equity_stats.max_drawdown) }}</span>
+      <span class="kpi-value num loss" id="kpiMaxDD">{{ "₹{:,.0f}".format(snap.equity_stats.max_drawdown) }}</span>
+      <span class="kpi-caption">peak to trough</span>
     </div>
   </div>
 
-  <section class="card" aria-label="Pairs to trade">
-    <h2>Pairs to Trade</h2>
-    <div class="pair-grid" id="pairGrid">
-      {% for pair in snap.config.pair_universe %}
-      <label class="pair-chip"><input type="checkbox" value="{{ pair }}" {{ 'checked' if pair not in snap.config.excluded_pairs }}> {{ pair }}</label>
-      {% endfor %}
-    </div>
-    <p class="cfg-hint">Uncheck a pair to exclude it from the backtest.</p>
-  </section>
-
-  <section class="card" aria-label="Config explorer">
-    <h2>Config Explorer</h2>
-    <div class="config-grid">
-      <div class="cfg-field">
-        <span class="cfg-label">IV flat</span>
-        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgIv',-1)">−</button><input type="number" id="cfgIv" class="stepper-input" min="0.05" max="0.25" step="0.005" value="{{ snap.config.iv_flat }}" aria-label="IV flat"><button type="button" class="stepper-btn" onclick="stepVal('cfgIv',1)">+</button></div>
-      </div>
-      <div class="cfg-field">
-        <span class="cfg-label">Stop 1 (%)</span>
-        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgStop1',-1)">−</button><input type="number" id="cfgStop1" class="stepper-input" min="1" max="12" step="1" value="{{ "%.0f"|format(snap.config.ladder_stop_pcts[0]*100) }}" aria-label="Stop 1 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgStop1',1)">+</button></div>
-      </div>
-      <div class="cfg-field">
-        <span class="cfg-label">Stop 2 (%)</span>
-        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgStop2',-1)">−</button><input type="number" id="cfgStop2" class="stepper-input" min="1" max="20" step="1" value="{{ "%.0f"|format(snap.config.ladder_stop_pcts[1]*100) }}" aria-label="Stop 2 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgStop2',1)">+</button></div>
-      </div>
-      <div class="cfg-field">
-        <span class="cfg-label">Floor 1 (%)</span>
-        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor1',-1)">−</button><input type="number" id="cfgFloor1" class="stepper-input" min="3" max="25" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[0]*100) }}" aria-label="Floor 1 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor1',1)">+</button></div>
-      </div>
-      <div class="cfg-field">
-        <span class="cfg-label">Floor 2 (%)</span>
-        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor2',-1)">−</button><input type="number" id="cfgFloor2" class="stepper-input" min="3" max="30" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[1]*100) }}" aria-label="Floor 2 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor2',1)">+</button></div>
-      </div>
-      <div class="cfg-field">
-        <span class="cfg-label">Floor 3 (%)</span>
-        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor3',-1)">−</button><input type="number" id="cfgFloor3" class="stepper-input" min="3" max="40" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[2]*100) }}" aria-label="Floor 3 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor3',1)">+</button></div>
-      </div>
-      <label class="cfg-check"><input type="checkbox" id="cfgRollover" {{ 'checked' if snap.config.ladder_rollover }}> Ladder rollover</label>
-      <label class="cfg-check"><input type="checkbox" id="cfgCosts"> Apply costs (₹ + slippage)</label>
-      <div class="cfg-field">
-        <span class="cfg-label">Brokerage ₹/trade</span>
-        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgBrokerage',-1)">−</button><input type="number" id="cfgBrokerage" class="stepper-input" min="0" step="5" value="40" disabled aria-label="Brokerage per trade"><button type="button" class="stepper-btn" onclick="stepVal('cfgBrokerage',1)">+</button></div>
-      </div>
-      <div class="cfg-field">
-        <span class="cfg-label">Slippage %</span>
-        <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgSlippage',-1)">−</button><input type="number" id="cfgSlippage" class="stepper-input" min="0" max="5" step="0.1" value="0.5" disabled aria-label="Slippage percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgSlippage',1)">+</button></div>
-      </div>
-    </div>
-    <p class="cfg-hint">Excluded pairs: <span id="cfgExcluded">{{ snap.config.excluded_pairs | join(", ") }}</span></p>
-    <div class="config-actions">
-      <button id="cfgApply" class="btn-primary">Recompute</button>
-      <button id="cfgReset" class="btn-secondary">Reset</button>
-      <button id="cfgRefresh" class="btn-secondary">Refresh data now</button>
-      <span id="cfgStatus" class="cfg-status" aria-live="polite"></span>
-    </div>
-  </section>
-
   <section class="card" aria-label="Live positions">
-    <h2>Live Positions</h2>
+    <div class="card-head">
+      <h2>Live Positions</h2>
+      <p class="card-sub">Marked against live NIFTY spot · re-marked every minute</p>
+    </div>
     {% if snap.live_positions %}
     <div class="positions-grid" id="positionsGrid">
       {% for p in snap.live_positions %}
       <div class="position-card" data-pair="{{ p.pair }}" data-side="{{ p.side }}">
         <div class="position-header">
           <span class="pair-label">{{ p.pair }}</span>
-          <span class="side-badge {{ 'ce' if p.side == 'CE' else 'pe' }}">{{ 'CE ▲' if p.side == 'CE' else 'PE ▼' }}</span>
+          <span class="side-badge {{ 'ce' if p.side == 'CE' else 'pe' }}">{{ p.side }}</span>
           <span class="dte-badge">{{ p.days_to_expiry }} DTE</span>
         </div>
         <div class="position-body">
-          <div class="position-stat"><span class="stat-label">Strike</span><span class="stat-value">₹{{ "{:,.0f}".format(p.strike) }}</span></div>
-          <div class="position-stat"><span class="stat-label">Entry</span><span class="stat-value">₹{{ "{:,.2f}".format(p.entry_premium) }}</span></div>
-          <div class="position-stat"><span class="stat-label">Live</span><span class="stat-value" data-live-premium="true" data-entry="{{ p.entry_premium }}" data-side="{{ p.side }}">₹{{ "{:,.2f}".format(p.live_premium) }}</span></div>
-          <div class="position-stat"><span class="stat-label">P&L</span><span class="stat-value {{ 'profit' if (p.live_pnl or 0) >= 0 else 'loss' }}" data-live-pnl="true">₹{{ "{:,.2f}".format(p.live_pnl or 0) }}</span></div>
+          <div><span class="stat-label">Strike</span><span class="stat-value">₹{{ "{:,.0f}".format(p.strike) }}</span></div>
+          <div><span class="stat-label">Entry</span><span class="stat-value">₹{{ "{:,.2f}".format(p.entry_premium) }}</span></div>
+          <div><span class="stat-label">Live</span><span class="stat-value" data-live-premium="true">₹{{ "{:,.2f}".format(p.live_premium) }}</span></div>
+          <div><span class="stat-label">P&amp;L</span><span class="stat-value {{ 'profit' if (p.live_pnl or 0) >= 0 else 'loss' }}" data-live-pnl="true">₹{{ "{:,.2f}".format(p.live_pnl or 0) }}</span></div>
         </div>
-        <div class="position-chart"><canvas id="spark-{{ loop.index0 }}" height="48" aria-label="Premium path for {{ p.pair }}"></canvas></div>
+        <div class="move-hero">
+          <span class="move-val {{ 'profit' if (p.pct_move or 0) >= 0 else 'loss' }}">{{ "+" if (p.pct_move or 0) >= 0 else "" }}{{ "{:.1f}".format(p.pct_move or 0) }}%</span>
+          <span class="move-lbl">premium move since entry</span>
+        </div>
         <div class="position-footer">
-          <span class="pct-move">{{ "+" if (p.pct_move or 0) >= 0 else "" }}{{ "{:.1f}".format(p.pct_move or 0) }}% move</span>
-          <span class="banked-floor">Floor: {{ "none" if p.banked_floor is none else p.banked_floor }}</span>
+          <span>Floor: {{ "none banked" if p.banked_floor is none else p.banked_floor }}</span>
         </div>
       </div>
       {% endfor %}
     </div>
     {% else %}
     <div class="empty-state" id="noPositions">
-      <p>No live positions currently open.</p>
-      <p class="empty-sub">Positions appear here when a tradeable weekday pair signals and the entry date passes.</p>
+      <p>No live positions right now.</p>
+      <p class="empty-sub">Cards appear here when a tradeable pair signals and its entry date arrives.</p>
     </div>
     {% endif %}
   </section>
 
   {% if snap.next_trade_preview and snap.next_trade_preview.pair %}
   <section class="card" aria-label="Next trade preview">
-    <h2>Next Trade Preview</h2>
-    <p>
+    <div class="card-head">
+      <h2>Next Trade Preview</h2>
+      <p class="card-sub">What the rulebook would take on the next signal</p>
+    </div>
+    <p style="margin:10px 0 4px;">
       <strong>{{ snap.next_trade_preview.pair }}</strong> ·
-      <span class="side-badge {{ 'ce' if snap.next_trade_preview.side == 'CE' else 'pe' }}">{{ 'CE ▲' if snap.next_trade_preview.side == 'CE' else 'PE ▼' }}</span> ·
+      <span class="side-badge {{ 'ce' if snap.next_trade_preview.side == 'CE' else 'pe' }}">{{ snap.next_trade_preview.side }}</span> ·
       Strike ₹{{ "{:,.0f}".format(snap.next_trade_preview.strike) }} ·
-      Entry premium ₹{{ "{:,.2f}".format(snap.next_trade_preview.entry_premium) }} ·
+      Entry ₹{{ "{:,.2f}".format(snap.next_trade_preview.entry_premium) }} ·
       {{ snap.next_trade_preview.tte_days }}d to expiry
     </p>
     <p class="empty-sub">{{ snap.next_trade_preview.note }}</p>
@@ -129,20 +84,29 @@
 </div>
 
 <div class="tab-panel" id="tab-trades">
-  <div class="coming-soon-mobile">Full data export &amp; signals — coming soon.</div>
   <section class="card" aria-label="Past trades">
-    <h2>Past Trades</h2>
-    <div class="filters">
-      <select id="filterPair" aria-label="Filter by pair"><option value="">All Pairs</option></select>
-      <select id="filterReason" aria-label="Filter by exit reason"><option value="">All Reasons</option></select>
-      <select id="filterSide" aria-label="Filter by side"><option value="">All Sides</option><option value="CE">CE</option><option value="PE">PE</option></select>
-      <input type="date" id="filterDateFrom" aria-label="From date">
-      <input type="date" id="filterDateTo" aria-label="To date">
-      <input type="number" id="filterPnlMin" placeholder="P&L min ₹" aria-label="Minimum P&L">
-      <input type="number" id="filterPnlMax" placeholder="P&L max ₹" aria-label="Maximum P&L">
-      <input type="number" id="filterDaysMin" placeholder="Days ≥" aria-label="Minimum days held">
-      <input type="number" id="filterDaysMax" placeholder="Days ≤" aria-label="Maximum days held">
+    <div class="card-head">
+      <h2>Past Trades</h2>
+      <p class="card-sub">Click an entry date for its premium path · click headers to sort</p>
     </div>
+    <details class="filters-details" id="filtersBox">
+      <summary>
+        Filters
+        <span class="count-pill" id="filterCount" hidden></span>
+      </summary>
+      <div class="filters">
+        <select id="filterPair" aria-label="Filter by pair"><option value="">All pairs</option></select>
+        <select id="filterReason" aria-label="Filter by exit reason"><option value="">All reasons</option></select>
+        <select id="filterSide" aria-label="Filter by side"><option value="">All sides</option><option value="CE">CE</option><option value="PE">PE</option></select>
+        <input type="date" id="filterDateFrom" aria-label="From date">
+        <input type="date" id="filterDateTo" aria-label="To date">
+        <input type="number" id="filterPnlMin" placeholder="P&L min ₹" aria-label="Minimum P&L">
+        <input type="number" id="filterPnlMax" placeholder="P&L max ₹" aria-label="Maximum P&L">
+        <input type="number" id="filterDaysMin" placeholder="Days ≥" aria-label="Minimum days held">
+        <input type="number" id="filterDaysMax" placeholder="Days ≤" aria-label="Maximum days held">
+        <button type="button" id="filterClear" class="btn-text">Clear all</button>
+      </div>
+    </details>
     <div class="table-wrap collapsed" id="tradesWrap">
       <table id="tradesTable">
         <thead>
@@ -162,7 +126,7 @@
         <tbody id="tradesBody">
           {% for t in snap.trades %}
           <tr data-pair="{{ t.pair }}" data-reason="{{ t.exit_reason }}" data-side="{{ t.side }}" data-date="{{ t.entry_date }}" data-pnl="{{ t.pnl }}" data-days="{{ t.days_held }}">
-            <td><a href="/trade/{{ t.entry_date }}">{{ t.entry_date[5:] }}</a></td>
+            <td><a href="/trade/{{ t.entry_date }}" title="{{ t.entry_date }}">{{ t.entry_date[5:] }}</a></td>
             <td>{{ t.exit_date[5:] }}</td>
             <td>{{ t.pair }}</td>
             <td>{{ t.side }}</td>
@@ -184,32 +148,105 @@
 
 <div class="tab-panel" id="tab-charts">
   <section class="card" aria-label="Equity curve">
-    <h2>Equity Curve</h2>
+    <div class="card-head">
+      <h2>Equity Curve</h2>
+      <p class="card-sub">Cumulative portfolio value with drawdown shading</p>
+    </div>
     <div class="chart-container"><canvas id="equityChart"></canvas></div>
     <img class="chart-png-fallback" src="/charts/equity.png" alt="Equity & per-pair P&L">
   </section>
+
   <div class="two-col">
-    <section class="card" aria-label="Probability table">
-      <h2>Probability Table</h2>
+    <section class="card" aria-label="Gap probabilities">
+      <div class="card-head">
+        <h2>Gap Probabilities</h2>
+        <p class="card-sub">In-sample edge vs realised out-of-sample result, 95% CI</p>
+      </div>
       <div class="chart-container"><canvas id="probabilityChart"></canvas></div>
       <img class="chart-png-fallback" src="/charts/probability.png" alt="Weekday pair gap probability">
     </section>
-    <section class="card" aria-label="In-sample vs out-of-sample">
-      <h2>IS vs OOS</h2>
-      <img class="chart-png-fallback" src="/charts/oos.png" alt="In-sample vs out-of-sample win rates" style="display:block">
-    </section>
-  </div>
-  <div class="two-col">
-    <section class="card" aria-label="Benchmark comparison">
-      <h2>Benchmark</h2>
-      <div class="chart-container"><canvas id="benchmarkChart"></canvas></div>
-      <img class="chart-png-fallback" src="/charts/benchmark.png" alt="Ladder vs benchmark">
-    </section>
     <section class="card" aria-label="Exit reason distribution">
-      <h2>Exit Reasons</h2>
-      <img class="chart-png-fallback" src="/charts/exit_reasons.png" alt="Exit reason distribution" style="display:block">
+      <div class="card-head">
+        <h2>Exit Reasons</h2>
+        <p class="card-sub">How trades ended · count per rule</p>
+      </div>
+      <div class="chart-container"><canvas id="exitReasonsChart"></canvas></div>
     </section>
   </div>
+
+  <section class="card" aria-label="Benchmark comparison">
+    <div class="card-head">
+      <h2>Benchmark</h2>
+      <p class="card-sub">Ladder exits vs simply holding every trade to expiry</p>
+    </div>
+    <div class="chart-container"><canvas id="benchmarkChart"></canvas></div>
+    <img class="chart-png-fallback" src="/charts/benchmark.png" alt="Ladder vs benchmark">
+  </section>
+</div>
+
+<div class="tab-panel" id="tab-config">
+  <details class="panel-details" id="configBox">
+    <summary>
+      <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 21v-6M4 10V3M12 21v-9M12 8V3M20 21v-4M20 13V3"/><path d="M1 14h6M9 9h6M17 17h6"/></svg>
+      Strategy parameters
+      <span class="dirty-hint" id="cfgDirtyHint" hidden>modified · unsaved to server</span>
+    </summary>
+    <div class="config-body">
+      <p class="cfg-hint" style="margin-top:14px;">Changes re-run the backtest instantly on this page only &mdash; nothing here is saved or used for advice.</p>
+
+      <span class="group-label">Tradeable pairs</span>
+      <div class="pair-grid" id="pairGrid">
+        {% for pair in snap.config.pair_universe %}
+        <label class="pair-chip"><input type="checkbox" value="{{ pair }}" {{ 'checked' if pair not in snap.config.excluded_pairs }}> {{ pair }}</label>
+        {% endfor %}
+      </div>
+      <p class="cfg-hint">Uncheck a pair to drop it from the backtest.</p>
+
+      <span class="group-label">Exit ladder &amp; pricing</span>
+      <div class="config-grid">
+        <div class="cfg-field">
+          <span class="cfg-label">IV flat</span>
+          <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgIv',-1)">−</button><input type="number" id="cfgIv" class="stepper-input" min="0.05" max="0.25" step="0.005" value="{{ snap.config.iv_flat }}" aria-label="IV flat"><button type="button" class="stepper-btn" onclick="stepVal('cfgIv',1)">+</button></div>
+        </div>
+        <div class="cfg-field">
+          <span class="cfg-label">Stop 1 (%)</span>
+          <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgStop1',-1)">−</button><input type="number" id="cfgStop1" class="stepper-input" min="1" max="12" step="1" value="{{ "%.0f"|format(snap.config.ladder_stop_pcts[0]*100) }}" aria-label="Stop 1 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgStop1',1)">+</button></div>
+        </div>
+        <div class="cfg-field">
+          <span class="cfg-label">Stop 2 (%)</span>
+          <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgStop2',-1)">−</button><input type="number" id="cfgStop2" class="stepper-input" min="1" max="20" step="1" value="{{ "%.0f"|format(snap.config.ladder_stop_pcts[1]*100) }}" aria-label="Stop 2 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgStop2',1)">+</button></div>
+        </div>
+        <div class="cfg-field">
+          <span class="cfg-label">Floor 1 (%)</span>
+          <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor1',-1)">−</button><input type="number" id="cfgFloor1" class="stepper-input" min="3" max="25" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[0]*100) }}" aria-label="Floor 1 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor1',1)">+</button></div>
+        </div>
+        <div class="cfg-field">
+          <span class="cfg-label">Floor 2 (%)</span>
+          <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor2',-1)">−</button><input type="number" id="cfgFloor2" class="stepper-input" min="3" max="30" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[1]*100) }}" aria-label="Floor 2 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor2',1)">+</button></div>
+        </div>
+        <div class="cfg-field">
+          <span class="cfg-label">Floor 3 (%)</span>
+          <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor3',-1)">−</button><input type="number" id="cfgFloor3" class="stepper-input" min="3" max="40" step="1" value="{{ "%.0f"|format(snap.config.ladder_floor_pcts[2]*100) }}" aria-label="Floor 3 percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgFloor3',1)">+</button></div>
+        </div>
+        <label class="cfg-check"><input type="checkbox" id="cfgRollover" {{ 'checked' if snap.config.ladder_rollover }}> Ladder rollover</label>
+        <label class="cfg-check"><input type="checkbox" id="cfgCosts"> Apply costs</label>
+        <div class="cfg-field">
+          <span class="cfg-label">Brokerage ₹/trade</span>
+          <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgBrokerage',-1)">−</button><input type="number" id="cfgBrokerage" class="stepper-input" min="0" step="5" value="40" disabled aria-label="Brokerage per trade"><button type="button" class="stepper-btn" onclick="stepVal('cfgBrokerage',1)">+</button></div>
+        </div>
+        <div class="cfg-field">
+          <span class="cfg-label">Slippage %</span>
+          <div class="stepper"><button type="button" class="stepper-btn" onclick="stepVal('cfgSlippage',-1)">−</button><input type="number" id="cfgSlippage" class="stepper-input" min="0" max="5" step="0.1" value="0.5" disabled aria-label="Slippage percent"><button type="button" class="stepper-btn" onclick="stepVal('cfgSlippage',1)">+</button></div>
+        </div>
+      </div>
+      <div class="config-actions">
+        <button id="cfgApply" class="btn-primary">Recompute</button>
+        <button id="cfgReset" class="btn-secondary">Reset</button>
+        <button id="cfgRefresh" class="btn-secondary">Refresh data now</button>
+        <span id="cfgStatus" class="cfg-status" aria-live="polite"></span>
+      </div>
+    </div>
+  </details>
 </div>
 
 <div class="tab-panel" id="tab-expiry">
@@ -225,13 +262,48 @@
   var chartInstances = [];
   window.chartInstances = chartInstances;
 
-  function fmtInr(v) { return '\u20B9' + v.toLocaleString('en-IN', { maximumFractionDigits: 0 }); }
-
   function esc(s) {
     return String(s).replace(/[&<>"']/g, function (c) {
       return { '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c];
     });
   }
+  function fmtInr(v) { return '\u20B9' + v.toLocaleString('en-IN', { maximumFractionDigits: 0 }); }
+  function fmtInrShort(v) {
+    var a = Math.abs(v), s = v < 0 ? '\u2212' : '';
+    if (a >= 1e7) return s + '\u20B9' + (a / 1e7).toFixed(1).replace(/\.0$/, '') + 'Cr';
+    if (a >= 1e5) return s + '\u20B9' + (a / 1e5).toFixed(1).replace(/\.0$/, '') + 'L';
+    return s + '\u20B9' + Math.round(a);
+  }
+  var MONTHS = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  function fmtDate(iso) {
+    var y = iso.slice(0, 4), m = parseInt(iso.slice(5, 7), 10), d = parseInt(iso.slice(8, 10), 10);
+    return d + ' ' + MONTHS[m - 1] + ' ' + y.slice(2);
+  }
+  var REASONS = {
+    'expiry':   { label: 'Expiry',     cls: 'rn-expiry' },
+    'stop_3':   { label: 'Stop \u22123%', cls: 'rn-loss' },
+    'stop_5':   { label: 'Stop \u22125%', cls: 'rn-loss' },
+    'floor_10': { label: 'Floor +10%', cls: 'rn-profit' },
+    'floor_15': { label: 'Floor +15%', cls: 'rn-profit' }
+  };
+  function rbadge(reason) {
+    var m = REASONS[reason] || { label: reason.replace(/_/g, ' '), cls: 'rn-neutral' };
+    return '<span class="rb ' + m.cls + '">' + esc(m.label) + '</span>';
+  }
+  function sideBadge(side) {
+    return '<span class="side-badge ' + (side === 'CE' ? 'ce' : 'pe') + '">' + side + '</span>';
+  }
+
+  /* ---------- shared chart styling ---------- */
+  var TT = {
+    backgroundColor: '#14181d', titleColor: '#e8ebef', bodyColor: '#c6ccd4',
+    borderColor: 'rgba(255,255,255,.09)', borderWidth: 1, padding: 10,
+    cornerRadius: 8, displayColors: false, titleFont: { weight: '600', size: 12 }, bodyFont: { size: 12 }
+  };
+  function tickFont() { return { family: "'IBM Plex Mono', monospace", size: 10.5, color: cssVar('--text-3') || '#949aa5' }; }
+  function legendOpts() { return { position: 'top', align: 'end', labels: { boxWidth: 8, boxHeight: 8, usePointStyle: true, pointStyle: 'circle', font: { family: "'IBM Plex Sans', sans-serif", size: 11.5 }, color: cssVar('--text-2') || '#5d6570' } }; }
+  function timeScale() { return { type: 'time', time: { unit: 'month', displayFormats: { month: 'MMM yy' } }, grid: { display: false }, ticks: { maxTicksLimit: 10, font: tickFont() } }; }
+  function moneyScale() { return { grid: { color: cssVar('--chart-grid') || '#eae6dc' }, border: { display: false }, ticks: { font: tickFont(), callback: function (v) { return fmtInrShort(v); } } }; }
 
   function updateKpis(s) {
     var pnl = s.trade_stats.total_pnl || 0;
@@ -239,10 +311,15 @@
     kpiPnl.textContent = '\u20B9' + pnl.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     kpiPnl.className = 'kpi-value ' + (pnl >= 0 ? 'profit' : 'loss');
     var wr = s.trade_stats.win_rate;
-    document.getElementById('kpiWinRate').textContent = (isFinite(wr) ? (wr * 100).toFixed(1) : '—') + '%';
+    document.getElementById('kpiWinRate').textContent = (isFinite(wr) ? (wr * 100).toFixed(1) : '\u2014') + '%';
     var sh = s.equity_stats.sharpe_annualized;
-    document.getElementById('kpiSharpe').textContent = isFinite(sh) ? sh.toFixed(2) : '—';
+    document.getElementById('kpiSharpe').textContent = isFinite(sh) ? sh.toFixed(2) : '\u2014';
     document.getElementById('kpiMaxDD').textContent = '\u20B9' + s.equity_stats.max_drawdown.toLocaleString('en-IN', { maximumFractionDigits: 0 });
+    var nTrades = (s.trade_stats.n_trades != null) ? s.trade_stats.n_trades : (s.trades ? s.trades.length : 0);
+    document.getElementById('capTrades').textContent = nTrades + ' trades taken';
+    var c = s.config || {};
+    var costsOn = (c.brokerage_per_trade > 0) || (c.slippage_pct > 0);
+    document.getElementById('capPnl').textContent = costsOn ? 'incl. brokerage & slippage' : 'before costs';
   }
 
   var pairSel = document.getElementById('filterPair');
@@ -250,10 +327,10 @@
   function buildFilterOptions(s) {
     var pairs = new Set(s.trades.map(function (t) { return t.pair; }));
     var reasons = new Set(s.trades.map(function (t) { return t.exit_reason; }));
-    pairSel.innerHTML = '<option value="">All Pairs</option>';
-    reasonSel.innerHTML = '<option value="">All Reasons</option>';
+    pairSel.innerHTML = '<option value="">All pairs</option>';
+    reasonSel.innerHTML = '<option value="">All reasons</option>';
     Array.from(pairs).sort().forEach(function (p) { pairSel.add(new Option(p, p)); });
-    Array.from(reasons).sort().forEach(function (r) { reasonSel.add(new Option(r, r)); });
+    Array.from(reasons).sort().forEach(function (r) { reasonSel.add(new Option((REASONS[r] || { label: r }).label, r)); });
   }
 
   var tbody = document.getElementById('tradesBody');
@@ -262,21 +339,20 @@
     buildFilterOptions(s);
     tbody.innerHTML = s.trades.map(function (t) {
       var cls = (t.pnl || 0) >= 0 ? 'pnl-positive' : 'pnl-negative';
-      var sign = (t.pnl || 0) >= 0 ? '+' : '-';
+      var sign = (t.pnl || 0) >= 0 ? '+' : '\u2212';
       var pnl = Math.abs(t.pnl).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
       return '<tr data-pair="' + esc(t.pair) + '" data-reason="' + esc(t.exit_reason) + '" data-side="' + esc(t.side) + '" data-date="' + esc(t.entry_date) + '" data-pnl="' + t.pnl + '" data-days="' + t.days_held + '">' +
-        '<td><a href="/trade/' + esc(t.entry_date) + '">' + esc(t.entry_date.slice(5)) + '</a></td>' +
-        '<td>' + esc(t.exit_date.slice(5)) + '</td>' +
-        '<td>' + esc(t.pair) + '</td><td>' + esc(t.side) + '</td>' +
+        '<td><a href="/trade/' + esc(t.entry_date) + '" title="' + esc(t.entry_date) + '">' + fmtDate(t.entry_date) + '</a></td>' +
+        '<td title="' + esc(t.exit_date) + '">' + fmtDate(t.exit_date) + '</td>' +
+        '<td>' + esc(t.pair) + '</td><td>' + sideBadge(t.side) + '</td>' +
         '<td>' + t.strike.toLocaleString('en-IN', { maximumFractionDigits: 0 }) + '</td>' +
         '<td>' + t.entry_premium.toFixed(2) + '</td><td>' + t.exit_premium.toFixed(2) + '</td>' +
-        '<td>' + esc(t.exit_reason) + '</td><td>' + t.days_held + '</td>' +
+        '<td>' + rbadge(t.exit_reason) + '</td><td>' + t.days_held + '</td>' +
         '<td class="' + cls + '">' + sign + '\u20B9' + pnl + '</td></tr>';
     }).join('');
     if (!tradesWrap.classList.contains('collapsed')) {
       tradesToggle.textContent = 'Show fewer';
     } else {
-      tradesWrap.classList.add('collapsed');
       tradesToggle.textContent = 'Show all ' + s.trades.length + ' trades';
     }
     filterTrades();
@@ -287,80 +363,108 @@
     chartInstances = [];
     window.chartInstances = chartInstances;
   }
-
   function showPngFallbacks() {
     document.querySelectorAll('.chart-png-fallback').forEach(function (el) { el.classList.add('show'); });
   }
 
   function buildCharts(s) {
-    if (!window.Chart) return;
+    if (!window.Chart) { showPngFallbacks(); return; }
     destroyCharts();
+    Chart.defaults.font.family = "'IBM Plex Sans', sans-serif";
     try {
-      var gridColor = cssVar('--chart-grid') || '#e9ecef';
-      var textColor = cssVar('--text-secondary') || '#6c757d';
+      /* equity */
       var equityCurve = s.equity_curve;
-    var peak = 0;
-    var drawdown = equityCurve.map(function (d) { peak = Math.max(peak, d.equity); return peak - d.equity; });
-    chartInstances.push(new Chart(document.getElementById('equityChart'), {
-      type: 'line',
-      data: {
-        labels: equityCurve.map(function (d) { return d.date; }),
-        datasets: [
-          { label: 'Strategy Equity', data: equityCurve.map(function (d) { return d.equity; }), borderColor: '#1565c0', backgroundColor: 'rgba(21,101,192,0.08)', borderWidth: 1.5, pointRadius: 0, tension: 0.1, order: 1 },
-          { label: 'Drawdown', data: drawdown, borderColor: 'transparent', backgroundColor: 'rgba(198,40,40,0.18)', borderWidth: 0, pointRadius: 0, fill: true, tension: 0.1, order: 2 }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: { legend: { display: true, position: 'top', labels: { boxWidth: 12, font: { size: 11 }, color: textColor } }, tooltip: { callbacks: { label: function (c) { return c.dataset.label + ': ' + fmtInr(c.parsed.y); } } } },
-        scales: { x: { type: 'time', time: { unit: 'month', displayFormats: { month: 'MMM yyyy' } }, grid: { display: false }, ticks: { font: { size: 11 }, maxTicksLimit: 12, color: textColor } }, y: { grid: { color: gridColor }, ticks: { font: { size: 11 }, color: textColor, callback: function (v) { return fmtInr(v); } } } }
-      }
-    }));
-
-    var oosData = s.oos_data;
-    chartInstances.push(new Chart(document.getElementById('probabilityChart'), {
-      type: 'barWithErrorBars',
-      data: {
-        labels: oosData.map(function (d) { return d.weekday_pair; }),
-        datasets: [
-          { label: 'Table (IS p_up)', data: oosData.map(function (d) { return { y: d.p_up, yMin: d.ci_low, yMax: d.ci_high }; }), backgroundColor: 'rgba(25,118,210,0.8)', borderColor: '#1976d2', borderWidth: 1 },
-          { label: 'Realized (OOS)', data: oosData.map(function (d) { return { y: d.realized_p_up, yMin: d.realized_ci_low, yMax: d.realized_ci_high }; }), backgroundColor: 'rgba(249,168,37,0.8)', borderColor: '#f9a825', borderWidth: 1 }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 }, color: textColor } }, tooltip: { callbacks: { label: function (c) { var v = c.raw; var ci = ' [' + (v.yMin * 100).toFixed(1) + '%\u2013' + (v.yMax * 100).toFixed(1) + '%]'; return c.dataset.label + ': ' + (v.y * 100).toFixed(1) + '%' + ci; } } } },
-        scales: { x: { grid: { display: false }, ticks: { font: { size: 11 }, color: textColor, maxRotation: 20 } }, y: { min: 0, max: 1.05, grid: { color: gridColor }, ticks: { font: { size: 11 }, color: textColor, callback: function (v) { return (v * 100).toFixed(0) + '%'; } } } }
-      },
-      plugins: [{
-        id: 'refLine50', afterDraw: function (chart) {
-          var ys = chart.scales.y, ctx = chart.ctx, y = ys.getPixelForValue(0.5);
-          ctx.save(); ctx.strokeStyle = cssVar('--neutral-grey') || '#757575'; ctx.lineWidth = 1; ctx.setLineDash([6, 4]);
-          ctx.beginPath(); ctx.moveTo(chart.chartArea.left, y); ctx.lineTo(chart.chartArea.right, y); ctx.stroke();
-          ctx.fillStyle = cssVar('--neutral-grey') || '#757575'; ctx.font = '11px sans-serif'; ctx.textAlign = 'right'; ctx.fillText('50%', chart.chartArea.right - 4, y - 4); ctx.restore();
+      var peak = 0;
+      var drawdown = equityCurve.map(function (d) { peak = Math.max(peak, d.equity); return peak - d.equity; });
+      chartInstances.push(new Chart(document.getElementById('equityChart'), {
+        type: 'line',
+        data: {
+          labels: equityCurve.map(function (d) { return d.date; }),
+          datasets: [
+            { label: 'Strategy', data: equityCurve.map(function (d) { return d.equity; }), borderColor: cssVar('--chart-line'), backgroundColor: cssVar('--accent-soft'), borderWidth: 1.6, pointRadius: 0, tension: 0.15, fill: true, order: 1 },
+            { label: 'Drawdown', data: drawdown, borderColor: 'transparent', backgroundColor: cssVar('--drawdown'), borderWidth: 0, pointRadius: 0, fill: 'start', tension: 0.15, order: 2 }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: { legend: legendOpts(), tooltip: Object.assign({}, TT, { callbacks: { label: function (c) { return c.dataset.label + ': ' + fmtInr(c.parsed.y); } } }) },
+          scales: { x: timeScale(), y: moneyScale() }
         }
-      }]
-    }));
+      }));
 
-    var bench = s.benchmark_equity;
-    var ladderEq = s.equity_curve;
-    chartInstances.push(new Chart(document.getElementById('benchmarkChart'), {
-      type: 'line',
-      data: {
-        labels: ladderEq.map(function (d) { return d.date; }),
-        datasets: [
-          { label: 'Ladder Strategy', data: ladderEq.map(function (d) { return d.equity; }), borderColor: '#1565c0', backgroundColor: 'transparent', borderWidth: 1.5, pointRadius: 0, tension: 0.1 },
-          { label: 'Hold-to-Expiry (benchmark)', data: bench.map(function (d) { return d.equity; }), borderColor: '#757575', backgroundColor: 'transparent', borderWidth: 1.4, borderDash: [6, 3], pointRadius: 0, tension: 0.1 }
-        ]
-      },
-      options: {
-        responsive: true, maintainAspectRatio: false,
-        interaction: { mode: 'index', intersect: false },
-        plugins: { legend: { position: 'top', labels: { boxWidth: 12, font: { size: 11 }, color: textColor } }, tooltip: { callbacks: { label: function (c) { return c.dataset.label + ': ' + fmtInr(c.parsed.y); } } } },
-        scales: { x: { type: 'time', time: { unit: 'month', displayFormats: { month: 'MMM yyyy' } }, grid: { display: false }, ticks: { font: { size: 11 }, color: textColor, maxTicksLimit: 12 } }, y: { grid: { color: gridColor }, ticks: { font: { size: 11 }, color: textColor, callback: function (v) { return fmtInr(v); } } } }
-      }
-    }));
+      /* probability IS vs OOS */
+      var oosData = s.oos_data;
+      chartInstances.push(new Chart(document.getElementById('probabilityChart'), {
+        type: 'barWithErrorBars',
+        data: {
+          labels: oosData.map(function (d) { return d.weekday_pair; }),
+          datasets: [
+            { label: 'In-sample', data: oosData.map(function (d) { return { y: d.p_up, yMin: d.ci_low, yMax: d.ci_high }; }), backgroundColor: cssVar('--chart-line'), borderColor: cssVar('--chart-line'), borderWidth: 1 },
+            { label: 'OOS realised', data: oosData.map(function (d) { return { y: d.realized_p_up, yMin: d.realized_ci_low, yMax: d.realized_ci_high }; }), backgroundColor: '#e8b64c', borderColor: '#e8b64c', borderWidth: 1 }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: legendOpts(),
+            tooltip: Object.assign({}, TT, { callbacks: { label: function (c) { var v = c.raw; return c.dataset.label + ': ' + (v.y * 100).toFixed(1) + '% [' + (v.yMin * 100).toFixed(0) + '\u2013' + (v.yMax * 100).toFixed(0) + '%]'; } } })
+          },
+          scales: { x: { grid: { display: false }, border: { display: false }, ticks: { font: { family: "'IBM Plex Mono', monospace", size: 10.5, color: cssVar('--text-3') } } }, y: { min: 0, max: 1.05, grid: { color: cssVar('--chart-grid') }, border: { display: false }, ticks: { font: tickFont(), callback: function (v) { return (v * 100).toFixed(0) + '%'; } } } }
+        },
+        plugins: [{
+          id: 'refLine50', afterDraw: function (chart) {
+            var ys = chart.scales.y, ctx = chart.ctx, y = ys.getPixelForValue(0.5);
+            ctx.save(); ctx.strokeStyle = cssVar('--text-3'); ctx.lineWidth = 1; ctx.setLineDash([5, 4]);
+            ctx.beginPath(); ctx.moveTo(chart.chartArea.left, y); ctx.lineTo(chart.chartArea.right, y); ctx.stroke();
+            ctx.fillStyle = cssVar('--text-3'); ctx.font = '10px "IBM Plex Mono", monospace'; ctx.textAlign = 'right';
+            ctx.fillText('coin flip', chart.chartArea.right - 4, y - 4); ctx.restore();
+          }
+        }]
+      }));
+
+      /* exit reasons (computed from trades) */
+      var counts = {};
+      s.trades.forEach(function (t) {
+        if (!counts[t.exit_reason]) counts[t.exit_reason] = { n: 0, pnl: 0 };
+        counts[t.exit_reason].n++; counts[t.exit_reason].pnl += (t.pnl || 0);
+      });
+      var keys = Object.keys(counts).sort(function (a, b) { return counts[b].n - counts[a].n; });
+      var keyColor = function (k) { return REASONS[k] && REASONS[k].cls === 'rn-loss' ? cssVar('--loss') : (REASONS[k] && REASONS[k].cls === 'rn-profit' ? cssVar('--profit') : cssVar('--chart-line')); };
+      chartInstances.push(new Chart(document.getElementById('exitReasonsChart'), {
+        type: 'bar',
+        data: {
+          labels: keys.map(function (k) { return (REASONS[k] || { label: k }).label; }),
+          datasets: [{ data: keys.map(function (k) { return counts[k].n; }), backgroundColor: keys.map(keyColor), borderRadius: 6, maxBarThickness: 26 }]
+        },
+        options: {
+          indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+          plugins: {
+            legend: { display: false },
+            tooltip: Object.assign({}, TT, { callbacks: { label: function (c) { var k = keys[c.dataIndex]; return counts[k].n + ' trades \u00B7 net ' + fmtInrShort(counts[k].pnl); } } })
+          },
+          scales: { x: { grid: { color: cssVar('--chart-grid') }, border: { display: false }, ticks: { font: tickFont(), precision: 0 } }, y: { grid: { display: false }, border: { display: false }, ticks: { font: { family: "'IBM Plex Sans', sans-serif", size: 11.5, color: cssVar('--text-2') } } } }
+        }
+      }));
+
+      /* benchmark */
+      var bench = s.benchmark_equity;
+      chartInstances.push(new Chart(document.getElementById('benchmarkChart'), {
+        type: 'line',
+        data: {
+          labels: s.equity_curve.map(function (d) { return d.date; }),
+          datasets: [
+            { label: 'Ladder strategy', data: s.equity_curve.map(function (d) { return d.equity; }), borderColor: cssVar('--chart-line'), backgroundColor: 'transparent', borderWidth: 1.6, pointRadius: 0, tension: 0.15 },
+            { label: 'Hold to expiry', data: bench.map(function (d) { return d.equity; }), borderColor: cssVar('--chart-bench'), backgroundColor: 'transparent', borderWidth: 1.4, borderDash: [5, 4], pointRadius: 0, tension: 0.15 }
+          ]
+        },
+        options: {
+          responsive: true, maintainAspectRatio: false,
+          interaction: { mode: 'index', intersect: false },
+          plugins: { legend: legendOpts(), tooltip: Object.assign({}, TT, { callbacks: { label: function (c) { return c.dataset.label + ': ' + fmtInr(c.parsed.y); } } }) },
+          scales: { x: timeScale(), y: moneyScale() }
+        }
+      }));
     } catch (e) {
       destroyCharts();
       showPngFallbacks();
@@ -376,10 +480,8 @@
       var va = a.cells[colIdx].textContent.trim();
       var vb = b.cells[colIdx].textContent.trim();
       if (numeric) {
-        va = parseFloat(va.replace(/[₹,+\-]/g, '').trim());
-        vb = parseFloat(vb.replace(/[₹,+\-]/g, '').trim());
-        if (a.cells[colIdx].textContent.trim().startsWith('-')) va = -va;
-        if (b.cells[colIdx].textContent.trim().startsWith('-')) vb = -vb;
+        va = parseFloat(va.replace(/[₹,+−-]/g, '').trim());
+        vb = parseFloat(vb.replace(/[₹,+−-]/g, '').trim());
       }
       if (va < vb) return currentSort.dir === 'asc' ? -1 : 1;
       if (va > vb) return currentSort.dir === 'asc' ? 1 : -1;
@@ -389,6 +491,16 @@
     filterTrades();
   }
 
+  function filterCountActive() {
+    return ['filterPair', 'filterReason', 'filterSide', 'filterDateFrom', 'filterDateTo', 'filterPnlMin', 'filterPnlMax', 'filterDaysMin', 'filterDaysMax']
+      .filter(function (id) { return document.getElementById(id).value !== ''; }).length;
+  }
+  function refreshFilterCount() {
+    var n = filterCountActive();
+    var pill = document.getElementById('filterCount');
+    pill.hidden = n === 0;
+    pill.textContent = n;
+  }
   function filterTrades() {
     var pair = pairSel.value;
     var reason = reasonSel.value;
@@ -414,6 +526,7 @@
     if (tradesWrap.classList.contains('collapsed')) {
       tradesToggle.textContent = 'Show all ' + visible + ' trades';
     }
+    refreshFilterCount();
   }
 
   document.querySelectorAll('#tradesTable th').forEach(function (th) {
@@ -435,6 +548,12 @@
     document.getElementById(id).addEventListener('change', filterTrades);
     document.getElementById(id).addEventListener('input', filterTrades);
   });
+  document.getElementById('filterClear').addEventListener('click', function () {
+    ['filterPair', 'filterReason', 'filterSide', 'filterDateFrom', 'filterDateTo', 'filterPnlMin', 'filterPnlMax', 'filterDaysMin', 'filterDaysMax'].forEach(function (id) {
+      document.getElementById(id).value = '';
+    });
+    filterTrades();
+  });
 
   function updateConfigUI(s) {
     var c = s.config;
@@ -445,18 +564,18 @@
     document.getElementById('cfgFloor2').value = Math.round(c.ladder_floor_pcts[1] * 100);
     document.getElementById('cfgFloor3').value = Math.round(c.ladder_floor_pcts[2] * 100);
     document.getElementById('cfgRollover').checked = c.ladder_rollover;
-    document.getElementById('cfgExcluded').textContent = c.excluded_pairs.join(', ');
     var grid = document.getElementById('pairGrid');
     var current = Array.prototype.map.call(grid.querySelectorAll('input'), function (el) { return el.value; });
     if (current.join('\u0001') !== c.pair_universe.join('\u0001')) {
       grid.innerHTML = c.pair_universe.map(function (p) {
         return '<label class="pair-chip"><input type="checkbox" value="' + esc(p) + '"' + (c.excluded_pairs.indexOf(p) === -1 ? ' checked' : '') + '> ' + esc(p) + '</label>';
       }).join('');
-      grid.querySelectorAll('input').forEach(function (el) { el.addEventListener('change', scheduleRecompute); });
+      wirePairGrid();
     }
-    document.querySelectorAll('#pairGrid .pair-chip input').forEach(function (el) {
+    grid.querySelectorAll('input').forEach(function (el) {
       el.checked = c.excluded_pairs.indexOf(el.value) === -1;
     });
+    setDirty(false);
   }
 
   function stepVal(id, dir) {
@@ -486,28 +605,30 @@
   function setCostFields(enabled) {
     cfgBrokerage.disabled = !enabled;
     cfgSlippage.disabled = !enabled;
-    document.querySelectorAll('.config-grid .stepper').forEach(function (st) {
-      var input = st.querySelector('.stepper-input');
-      if (input === cfgBrokerage || input === cfgSlippage) {
-        st.querySelectorAll('.stepper-btn').forEach(function (b) { b.disabled = !enabled; });
-      }
+    [cfgBrokerage, cfgSlippage].forEach(function (input) {
+      input.closest('.stepper').querySelectorAll('.stepper-btn').forEach(function (b) { b.disabled = !enabled; });
     });
   }
-  cfgCosts.addEventListener('change', function () {
-    setCostFields(cfgCosts.checked);
-  });
+  cfgCosts.addEventListener('change', function () { setCostFields(cfgCosts.checked); });
 
   var applyBtn = document.getElementById('cfgApply');
   var statusEl = document.getElementById('cfgStatus');
   var recomputeSeq = 0;
   var liveTimer = null;
   var recomputeAbort = null;
+
+  function setDirty(on) {
+    var hint = document.getElementById('cfgDirtyHint');
+    if (hint) hint.hidden = !on;
+  }
+  function markDirty() { setDirty(true); }
+
   async function recompute() {
     var seq = ++recomputeSeq;
     if (recomputeAbort) recomputeAbort.abort();
     recomputeAbort = new AbortController();
     applyBtn.disabled = true;
-    statusEl.textContent = 'Running backtest…';
+    statusEl.textContent = 'Running backtest\u2026';
     var clampNum = function (id) {
       var el = document.getElementById(id);
       var v = parseFloat(el.value);
@@ -539,7 +660,7 @@
       buildCharts(s);
       buildPositions(s);
       updateConfigUI(s);
-      statusEl.textContent = 'Done — ' + s.trade_stats.n_trades + ' trades, ' + fmtInr(s.trade_stats.total_pnl);
+      statusEl.textContent = 'Done \u2014 ' + s.trade_stats.n_trades + ' trades, ' + fmtInrShort(s.trade_stats.total_pnl);
     } catch (e) {
       if (seq === recomputeSeq) statusEl.textContent = 'Recompute failed: ' + e.message;
     } finally {
@@ -547,13 +668,22 @@
     }
   }
   function scheduleRecompute() {
+    markDirty();
     if (liveTimer) clearTimeout(liveTimer);
     liveTimer = setTimeout(recompute, 350);
   }
   var liveInputs = ['cfgIv', 'cfgStop1', 'cfgStop2', 'cfgFloor1', 'cfgFloor2', 'cfgFloor3', 'cfgBrokerage', 'cfgSlippage'];
   liveInputs.forEach(function (id) { document.getElementById(id).addEventListener('input', scheduleRecompute); });
-  [cfgRollover, cfgCosts].forEach(function (el) { el.addEventListener('change', scheduleRecompute); });
-  document.querySelectorAll('#pairGrid .pair-chip input').forEach(function (el) { el.addEventListener('change', scheduleRecompute); });
+  [document.getElementById('cfgRollover'), cfgCosts].forEach(function (el) { el.addEventListener('change', scheduleRecompute); });
+
+  function wirePairGrid() {
+    document.querySelectorAll('#pairGrid .pair-chip input').forEach(function (el) {
+      el.removeEventListener('change', scheduleRecompute);
+      el.addEventListener('change', scheduleRecompute);
+    });
+  }
+  wirePairGrid();
+
   applyBtn.addEventListener('click', recompute);
   document.getElementById('cfgReset').addEventListener('click', function () {
     recomputeSeq++;
@@ -564,12 +694,13 @@
     setCostFields(false);
     statusEl.textContent = '';
     applyBtn.disabled = false;
+    setDirty(false);
   });
 
   document.getElementById('cfgRefresh').addEventListener('click', async function () {
     var btn = this;
     btn.disabled = true;
-    statusEl.textContent = 'Refreshing data…';
+    statusEl.textContent = 'Refreshing data\u2026';
     try {
       var resp = await fetch('/api/refresh', { method: 'POST' });
       var r = await resp.json();
@@ -586,65 +717,45 @@
   buildTrades(snap);
   buildCharts(snap);
   buildPositions(snap);
-  if (!window.Chart) {
-    showPngFallbacks();
-  }
+
+  window.__onThemeChange = function () { buildCharts(snap); };
 
 function buildPositions(s) {
     var grid = document.getElementById('positionsGrid');
     var noPos = document.getElementById('noPositions');
     var positions = s.live_positions || [];
+    if (!grid) return;
     if (!positions.length) {
-      if (grid) grid.innerHTML = '';
+      grid.innerHTML = '';
       if (noPos) noPos.style.display = '';
       return;
     }
     if (noPos) noPos.style.display = 'none';
-    if (!grid) {
-      var section = document.querySelector('section[aria-label="Live positions"]');
-      grid = document.createElement('div');
-      grid.className = 'positions-grid';
-      grid.id = 'positionsGrid';
-      var empty = section.querySelector('.empty-state');
-      if (empty) section.insertBefore(grid, empty); else section.appendChild(grid);
-    }
-    grid.innerHTML = positions.map(function (p, i) {
-      var sideBadge = p.side === 'CE' ? 'ce' : 'pe';
-      var arrow = p.side === 'CE' ? 'CE \u25B2' : 'PE \u25BC';
+    grid.innerHTML = positions.map(function (p) {
+      var sideCls = p.side === 'CE' ? 'ce' : 'pe';
       var pnl = p.live_pnl || 0;
       var pnlCls = pnl >= 0 ? 'profit' : 'loss';
-      var pnlSign = pnl >= 0 ? '+' : '-';
+      var pnlSign = pnl >= 0 ? '+' : '\u2212';
+      var pct = p.pct_move || 0;
       return '<div class="position-card" data-pair="' + esc(p.pair) + '" data-side="' + esc(p.side) + '">' +
         '<div class="position-header">' +
         '<span class="pair-label">' + esc(p.pair) + '</span>' +
-        '<span class="side-badge ' + sideBadge + '">' + arrow + '</span>' +
+        '<span class="side-badge ' + sideCls + '">' + esc(p.side) + '</span>' +
         '<span class="dte-badge">' + p.days_to_expiry + ' DTE</span>' +
         '</div>' +
         '<div class="position-body">' +
-        '<div class="position-stat"><span class="stat-label">Strike</span><span class="stat-value">\u20B9' + p.strike.toLocaleString('en-IN', { maximumFractionDigits: 0 }) + '</span></div>' +
-        '<div class="position-stat"><span class="stat-label">Entry</span><span class="stat-value">\u20B9' + p.entry_premium.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span></div>' +
-        '<div class="position-stat"><span class="stat-label">Live</span><span class="stat-value" data-live-premium="true" data-entry="' + p.entry_premium + '" data-side="' + esc(p.side) + '">\u20B9' + p.live_premium.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span></div>' +
-        '<div class="position-stat"><span class="stat-label">P&L</span><span class="stat-value ' + pnlCls + '" data-live-pnl="true">' + pnlSign + '\u20B9' + Math.abs(pnl).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span></div>' +
+        '<div><span class="stat-label">Strike</span><span class="stat-value">\u20B9' + p.strike.toLocaleString('en-IN', { maximumFractionDigits: 0 }) + '</span></div>' +
+        '<div><span class="stat-label">Entry</span><span class="stat-value">\u20B9' + p.entry_premium.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span></div>' +
+        '<div><span class="stat-label">Live</span><span class="stat-value" data-live-premium="true">\u20B9' + p.live_premium.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span></div>' +
+        '<div><span class="stat-label">P&L</span><span class="stat-value ' + pnlCls + '" data-live-pnl="true">' + pnlSign + '\u20B9' + Math.abs(pnl).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }) + '</span></div>' +
         '</div>' +
-        '<div class="position-chart"><canvas id="spark-' + i + '" height="48" aria-label="Premium path for ' + esc(p.pair) + '"></canvas></div>' +
-        '<div class="position-footer">' +
-        '<span class="pct-move">' + ((p.pct_move || 0) >= 0 ? '+' : '') + (p.pct_move || 0).toFixed(1) + '% move</span>' +
-        '<span class="banked-floor">Floor: ' + (p.banked_floor == null ? 'none' : esc(p.banked_floor)) + '</span>' +
+        '<div class="move-hero">' +
+        '<span class="move-val ' + (pct >= 0 ? 'profit' : 'loss') + '">' + (pct >= 0 ? '+' : '') + pct.toFixed(1) + '%</span>' +
+        '<span class="move-lbl">premium move since entry</span>' +
         '</div>' +
+        '<div class="position-footer"><span>Floor: ' + (p.banked_floor == null ? 'none banked' : esc(p.banked_floor)) + '</span></div>' +
         '</div>';
     }).join('');
-    if (window.Chart) {
-      positions.forEach(function (p, i) {
-        var canvas = document.getElementById('spark-' + i);
-        var color = p.side === 'CE' ? '#2e7d32' : '#c62828';
-        var premiums = [p.entry_premium, p.live_premium];
-        chartInstances.push(new Chart(canvas, {
-          type: 'line',
-          data: { labels: premiums.map(function (_, k) { return k; }), datasets: [{ data: premiums, borderColor: color, backgroundColor: color + '18', borderWidth: 1.5, pointRadius: 2, pointBackgroundColor: color, fill: true, tension: 0.2 }] },
-          options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, tooltip: { enabled: false } }, scales: { x: { display: false }, y: { display: false } } }
-        }));
-      });
-    }
   }
 
   var remarkSeq = 0;
@@ -660,7 +771,7 @@ function buildPositions(s) {
         var live = card.querySelector('[data-live-premium]');
         var pnl = card.querySelector('[data-live-pnl]');
         if (live) live.textContent = '\u20B9' + p.live_premium.toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-        if (pnl) { pnl.textContent = (p.live_pnl >= 0 ? '+' : '-') + '\u20B9' + Math.abs(p.live_pnl).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); pnl.className = 'stat-value ' + (p.live_pnl >= 0 ? 'profit' : 'loss'); }
+        if (pnl) { pnl.textContent = (p.live_pnl >= 0 ? '+' : '\u2212') + '\u20B9' + Math.abs(p.live_pnl).toLocaleString('en-IN', { minimumFractionDigits: 2, maximumFractionDigits: 2 }); pnl.className = 'stat-value ' + (p.live_pnl >= 0 ? 'profit' : 'loss'); }
       });
     } catch (e) {}
   }

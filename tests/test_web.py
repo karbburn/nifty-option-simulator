@@ -53,7 +53,7 @@ def test_api_live_positions_with_spot():
 def test_dashboard_page():
     resp = client.get("/")
     assert resp.status_code == 200
-    assert "NIFTY Gap Dashboard" in resp.text
+    assert "Nifty Gap Lab" in resp.text
     assert "Live Positions" in resp.text
 
 
@@ -265,7 +265,7 @@ def test_report_charts_served():
 
 def test_dashboard_page_has_config_explorer():
     resp = client.get("/")
-    assert "Config Explorer" in resp.text
+    assert "Strategy parameters" in resp.text
     assert "cfgApply" in resp.text
     assert "cfgRefresh" in resp.text
     assert "themeToggle" in resp.text
