@@ -122,7 +122,7 @@ async def _unhandled_exception(request: Request, exc: Exception):
 # Embedding allow-list: same origin + the portfolio site. Modern browsers use
 # CSP frame-ancestors; X-Frame-Options is omitted because it has no supported
 # cross-origin allow-list syntax (ALLOW-FROM was never standardised).
-_FRAME_ANCESTORS = "'self' https://sourabh08.vercel.app"
+_FRAME_ANCESTORS = "'self' https://www.sourabhpradhan.in https://sourabhpradhan.in https://sourabh08.vercel.app"
 
 
 @app.middleware("http")

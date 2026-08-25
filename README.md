@@ -98,7 +98,7 @@ The service deploys from `main` via the repository blueprint (`render.yaml`):
 4. Optional: external cron ping (e.g. UptimeRobot) to `/health` every 5 minutes keeps the free tier awake.
 5. A scheduled GitHub Action refreshes history and regenerates `output/dashboard.json` + PNGs on weekdays, committing the results; Render auto‑deploys on push. Committed snapshots mean the app boots instantly without regenerating on startup. No environment variables or secrets required.
 
-Embedding: the app sets `Content-Security-Policy: frame-ancestors 'self' https://sourabh08.vercel.app`, so the dashboard can be framed from the portfolio site while remaining protected elsewhere.
+Embedding: the app sets `Content-Security-Policy: frame-ancestors 'self' https://www.sourabhpradhan.in https://sourabhpradhan.in https://sourabh08.vercel.app`, so the dashboard can be framed from the portfolio site while remaining protected elsewhere.
 
 ---
 

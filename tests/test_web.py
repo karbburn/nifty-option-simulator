@@ -317,3 +317,12 @@ def test_refresh_endpoint_structure():
     data = resp.json()
     assert "status" in data
     assert "rows_added" in data
+
+
+def test_frame_ancestors_header_includes_sourabhpradhan_domain():
+    resp = client.get("/")
+    assert resp.status_code == 200
+    csp = resp.headers.get("content-security-policy", "")
+    assert "frame-ancestors" in csp
+    assert "https://www.sourabhpradhan.in" in csp
+    assert "https://sourabhpradhan.in" in csp
