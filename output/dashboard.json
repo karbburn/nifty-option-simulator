@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-25T13:59:32Z",
-  "last_trading_date": "2026-08-24",
-  "git_sha": "26078d4c49aa24e21d35fa37cfc411232948611f",
+  "generated_at": "2026-08-26T11:54:40Z",
+  "last_trading_date": "2026-08-25",
+  "git_sha": "b4dc24d91057746c372879a6089b1ba2655e7be3",
   "config": {
     "iv_flat": 0.125,
     "lot_size": 75,
@@ -37,79 +37,73 @@
     ]
   },
   "trade_stats": {
-    "n_trades": 141,
-    "total_pnl": 165896.4625981828,
-    "win_rate": 0.2553191489361702,
-    "avg_win": 17489.42624149189,
-    "avg_loss": -4416.408400909764,
-    "profit_factor": 1.3577491407120357,
+    "n_trades": 142,
+    "total_pnl": 180969.36392051418,
+    "win_rate": 0.3028169014084507,
+    "avg_win": 13950.79066172353,
+    "avg_loss": -4231.460954884823,
+    "profit_factor": 1.4319958029683022,
     "exit_reasons": [
       {
+        "exit_reason": "stop_5",
+        "count": 85,
+        "pct": 59.859154929577464,
+        "avg_pnl": -4456.61959971868
+      },
+      {
         "exit_reason": "expiry",
-        "count": 40,
-        "pct": 28.368794326241137,
-        "avg_pnl": 14402.372546536344
+        "count": 48,
+        "pct": 33.80281690140845,
+        "avg_pnl": 11612.343240378474
       },
       {
         "exit_reason": "floor_15",
         "count": 6,
-        "pct": 4.25531914893617,
-        "avg_pnl": 712.3785183464861
-      },
-      {
-        "exit_reason": "stop_5",
-        "count": 93,
-        "pct": 65.95744680851064,
-        "avg_pnl": -4454.079733021398
+        "pct": 4.225352112676056,
+        "avg_pnl": 596.9860848191729
       },
       {
         "exit_reason": "stop_3",
-        "count": 1,
-        "pct": 0.7092198581560284,
-        "avg_pnl": -403.37912896388843
-      },
-      {
-        "exit_reason": "floor_10",
-        "count": 1,
-        "pct": 0.7092198581560284,
-        "avg_pnl": 160.08392660396566
+        "count": 3,
+        "pct": 2.112676056338028,
+        "avg_pnl": -397.4540501599222
       }
     ]
   },
   "equity_stats": {
-    "n_days": 252,
-    "final_equity": 165896.4625981828,
-    "max_drawdown": 93646.55233603707,
-    "max_drawdown_pct": 1.8561037127278162,
-    "sharpe_annualized": 0.8826278393866976,
+    "n_days": 253,
+    "final_equity": 180969.3639205142,
+    "max_drawdown": 79960.94443931311,
+    "max_drawdown_pct": 2.0234716764032044,
+    "sharpe_annualized": 1.1345700329963742,
     "annualization": 252,
     "sharpe_note": "mean/std of daily-dollar equity changes \u00d7 \u221a252 (portfolio MTM; ties/flat count as zero)"
   },
   "trades": [
     {
       "entry_date": "2025-08-18",
-      "exit_date": "2025-08-21",
+      "exit_date": "2025-08-19",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24900,
       "entry_close": 24876.95,
       "expiry": "2025-08-21",
-      "entry_premium": 107.68191577373727,
-      "exit_premium": 183.75,
-      "exit_reason": "expiry",
-      "days_held": 3,
-      "pnl": 5705.1063169697045,
+      "entry_premium": 117.43272888655156,
+      "exit_premium": 54.13103117054743,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4747.62732870031,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2025-08-18",
-          "exit_date": "2025-08-21",
+          "exit_date": "2025-08-19",
           "expiry": "2025-08-21",
           "strike": 24900,
-          "entry_premium": 107.68191577373727,
-          "exit_premium": 183.75,
-          "exit_reason": "expiry",
-          "pnl": 5705.1063169697045
+          "entry_premium": 117.43272888655156,
+          "exit_premium": 54.13103117054743,
+          "exit_reason": "stop_5",
+          "pnl": -4747.62732870031
         }
       ]
     },
@@ -169,28 +163,28 @@
     },
     {
       "entry_date": "2025-08-25",
-      "exit_date": "2025-08-26",
+      "exit_date": "2025-08-28",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24950,
       "entry_close": 24967.75,
       "expiry": "2025-08-28",
-      "entry_premium": 129.02676728491133,
-      "exit_premium": 19.24231446782005,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -8233.833961281845,
+      "entry_premium": 97.95087520317611,
+      "exit_premium": 449.09999999999854,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 26336.184359761683,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2025-08-25",
-          "exit_date": "2025-08-26",
+          "exit_date": "2025-08-28",
           "expiry": "2025-08-28",
           "strike": 24950,
-          "entry_premium": 129.02676728491133,
-          "exit_premium": 19.24231446782005,
-          "exit_reason": "stop_5",
-          "pnl": -8233.833961281845
+          "entry_premium": 97.95087520317611,
+          "exit_premium": 449.09999999999854,
+          "exit_reason": "expiry",
+          "pnl": 26336.184359761683
         }
       ]
     },
@@ -223,28 +217,28 @@
     },
     {
       "entry_date": "2025-09-01",
-      "exit_date": "2025-09-02",
+      "exit_date": "2025-09-03",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24650,
       "entry_close": 24625.05,
       "expiry": "2025-09-04",
-      "entry_premium": 105.56288771338586,
-      "exit_premium": 63.341048723839776,
+      "entry_premium": 117.34722679896913,
+      "exit_premium": 35.566950943384654,
       "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -3166.6379242159564,
+      "days_held": 2,
+      "pnl": -6133.520689168836,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2025-09-01",
-          "exit_date": "2025-09-02",
+          "exit_date": "2025-09-03",
           "expiry": "2025-09-04",
           "strike": 24650,
-          "entry_premium": 105.56288771338586,
-          "exit_premium": 63.341048723839776,
+          "entry_premium": 117.34722679896913,
+          "exit_premium": 35.566950943384654,
           "exit_reason": "stop_5",
-          "pnl": -3166.6379242159564
+          "pnl": -6133.520689168836
         }
       ]
     },
@@ -304,28 +298,28 @@
     },
     {
       "entry_date": "2025-09-08",
-      "exit_date": "2025-09-11",
+      "exit_date": "2025-09-09",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24750,
       "entry_close": 24773.15,
       "expiry": "2025-09-11",
-      "entry_premium": 131.04024377604765,
-      "exit_premium": 255.5,
-      "exit_reason": "expiry",
-      "days_held": 3,
-      "pnl": 9334.481716796427,
+      "entry_premium": 94.67117247252281,
+      "exit_premium": 41.614551163269425,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -3979.246598194004,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2025-09-08",
-          "exit_date": "2025-09-11",
+          "exit_date": "2025-09-09",
           "expiry": "2025-09-11",
           "strike": 24750,
-          "entry_premium": 131.04024377604765,
-          "exit_premium": 255.5,
-          "exit_reason": "expiry",
-          "pnl": 9334.481716796427
+          "entry_premium": 94.67117247252281,
+          "exit_premium": 41.614551163269425,
+          "exit_reason": "stop_5",
+          "pnl": -3979.246598194004
         }
       ]
     },
@@ -385,28 +379,28 @@
     },
     {
       "entry_date": "2025-09-15",
-      "exit_date": "2025-09-18",
+      "exit_date": "2025-09-16",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25050,
       "entry_close": 25069.2,
       "expiry": "2025-09-18",
-      "entry_premium": 130.29809230356295,
-      "exit_premium": 373.59999999999854,
-      "exit_reason": "expiry",
-      "days_held": 3,
-      "pnl": 18247.64307723267,
+      "entry_premium": 97.71878983272472,
+      "exit_premium": 25.522884307514687,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -5414.692914390753,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2025-09-15",
-          "exit_date": "2025-09-18",
+          "exit_date": "2025-09-16",
           "expiry": "2025-09-18",
           "strike": 25050,
-          "entry_premium": 130.29809230356295,
-          "exit_premium": 373.59999999999854,
-          "exit_reason": "expiry",
-          "pnl": 18247.64307723267
+          "entry_premium": 97.71878983272472,
+          "exit_premium": 25.522884307514687,
+          "exit_reason": "stop_5",
+          "pnl": -5414.692914390753
         }
       ]
     },
@@ -466,28 +460,28 @@
     },
     {
       "entry_date": "2025-09-22",
-      "exit_date": "2025-09-23",
+      "exit_date": "2025-09-25",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25200,
       "entry_close": 25202.35,
       "expiry": "2025-09-25",
-      "entry_premium": 121.98269367398825,
-      "exit_premium": 82.58286508471429,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -2954.9871441955474,
+      "entry_premium": 106.17327561949423,
+      "exit_premium": 309.15000000000146,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 15223.254328538042,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2025-09-22",
-          "exit_date": "2025-09-23",
+          "exit_date": "2025-09-25",
           "expiry": "2025-09-25",
           "strike": 25200,
-          "entry_premium": 121.98269367398825,
-          "exit_premium": 82.58286508471429,
-          "exit_reason": "stop_5",
-          "pnl": -2954.9871441955474
+          "entry_premium": 106.17327561949423,
+          "exit_premium": 309.15000000000146,
+          "exit_reason": "expiry",
+          "pnl": 15223.254328538042
         }
       ]
     },
@@ -549,15 +543,15 @@
       "entry_date": "2025-09-29",
       "exit_date": "2025-09-30",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24650,
       "entry_close": 24634.9,
       "expiry": "2025-10-02",
-      "entry_premium": 110.41360344968234,
-      "exit_premium": 76.63623589551935,
-      "exit_reason": "stop_5",
+      "entry_premium": 112.34794253526161,
+      "exit_premium": 106.75834711918833,
+      "exit_reason": "stop_3",
       "days_held": 1,
-      "pnl": -2533.3025665622245,
+      "pnl": -419.219656205496,
       "rolls": 0,
       "legs": [
         {
@@ -565,10 +559,10 @@
           "exit_date": "2025-09-30",
           "expiry": "2025-10-02",
           "strike": 24650,
-          "entry_premium": 110.41360344968234,
-          "exit_premium": 76.63623589551935,
-          "exit_reason": "stop_5",
-          "pnl": -2533.3025665622245
+          "entry_premium": 112.34794253526161,
+          "exit_premium": 106.75834711918833,
+          "exit_reason": "stop_3",
+          "pnl": -419.219656205496
         }
       ]
     },
@@ -603,15 +597,15 @@
       "entry_date": "2025-10-06",
       "exit_date": "2025-10-07",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25100,
       "entry_close": 25077.65,
       "expiry": "2025-10-09",
-      "entry_premium": 108.9797418804792,
-      "exit_premium": 101.52627286701318,
+      "entry_premium": 117.92373421508455,
+      "exit_premium": 84.28813865663324,
       "exit_reason": "stop_5",
       "days_held": 1,
-      "pnl": -559.0101760099515,
+      "pnl": -2522.6696668838485,
       "rolls": 0,
       "legs": [
         {
@@ -619,10 +613,10 @@
           "exit_date": "2025-10-07",
           "expiry": "2025-10-09",
           "strike": 25100,
-          "entry_premium": 108.9797418804792,
-          "exit_premium": 101.52627286701318,
+          "entry_premium": 117.92373421508455,
+          "exit_premium": 84.28813865663324,
           "exit_reason": "stop_5",
-          "pnl": -559.0101760099515
+          "pnl": -2522.6696668838485
         }
       ]
     },
@@ -682,28 +676,28 @@
     },
     {
       "entry_date": "2025-10-13",
-      "exit_date": "2025-10-14",
+      "exit_date": "2025-10-15",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25250,
       "entry_close": 25227.35,
       "expiry": "2025-10-16",
-      "entry_premium": 109.54953028864838,
-      "exit_premium": 52.941337167661914,
+      "entry_premium": 118.71340703959686,
+      "exit_premium": 34.18570630054273,
       "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -4245.614484073985,
+      "days_held": 2,
+      "pnl": -6339.577555429059,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2025-10-13",
-          "exit_date": "2025-10-14",
+          "exit_date": "2025-10-15",
           "expiry": "2025-10-16",
           "strike": 25250,
-          "entry_premium": 109.54953028864838,
-          "exit_premium": 52.941337167661914,
+          "entry_premium": 118.71340703959686,
+          "exit_premium": 34.18570630054273,
           "exit_reason": "stop_5",
-          "pnl": -4245.614484073985
+          "pnl": -6339.577555429059
         }
       ]
     },
@@ -765,15 +759,15 @@
       "entry_date": "2025-10-20",
       "exit_date": "2025-10-21",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25850,
       "entry_close": 25843.15,
       "expiry": "2025-10-23",
-      "entry_premium": 120.33172430771265,
-      "exit_premium": 109.98565730331757,
+      "entry_premium": 113.37513872403179,
+      "exit_premium": 82.18044736952652,
       "exit_reason": "stop_5",
       "days_held": 1,
-      "pnl": -775.9550253296311,
+      "pnl": -2339.601851587895,
       "rolls": 0,
       "legs": [
         {
@@ -781,10 +775,10 @@
           "exit_date": "2025-10-21",
           "expiry": "2025-10-23",
           "strike": 25850,
-          "entry_premium": 120.33172430771265,
-          "exit_premium": 109.98565730331757,
+          "entry_premium": 113.37513872403179,
+          "exit_premium": 82.18044736952652,
           "exit_reason": "stop_5",
-          "pnl": -775.9550253296311
+          "pnl": -2339.601851587895
         }
       ]
     },
@@ -819,15 +813,15 @@
       "entry_date": "2025-10-27",
       "exit_date": "2025-10-28",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25950,
       "entry_close": 25966.05,
       "expiry": "2025-10-30",
-      "entry_premium": 132.88545782277652,
-      "exit_premium": 93.48610367610854,
-      "exit_reason": "stop_5",
+      "entry_premium": 102.97546184999192,
+      "exit_premium": 98.04528364585349,
+      "exit_reason": "stop_3",
       "days_held": 1,
-      "pnl": -2954.951561000098,
+      "pnl": -369.76336531038214,
       "rolls": 0,
       "legs": [
         {
@@ -835,10 +829,10 @@
           "exit_date": "2025-10-28",
           "expiry": "2025-10-30",
           "strike": 25950,
-          "entry_premium": 132.88545782277652,
-          "exit_premium": 93.48610367610854,
-          "exit_reason": "stop_5",
-          "pnl": -2954.951561000098
+          "entry_premium": 102.97546184999192,
+          "exit_premium": 98.04528364585349,
+          "exit_reason": "stop_3",
+          "pnl": -369.76336531038214
         }
       ]
     },
@@ -898,28 +892,28 @@
     },
     {
       "entry_date": "2025-11-03",
-      "exit_date": "2025-11-04",
+      "exit_date": "2025-11-06",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25750,
       "entry_close": 25763.35,
       "expiry": "2025-11-06",
-      "entry_premium": 130.46750928968322,
-      "exit_premium": 39.87809984339856,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -6794.20570847135,
+      "entry_premium": 103.36433409511119,
+      "exit_premium": 240.29999999999927,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 10270.174942866606,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2025-11-03",
-          "exit_date": "2025-11-04",
+          "exit_date": "2025-11-06",
           "expiry": "2025-11-06",
           "strike": 25750,
-          "entry_premium": 130.46750928968322,
-          "exit_premium": 39.87809984339856,
-          "exit_reason": "stop_5",
-          "pnl": -6794.20570847135
+          "entry_premium": 103.36433409511119,
+          "exit_premium": 240.29999999999927,
+          "exit_reason": "expiry",
+          "pnl": 10270.174942866606
         }
       ]
     },
@@ -952,28 +946,28 @@
     },
     {
       "entry_date": "2025-11-10",
-      "exit_date": "2025-11-13",
+      "exit_date": "2025-11-11",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25550,
       "entry_close": 25574.35,
       "expiry": "2025-11-13",
-      "entry_premium": 135.52619532810968,
-      "exit_premium": 329.15000000000146,
-      "exit_reason": "expiry",
-      "days_held": 3,
-      "pnl": 14521.785350391883,
+      "entry_premium": 97.52984091174767,
+      "exit_premium": 36.83624857420182,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4552.019425315939,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2025-11-10",
-          "exit_date": "2025-11-13",
+          "exit_date": "2025-11-11",
           "expiry": "2025-11-13",
           "strike": 25550,
-          "entry_premium": 135.52619532810968,
-          "exit_premium": 329.15000000000146,
-          "exit_reason": "expiry",
-          "pnl": 14521.785350391883
+          "entry_premium": 97.52984091174767,
+          "exit_premium": 36.83624857420182,
+          "exit_reason": "stop_5",
+          "pnl": -4552.019425315939
         }
       ]
     },
@@ -1033,28 +1027,28 @@
     },
     {
       "entry_date": "2025-11-17",
-      "exit_date": "2025-11-18",
+      "exit_date": "2025-11-19",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 26000,
       "entry_close": 26013.45,
       "expiry": "2025-11-20",
-      "entry_premium": 131.7182166239072,
-      "exit_premium": 60.805265143830184,
+      "entry_premium": 104.38151545656729,
+      "exit_premium": 43.09565694987214,
       "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -5318.471361005777,
+      "days_held": 2,
+      "pnl": -4596.439388002136,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2025-11-17",
-          "exit_date": "2025-11-18",
+          "exit_date": "2025-11-19",
           "expiry": "2025-11-20",
           "strike": 26000,
-          "entry_premium": 131.7182166239072,
-          "exit_premium": 60.805265143830184,
+          "entry_premium": 104.38151545656729,
+          "exit_premium": 43.09565694987214,
           "exit_reason": "stop_5",
-          "pnl": -5318.471361005777
+          "pnl": -4596.439388002136
         }
       ]
     },
@@ -1114,28 +1108,28 @@
     },
     {
       "entry_date": "2025-11-24",
-      "exit_date": "2025-11-25",
+      "exit_date": "2025-11-26",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25950,
       "entry_close": 25959.5,
       "expiry": "2025-11-27",
-      "entry_premium": 129.35937045553328,
-      "exit_premium": 70.26730737391154,
+      "entry_premium": 105.99937448274613,
+      "exit_premium": 4.737682789821747,
       "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -4431.904731121631,
+      "days_held": 2,
+      "pnl": -7594.626876969329,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2025-11-24",
-          "exit_date": "2025-11-25",
+          "exit_date": "2025-11-26",
           "expiry": "2025-11-27",
           "strike": 25950,
-          "entry_premium": 129.35937045553328,
-          "exit_premium": 70.26730737391154,
+          "entry_premium": 105.99937448274613,
+          "exit_premium": 4.737682789821747,
           "exit_reason": "stop_5",
-          "pnl": -4431.904731121631
+          "pnl": -7594.626876969329
         }
       ]
     },
@@ -1195,28 +1189,28 @@
     },
     {
       "entry_date": "2025-12-01",
-      "exit_date": "2025-12-02",
+      "exit_date": "2025-12-04",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 26200,
       "entry_close": 26175.75,
       "expiry": "2025-12-04",
-      "entry_premium": 113.30553064696505,
-      "exit_premium": 37.172276044464525,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -5709.99409518754,
+      "entry_premium": 123.56200870141583,
+      "exit_premium": 166.25,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 3201.5993473938124,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2025-12-01",
-          "exit_date": "2025-12-02",
+          "exit_date": "2025-12-04",
           "expiry": "2025-12-04",
           "strike": 26200,
-          "entry_premium": 113.30553064696505,
-          "exit_premium": 37.172276044464525,
-          "exit_reason": "stop_5",
-          "pnl": -5709.99409518754
+          "entry_premium": 123.56200870141583,
+          "exit_premium": 166.25,
+          "exit_reason": "expiry",
+          "pnl": 3201.5993473938124
         }
       ]
     },
@@ -1276,28 +1270,28 @@
     },
     {
       "entry_date": "2025-12-08",
-      "exit_date": "2025-12-09",
+      "exit_date": "2025-12-11",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25950,
       "entry_close": 25960.55,
       "expiry": "2025-12-11",
-      "entry_premium": 129.92072296795232,
-      "exit_premium": 53.40370426145091,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -5738.776402987605,
+      "entry_premium": 105.51072699516772,
+      "exit_premium": 51.45000000000073,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": -4054.554524637524,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2025-12-08",
-          "exit_date": "2025-12-09",
+          "exit_date": "2025-12-11",
           "expiry": "2025-12-11",
           "strike": 25950,
-          "entry_premium": 129.92072296795232,
-          "exit_premium": 53.40370426145091,
-          "exit_reason": "stop_5",
-          "pnl": -5738.776402987605
+          "entry_premium": 105.51072699516772,
+          "exit_premium": 51.45000000000073,
+          "exit_reason": "expiry",
+          "pnl": -4054.554524637524
         }
       ]
     },
@@ -1357,28 +1351,28 @@
     },
     {
       "entry_date": "2025-12-15",
-      "exit_date": "2025-12-16",
+      "exit_date": "2025-12-18",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 26050,
       "entry_close": 26027.3,
       "expiry": "2025-12-18",
-      "entry_premium": 113.34749385122632,
-      "exit_premium": 31.373593667306523,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -6148.042513793985,
+      "entry_premium": 122.1340874893358,
+      "exit_premium": 234.45000000000073,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 8423.69343829987,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2025-12-15",
-          "exit_date": "2025-12-16",
+          "exit_date": "2025-12-18",
           "expiry": "2025-12-18",
           "strike": 26050,
-          "entry_premium": 113.34749385122632,
-          "exit_premium": 31.373593667306523,
-          "exit_reason": "stop_5",
-          "pnl": -6148.042513793985
+          "entry_premium": 122.1340874893358,
+          "exit_premium": 234.45000000000073,
+          "exit_reason": "expiry",
+          "pnl": 8423.69343829987
         }
       ]
     },
@@ -1440,15 +1434,15 @@
       "entry_date": "2025-12-22",
       "exit_date": "2025-12-23",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 26150,
       "entry_close": 26172.4,
       "expiry": "2025-12-25",
-      "entry_premium": 137.31486740747278,
-      "exit_premium": 115.88671193730443,
+      "entry_premium": 100.94805065647597,
+      "exit_premium": 79.42467171413955,
       "exit_reason": "stop_5",
       "days_held": 1,
-      "pnl": -1607.1116602626262,
+      "pnl": -1614.2534206752316,
       "rolls": 0,
       "legs": [
         {
@@ -1456,10 +1450,10 @@
           "exit_date": "2025-12-23",
           "expiry": "2025-12-25",
           "strike": 26150,
-          "entry_premium": 137.31486740747278,
-          "exit_premium": 115.88671193730443,
+          "entry_premium": 100.94805065647597,
+          "exit_premium": 79.42467171413955,
           "exit_reason": "stop_5",
-          "pnl": -1607.1116602626262
+          "pnl": -1614.2534206752316
         }
       ]
     },
@@ -1494,15 +1488,15 @@
       "entry_date": "2025-12-29",
       "exit_date": "2025-12-30",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25950,
       "entry_close": 25942.1,
       "expiry": "2026-01-01",
-      "entry_premium": 120.27417204210906,
-      "exit_premium": 94.8017491029932,
+      "entry_premium": 114.31417606932337,
+      "exit_premium": 96.71092907274215,
       "exit_reason": "stop_5",
       "days_held": 1,
-      "pnl": -1910.4317204336894,
+      "pnl": -1320.2435247435915,
       "rolls": 0,
       "legs": [
         {
@@ -1510,10 +1504,10 @@
           "exit_date": "2025-12-30",
           "expiry": "2026-01-01",
           "strike": 25950,
-          "entry_premium": 120.27417204210906,
-          "exit_premium": 94.8017491029932,
+          "entry_premium": 114.31417606932337,
+          "exit_premium": 96.71092907274215,
           "exit_reason": "stop_5",
-          "pnl": -1910.4317204336894
+          "pnl": -1320.2435247435915
         }
       ]
     },
@@ -1573,28 +1567,28 @@
     },
     {
       "entry_date": "2026-01-05",
-      "exit_date": "2026-01-06",
+      "exit_date": "2026-01-08",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 26250,
       "entry_close": 26250.3,
       "expiry": "2026-01-08",
-      "entry_premium": 125.94216511768536,
-      "exit_premium": 68.91310170796532,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -4277.179755729003,
+      "entry_premium": 111.62193797758664,
+      "exit_premium": 373.15000000000146,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 19614.60465168111,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-01-05",
-          "exit_date": "2026-01-06",
+          "exit_date": "2026-01-08",
           "expiry": "2026-01-08",
           "strike": 26250,
-          "entry_premium": 125.94216511768536,
-          "exit_premium": 68.91310170796532,
-          "exit_reason": "stop_5",
-          "pnl": -4277.179755729003
+          "entry_premium": 111.62193797758664,
+          "exit_premium": 373.15000000000146,
+          "exit_reason": "expiry",
+          "pnl": 19614.60465168111
         }
       ]
     },
@@ -1654,28 +1648,28 @@
     },
     {
       "entry_date": "2026-01-12",
-      "exit_date": "2026-01-13",
+      "exit_date": "2026-01-14",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25800,
       "entry_close": 25790.25,
       "expiry": "2026-01-15",
-      "entry_premium": 118.61394867348099,
-      "exit_premium": 68.689726209117,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -3744.3166848272995,
+      "entry_premium": 114.58406828435363,
+      "exit_premium": 151.09564050824702,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 2738.3679167920036,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-01-12",
-          "exit_date": "2026-01-13",
+          "exit_date": "2026-01-14",
           "expiry": "2026-01-15",
           "strike": 25800,
-          "entry_premium": 118.61394867348099,
-          "exit_premium": 68.689726209117,
-          "exit_reason": "stop_5",
-          "pnl": -3744.3166848272995
+          "entry_premium": 114.58406828435363,
+          "exit_premium": 151.09564050824702,
+          "exit_reason": "expiry",
+          "pnl": 2738.3679167920036
         }
       ]
     },
@@ -1708,28 +1702,28 @@
     },
     {
       "entry_date": "2026-01-19",
-      "exit_date": "2026-01-20",
+      "exit_date": "2026-01-22",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25600,
       "entry_close": 25585.5,
       "expiry": "2026-01-22",
-      "entry_premium": 115.26023398545112,
-      "exit_premium": 6.519345412769553,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -8155.5666429511175,
+      "entry_premium": 116.0871743745356,
+      "exit_premium": 310.09999999999854,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 14550.96192190972,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-01-19",
-          "exit_date": "2026-01-20",
+          "exit_date": "2026-01-22",
           "expiry": "2026-01-22",
           "strike": 25600,
-          "entry_premium": 115.26023398545112,
-          "exit_premium": 6.519345412769553,
-          "exit_reason": "stop_5",
-          "pnl": -8155.5666429511175
+          "entry_premium": 116.0871743745356,
+          "exit_premium": 310.09999999999854,
+          "exit_reason": "expiry",
+          "pnl": 14550.96192190972
         }
       ]
     },
@@ -1843,28 +1837,28 @@
     },
     {
       "entry_date": "2026-02-02",
-      "exit_date": "2026-02-05",
+      "exit_date": "2026-02-03",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25100,
       "entry_close": 25088.4,
       "expiry": "2026-02-05",
-      "entry_premium": 114.32519835534913,
-      "exit_premium": 542.7999999999993,
-      "exit_reason": "expiry",
-      "days_held": 3,
-      "pnl": 32135.61012334876,
+      "entry_premium": 112.51919068995448,
+      "exit_premium": 0.24330862041828993,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -8420.691155215214,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-02-02",
-          "exit_date": "2026-02-05",
+          "exit_date": "2026-02-03",
           "expiry": "2026-02-05",
           "strike": 25100,
-          "entry_premium": 114.32519835534913,
-          "exit_premium": 542.7999999999993,
-          "exit_reason": "expiry",
-          "pnl": 32135.61012334876
+          "entry_premium": 112.51919068995448,
+          "exit_premium": 0.24330862041828993,
+          "exit_reason": "stop_5",
+          "pnl": -8420.691155215214
         }
       ]
     },
@@ -1924,28 +1918,28 @@
     },
     {
       "entry_date": "2026-02-09",
-      "exit_date": "2026-02-11",
+      "exit_date": "2026-02-10",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25850,
       "entry_close": 25867.3,
       "expiry": "2026-02-12",
-      "entry_premium": 133.08654864375058,
-      "exit_premium": 135.22100099847012,
-      "exit_reason": "floor_10",
-      "days_held": 2,
-      "pnl": 160.08392660396566,
+      "entry_premium": 101.9799630600719,
+      "exit_premium": 55.70361269768728,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -3470.7262771788464,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-02-09",
-          "exit_date": "2026-02-11",
+          "exit_date": "2026-02-10",
           "expiry": "2026-02-12",
           "strike": 25850,
-          "entry_premium": 133.08654864375058,
-          "exit_premium": 135.22100099847012,
-          "exit_reason": "floor_10",
-          "pnl": 160.08392660396566
+          "entry_premium": 101.9799630600719,
+          "exit_premium": 55.70361269768728,
+          "exit_reason": "stop_5",
+          "pnl": -3470.7262771788464
         }
       ]
     },
@@ -2005,28 +1999,28 @@
     },
     {
       "entry_date": "2026-02-16",
-      "exit_date": "2026-02-19",
+      "exit_date": "2026-02-17",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25700,
       "entry_close": 25682.75,
       "expiry": "2026-02-19",
-      "entry_premium": 114.36573702962232,
-      "exit_premium": 0.0,
-      "exit_reason": "expiry",
-      "days_held": 3,
-      "pnl": -8577.430277221674,
+      "entry_premium": 117.8892670296027,
+      "exit_premium": 78.62151628954598,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -2945.0813055042545,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-02-16",
-          "exit_date": "2026-02-19",
+          "exit_date": "2026-02-17",
           "expiry": "2026-02-19",
           "strike": 25700,
-          "entry_premium": 114.36573702962232,
-          "exit_premium": 0.0,
-          "exit_reason": "expiry",
-          "pnl": -8577.430277221674
+          "entry_premium": 117.8892670296027,
+          "exit_premium": 78.62151628954598,
+          "exit_reason": "stop_5",
+          "pnl": -2945.0813055042545
         }
       ]
     },
@@ -2086,28 +2080,28 @@
     },
     {
       "entry_date": "2026-02-23",
-      "exit_date": "2026-02-24",
+      "exit_date": "2026-02-26",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 25700,
       "entry_close": 25713.0,
       "expiry": "2026-02-26",
-      "entry_premium": 130.03948675421634,
-      "exit_premium": 15.420582371760247,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -8596.417828684207,
+      "entry_premium": 103.31301675419309,
+      "exit_premium": 203.45000000000073,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 7510.273743435573,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-02-23",
-          "exit_date": "2026-02-24",
+          "exit_date": "2026-02-26",
           "expiry": "2026-02-26",
           "strike": 25700,
-          "entry_premium": 130.03948675421634,
-          "exit_premium": 15.420582371760247,
-          "exit_reason": "stop_5",
-          "pnl": -8596.417828684207
+          "entry_premium": 103.31301675419309,
+          "exit_premium": 203.45000000000073,
+          "exit_reason": "expiry",
+          "pnl": 7510.273743435573
         }
       ]
     },
@@ -2194,28 +2188,28 @@
     },
     {
       "entry_date": "2026-03-09",
-      "exit_date": "2026-03-11",
+      "exit_date": "2026-03-10",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24050,
       "entry_close": 24028.05,
       "expiry": "2026-03-12",
-      "entry_premium": 104.15906341425944,
-      "exit_premium": 9.908437033102018,
+      "entry_premium": 113.26386483447277,
+      "exit_premium": 19.148833762610593,
       "exit_reason": "stop_5",
-      "days_held": 2,
-      "pnl": -7068.796978586806,
+      "days_held": 1,
+      "pnl": -7058.627330389663,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-03-09",
-          "exit_date": "2026-03-11",
+          "exit_date": "2026-03-10",
           "expiry": "2026-03-12",
           "strike": 24050,
-          "entry_premium": 104.15906341425944,
-          "exit_premium": 9.908437033102018,
+          "entry_premium": 113.26386483447277,
+          "exit_premium": 19.148833762610593,
           "exit_reason": "stop_5",
-          "pnl": -7068.796978586806
+          "pnl": -7058.627330389663
         }
       ]
     },
@@ -2275,28 +2269,28 @@
     },
     {
       "entry_date": "2026-03-16",
-      "exit_date": "2026-03-19",
+      "exit_date": "2026-03-17",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 23400,
       "entry_close": 23408.8,
       "expiry": "2026-03-19",
-      "entry_premium": 116.77247924900075,
-      "exit_premium": 0.0,
-      "exit_reason": "expiry",
-      "days_held": 3,
-      "pnl": -8757.935943675056,
+      "entry_premium": 95.4744481983962,
+      "exit_premium": 22.971288470514992,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -5437.736979591091,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-03-16",
-          "exit_date": "2026-03-19",
+          "exit_date": "2026-03-17",
           "expiry": "2026-03-19",
           "strike": 23400,
-          "entry_premium": 116.77247924900075,
-          "exit_premium": 0.0,
-          "exit_reason": "expiry",
-          "pnl": -8757.935943675056
+          "entry_premium": 95.4744481983962,
+          "exit_premium": 22.971288470514992,
+          "exit_reason": "stop_5",
+          "pnl": -5437.736979591091
         }
       ]
     },
@@ -2356,28 +2350,28 @@
     },
     {
       "entry_date": "2026-03-23",
-      "exit_date": "2026-03-25",
+      "exit_date": "2026-03-24",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 22500,
       "entry_close": 22512.65,
       "expiry": "2026-03-26",
-      "entry_premium": 114.53262680646185,
-      "exit_premium": 810.4564933858455,
-      "exit_reason": "expiry",
-      "days_held": 2,
-      "pnl": 52194.28999345378,
+      "entry_premium": 89.8652892577993,
+      "exit_premium": 1.776634495289045,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -6606.649107188269,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-03-23",
-          "exit_date": "2026-03-25",
+          "exit_date": "2026-03-24",
           "expiry": "2026-03-26",
           "strike": 22500,
-          "entry_premium": 114.53262680646185,
-          "exit_premium": 810.4564933858455,
-          "exit_reason": "expiry",
-          "pnl": 52194.28999345378
+          "entry_premium": 89.8652892577993,
+          "exit_premium": 1.776634495289045,
+          "exit_reason": "stop_5",
+          "pnl": -6606.649107188269
         }
       ]
     },
@@ -2410,28 +2404,28 @@
     },
     {
       "entry_date": "2026-04-06",
-      "exit_date": "2026-04-09",
+      "exit_date": "2026-04-07",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 22950,
       "entry_close": 22968.25,
       "expiry": "2026-04-09",
-      "entry_premium": 119.73663006390962,
-      "exit_premium": 825.0999999999985,
-      "exit_reason": "expiry",
-      "days_held": 3,
-      "pnl": 52902.25274520667,
+      "entry_premium": 89.22894576427825,
+      "exit_premium": 23.304406688203017,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4944.340430705643,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-04-06",
-          "exit_date": "2026-04-09",
+          "exit_date": "2026-04-07",
           "expiry": "2026-04-09",
           "strike": 22950,
-          "entry_premium": 119.73663006390962,
-          "exit_premium": 825.0999999999985,
-          "exit_reason": "expiry",
-          "pnl": 52902.25274520667
+          "entry_premium": 89.22894576427825,
+          "exit_premium": 23.304406688203017,
+          "exit_reason": "stop_5",
+          "pnl": -4944.340430705643
         }
       ]
     },
@@ -2518,28 +2512,28 @@
     },
     {
       "entry_date": "2026-04-20",
-      "exit_date": "2026-04-22",
+      "exit_date": "2026-04-21",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24350,
       "entry_close": 24364.85,
       "expiry": "2026-04-23",
-      "entry_premium": 124.5779690182444,
-      "exit_premium": 81.11928937141238,
+      "entry_premium": 96.72253927114252,
+      "exit_premium": 17.476736411482307,
       "exit_reason": "stop_5",
-      "days_held": 2,
-      "pnl": -3259.400973512402,
+      "days_held": 1,
+      "pnl": -5943.435214474516,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-04-20",
-          "exit_date": "2026-04-22",
+          "exit_date": "2026-04-21",
           "expiry": "2026-04-23",
           "strike": 24350,
-          "entry_premium": 124.5779690182444,
-          "exit_premium": 81.11928937141238,
+          "entry_premium": 96.72253927114252,
+          "exit_premium": 17.476736411482307,
           "exit_reason": "stop_5",
-          "pnl": -3259.400973512402
+          "pnl": -5943.435214474516
         }
       ]
     },
@@ -2599,28 +2593,28 @@
     },
     {
       "entry_date": "2026-04-27",
-      "exit_date": "2026-04-28",
+      "exit_date": "2026-04-29",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24100,
       "entry_close": 24092.7,
       "expiry": "2026-04-30",
-      "entry_premium": 111.71849534571265,
-      "exit_premium": 48.984761535856705,
+      "entry_premium": 106.1465915713743,
+      "exit_premium": 30.32638746712928,
       "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -4705.030035739196,
+      "days_held": 2,
+      "pnl": -5686.515307818377,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-04-27",
-          "exit_date": "2026-04-28",
+          "exit_date": "2026-04-29",
           "expiry": "2026-04-30",
           "strike": 24100,
-          "entry_premium": 111.71849534571265,
-          "exit_premium": 48.984761535856705,
+          "entry_premium": 106.1465915713743,
+          "exit_premium": 30.32638746712928,
           "exit_reason": "stop_5",
-          "pnl": -4705.030035739196
+          "pnl": -5686.515307818377
         }
       ]
     },
@@ -2653,28 +2647,28 @@
     },
     {
       "entry_date": "2026-05-04",
-      "exit_date": "2026-05-05",
+      "exit_date": "2026-05-06",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24100,
       "entry_close": 24119.3,
       "expiry": "2026-05-07",
-      "entry_premium": 125.81090432533892,
-      "exit_premium": 62.57380385986835,
+      "entry_premium": 93.63900055100021,
+      "exit_premium": 4.80489587619968,
       "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -4742.782534910293,
+      "days_held": 2,
+      "pnl": -6662.557850610039,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-05-04",
-          "exit_date": "2026-05-05",
+          "exit_date": "2026-05-06",
           "expiry": "2026-05-07",
           "strike": 24100,
-          "entry_premium": 125.81090432533892,
-          "exit_premium": 62.57380385986835,
+          "entry_premium": 93.63900055100021,
+          "exit_premium": 4.80489587619968,
           "exit_reason": "stop_5",
-          "pnl": -4742.782534910293
+          "pnl": -6662.557850610039
         }
       ]
     },
@@ -2734,28 +2728,28 @@
     },
     {
       "entry_date": "2026-05-11",
-      "exit_date": "2026-05-12",
+      "exit_date": "2026-05-14",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 23800,
       "entry_close": 23815.85,
       "expiry": "2026-05-14",
-      "entry_premium": 122.48980233419024,
-      "exit_premium": 2.4898233509748025,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -8999.998423741159,
+      "entry_premium": 93.92812972717002,
+      "exit_premium": 110.40000000000146,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 1235.3902704623579,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-05-11",
-          "exit_date": "2026-05-12",
+          "exit_date": "2026-05-14",
           "expiry": "2026-05-14",
           "strike": 23800,
-          "entry_premium": 122.48980233419024,
-          "exit_premium": 2.4898233509748025,
-          "exit_reason": "stop_5",
-          "pnl": -8999.998423741159
+          "entry_premium": 93.92812972717002,
+          "exit_premium": 110.40000000000146,
+          "exit_reason": "expiry",
+          "pnl": 1235.3902704623579
         }
       ]
     },
@@ -2815,28 +2809,28 @@
     },
     {
       "entry_date": "2026-05-18",
-      "exit_date": "2026-05-19",
+      "exit_date": "2026-05-20",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 23650,
       "entry_close": 23649.95,
       "expiry": "2026-05-21",
-      "entry_premium": 113.30095363557666,
-      "exit_premium": 75.94377662782426,
+      "entry_premium": 100.7193966122104,
+      "exit_premium": 55.356550794071154,
       "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -2801.78827558143,
+      "days_held": 2,
+      "pnl": -3402.2134363604437,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-05-18",
-          "exit_date": "2026-05-19",
+          "exit_date": "2026-05-20",
           "expiry": "2026-05-21",
           "strike": 23650,
-          "entry_premium": 113.30095363557666,
-          "exit_premium": 75.94377662782426,
+          "entry_premium": 100.7193966122104,
+          "exit_premium": 55.356550794071154,
           "exit_reason": "stop_5",
-          "pnl": -2801.78827558143
+          "pnl": -3402.2134363604437
         }
       ]
     },
@@ -2896,28 +2890,28 @@
     },
     {
       "entry_date": "2026-05-25",
-      "exit_date": "2026-05-26",
+      "exit_date": "2026-05-27",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24050,
       "entry_close": 24031.7,
       "expiry": "2026-05-28",
-      "entry_premium": 105.95339587929811,
-      "exit_premium": 38.91948652345127,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -5027.543201688513,
+      "entry_premium": 111.40819729951,
+      "exit_premium": 154.80998960353827,
+      "exit_reason": "expiry",
+      "days_held": 2,
+      "pnl": 3255.1344228021208,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-05-25",
-          "exit_date": "2026-05-26",
+          "exit_date": "2026-05-27",
           "expiry": "2026-05-28",
           "strike": 24050,
-          "entry_premium": 105.95339587929811,
-          "exit_premium": 38.91948652345127,
-          "exit_reason": "stop_5",
-          "pnl": -5027.543201688513
+          "entry_premium": 111.40819729951,
+          "exit_premium": 154.80998960353827,
+          "exit_reason": "expiry",
+          "pnl": 3255.1344228021208
         }
       ]
     },
@@ -2950,28 +2944,28 @@
     },
     {
       "entry_date": "2026-06-01",
-      "exit_date": "2026-06-03",
+      "exit_date": "2026-06-02",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 23400,
       "entry_close": 23382.6,
       "expiry": "2026-06-04",
-      "entry_premium": 103.29029442472893,
-      "exit_premium": 66.08803153253757,
+      "entry_premium": 108.19226337412874,
+      "exit_premium": 48.22648948558526,
       "exit_reason": "stop_5",
-      "days_held": 2,
-      "pnl": -2790.1697169143517,
+      "days_held": 1,
+      "pnl": -4497.433041640761,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-06-01",
-          "exit_date": "2026-06-03",
+          "exit_date": "2026-06-02",
           "expiry": "2026-06-04",
           "strike": 23400,
-          "entry_premium": 103.29029442472893,
-          "exit_premium": 66.08803153253757,
+          "entry_premium": 108.19226337412874,
+          "exit_premium": 48.22648948558526,
           "exit_reason": "stop_5",
-          "pnl": -2790.1697169143517
+          "pnl": -4497.433041640761
         }
       ]
     },
@@ -3031,28 +3025,28 @@
     },
     {
       "entry_date": "2026-06-08",
-      "exit_date": "2026-06-10",
+      "exit_date": "2026-06-09",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 23100,
       "entry_close": 23123.0,
       "expiry": "2026-06-11",
-      "entry_premium": 123.07734175756195,
-      "exit_premium": 137.73196293722867,
-      "exit_reason": "floor_15",
-      "days_held": 2,
-      "pnl": 1099.096588475004,
+      "entry_premium": 87.73954187427444,
+      "exit_premium": 30.561454004680854,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4288.356590219519,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-06-08",
-          "exit_date": "2026-06-10",
+          "exit_date": "2026-06-09",
           "expiry": "2026-06-11",
           "strike": 23100,
-          "entry_premium": 123.07734175756195,
-          "exit_premium": 137.73196293722867,
-          "exit_reason": "floor_15",
-          "pnl": 1099.096588475004
+          "entry_premium": 87.73954187427444,
+          "exit_premium": 30.561454004680854,
+          "exit_reason": "stop_5",
+          "pnl": -4288.356590219519
         }
       ]
     },
@@ -3112,28 +3106,28 @@
     },
     {
       "entry_date": "2026-06-15",
-      "exit_date": "2026-06-18",
+      "exit_date": "2026-06-16",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 23850,
       "entry_close": 23853.9,
       "expiry": "2026-06-18",
-      "entry_premium": 116.32870499422279,
-      "exit_premium": 318.0,
-      "exit_reason": "expiry",
-      "days_held": 3,
-      "pnl": 15125.34712543329,
+      "entry_premium": 99.69032719264214,
+      "exit_premium": 33.41030851715732,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4971.001400661362,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-06-15",
-          "exit_date": "2026-06-18",
+          "exit_date": "2026-06-16",
           "expiry": "2026-06-18",
           "strike": 23850,
-          "entry_premium": 116.32870499422279,
-          "exit_premium": 318.0,
-          "exit_reason": "expiry",
-          "pnl": 15125.34712543329
+          "entry_premium": 99.69032719264214,
+          "exit_premium": 33.41030851715732,
+          "exit_reason": "stop_5",
+          "pnl": -4971.001400661362
         }
       ]
     },
@@ -3193,28 +3187,28 @@
     },
     {
       "entry_date": "2026-06-22",
-      "exit_date": "2026-06-23",
+      "exit_date": "2026-06-24",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24100,
       "entry_close": 24102.9,
       "expiry": "2026-06-25",
-      "entry_premium": 117.00053318504615,
-      "exit_premium": 12.286947640706785,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -7853.5189158254525,
+      "entry_premium": 101.22862941070889,
+      "exit_premium": 106.65185590819056,
+      "exit_reason": "floor_15",
+      "days_held": 2,
+      "pnl": 406.74198731112483,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-06-22",
-          "exit_date": "2026-06-23",
+          "exit_date": "2026-06-24",
           "expiry": "2026-06-25",
           "strike": 24100,
-          "entry_premium": 117.00053318504615,
-          "exit_premium": 12.286947640706785,
-          "exit_reason": "stop_5",
-          "pnl": -7853.5189158254525
+          "entry_premium": 101.22862941070889,
+          "exit_premium": 106.65185590819056,
+          "exit_reason": "floor_15",
+          "pnl": 406.74198731112483
         }
       ]
     },
@@ -3247,28 +3241,28 @@
     },
     {
       "entry_date": "2026-06-29",
-      "exit_date": "2026-06-30",
+      "exit_date": "2026-07-01",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 23950,
       "entry_close": 23946.25,
       "expiry": "2026-07-02",
-      "entry_premium": 112.82091235162625,
-      "exit_premium": 55.49731606203386,
+      "entry_premium": 103.77912416094478,
+      "exit_premium": 37.063898149972374,
       "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -4299.269721719429,
+      "days_held": 2,
+      "pnl": -5003.64195082293,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-06-29",
-          "exit_date": "2026-06-30",
+          "exit_date": "2026-07-01",
           "expiry": "2026-07-02",
           "strike": 23950,
-          "entry_premium": 112.82091235162625,
-          "exit_premium": 55.49731606203386,
+          "entry_premium": 103.77912416094478,
+          "exit_premium": 37.063898149972374,
           "exit_reason": "stop_5",
-          "pnl": -4299.269721719429
+          "pnl": -5003.64195082293
         }
       ]
     },
@@ -3328,28 +3322,28 @@
     },
     {
       "entry_date": "2026-07-06",
-      "exit_date": "2026-07-07",
+      "exit_date": "2026-07-09",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24450,
       "entry_close": 24430.35,
       "expiry": "2026-07-09",
-      "entry_premium": 107.19957555290421,
-      "exit_premium": 70.44327962669377,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -2756.722194465783,
+      "entry_premium": 113.79073541669823,
+      "exit_premium": 487.2000000000007,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 28005.69484374769,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-07-06",
-          "exit_date": "2026-07-07",
+          "exit_date": "2026-07-09",
           "expiry": "2026-07-09",
           "strike": 24450,
-          "entry_premium": 107.19957555290421,
-          "exit_premium": 70.44327962669377,
-          "exit_reason": "stop_5",
-          "pnl": -2756.722194465783
+          "entry_premium": 113.79073541669823,
+          "exit_premium": 487.2000000000007,
+          "exit_reason": "expiry",
+          "pnl": 28005.69484374769
         }
       ]
     },
@@ -3409,28 +3403,28 @@
     },
     {
       "entry_date": "2026-07-13",
-      "exit_date": "2026-07-14",
+      "exit_date": "2026-07-16",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24200,
       "entry_close": 24211.0,
       "expiry": "2026-07-16",
-      "entry_premium": 121.78195412817331,
-      "exit_premium": 36.18344304915627,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -6419.888330926278,
+      "entry_premium": 97.85663996472977,
+      "exit_premium": 127.25,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 2204.5020026452676,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-07-13",
-          "exit_date": "2026-07-14",
+          "exit_date": "2026-07-16",
           "expiry": "2026-07-16",
           "strike": 24200,
-          "entry_premium": 121.78195412817331,
-          "exit_premium": 36.18344304915627,
-          "exit_reason": "stop_5",
-          "pnl": -6419.888330926278
+          "entry_premium": 97.85663996472977,
+          "exit_premium": 127.25,
+          "exit_reason": "expiry",
+          "pnl": 2204.5020026452676
         }
       ]
     },
@@ -3490,28 +3484,28 @@
     },
     {
       "entry_date": "2026-07-20",
-      "exit_date": "2026-07-21",
+      "exit_date": "2026-07-23",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24250,
       "entry_close": 24238.5,
       "expiry": "2026-07-23",
-      "entry_premium": 110.30587181164083,
-      "exit_premium": 65.10410522569327,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -3390.1324939460665,
+      "entry_premium": 108.8538524536416,
+      "exit_premium": 380.40000000000146,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 20365.96106597699,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-07-20",
-          "exit_date": "2026-07-21",
+          "exit_date": "2026-07-23",
           "expiry": "2026-07-23",
           "strike": 24250,
-          "entry_premium": 110.30587181164083,
-          "exit_premium": 65.10410522569327,
-          "exit_reason": "stop_5",
-          "pnl": -3390.1324939460665
+          "entry_premium": 108.8538524536416,
+          "exit_premium": 380.40000000000146,
+          "exit_reason": "expiry",
+          "pnl": 20365.96106597699
         }
       ]
     },
@@ -3573,15 +3567,15 @@
       "entry_date": "2026-07-27",
       "exit_date": "2026-07-28",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24000,
       "entry_close": 23995.95,
       "expiry": "2026-07-30",
-      "entry_premium": 112.90587990578206,
-      "exit_premium": 85.53165602714762,
+      "entry_premium": 104.13738652054599,
+      "exit_premium": 91.6352328777848,
       "exit_reason": "stop_5",
       "days_held": 1,
-      "pnl": -2053.066790897583,
+      "pnl": -937.661523207089,
       "rolls": 0,
       "legs": [
         {
@@ -3589,10 +3583,10 @@
           "exit_date": "2026-07-28",
           "expiry": "2026-07-30",
           "strike": 24000,
-          "entry_premium": 112.90587990578206,
-          "exit_premium": 85.53165602714762,
+          "entry_premium": 104.13738652054599,
+          "exit_premium": 91.6352328777848,
           "exit_reason": "stop_5",
-          "pnl": -2053.066790897583
+          "pnl": -937.661523207089
         }
       ]
     },
@@ -3652,28 +3646,28 @@
     },
     {
       "entry_date": "2026-08-03",
-      "exit_date": "2026-08-04",
+      "exit_date": "2026-08-06",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24750,
       "entry_close": 24774.3,
       "expiry": "2026-08-06",
-      "entry_premium": 131.67806298706637,
-      "exit_premium": 41.539494071769695,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -6760.3926686472505,
+      "entry_premium": 94.1589916835419,
+      "exit_premium": 114.0,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 1488.0756237343576,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-08-03",
-          "exit_date": "2026-08-04",
+          "exit_date": "2026-08-06",
           "expiry": "2026-08-06",
           "strike": 24750,
-          "entry_premium": 131.67806298706637,
-          "exit_premium": 41.539494071769695,
-          "exit_reason": "stop_5",
-          "pnl": -6760.3926686472505
+          "entry_premium": 94.1589916835419,
+          "exit_premium": 114.0,
+          "exit_reason": "expiry",
+          "pnl": 1488.0756237343576
         }
       ]
     },
@@ -3733,28 +3727,28 @@
     },
     {
       "entry_date": "2026-08-10",
-      "exit_date": "2026-08-11",
+      "exit_date": "2026-08-13",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24600,
       "entry_close": 24583.8,
       "expiry": "2026-08-13",
-      "entry_premium": 109.62581096043505,
-      "exit_premium": 43.059700431239435,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -4992.458289689671,
+      "entry_premium": 112.68685524056855,
+      "exit_premium": 204.15000000000146,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": 6859.735856957468,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-08-10",
-          "exit_date": "2026-08-11",
+          "exit_date": "2026-08-13",
           "expiry": "2026-08-13",
           "strike": 24600,
-          "entry_premium": 109.62581096043505,
-          "exit_premium": 43.059700431239435,
-          "exit_reason": "stop_5",
-          "pnl": -4992.458289689671
+          "entry_premium": 112.68685524056855,
+          "exit_premium": 204.15000000000146,
+          "exit_reason": "expiry",
+          "pnl": 6859.735856957468
         }
       ]
     },
@@ -3814,28 +3808,28 @@
     },
     {
       "entry_date": "2026-08-17",
-      "exit_date": "2026-08-18",
+      "exit_date": "2026-08-20",
       "pair": "Mon\u2192Tue",
-      "side": "CE",
+      "side": "PE",
       "strike": 24300,
       "entry_close": 24287.650390625,
       "expiry": "2026-08-20",
-      "entry_premium": 110.11724323879025,
-      "exit_premium": 37.26869906938464,
-      "exit_reason": "stop_5",
-      "days_held": 1,
-      "pnl": -5463.640812705421,
+      "entry_premium": 109.48812806123715,
+      "exit_premium": 68.150390625,
+      "exit_reason": "expiry",
+      "days_held": 3,
+      "pnl": -3100.330307717786,
       "rolls": 0,
       "legs": [
         {
           "entry_date": "2026-08-17",
-          "exit_date": "2026-08-18",
+          "exit_date": "2026-08-20",
           "expiry": "2026-08-20",
           "strike": 24300,
-          "entry_premium": 110.11724323879025,
-          "exit_premium": 37.26869906938464,
-          "exit_reason": "stop_5",
-          "pnl": -5463.640812705421
+          "entry_premium": 109.48812806123715,
+          "exit_premium": 68.150390625,
+          "exit_reason": "expiry",
+          "pnl": -3100.330307717786
         }
       ]
     },
@@ -3892,6 +3886,33 @@
           "pnl": -1493.9986576498086
         }
       ]
+    },
+    {
+      "entry_date": "2026-08-24",
+      "exit_date": "2026-08-25",
+      "pair": "Mon\u2192Tue",
+      "side": "PE",
+      "strike": 24200,
+      "entry_close": 24219.05,
+      "expiry": "2026-08-27",
+      "entry_premium": 94.17644927870242,
+      "exit_premium": 35.59811633108893,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -4393.374971071012,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-08-24",
+          "exit_date": "2026-08-25",
+          "expiry": "2026-08-27",
+          "strike": 24200,
+          "entry_premium": 94.17644927870242,
+          "exit_premium": 35.59811633108893,
+          "exit_reason": "stop_5",
+          "pnl": -4393.374971071012
+        }
+      ]
     }
   ],
   "equity_curve": [
@@ -3905,1013 +3926,1017 @@
     },
     {
       "date": "2025-08-19",
-      "equity": 2697.4522060708296
+      "equity": -4747.62732870031
     },
     {
       "date": "2025-08-20",
-      "equity": 5375.054227227565
+      "equity": -4045.2594969470283
     },
     {
       "date": "2025-08-21",
-      "equity": 5453.674752177949
+      "equity": -4999.058893492065
     },
     {
       "date": "2025-08-22",
-      "equity": 14121.216306812494
+      "equity": 3668.4826611424796
     },
     {
       "date": "2025-08-25",
-      "equity": 6698.1455466144325
+      "equity": -3754.5880990555816
     },
     {
       "date": "2025-08-26",
-      "equity": -1535.6884146674129
+      "equity": 7522.165915865662
     },
     {
       "date": "2025-08-28",
-      "equity": -1535.6884146674129
+      "equity": 22581.5962607061
     },
     {
       "date": "2025-08-29",
-      "equity": 496.5347106658901
+      "equity": 24613.819386039402
     },
     {
       "date": "2025-09-01",
-      "equity": -8922.5877842788
+      "equity": 15194.696891094714
     },
     {
       "date": "2025-09-02",
-      "equity": -12089.225708494756
+      "equity": 15765.89187723546
     },
     {
       "date": "2025-09-03",
-      "equity": -7897.350571323646
+      "equity": 13253.051339096988
     },
     {
       "date": "2025-09-04",
-      "equity": -8395.670508175577
+      "equity": 12754.731402245057
     },
     {
       "date": "2025-09-05",
-      "equity": -9425.701130541926
+      "equity": 11724.700779878709
     },
     {
       "date": "2025-09-08",
-      "equity": -9425.701130541926
+      "equity": 11724.700779878709
     },
     {
       "date": "2025-09-09",
-      "equity": -6576.615661041784
+      "equity": 7745.454181684705
     },
     {
       "date": "2025-09-10",
-      "equity": 1378.018559399301
+      "equity": 10865.640251215997
     },
     {
       "date": "2025-09-11",
-      "equity": 3611.8520677406777
+      "equity": 11448.525663170882
     },
     {
       "date": "2025-09-12",
-      "equity": -539.0917893073365
+      "equity": 7297.581806122867
     },
     {
       "date": "2025-09-15",
-      "equity": -539.0917893073365
+      "equity": 7297.581806122867
     },
     {
       "date": "2025-09-16",
-      "equity": 6454.292298150507
+      "equity": 1882.8888917321146
     },
     {
       "date": "2025-09-17",
-      "equity": 13100.657417821607
+      "equity": 3730.4576324786703
     },
     {
       "date": "2025-09-18",
-      "equity": 23812.114232687298
+      "equity": 7986.451836494076
     },
     {
       "date": "2025-09-19",
-      "equity": 26577.920406434867
+      "equity": 10752.258010241645
     },
     {
       "date": "2025-09-22",
-      "equity": 29816.435253127263
+      "equity": 13990.772856934042
     },
     {
       "date": "2025-09-23",
-      "equity": 27896.618323918454
+      "equity": 14871.13145879937
     },
     {
       "date": "2025-09-24",
-      "equity": 29362.030542101835
+      "equity": 20296.953121744697
     },
     {
       "date": "2025-09-25",
-      "equity": 42063.51541953838
+      "equity": 44416.094496078746
     },
     {
       "date": "2025-09-26",
-      "equity": 51815.92473515836
+      "equity": 54168.50381169873
     },
     {
       "date": "2025-09-29",
-      "equity": 50989.56458003847
+      "equity": 53342.14365657883
     },
     {
       "date": "2025-09-30",
-      "equity": 49369.44491345759
+      "equity": 53836.10690035469
     },
     {
       "date": "2025-10-01",
-      "equity": 45691.74800136572
+      "equity": 50158.409988262814
     },
     {
       "date": "2025-10-03",
-      "equity": 45691.74800136572
+      "equity": 50158.409988262814
     },
     {
       "date": "2025-10-06",
-      "equity": 45691.74800136572
+      "equity": 50158.409988262814
     },
     {
       "date": "2025-10-07",
-      "equity": 45132.73782535577
+      "equity": 47635.740321378966
     },
     {
       "date": "2025-10-08",
-      "equity": 40795.20712647683
+      "equity": 43298.20962250003
     },
     {
       "date": "2025-10-09",
-      "equity": 40795.20712647683
+      "equity": 43298.20962250003
     },
     {
       "date": "2025-10-10",
-      "equity": 36596.18391089527
+      "equity": 39099.18640691847
     },
     {
       "date": "2025-10-13",
-      "equity": 36596.18391089527
+      "equity": 39099.18640691847
     },
     {
       "date": "2025-10-14",
-      "equity": 32350.569426821283
+      "equity": 41329.41496489386
     },
     {
       "date": "2025-10-15",
-      "equity": 39460.16900888123
+      "equity": 39869.20843354936
     },
     {
       "date": "2025-10-16",
-      "equity": 57868.71870659986
+      "equity": 58277.75813126798
     },
     {
       "date": "2025-10-17",
-      "equity": 53086.03000943569
+      "equity": 53495.06943410382
     },
     {
       "date": "2025-10-20",
-      "equity": 53086.03000943569
+      "equity": 53495.06943410382
     },
     {
       "date": "2025-10-21",
-      "equity": 52310.07498410606
+      "equity": 51155.46758251592
     },
     {
       "date": "2025-10-23",
-      "equity": 52310.07498410606
+      "equity": 51155.46758251592
     },
     {
       "date": "2025-10-24",
-      "equity": 55271.926169450555
+      "equity": 54117.318767860415
     },
     {
       "date": "2025-10-27",
-      "equity": 45892.983994137125
+      "equity": 44738.376592546985
     },
     {
       "date": "2025-10-28",
-      "equity": 42938.03243313703
+      "equity": 44368.6132272366
     },
     {
       "date": "2025-10-29",
-      "equity": 46087.86991539257
+      "equity": 47518.45070949214
     },
     {
       "date": "2025-10-30",
-      "equity": 35926.574657428886
+      "equity": 37357.15545152846
     },
     {
       "date": "2025-10-31",
-      "equity": 41714.16301973243
+      "equity": 43144.743813832
     },
     {
       "date": "2025-11-03",
-      "equity": 37024.03596176539
+      "equity": 38454.61675586496
     },
     {
       "date": "2025-11-04",
-      "equity": 30229.83025329404
+      "equity": 44431.67919918558
     },
     {
       "date": "2025-11-06",
-      "equity": 30229.83025329404
+      "equity": 48724.79169873157
     },
     {
       "date": "2025-11-07",
-      "equity": 30025.77189944518
+      "equity": 48520.73334488271
     },
     {
       "date": "2025-11-10",
-      "equity": 24279.777616022555
+      "equity": 42774.73906146009
     },
     {
       "date": "2025-11-11",
-      "equity": 28431.660082811686
+      "equity": 38222.719636144146
     },
     {
       "date": "2025-11-12",
-      "equity": 46192.22445779055
+      "equity": 45405.45313078081
     },
     {
       "date": "2025-11-13",
-      "equity": 44969.79508167537
+      "equity": 44390.95175140508
     },
     {
       "date": "2025-11-14",
-      "equity": 43045.14603397196
+      "equity": 42466.30270370167
     },
     {
       "date": "2025-11-17",
-      "equity": 43045.14603397196
+      "equity": 42466.30270370167
     },
     {
       "date": "2025-11-18",
-      "equity": 37726.67467296618
+      "equity": 45249.93704936039
     },
     {
       "date": "2025-11-19",
-      "equity": 42826.402501964585
+      "equity": 42969.59114469794
     },
     {
       "date": "2025-11-20",
-      "equity": 51721.41904647655
+      "equity": 51864.6076892099
     },
     {
       "date": "2025-11-21",
-      "equity": 55875.066811229626
+      "equity": 56018.25545396298
     },
     {
       "date": "2025-11-24",
-      "equity": 58883.375692675996
+      "equity": 59026.56433540935
     },
     {
       "date": "2025-11-25",
-      "equity": 58456.90313542931
+      "equity": 64549.02997385281
     },
     {
       "date": "2025-11-26",
-      "equity": 55875.84713094719
+      "equity": 52856.313627832846
     },
     {
       "date": "2025-11-27",
-      "equity": 56124.459572410604
+      "equity": 53104.926069296256
     },
     {
       "date": "2025-11-28",
-      "equity": 55721.08044344671
+      "equity": 52701.546940332366
     },
     {
       "date": "2025-12-01",
-      "equity": 55721.08044344671
+      "equity": 52701.546940332366
     },
     {
       "date": "2025-12-02",
-      "equity": 50011.086348259174
+      "equity": 58107.57859570646
     },
     {
       "date": "2025-12-03",
-      "equity": 46291.45263015279
+      "equity": 56095.24397715469
     },
     {
       "date": "2025-12-04",
-      "equity": 46291.45263015279
+      "equity": 52183.512569619794
     },
     {
       "date": "2025-12-05",
-      "equity": 40720.779589847356
+      "equity": 46612.83952931437
     },
     {
       "date": "2025-12-08",
-      "equity": 40720.779589847356
+      "equity": 46612.83952931437
     },
     {
       "date": "2025-12-09",
-      "equity": 34982.00318685975
+      "equity": 50288.001322016564
     },
     {
       "date": "2025-12-10",
-      "equity": 30306.764786443666
+      "equity": 48934.83088551813
     },
     {
       "date": "2025-12-11",
-      "equity": 30306.764786443666
+      "equity": 37883.04660426076
     },
     {
       "date": "2025-12-12",
-      "equity": 25005.568193071013
+      "equity": 32581.850010888105
     },
     {
       "date": "2025-12-15",
-      "equity": 25005.568193071013
+      "equity": 32581.850010888105
     },
     {
       "date": "2025-12-16",
-      "equity": 18857.525679277027
+      "equity": 39321.58071473265
     },
     {
       "date": "2025-12-17",
-      "equity": 15067.41180874283
+      "equity": 37177.986763925415
     },
     {
       "date": "2025-12-18",
-      "equity": 15067.41180874283
+      "equity": 37215.42957865378
     },
     {
       "date": "2025-12-19",
-      "equity": 9885.980856709106
+      "equity": 32033.99862662005
     },
     {
       "date": "2025-12-22",
-      "equity": 9885.980856709106
+      "equity": 32033.99862662005
     },
     {
       "date": "2025-12-23",
-      "equity": 8278.86919644648
+      "equity": 30419.74520594482
     },
     {
       "date": "2025-12-24",
-      "equity": 4897.761877478846
+      "equity": 27038.637886977187
     },
     {
       "date": "2025-12-26",
-      "equity": 4897.761877478846
+      "equity": 27038.637886977187
     },
     {
       "date": "2025-12-29",
-      "equity": 4897.761877478846
+      "equity": 27038.637886977187
     },
     {
       "date": "2025-12-30",
-      "equity": 2987.3301570451567
+      "equity": 25718.394362233594
     },
     {
       "date": "2025-12-31",
-      "equity": 10603.256889773778
+      "equity": 33334.321094962215
     },
     {
       "date": "2026-01-01",
-      "equity": 10618.448974320612
+      "equity": 33349.51317950905
     },
     {
       "date": "2026-01-02",
-      "equity": 4468.2314005282515
+      "equity": 27199.29560571669
     },
     {
       "date": "2026-01-05",
-      "equity": 4468.2314005282515
+      "equity": 27199.29560571669
     },
     {
       "date": "2026-01-06",
-      "equity": 191.0516447992486
+      "equity": 28642.55911152328
     },
     {
       "date": "2026-01-07",
-      "equity": -3284.195974846758
+      "equity": 25327.774161990157
     },
     {
       "date": "2026-01-08",
-      "equity": -3284.195974846758
+      "equity": 43338.652637751795
     },
     {
       "date": "2026-01-09",
-      "equity": 4376.551236793652
+      "equity": 50999.399849392204
     },
     {
       "date": "2026-01-12",
-      "equity": -3521.581444501586
+      "equity": 43101.267168096965
     },
     {
       "date": "2026-01-13",
-      "equity": -7265.898129328885
+      "equity": 44047.636146036675
     },
     {
       "date": "2026-01-14",
-      "equity": -11480.384612789108
+      "equity": 41625.14860142875
     },
     {
       "date": "2026-01-16",
-      "equity": -11480.384612789108
+      "equity": 41625.14860142875
     },
     {
       "date": "2026-01-19",
-      "equity": -11480.384612789108
+      "equity": 41625.14860142875
     },
     {
       "date": "2026-01-20",
-      "equity": -19635.951255740227
+      "equity": 60286.34757734659
     },
     {
       "date": "2026-01-21",
-      "equity": -23988.5056100067
+      "equity": 61427.82308903171
     },
     {
       "date": "2026-01-22",
-      "equity": -23988.5056100067
+      "equity": 51823.556169072
     },
     {
       "date": "2026-01-23",
-      "equity": -13996.229149469378
+      "equity": 61815.83262960932
     },
     {
       "date": "2026-01-27",
-      "equity": -24134.491192765996
+      "equity": 51677.57058631271
     },
     {
       "date": "2026-01-28",
-      "equity": -18226.414947984384
+      "equity": 57585.646831094324
     },
     {
       "date": "2026-01-29",
-      "equity": -14118.711561749229
+      "equity": 61693.35021732948
     },
     {
       "date": "2026-01-30",
-      "equity": -11249.53940114981
+      "equity": 64562.52237792889
     },
     {
       "date": "2026-02-02",
-      "equity": -1461.5906314451659
+      "equity": 74350.47114763354
     },
     {
       "date": "2026-02-03",
-      "equity": 14335.695618720965
+      "equity": 42546.597906925774
     },
     {
       "date": "2026-02-04",
-      "equity": 17251.25440076314
+      "equity": 42181.74515821885
     },
     {
       "date": "2026-02-05",
-      "equity": 6925.984657704124
+      "equity": 42181.74515821885
     },
     {
       "date": "2026-02-06",
-      "equity": 4379.66637813421
+      "equity": 39635.42687864894
     },
     {
       "date": "2026-02-09",
-      "equity": 4379.66637813421
+      "equity": 39635.42687864894
     },
     {
       "date": "2026-02-10",
-      "equity": 5652.586927214419
+      "equity": 36164.7006014701
     },
     {
       "date": "2026-02-11",
-      "equity": 2971.1400846989945
+      "equity": 34596.09038143091
     },
     {
       "date": "2026-02-12",
-      "equity": 2971.1400846989945
+      "equity": 34596.09038143091
     },
     {
       "date": "2026-02-13",
-      "equity": 17792.45924685175
+      "equity": 49417.40954358367
     },
     {
       "date": "2026-02-16",
-      "equity": 4187.753559944043
+      "equity": 35812.70385667596
     },
     {
       "date": "2026-02-17",
-      "equity": 4098.321613621933
+      "equity": 32867.622551171706
     },
     {
       "date": "2026-02-18",
-      "equity": 8341.44291619888
+      "equity": 34604.05773010636
     },
     {
       "date": "2026-02-19",
-      "equity": -10950.266865690706
+      "equity": 26307.032402758632
     },
     {
       "date": "2026-02-20",
-      "equity": -15358.740347032595
+      "equity": 21898.55892141674
     },
     {
       "date": "2026-02-23",
-      "equity": -15358.740347032595
+      "equity": 21898.55892141674
     },
     {
       "date": "2026-02-24",
-      "equity": -23955.158175716802
+      "equity": 35271.4917335508
     },
     {
       "date": "2026-02-25",
-      "equity": -23416.056546627202
+      "equity": 31265.312795156904
     },
     {
       "date": "2026-02-26",
-      "equity": -25083.805302003326
+      "equity": 28280.18553856579
     },
     {
       "date": "2026-02-27",
-      "equity": -11017.928837691657
+      "equity": 42346.06200287746
     },
     {
       "date": "2026-03-02",
-      "equity": 9415.686609048418
+      "equity": 62779.677449617535
     },
     {
       "date": "2026-03-04",
-      "equity": 38874.55598024818
+      "equity": 92238.5468208173
     },
     {
       "date": "2026-03-05",
-      "equity": 17810.107847515166
+      "equity": 71174.09868808428
     },
     {
       "date": "2026-03-06",
-      "equity": 31427.00565961751
+      "equity": 84790.99650018662
     },
     {
       "date": "2026-03-09",
-      "equity": 59859.98393128685
+      "equity": 113223.97477185597
     },
     {
       "date": "2026-03-10",
-      "equity": 52882.18447028604
+      "equity": 89050.99808951956
     },
     {
       "date": "2026-03-11",
-      "equity": 58039.461909231286
+      "equity": 111413.62239799756
     },
     {
       "date": "2026-03-12",
-      "equity": 75447.49751229487
+      "equity": 128821.65800106115
     },
     {
       "date": "2026-03-13",
-      "equity": 100799.1375046953
+      "equity": 154173.2979934616
     },
     {
       "date": "2026-03-16",
-      "equity": 83206.03873980553
+      "equity": 136580.19922857182
     },
     {
       "date": "2026-03-17",
-      "equity": 80121.5093300374
+      "equity": 120881.81495480168
     },
     {
       "date": "2026-03-18",
-      "equity": 101051.59030603307
+      "equity": 129073.39810302448
     },
     {
       "date": "2026-03-19",
-      "equity": 58041.75766604566
+      "equity": 114736.1171188959
     },
     {
       "date": "2026-03-20",
-      "equity": 53865.34912046076
+      "equity": 110559.708573311
     },
     {
       "date": "2026-03-23",
-      "equity": 53865.34912046076
+      "equity": 110559.708573311
     },
     {
       "date": "2026-03-24",
-      "equity": 76939.57007481303
+      "equity": 103953.05946612274
     },
     {
       "date": "2026-03-25",
-      "equity": 129719.50118601663
+      "equity": 127612.92153822482
     },
     {
       "date": "2026-03-27",
-      "equity": 129719.50118601663
+      "equity": 127612.92153822482
     },
     {
       "date": "2026-03-30",
-      "equity": 129719.50118601663
+      "equity": 127612.92153822482
     },
     {
       "date": "2026-04-01",
-      "equity": 129719.50118601663
+      "equity": 127612.92153822482
     },
     {
       "date": "2026-04-02",
-      "equity": 129719.50118601663
+      "equity": 127612.92153822482
     },
     {
       "date": "2026-04-06",
-      "equity": 129719.50118601663
+      "equity": 127612.92153822482
     },
     {
       "date": "2026-04-07",
-      "equity": 136123.7732180825
+      "equity": 122668.58110751917
     },
     {
       "date": "2026-04-08",
-      "equity": 259543.0149342199
+      "equity": 182614.595429517
     },
     {
       "date": "2026-04-09",
-      "equity": 225590.5183214015
+      "equity": 165637.34549769736
     },
     {
       "date": "2026-04-10",
-      "equity": 217422.70331817915
+      "equity": 157469.530494475
     },
     {
       "date": "2026-04-13",
-      "equity": 217422.70331817915
+      "equity": 157469.530494475
     },
     {
       "date": "2026-04-15",
-      "equity": 217422.70331817915
+      "equity": 157469.530494475
     },
     {
       "date": "2026-04-16",
-      "equity": 217422.70331817915
+      "equity": 157469.530494475
     },
     {
       "date": "2026-04-17",
-      "equity": 212004.35723162073
+      "equity": 152051.1844079166
     },
     {
       "date": "2026-04-20",
-      "equity": 212004.35723162073
+      "equity": 152051.1844079166
     },
     {
       "date": "2026-04-21",
-      "equity": 221617.09417263552
+      "equity": 146107.74919344208
     },
     {
       "date": "2026-04-22",
-      "equity": 202957.02574355932
+      "equity": 140319.8186788931
     },
     {
       "date": "2026-04-23",
-      "equity": 202957.02574355932
+      "equity": 140319.8186788931
     },
     {
       "date": "2026-04-24",
-      "equity": 214275.5897732694
+      "equity": 151638.38270860317
     },
     {
       "date": "2026-04-27",
-      "equity": 202291.76235796657
+      "equity": 139654.55529330033
     },
     {
       "date": "2026-04-28",
-      "equity": 197586.73232222738
+      "equity": 142546.26554719958
     },
     {
       "date": "2026-04-29",
-      "equity": 205155.43734578553
+      "equity": 141536.7450090401
     },
     {
       "date": "2026-04-30",
-      "equity": 190783.59607237292
+      "equity": 127164.90373562751
     },
     {
       "date": "2026-05-04",
-      "equity": 190783.59607237292
+      "equity": 127164.90373562751
     },
     {
       "date": "2026-05-05",
-      "equity": 186040.8135374626
+      "equity": 129231.36149035585
     },
     {
       "date": "2026-05-06",
-      "equity": 201265.7900579183
+      "equity": 135727.32240547315
     },
     {
       "date": "2026-05-07",
-      "equity": 200453.65458873587
+      "equity": 134915.1869362907
     },
     {
       "date": "2026-05-08",
-      "equity": 206119.94317036134
+      "equity": 140581.4755179162
     },
     {
       "date": "2026-05-11",
-      "equity": 227422.11931017417
+      "equity": 161883.651657729
     },
     {
       "date": "2026-05-12",
-      "equity": 251249.40234172682
+      "equity": 218751.1699130743
     },
     {
       "date": "2026-05-13",
-      "equity": 248303.55778066162
+      "equity": 213482.24132940453
     },
     {
       "date": "2026-05-14",
-      "equity": 227853.75142477054
+      "equity": 172550.6724665289
     },
     {
       "date": "2026-05-15",
-      "equity": 228845.7781059733
+      "equity": 173542.69914773165
     },
     {
       "date": "2026-05-18",
-      "equity": 225798.24033636166
+      "equity": 170495.16137812
     },
     {
       "date": "2026-05-19",
-      "equity": 222996.45206078023
+      "equity": 170405.35579340826
     },
     {
       "date": "2026-05-20",
-      "equity": 222800.33145331373
+      "equity": 166896.82733429308
     },
     {
       "date": "2026-05-21",
-      "equity": 219526.06223947948
+      "equity": 163622.55812045882
     },
     {
       "date": "2026-05-22",
-      "equity": 216677.762938503
+      "equity": 160774.25881948235
     },
     {
       "date": "2026-05-25",
-      "equity": 216677.762938503
+      "equity": 160774.25881948235
     },
     {
       "date": "2026-05-26",
-      "equity": 211650.2197368145
+      "equity": 164917.78839645832
     },
     {
       "date": "2026-05-27",
-      "equity": 209285.6952573798
+      "equity": 161664.86876284977
     },
     {
       "date": "2026-05-29",
-      "equity": 209285.6952573798
+      "equity": 161664.86876284977
     },
     {
       "date": "2026-06-01",
-      "equity": 209285.6952573798
+      "equity": 161664.86876284977
     },
     {
       "date": "2026-06-02",
-      "equity": 212047.11707974147
+      "equity": 157167.435721209
     },
     {
       "date": "2026-06-03",
-      "equity": 202270.70093317484
+      "equity": 152942.61111391842
     },
     {
       "date": "2026-06-04",
-      "equity": 202270.70093317484
+      "equity": 152942.61111391842
     },
     {
       "date": "2026-06-05",
-      "equity": 203312.10971648333
+      "equity": 153984.0198972269
     },
     {
       "date": "2026-06-08",
-      "equity": 213263.84604961565
+      "equity": 163935.7562303592
     },
     {
       "date": "2026-06-09",
-      "equity": 209682.7097542677
+      "equity": 151730.51000516315
     },
     {
       "date": "2026-06-10",
-      "equity": 204149.62291135456
+      "equity": 149434.0799134036
     },
     {
       "date": "2026-06-11",
-      "equity": 207803.49891462395
+      "equity": 153087.955916673
     },
     {
       "date": "2026-06-12",
-      "equity": 198476.7698723735
+      "equity": 143761.22687442254
     },
     {
       "date": "2026-06-15",
-      "equity": 198476.7698723735
+      "equity": 143761.22687442254
     },
     {
       "date": "2026-06-16",
-      "equity": 203331.11573694507
+      "equity": 138790.22547376118
     },
     {
       "date": "2026-06-17",
-      "equity": 210343.89619697334
+      "equity": 141064.42513918655
     },
     {
       "date": "2026-06-18",
-      "equity": 219646.36987428798
+      "equity": 144834.47835024237
     },
     {
       "date": "2026-06-19",
-      "equity": 225045.32325319815
+      "equity": 150233.43172915254
     },
     {
       "date": "2026-06-22",
-      "equity": 218386.760048268
+      "equity": 143574.8685242224
     },
     {
       "date": "2026-06-23",
-      "equity": 210533.24113244255
+      "equity": 156953.0898980358
     },
     {
       "date": "2026-06-24",
-      "equity": 219980.23006484917
+      "equity": 153428.59944394015
     },
     {
       "date": "2026-06-25",
-      "equity": 221848.4879505314
+      "equity": 155296.85732962238
     },
     {
       "date": "2026-06-29",
-      "equity": 221848.4879505314
+      "equity": 155296.85732962238
     },
     {
       "date": "2026-06-30",
-      "equity": 217549.21822881195
+      "equity": 157354.8253646186
     },
     {
       "date": "2026-07-01",
-      "equity": 222940.22446019034
+      "equity": 155684.22161017783
     },
     {
       "date": "2026-07-02",
-      "equity": 234423.87404246637
+      "equity": 167167.87119245387
     },
     {
       "date": "2026-07-03",
-      "equity": 230469.53120015192
+      "equity": 163213.52835013942
     },
     {
       "date": "2026-07-06",
-      "equity": 230469.53120015192
+      "equity": 163213.52835013942
     },
     {
       "date": "2026-07-07",
-      "equity": 227712.80900568614
+      "equity": 163156.9690221327
     },
     {
       "date": "2026-07-08",
-      "equity": 220680.09802073182
+      "equity": 189916.76747551272
     },
     {
       "date": "2026-07-09",
-      "equity": 220680.09802073182
+      "equity": 184186.51220893278
     },
     {
       "date": "2026-07-10",
-      "equity": 213723.9834260294
+      "equity": 177230.39761423034
     },
     {
       "date": "2026-07-13",
-      "equity": 213723.9834260294
+      "equity": 177230.39761423034
     },
     {
       "date": "2026-07-14",
-      "equity": 207304.0950951031
+      "equity": 183054.83459489146
     },
     {
       "date": "2026-07-15",
-      "equity": 206282.69705888216
+      "equity": 179234.0279379466
     },
     {
       "date": "2026-07-16",
-      "equity": 206282.69705888216
+      "equity": 178413.50158065464
     },
     {
       "date": "2026-07-17",
-      "equity": 199198.89131098046
+      "equity": 171329.69583275294
     },
     {
       "date": "2026-07-20",
-      "equity": 199198.89131098046
+      "equity": 171329.69583275294
     },
     {
       "date": "2026-07-21",
-      "equity": 195808.7588170344
+      "equity": 172073.30616136902
     },
     {
       "date": "2026-07-22",
-      "equity": 189828.58562507498
+      "equity": 176180.86463560982
     },
     {
       "date": "2026-07-23",
-      "equity": 189828.58562507498
+      "equity": 185715.48370677052
     },
     {
       "date": "2026-07-24",
-      "equity": 192918.24897825613
+      "equity": 188805.14705995168
     },
     {
       "date": "2026-07-27",
-      "equity": 182749.78156397003
+      "equity": 178636.67964566557
     },
     {
       "date": "2026-07-28",
-      "equity": 180696.71477307245
+      "equity": 177699.01812245848
     },
     {
       "date": "2026-07-29",
-      "equity": 193634.58342180095
+      "equity": 190636.88677118698
     },
     {
       "date": "2026-07-30",
-      "equity": 198068.0905710365
+      "equity": 195070.39392042253
     },
     {
       "date": "2026-07-31",
-      "equity": 195199.46681354384
+      "equity": 192201.77016292987
     },
     {
       "date": "2026-08-03",
-      "equity": 195199.46681354384
+      "equity": 192201.77016292987
     },
     {
       "date": "2026-08-04",
-      "equity": 188439.0741448966
+      "equity": 197726.79542658816
     },
     {
       "date": "2026-08-05",
-      "equity": 186688.17038770363
+      "equity": 194051.72133401362
     },
     {
       "date": "2026-08-06",
-      "equity": 186688.17038770363
+      "equity": 191938.94202947128
     },
     {
       "date": "2026-08-07",
-      "equity": 188439.16017361736
+      "equity": 193689.931815385
     },
     {
       "date": "2026-08-10",
-      "equity": 185033.2454153026
+      "equity": 190284.01705707025
     },
     {
       "date": "2026-08-11",
-      "equity": 180040.78712561293
+      "equity": 194027.4741667629
     },
     {
       "date": "2026-08-12",
-      "equity": 176498.49081827595
+      "equity": 191276.44929765043
     },
     {
       "date": "2026-08-13",
-      "equity": 176498.49081827595
+      "equity": 193601.45660669074
     },
     {
       "date": "2026-08-14",
-      "equity": 176815.7332883726
+      "equity": 193918.6990767874
     },
     {
       "date": "2026-08-17",
-      "equity": 177335.46588897437
+      "equity": 194438.43167738916
     },
     {
       "date": "2026-08-18",
-      "equity": 178365.1171596267
+      "equity": 205748.74328157792
     },
     {
       "date": "2026-08-19",
-      "equity": 178681.39524613007
+      "equity": 209800.43478317407
     },
     {
       "date": "2026-08-20",
-      "equity": 167390.46125583263
+      "equity": 186856.73754923505
     },
     {
       "date": "2026-08-21",
-      "equity": 165896.4625981828
+      "equity": 185362.73889158524
     },
     {
       "date": "2026-08-24",
-      "equity": 165896.4625981828
+      "equity": 185362.73889158524
+    },
+    {
+      "date": "2026-08-25",
+      "equity": 180969.3639205142
     }
   ],
   "probability_table": [
     {
       "weekday_pair": "Mon\u2192Tue",
-      "n": 49,
-      "p_up": 0.5102040816326531,
-      "ci_low": 0.37467563740468035,
-      "ci_high": 0.6442488968969421,
-      "side": "CE",
+      "n": 50,
+      "p_up": 0.5,
+      "ci_low": 0.3664451431682858,
+      "ci_high": 0.6335548568317142,
+      "side": "PE",
       "tradeable": true
     },
     {
@@ -5004,22 +5029,22 @@
       "p_up": 0.6153846153846154,
       "ci_low": 0.4253485008511553,
       "ci_high": 0.7757140556428721,
-      "n_oos": 23,
-      "realized_p_up": 0.391304347826087,
-      "realized_ci_low": 0.22157622792477952,
-      "realized_ci_high": 0.592144776086183
+      "n_oos": 24,
+      "realized_p_up": 0.375,
+      "realized_ci_low": 0.21159367559548778,
+      "realized_ci_high": 0.5729003755732572
     },
     {
       "weekday_pair": "Tue\u2192Wed",
       "side": "CE",
-      "n_in": 23,
-      "p_up": 0.5652173913043478,
-      "ci_low": 0.3681137508501646,
-      "ci_high": 0.743653646743258,
-      "n_oos": 24,
-      "realized_p_up": 0.5416666666666666,
-      "realized_ci_low": 0.3507486535891948,
-      "realized_ci_high": 0.72108666268789
+      "n_in": 24,
+      "p_up": 0.5833333333333334,
+      "ci_low": 0.3883466586522876,
+      "ci_high": 0.7553239739018824,
+      "n_oos": 23,
+      "realized_p_up": 0.5217391304347826,
+      "realized_ci_low": 0.32962737336427406,
+      "realized_ci_high": 0.7076284258335335
     },
     {
       "weekday_pair": "Tue\u2192Thu",
@@ -5117,1003 +5142,1007 @@
     },
     {
       "date": "2025-08-19",
-      "equity": 2697.4522060708296
+      "equity": -4747.62732870031
     },
     {
       "date": "2025-08-20",
-      "equity": 5375.054227227565
+      "equity": -6980.0456388787325
     },
     {
       "date": "2025-08-21",
-      "equity": 5453.674752177949
+      "equity": -9058.886231283122
     },
     {
       "date": "2025-08-22",
-      "equity": 14121.216306812494
+      "equity": -391.34467664857766
     },
     {
       "date": "2025-08-25",
-      "equity": 6698.1455466144325
+      "equity": -7814.415436846639
     },
     {
       "date": "2025-08-26",
-      "equity": 13574.171880263555
+      "equity": 18572.19887300557
     },
     {
       "date": "2025-08-28",
-      "equity": 28276.66705037445
+      "equity": 49777.297973043416
     },
     {
       "date": "2025-08-29",
-      "equity": 30308.890175707755
+      "equity": 51809.52109837672
     },
     {
       "date": "2025-09-01",
-      "equity": 20889.767680763063
+      "equity": 42390.398603432026
     },
     {
       "date": "2025-09-02",
-      "equity": 17559.909342656145
+      "equity": 42798.37317568181
     },
     {
       "date": "2025-09-03",
-      "equity": 21368.605221833917
+      "equity": 36777.460574240285
     },
     {
       "date": "2025-09-04",
-      "equity": 18837.169931741068
+      "equity": 33131.475422991345
     },
     {
       "date": "2025-09-05",
-      "equity": 17807.139309374717
+      "equity": 32101.444800624995
     },
     {
       "date": "2025-09-08",
-      "equity": 13690.074920205456
+      "equity": 27984.380411455735
     },
     {
       "date": "2025-09-09",
-      "equity": 12559.913791511593
+      "equity": 20025.887215067727
     },
     {
       "date": "2025-09-10",
-      "equity": 17841.972941956672
+      "equity": 17800.923144606997
     },
     {
       "date": "2025-09-11",
-      "equity": 19627.290183048848
+      "equity": 17486.77602206349
     },
     {
       "date": "2025-09-12",
-      "equity": 15476.346326000834
+      "equity": 13335.832165015474
     },
     {
       "date": "2025-09-15",
-      "equity": 13760.74194867278
+      "equity": 11620.22778768742
     },
     {
       "date": "2025-09-16",
-      "equity": 16282.187341973151
+      "equity": 1733.5961791391946
     },
     {
       "date": "2025-09-17",
-      "equity": 21748.89928226276
+      "equity": 698.5406776640557
     },
     {
       "date": "2025-09-18",
-      "equity": 32364.43627192211
+      "equity": 4647.3697962497245
     },
     {
       "date": "2025-09-19",
-      "equity": 35130.242445669675
+      "equity": 7413.175969997294
     },
     {
       "date": "2025-09-22",
-      "equity": 38368.757292362076
+      "equity": 10651.69081668969
     },
     {
       "date": "2025-09-23",
-      "equity": 36448.94036315326
+      "equity": 11532.049418555018
     },
     {
       "date": "2025-09-24",
-      "equity": 33093.27657829289
+      "equity": 16957.871081500343
     },
     {
       "date": "2025-09-25",
-      "equity": 42132.95348658789
+      "equity": 38787.84336500266
     },
     {
       "date": "2025-09-26",
-      "equity": 51885.36280220787
+      "equity": 48540.252680622645
     },
     {
       "date": "2025-09-29",
-      "equity": 51059.002647087975
+      "equity": 47713.89252550275
     },
     {
       "date": "2025-09-30",
-      "equity": 49438.8829805071
+      "equity": 48207.855769278605
     },
     {
       "date": "2025-10-01",
-      "equity": 55027.57721330585
+      "equity": 37235.691521458255
     },
     {
       "date": "2025-10-03",
-      "equity": 55027.57721330585
+      "equity": 37235.691521458255
     },
     {
       "date": "2025-10-06",
-      "equity": 55027.57721330585
+      "equity": 37235.691521458255
     },
     {
       "date": "2025-10-07",
-      "equity": 54468.5670372959
+      "equity": 34713.02185457441
     },
     {
       "date": "2025-10-08",
-      "equity": 45793.50563953802
+      "equity": 31034.36064490817
     },
     {
       "date": "2025-10-09",
-      "equity": 51509.62610724381
+      "equity": 26911.94099030087
     },
     {
       "date": "2025-10-10",
-      "equity": 47310.602891662245
+      "equity": 22712.917774719306
     },
     {
       "date": "2025-10-13",
-      "equity": 46062.92659875611
+      "equity": 21465.241481813173
     },
     {
       "date": "2025-10-14",
-      "equity": 43521.4532191287
+      "equity": 25399.611144235147
     },
     {
       "date": "2025-10-15",
-      "equity": 47827.482934026906
+      "equity": 16689.043936795468
     },
     {
       "date": "2025-10-16",
-      "equity": 81408.64872948795
+      "equity": 30976.17285622393
     },
     {
       "date": "2025-10-17",
-      "equity": 76625.96003232378
+      "equity": 26193.484159059764
     },
     {
       "date": "2025-10-20",
-      "equity": 71067.35263883146
+      "equity": 20634.876765567442
     },
     {
       "date": "2025-10-21",
-      "equity": 69092.74032286165
+      "equity": 17096.61762333936
     },
     {
       "date": "2025-10-23",
-      "equity": 62876.33108299436
+      "equity": 9860.599128506301
     },
     {
       "date": "2025-10-24",
-      "equity": 65838.18226833886
+      "equity": 12822.450313850795
     },
     {
       "date": "2025-10-27",
-      "equity": 56459.24009302542
+      "equity": 3443.5081385373633
     },
     {
       "date": "2025-10-28",
-      "equity": 52985.326312930134
+      "equity": 2554.782554131789
     },
     {
       "date": "2025-10-29",
-      "equity": 54890.93251422522
+      "equity": -4020.61134891622
     },
     {
       "date": "2025-10-30",
-      "equity": 35024.463543905746
+      "equity": -10336.768712623352
     },
     {
       "date": "2025-10-31",
-      "equity": 40812.051906209286
+      "equity": -4549.180350319812
     },
     {
       "date": "2025-11-03",
-      "equity": 36121.92484824225
+      "equity": -9239.30740828685
     },
     {
       "date": "2025-11-04",
-      "equity": 38131.259949641164
+      "equity": 5541.295844904034
     },
     {
       "date": "2025-11-06",
-      "equity": 41487.31454414035
+      "equity": 16181.3204272041
     },
     {
       "date": "2025-11-07",
-      "equity": 41283.25619029149
+      "equity": 15977.262073355241
     },
     {
       "date": "2025-11-10",
-      "equity": 35537.261906868865
+      "equity": 10231.267789932617
     },
     {
       "date": "2025-11-11",
-      "equity": 35847.057532139566
+      "equity": 1837.1615230982534
     },
     {
       "date": "2025-11-12",
-      "equity": 51746.190362921196
+      "equity": 4513.703210682399
     },
     {
       "date": "2025-11-13",
-      "equity": 50472.391488393965
+      "equity": 3329.8739526847567
     },
     {
       "date": "2025-11-14",
-      "equity": 48547.74244069056
+      "equity": 1405.2249049813508
     },
     {
       "date": "2025-11-17",
-      "equity": 42332.58571577528
+      "equity": -4809.931819933927
     },
     {
       "date": "2025-11-18",
-      "equity": 38647.84238213676
+      "equity": -392.56944690794626
     },
     {
       "date": "2025-11-19",
-      "equity": 41465.88904675864
+      "equity": -7922.355256772613
     },
     {
       "date": "2025-11-20",
-      "equity": 56022.412367022
+      "equity": -3481.10258113682
     },
     {
       "date": "2025-11-21",
-      "equity": 60176.06013177508
+      "equity": 672.5451836162574
     },
     {
       "date": "2025-11-24",
-      "equity": 63184.369013221454
+      "equity": 3680.854065062631
     },
     {
       "date": "2025-11-25",
-      "equity": 62757.89645597476
+      "equity": 9203.319703506095
     },
     {
       "date": "2025-11-26",
-      "equity": 74756.18021429816
+      "equity": -2489.3966425138733
     },
     {
       "date": "2025-11-27",
-      "equity": 70307.59643606722
+      "equity": -7360.168814132507
     },
     {
       "date": "2025-11-28",
-      "equity": 69904.21730710333
+      "equity": -7763.547943096395
     },
     {
       "date": "2025-12-01",
-      "equity": 67739.74453935213
+      "equity": -9928.020710847599
     },
     {
       "date": "2025-12-02",
-      "equity": 67435.78209953869
+      "equity": 884.042599900582
     },
     {
       "date": "2025-12-03",
-      "equity": 63315.9085356007
+      "equity": 579.007080903435
     },
     {
       "date": "2025-12-04",
-      "equity": 55550.29392199537
+      "equity": -10417.957182288168
     },
     {
       "date": "2025-12-05",
-      "equity": 49979.620881689945
+      "equity": -15988.630222593596
     },
     {
       "date": "2025-12-08",
-      "equity": 54605.59113363785
+      "equity": -11362.659970645685
     },
     {
       "date": "2025-12-09",
-      "equity": 54034.91310353467
+      "equity": -2519.399805059069
     },
     {
       "date": "2025-12-10",
-      "equity": 50894.3039026771
+      "equity": 810.2408897399218
     },
     {
       "date": "2025-12-11",
-      "equity": 40814.36139236386
+      "equity": -19464.39001396078
     },
     {
       "date": "2025-12-12",
-      "equity": 35513.16479899121
+      "equity": -24765.586607333433
     },
     {
       "date": "2025-12-15",
-      "equity": 33035.146903929504
+      "equity": -27243.604502395134
     },
     {
       "date": "2025-12-16",
-      "equity": 30757.13358911584
+      "equity": -16633.84459957027
     },
     {
       "date": "2025-12-17",
-      "equity": 25233.277512208868
+      "equity": -18693.61552110671
     },
     {
       "date": "2025-12-18",
-      "equity": 18461.07456398542
+      "equity": -24892.921365197377
     },
     {
       "date": "2025-12-19",
-      "equity": 13279.643611951697
+      "equity": -30074.352317231103
     },
     {
       "date": "2025-12-22",
-      "equity": 7795.275411715085
+      "equity": -35558.720517467715
     },
     {
       "date": "2025-12-23",
-      "equity": 5620.042972542195
+      "equity": -37741.09471705321
     },
     {
       "date": "2025-12-24",
-      "equity": -1770.5743701289502
+      "equity": -42153.79164464052
     },
     {
       "date": "2025-12-26",
-      "equity": -1770.5743701289502
+      "equity": -42153.79164464052
     },
     {
       "date": "2025-12-29",
-      "equity": -1770.5743701289502
+      "equity": -42153.79164464052
     },
     {
       "date": "2025-12-30",
-      "equity": -3681.0060905626397
+      "equity": -43474.035169384115
     },
     {
       "date": "2025-12-31",
-      "equity": 11550.847374894603
+      "equity": -42201.931808270216
     },
     {
       "date": "2026-01-01",
-      "equity": 11581.231543988271
+      "equity": -43096.23603256432
     },
     {
       "date": "2026-01-02",
-      "equity": 5431.013970195911
+      "equity": -49246.45360635668
     },
     {
       "date": "2026-01-05",
-      "equity": 4357.137084839771
+      "equity": -50320.33049171282
     },
     {
       "date": "2026-01-06",
-      "equity": 739.5626884388112
+      "equity": -48217.46162657818
     },
     {
       "date": "2026-01-07",
-      "equity": -6386.034983123589
+      "equity": -52146.30362334278
     },
     {
       "date": "2026-01-08",
-      "equity": 3342.027419022088
+      "equity": -22275.17312202298
     },
     {
       "date": "2026-01-09",
-      "equity": 11002.774630662498
+      "equity": -14614.425910382572
     },
     {
       "date": "2026-01-12",
-      "equity": 3104.64194936726
+      "equity": -22512.558591677807
     },
     {
       "date": "2026-01-13",
-      "equity": 1143.3000572223136
+      "equity": -19783.214821055746
     },
     {
       "date": "2026-01-14",
-      "equity": -3495.1040032577566
+      "equity": -19074.62187544947
     },
     {
       "date": "2026-01-16",
-      "equity": -3495.1040032577566
+      "equity": -19074.62187544947
     },
     {
       "date": "2026-01-19",
-      "equity": -3495.1040032577566
+      "equity": -19074.62187544947
     },
     {
       "date": "2026-01-20",
-      "equity": -11650.670646208873
+      "equity": -413.4228995316298
     },
     {
       "date": "2026-01-21",
-      "equity": -16476.021621183427
+      "equity": 728.0526121534931
     },
     {
       "date": "2026-01-22",
-      "equity": -15819.549119405929
+      "equity": -8203.587520779087
     },
     {
       "date": "2026-01-23",
-      "equity": -5827.2726588686055
+      "equity": 1788.6889397582363
     },
     {
       "date": "2026-01-27",
-      "equity": -15965.534702165223
+      "equity": -8349.573103538381
     },
     {
       "date": "2026-01-28",
-      "equity": -18832.199364751068
+      "equity": -11216.237766124226
     },
     {
       "date": "2026-01-29",
-      "equity": -18109.323608120256
+      "equity": -10493.362009493418
     },
     {
       "date": "2026-01-30",
-      "equity": -15240.151447520837
+      "equity": -7624.189848893999
     },
     {
       "date": "2026-02-02",
-      "equity": -5452.202677816193
+      "equity": 2163.7589208106456
     },
     {
       "date": "2026-02-03",
-      "equity": 10345.083572349937
+      "equity": -29640.11431989711
     },
     {
       "date": "2026-02-04",
-      "equity": 12692.603063692306
+      "equity": -30591.194640462927
     },
     {
       "date": "2026-02-05",
-      "equity": -3955.1671491552934
+      "equity": -36913.7549756238
     },
     {
       "date": "2026-02-06",
-      "equity": -6501.485428725207
+      "equity": -39460.07325519371
     },
     {
       "date": "2026-02-09",
-      "equity": -13652.17602253517
+      "equity": -46610.76384900368
     },
     {
       "date": "2026-02-10",
-      "equity": -14112.309453580403
+      "equity": -51814.54410630796
     },
     {
       "date": "2026-02-11",
-      "equity": -17562.286834413815
+      "equity": -56321.85685119786
     },
     {
       "date": "2026-02-12",
-      "equity": -33276.60751185758
+      "equity": -60692.20141955024
     },
     {
       "date": "2026-02-13",
-      "equity": -18455.288349704824
+      "equity": -45870.88225739748
     },
     {
       "date": "2026-02-16",
-      "equity": -32059.994036612534
+      "equity": -59475.587944305196
     },
     {
       "date": "2026-02-17",
-      "equity": -35447.85875007387
+      "equity": -65719.10201694867
     },
     {
       "date": "2026-02-18",
-      "equity": -36850.829549267015
+      "equity": -73825.1610697689
     },
     {
       "date": "2026-02-19",
-      "equity": -34423.76686236484
+      "equity": -43679.875520055924
     },
     {
       "date": "2026-02-20",
-      "equity": -38832.24034370673
+      "equity": -48088.349001397815
     },
     {
       "date": "2026-02-23",
-      "equity": -44316.34853818625
+      "equity": -53572.45719587733
     },
     {
       "date": "2026-02-24",
-      "equity": -47217.944141700624
+      "equity": -34504.70215857344
     },
     {
       "date": "2026-02-25",
-      "equity": -51178.40453895026
+      "equity": -42460.75080945006
     },
     {
       "date": "2026-02-26",
-      "equity": -57171.89429778799
+      "equity": -49164.76770547729
     },
     {
       "date": "2026-02-27",
-      "equity": -43106.017833476326
+      "equity": -35098.89124116562
     },
     {
       "date": "2026-03-02",
-      "equity": -22672.40238673625
+      "equity": -14665.275794425543
     },
     {
       "date": "2026-03-04",
-      "equity": 6786.466984463514
+      "equity": 14793.59357677422
     },
     {
       "date": "2026-03-05",
-      "equity": -14277.9811482695
+      "equity": -6270.854555958795
     },
     {
       "date": "2026-03-06",
-      "equity": -661.0833361671575
+      "equity": 7346.043256143548
     },
     {
       "date": "2026-03-09",
-      "equity": 27771.894935502183
+      "equity": 35779.02152781289
     },
     {
       "date": "2026-03-10",
-      "equity": 20794.095474501373
+      "equity": 11606.044845476481
     },
     {
       "date": "2026-03-11",
-      "equity": 25951.37291344662
+      "equity": 46690.70224552187
     },
     {
       "date": "2026-03-12",
-      "equity": 42584.82739493034
+      "equity": 80722.84388072495
     },
     {
       "date": "2026-03-13",
-      "equity": 67936.46738733078
+      "equity": 106074.4838731254
     },
     {
       "date": "2026-03-16",
-      "equity": 50343.368622441
+      "equity": 88481.38510823561
     },
     {
       "date": "2026-03-17",
-      "equity": 47258.83921267287
+      "equity": 72783.00083446548
     },
     {
       "date": "2026-03-18",
-      "equity": 60415.02177355349
+      "equity": 71502.88416830801
     },
     {
       "date": "2026-03-19",
-      "equity": 64716.45362035353
+      "equity": 134290.57243494334
     },
     {
       "date": "2026-03-20",
-      "equity": 60540.045074768634
+      "equity": 130114.16388935845
     },
     {
       "date": "2026-03-23",
-      "equity": 89807.80961660726
+      "equity": 159381.92843119707
     },
     {
       "date": "2026-03-24",
-      "equity": 86775.72544628981
+      "equity": 126668.97419933908
     },
     {
       "date": "2026-03-25",
-      "equity": 129868.57781046524
+      "equity": 140508.5099990551
     },
     {
       "date": "2026-03-27",
-      "equity": 129868.57781046524
+      "equity": 140508.5099990551
     },
     {
       "date": "2026-03-30",
-      "equity": 129868.57781046524
+      "equity": 140508.5099990551
     },
     {
       "date": "2026-04-01",
-      "equity": 129868.57781046524
+      "equity": 140508.5099990551
     },
     {
       "date": "2026-04-02",
-      "equity": 129868.57781046524
+      "equity": 140508.5099990551
     },
     {
       "date": "2026-04-06",
-      "equity": 129868.57781046524
+      "equity": 140508.5099990551
     },
     {
       "date": "2026-04-07",
-      "equity": 136272.8498425311
+      "equity": 135564.16956834946
     },
     {
       "date": "2026-04-08",
-      "equity": 259692.09155866853
+      "equity": 193762.35338873812
     },
     {
       "date": "2026-04-09",
-      "equity": 225739.5949458501
+      "equity": 176785.10345691242
     },
     {
       "date": "2026-04-10",
-      "equity": 217571.77994262776
+      "equity": 168617.28845369007
     },
     {
       "date": "2026-04-13",
-      "equity": 219772.33308252072
+      "equity": 170817.84159358303
     },
     {
       "date": "2026-04-15",
-      "equity": 213613.9249603132
+      "equity": 164659.4334713755
     },
     {
       "date": "2026-04-16",
-      "equity": 213604.08168630436
+      "equity": 164649.59019736666
     },
     {
       "date": "2026-04-17",
-      "equity": 208185.73559974594
+      "equity": 159231.24411080824
     },
     {
       "date": "2026-04-20",
-      "equity": 205287.41480576154
+      "equity": 156332.92331682384
     },
     {
       "date": "2026-04-21",
-      "equity": 211978.11003752396
+      "equity": 147467.44639309697
     },
     {
       "date": "2026-04-22",
-      "equity": 193757.35010143637
+      "equity": 144459.32219724983
     },
     {
       "date": "2026-04-23",
-      "equity": 188468.1412844653
+      "equity": 154874.0570265603
     },
     {
       "date": "2026-04-24",
-      "equity": 199786.70531417537
+      "equity": 166192.62105627038
     },
     {
       "date": "2026-04-27",
-      "equity": 187802.87789887254
+      "equity": 154208.79364096755
     },
     {
       "date": "2026-04-28",
-      "equity": 186652.85377988877
+      "equity": 160655.5098116222
     },
     {
       "date": "2026-04-29",
-      "equity": 189091.46980583473
+      "equity": 149769.67342852504
     },
     {
       "date": "2026-04-30",
-      "equity": 174105.15334240277
+      "equity": 148612.7118675732
     },
     {
       "date": "2026-05-04",
-      "equity": 174105.15334240277
+      "equity": 148612.7118675732
     },
     {
       "date": "2026-05-05",
-      "equity": 169362.37080749247
+      "equity": 150679.16962230156
     },
     {
       "date": "2026-05-06",
-      "equity": 197897.7841316532
+      "equity": 157175.13053741885
     },
     {
       "date": "2026-05-07",
-      "equity": 196080.9265692757
+      "equity": 156002.62787752145
     },
     {
       "date": "2026-05-08",
-      "equity": 201747.21515090117
+      "equity": 161668.91645914695
     },
     {
       "date": "2026-05-11",
-      "equity": 223049.391290714
+      "equity": 182971.09259895975
     },
     {
       "date": "2026-05-12",
-      "equity": 246876.67432226666
+      "equity": 239838.61085430504
     },
     {
       "date": "2026-05-13",
-      "equity": 243768.70392678076
+      "equity": 234569.68227063527
     },
     {
       "date": "2026-05-14",
-      "equity": 239776.3790432172
+      "equity": 210120.20579698955
     },
     {
       "date": "2026-05-15",
-      "equity": 240768.40572441995
+      "equity": 211112.2324781923
     },
     {
       "date": "2026-05-18",
-      "equity": 237720.86795480832
+      "equity": 208064.69470858068
     },
     {
       "date": "2026-05-19",
-      "equity": 235087.44417166006
+      "equity": 208143.25361630207
     },
     {
       "date": "2026-05-20",
-      "equity": 230808.78174999735
+      "equity": 201105.38011688527
     },
     {
       "date": "2026-05-21",
-      "equity": 219997.462764668
+      "equity": 190932.40629519278
     },
     {
       "date": "2026-05-22",
-      "equity": 217149.1634636915
+      "equity": 188084.1069942163
     },
     {
       "date": "2026-05-25",
-      "equity": 209643.0912612891
+      "equity": 180578.0347918139
     },
     {
       "date": "2026-05-26",
-      "equity": 204823.4286158755
+      "equity": 184929.44492506477
     },
     {
       "date": "2026-05-27",
-      "equity": 200124.18455151393
+      "equity": 181042.5808218031
     },
     {
       "date": "2026-05-29",
-      "equity": 200124.18455151393
+      "equity": 181042.5808218031
     },
     {
       "date": "2026-06-01",
-      "equity": 200124.18455151393
+      "equity": 181042.5808218031
     },
     {
       "date": "2026-06-02",
-      "equity": 202885.6063738756
+      "equity": 176545.14778016234
     },
     {
       "date": "2026-06-03",
-      "equity": 193109.19022730898
+      "equity": 172927.43240655796
     },
     {
       "date": "2026-06-04",
-      "equity": 187414.63123336693
+      "equity": 166724.12983245117
     },
     {
       "date": "2026-06-05",
-      "equity": 188456.04001667543
+      "equity": 167765.53861575967
     },
     {
       "date": "2026-06-08",
-      "equity": 198407.77634980774
+      "equity": 177717.27494889195
     },
     {
       "date": "2026-06-09",
-      "equity": 194826.6400544598
+      "equity": 165512.0287236959
     },
     {
       "date": "2026-06-10",
-      "equity": 189293.55321154662
+      "equity": 162323.63687460366
     },
     {
       "date": "2026-06-11",
-      "equity": 183755.24688724958
+      "equity": 161095.0804775805
     },
     {
       "date": "2026-06-12",
-      "equity": 174428.51784499912
+      "equity": 151768.35143533003
     },
     {
       "date": "2026-06-15",
-      "equity": 173246.76635654588
+      "equity": 150586.59994687678
     },
     {
       "date": "2026-06-16",
-      "equity": 178079.45206813287
+      "equity": 145593.93839323084
     },
     {
       "date": "2026-06-17",
-      "equity": 185092.0405893577
+      "equity": 145683.73635612827
     },
     {
       "date": "2026-06-18",
-      "equity": 194394.51426560467
+      "equity": 149132.22619105413
     },
     {
       "date": "2026-06-19",
-      "equity": 199793.46764451484
+      "equity": 154531.1795699643
     },
     {
       "date": "2026-06-22",
-      "equity": 193134.9044395847
+      "equity": 147872.61636503416
     },
     {
       "date": "2026-06-23",
-      "equity": 200125.16708702213
+      "equity": 176094.61930211046
     },
     {
       "date": "2026-06-24",
-      "equity": 197482.96833293233
+      "equity": 158957.96813897695
     },
     {
       "date": "2026-06-25",
-      "equity": 193200.18071534755
+      "equity": 152420.78542387232
     },
     {
       "date": "2026-06-29",
-      "equity": 193200.18071534755
+      "equity": 152420.78542387232
     },
     {
       "date": "2026-06-30",
-      "equity": 188900.91099362812
+      "equity": 154478.75345886854
     },
     {
       "date": "2026-07-01",
-      "equity": 197418.01253780074
+      "equity": 152808.14970442778
     },
     {
       "date": "2026-07-02",
-      "equity": 218540.76810263007
+      "equity": 161512.00692545588
     },
     {
       "date": "2026-07-03",
-      "equity": 214586.42526031562
+      "equity": 157557.66408314143
     },
     {
       "date": "2026-07-06",
-      "equity": 208378.79107343548
+      "equity": 151350.0298962613
     },
     {
       "date": "2026-07-07",
-      "equity": 205107.4521052599
+      "equity": 150778.85379454476
     },
     {
       "date": "2026-07-08",
-      "equity": 214791.48373098052
+      "equity": 199538.10642021976
     },
     {
       "date": "2026-07-09",
-      "equity": 208954.3519193381
+      "equity": 187971.25375237942
     },
     {
       "date": "2026-07-10",
-      "equity": 201998.23732463567
+      "equity": 181015.13915767698
     },
     {
       "date": "2026-07-13",
-      "equity": 199780.57598928048
+      "equity": 178797.4778223218
     },
     {
       "date": "2026-07-14",
-      "equity": 194971.66074880207
+      "equity": 186232.88789343077
     },
     {
       "date": "2026-07-15",
-      "equity": 190814.69335349314
+      "equity": 180415.303348792
     },
     {
       "date": "2026-07-16",
-      "equity": 183597.04618872996
+      "equity": 173952.09658402952
     },
     {
       "date": "2026-07-17",
-      "equity": 176513.24044082826
+      "equity": 166868.29083612782
     },
     {
       "date": "2026-07-20",
-      "equity": 175775.70526173376
+      "equity": 166130.75565703333
     },
     {
       "date": "2026-07-21",
-      "equity": 172205.69308499573
+      "equity": 166694.48630285743
     },
     {
       "date": "2026-07-22",
-      "equity": 165842.8315544135
+      "equity": 175014.1752528022
     },
     {
       "date": "2026-07-23",
-      "equity": 171716.74923507194
+      "equity": 190710.70108222155
     },
     {
       "date": "2026-07-24",
-      "equity": 174806.4125882531
+      "equity": 193800.3644354027
     },
     {
       "date": "2026-07-27",
-      "equity": 164637.945173967
+      "equity": 183631.8970211166
     },
     {
       "date": "2026-07-28",
-      "equity": 161652.6880806442
+      "equity": 181762.0451954843
     },
     {
       "date": "2026-07-29",
-      "equity": 184969.3454822505
+      "equity": 185535.41492833343
     },
     {
       "date": "2026-07-30",
-      "equity": 193817.39595615608
+      "equity": 189682.73480719829
     },
     {
       "date": "2026-07-31",
-      "equity": 190948.7721986634
+      "equity": 186814.11104970562
     },
     {
       "date": "2026-08-03",
-      "equity": 183268.0975124659
+      "equity": 179133.4363635081
     },
     {
       "date": "2026-08-04",
-      "equity": 176755.16072997567
+      "equity": 184905.91751332342
     },
     {
       "date": "2026-08-05",
-      "equity": 172986.30919889268
+      "equity": 180736.29276133463
     },
     {
       "date": "2026-08-06",
-      "equity": 168022.03928902972
+      "equity": 175251.30848783627
     },
     {
       "date": "2026-08-07",
-      "equity": 169773.02907494345
+      "equity": 177002.29827375
     },
     {
       "date": "2026-08-10",
-      "equity": 166367.1143166287
+      "equity": 173596.38351543524
     },
     {
       "date": "2026-08-11",
-      "equity": 165855.34623562964
+      "equity": 181820.5308338185
     },
     {
       "date": "2026-08-12",
-      "equity": 161396.1206379033
+      "equity": 180371.0291256163
     },
     {
       "date": "2026-08-13",
-      "equity": 158750.4063778223
+      "equity": 181061.34725561895
     },
     {
       "date": "2026-08-14",
-      "equity": 159067.64884791896
+      "equity": 181378.5897257156
     },
     {
       "date": "2026-08-17",
-      "equity": 159587.38144852073
+      "equity": 181898.32232631737
     },
     {
       "date": "2026-08-18",
-      "equity": 160617.03271917306
+      "equity": 193208.63393050613
     },
     {
       "date": "2026-08-19",
-      "equity": 158599.28540726035
+      "equity": 197260.32543210228
     },
     {
       "date": "2026-08-20",
-      "equity": 150368.79032452393
+      "equity": 177838.19413751207
     },
     {
       "date": "2026-08-21",
-      "equity": 148874.7916668741
+      "equity": 176344.19547986225
     },
     {
       "date": "2026-08-24",
-      "equity": 147176.01210976354
+      "equity": 174645.41592275168
+    },
+    {
+      "date": "2026-08-25",
+      "equity": 165144.02772772557
     }
   ],
   "live_positions": [
@@ -6123,11 +6152,23 @@
       "strike": 24250,
       "entry_date": "2026-08-20",
       "entry_premium": 161.34,
-      "live_premium": 101.04,
-      "live_pnl": -4522.24,
-      "pct_move": -37.37,
+      "live_premium": 28.63,
+      "live_pnl": -9953.19,
+      "pct_move": -82.25,
       "banked_floor": null,
-      "days_to_expiry": 2
+      "days_to_expiry": 1
+    },
+    {
+      "pair": "Mon\u2192Tue",
+      "side": "PE",
+      "strike": 24200,
+      "entry_date": "2026-08-24",
+      "entry_premium": 94.18,
+      "live_premium": 16.7,
+      "live_pnl": -5810.79,
+      "pct_move": -82.27,
+      "banked_floor": null,
+      "days_to_expiry": 1
     }
   ],
   "next_trade_preview": {}
