@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-08-27T22:56:11Z",
-  "last_trading_date": "2026-08-26",
-  "git_sha": "a4381d0220f1580a97751a19e4edf27c322e2924",
+  "generated_at": "2026-08-28T21:28:56Z",
+  "last_trading_date": "2026-08-27",
+  "git_sha": "a48b20dfbe402d8e7b3b0fd18674c3ce94ea3d3e",
   "config": {
     "iv_flat": 0.125,
     "lot_size": 75,
@@ -71,11 +71,11 @@
     ]
   },
   "equity_stats": {
-    "n_days": 254,
+    "n_days": 255,
     "final_equity": 175750.08956242618,
     "max_drawdown": 79960.94443931311,
     "max_drawdown_pct": 2.0234716764032044,
-    "sharpe_annualized": 1.0989161386717339,
+    "sharpe_annualized": 1.0967489648345634,
     "annualization": 252,
     "sharpe_note": "mean/std of daily-dollar equity changes \u00d7 \u221a252 (portfolio MTM; ties/flat count as zero)"
   },
@@ -4958,6 +4958,10 @@
     {
       "date": "2026-08-26",
       "equity": 175750.08956242618
+    },
+    {
+      "date": "2026-08-27",
+      "equity": 175750.08956242618
     }
   ],
   "probability_table": [
@@ -4999,10 +5003,10 @@
     },
     {
       "weekday_pair": "Wed\u2192Thu",
-      "n": 45,
-      "p_up": 0.5555555555555556,
-      "ci_low": 0.4117613449352105,
-      "ci_high": 0.6906106996500243,
+      "n": 46,
+      "p_up": 0.5652173913043478,
+      "ci_low": 0.4224743369429499,
+      "ci_high": 0.6979073722198005,
       "side": "CE",
       "tradeable": false
     },
@@ -5092,10 +5096,10 @@
     {
       "weekday_pair": "Wed\u2192Thu",
       "side": "CE",
-      "n_in": 20,
-      "p_up": 0.6,
-      "ci_low": 0.3865815007622531,
-      "ci_high": 0.781193467627183,
+      "n_in": 21,
+      "p_up": 0.6190476190476191,
+      "ci_low": 0.4087865377511576,
+      "ci_high": 0.7924898863143551,
       "n_oos": 25,
       "realized_p_up": 0.52,
       "realized_ci_low": 0.3349851695035678,
@@ -6178,6 +6182,10 @@
     {
       "date": "2026-08-26",
       "equity": 164054.9467221159
+    },
+    {
+      "date": "2026-08-27",
+      "equity": 172310.17691131565
     }
   ],
   "live_positions": [],
