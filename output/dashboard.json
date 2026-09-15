@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-14T18:33:59Z",
+  "generated_at": "2026-09-15T15:38:04Z",
   "last_trading_date": "2026-09-11",
-  "git_sha": "5b8b41137bfc34a1e2a67800b971f86258407317",
+  "git_sha": "5b0b65289689d3b4505e18214f7f962634d37b59",
   "config": {
     "iv_flat": 0.125,
     "lot_size": 75,
@@ -6472,11 +6472,11 @@
       "strike": 23500,
       "entry_date": "2026-09-10",
       "entry_premium": 158.6,
-      "live_premium": 156.6,
-      "live_pnl": -149.97,
-      "pct_move": -1.26,
+      "live_premium": 141.23,
+      "live_pnl": -1302.39,
+      "pct_move": -10.95,
       "banked_floor": null,
-      "days_to_expiry": 3
+      "days_to_expiry": 2
     }
   ],
   "next_trade_preview": {}
