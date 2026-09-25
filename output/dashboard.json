@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-09-24T17:50:40Z",
-  "last_trading_date": "2026-09-23",
-  "git_sha": "9423f872eb8247c5d67243220ab4d1774e375f4e",
+  "generated_at": "2026-09-25T15:52:34Z",
+  "last_trading_date": "2026-09-24",
+  "git_sha": "db881fd0a6e8e105c3cb44a2d8f34d787abf85fd",
   "config": {
     "iv_flat": 0.125,
     "lot_size": 75,
@@ -71,11 +71,11 @@
     ]
   },
   "equity_stats": {
-    "n_days": 272,
+    "n_days": 273,
     "final_equity": 181936.25872425584,
     "max_drawdown": 79960.94443931329,
     "max_drawdown_pct": 2.023471676403355,
-    "sharpe_annualized": 1.0912590136659057,
+    "sharpe_annualized": 1.0892490945796391,
     "annualization": 252,
     "sharpe_note": "mean/std of daily-dollar equity changes \u00d7 \u221a252 (portfolio MTM; ties/flat count as zero)"
   },
@@ -5273,6 +5273,10 @@
     {
       "date": "2026-09-23",
       "equity": 181936.25872425584
+    },
+    {
+      "date": "2026-09-24",
+      "equity": 181936.25872425584
     }
   ],
   "probability_table": [
@@ -5314,10 +5318,10 @@
     },
     {
       "weekday_pair": "Wed\u2192Thu",
-      "n": 49,
-      "p_up": 0.5714285714285714,
-      "ci_low": 0.4327049309001736,
-      "ci_high": 0.699766809211184,
+      "n": 50,
+      "p_up": 0.56,
+      "ci_low": 0.4230602802165686,
+      "ci_high": 0.6883780078874284,
       "side": "CE",
       "tradeable": false
     },
@@ -5419,14 +5423,14 @@
     {
       "weekday_pair": "Wed\u2192Thu",
       "side": "CE",
-      "n_in": 22,
-      "p_up": 0.6363636363636364,
-      "ci_low": 0.42951708090131013,
-      "ci_high": 0.8026679532963387,
+      "n_in": 23,
+      "p_up": 0.6521739130434783,
+      "ci_low": 0.44890335377263,
+      "ci_high": 0.8118872406120227,
       "n_oos": 27,
-      "realized_p_up": 0.5185185185185185,
-      "realized_ci_low": 0.3398561575495229,
-      "realized_ci_high": 0.6925677302378153
+      "realized_p_up": 0.48148148148148145,
+      "realized_ci_low": 0.3074322697621846,
+      "realized_ci_high": 0.6601438424504771
     },
     {
       "weekday_pair": "Wed\u2192Fri",
@@ -6577,6 +6581,10 @@
     {
       "date": "2026-09-23",
       "equity": 206783.42852287958
+    },
+    {
+      "date": "2026-09-24",
+      "equity": 220296.29631634467
     }
   ],
   "live_positions": [],
