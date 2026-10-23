@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-22T17:56:34Z",
-  "last_trading_date": "2026-10-21",
-  "git_sha": "43991af982ea1cb4689bcb938b47d977891e4695",
+  "generated_at": "2026-10-23T15:48:32Z",
+  "last_trading_date": "2026-10-22",
+  "git_sha": "d6019de632c35d7d445fe8bcf155e67cfb31e5fb",
   "config": {
     "iv_flat": 0.125,
     "lot_size": 75,
@@ -71,11 +71,11 @@
     ]
   },
   "equity_stats": {
-    "n_days": 290,
+    "n_days": 291,
     "final_equity": 178064.80455999498,
     "max_drawdown": 79960.94443931329,
     "max_drawdown_pct": 2.023471676403355,
-    "sharpe_annualized": 1.018986112686889,
+    "sharpe_annualized": 1.0172265610962128,
     "annualization": 252,
     "sharpe_note": "mean/std of daily-dollar equity changes \u00d7 \u221a252 (portfolio MTM; ties/flat count as zero)"
   },
@@ -5723,6 +5723,10 @@
     {
       "date": "2026-10-21",
       "equity": 178064.80455999498
+    },
+    {
+      "date": "2026-10-22",
+      "equity": 178064.80455999498
     }
   ],
   "probability_table": [
@@ -5764,10 +5768,10 @@
     },
     {
       "weekday_pair": "Wed\u2192Thu",
-      "n": 53,
-      "p_up": 0.5471698113207547,
-      "ci_low": 0.414539754871058,
-      "ci_high": 0.6734242084707774,
+      "n": 54,
+      "p_up": 0.5370370370370371,
+      "ci_low": 0.40605356021011496,
+      "ci_high": 0.6631009888201891,
       "side": "CE",
       "tradeable": false
     },
@@ -5869,10 +5873,10 @@
     {
       "weekday_pair": "Wed\u2192Thu",
       "side": "CE",
-      "n_in": 24,
-      "p_up": 0.625,
-      "ci_low": 0.42709962442674276,
-      "ci_high": 0.7884063244045122,
+      "n_in": 25,
+      "p_up": 0.6,
+      "ci_low": 0.40739457358967,
+      "ci_high": 0.7659669762225203,
       "n_oos": 29,
       "realized_p_up": 0.4827586206896552,
       "realized_ci_low": 0.3138609015268349,
@@ -7099,6 +7103,10 @@
     {
       "date": "2026-10-21",
       "equity": 294963.8708401971
+    },
+    {
+      "date": "2026-10-22",
+      "equity": 301958.1608022916
     }
   ],
   "live_positions": [],
