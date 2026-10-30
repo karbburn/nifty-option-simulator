@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-10-29T18:55:54Z",
-  "last_trading_date": "2026-10-28",
-  "git_sha": "09caeae0844b0531f6759d95b273d740e574ef91",
+  "generated_at": "2026-10-30T17:05:22Z",
+  "last_trading_date": "2026-10-29",
+  "git_sha": "e5fcba37e3ef23272a878d394aab38802ec40ff8",
   "config": {
     "iv_flat": 0.125,
     "lot_size": 75,
@@ -71,11 +71,11 @@
     ]
   },
   "equity_stats": {
-    "n_days": 295,
+    "n_days": 296,
     "final_equity": 167570.83754089192,
     "max_drawdown": 79960.94443931311,
     "max_drawdown_pct": 2.0234716764032044,
-    "sharpe_annualized": 0.9488451332946894,
+    "sharpe_annualized": 0.9472352800646828,
     "annualization": 252,
     "sharpe_note": "mean/std of daily-dollar equity changes \u00d7 \u221a252 (portfolio MTM; ties/flat count as zero)"
   },
@@ -5824,6 +5824,10 @@
     {
       "date": "2026-10-28",
       "equity": 167570.83754089192
+    },
+    {
+      "date": "2026-10-29",
+      "equity": 167570.83754089192
     }
   ],
   "probability_table": [
@@ -5865,10 +5869,10 @@
     },
     {
       "weekday_pair": "Wed\u2192Thu",
-      "n": 54,
-      "p_up": 0.5370370370370371,
-      "ci_low": 0.40605356021011496,
-      "ci_high": 0.6631009888201891,
+      "n": 55,
+      "p_up": 0.5272727272727272,
+      "ci_low": 0.3979154435522611,
+      "ci_high": 0.6530690163868067,
       "side": "CE",
       "tradeable": false
     },
@@ -5974,10 +5978,10 @@
       "p_up": 0.6,
       "ci_low": 0.40739457358967,
       "ci_high": 0.7659669762225203,
-      "n_oos": 29,
-      "realized_p_up": 0.4827586206896552,
-      "realized_ci_low": 0.3138609015268349,
-      "realized_ci_high": 0.6556897811800528
+      "n_oos": 30,
+      "realized_p_up": 0.4666666666666667,
+      "realized_ci_low": 0.30232388907699753,
+      "realized_ci_high": 0.638577003801267
     },
     {
       "weekday_pair": "Wed\u2192Fri",
@@ -7220,6 +7224,10 @@
     {
       "date": "2026-10-28",
       "equity": 290727.6869638385
+    },
+    {
+      "date": "2026-10-29",
+      "equity": 291058.963184795
     }
   ],
   "live_positions": [],
