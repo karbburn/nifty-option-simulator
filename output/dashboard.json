@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-03T20:04:01Z",
-  "last_trading_date": "2026-11-02",
-  "git_sha": "7396d10e27a7b25ff49bf177175d99a6eb0b5c67",
+  "generated_at": "2026-11-04T18:45:16Z",
+  "last_trading_date": "2026-11-03",
+  "git_sha": "e48b35c2990aa5faa74443c73e95363ff6d3e29a",
   "config": {
     "iv_flat": 0.125,
     "lot_size": 75,
@@ -37,45 +37,45 @@
     ]
   },
   "trade_stats": {
-    "n_trades": 170,
-    "total_pnl": 163154.5287038478,
-    "win_rate": 0.28823529411764703,
+    "n_trades": 171,
+    "total_pnl": 155639.06145169775,
+    "win_rate": 0.28654970760233917,
     "avg_win": 13965.202236856892,
-    "avg_loss": -4306.9452967119005,
-    "profit_factor": 1.313072129281966,
+    "avg_loss": -4333.244657002377,
+    "profit_factor": 1.2944052581562928,
     "exit_reasons": [
       {
         "exit_reason": "stop_5",
-        "count": 106,
-        "pct": 62.35294117647059,
-        "avg_pnl": -4534.934024276328
+        "count": 107,
+        "pct": 62.57309941520468,
+        "avg_pnl": -4562.7894750041205
       },
       {
         "exit_reason": "expiry",
         "count": 54,
-        "pct": 31.76470588235294,
+        "pct": 31.57894736842105,
         "avg_pnl": 11885.247901667457
       },
       {
         "exit_reason": "floor_15",
         "count": 6,
-        "pct": 3.5294117647058822,
+        "pct": 3.508771929824561,
         "avg_pnl": 596.9860848191729
       },
       {
         "exit_reason": "stop_3",
         "count": 4,
-        "pct": 2.3529411764705883,
+        "pct": 2.3391812865497075,
         "avg_pnl": -381.9419804548147
       }
     ]
   },
   "equity_stats": {
-    "n_days": 298,
-    "final_equity": 163154.52870384787,
-    "max_drawdown": 83714.39977890631,
+    "n_days": 299,
+    "final_equity": 155639.06145169784,
+    "max_drawdown": 91229.86703105635,
     "max_drawdown_pct": 2.0234716764032044,
-    "sharpe_annualized": 0.9187389853688965,
+    "sharpe_annualized": 0.8738904355113436,
     "annualization": 252,
     "sharpe_note": "mean/std of daily-dollar equity changes \u00d7 \u221a252 (portfolio MTM; ties/flat count as zero)"
   },
@@ -4669,6 +4669,33 @@
           "pnl": -4416.308837044062
         }
       ]
+    },
+    {
+      "entry_date": "2026-11-02",
+      "exit_date": "2026-11-03",
+      "pair": "Mon\u2192Tue",
+      "side": "PE",
+      "strike": 23450,
+      "entry_close": 23440.8,
+      "expiry": "2026-11-05",
+      "entry_premium": 104.31364992871204,
+      "exit_premium": 4.107419900044761,
+      "exit_reason": "stop_5",
+      "days_held": 1,
+      "pnl": -7515.467252150046,
+      "rolls": 0,
+      "legs": [
+        {
+          "entry_date": "2026-11-02",
+          "exit_date": "2026-11-03",
+          "expiry": "2026-11-05",
+          "strike": 23450,
+          "entry_premium": 104.31364992871204,
+          "exit_premium": 4.107419900044761,
+          "exit_reason": "stop_5",
+          "pnl": -7515.467252150046
+        }
+      ]
     }
   ],
   "equity_curve": [
@@ -5863,15 +5890,19 @@
     {
       "date": "2026-11-02",
       "equity": 163154.52870384787
+    },
+    {
+      "date": "2026-11-03",
+      "equity": 155639.06145169784
     }
   ],
   "probability_table": [
     {
       "weekday_pair": "Mon\u2192Tue",
-      "n": 56,
-      "p_up": 0.48214285714285715,
-      "ci_low": 0.3566821941245828,
-      "ci_high": 0.6098961607582303,
+      "n": 57,
+      "p_up": 0.49122807017543857,
+      "ci_low": 0.3661628241840743,
+      "ci_high": 0.6174010150238727,
       "side": "PE",
       "tradeable": true
     },
@@ -5965,10 +5996,10 @@
       "p_up": 0.6333333333333333,
       "ci_low": 0.4551356365479487,
       "ci_high": 0.7812607919389929,
-      "n_oos": 26,
-      "realized_p_up": 0.3076923076923077,
-      "realized_ci_low": 0.16501315595463767,
-      "realized_ci_high": 0.4998825832219837
+      "n_oos": 27,
+      "realized_p_up": 0.3333333333333333,
+      "realized_ci_low": 0.18643261498715644,
+      "realized_ci_high": 0.5217523949267991
     },
     {
       "weekday_pair": "Mon\u2192Wed",
@@ -5985,14 +6016,14 @@
     {
       "weekday_pair": "Tue\u2192Wed",
       "side": "CE",
-      "n_in": 27,
-      "p_up": 0.5925925925925926,
-      "ci_low": 0.4072670096806468,
-      "ci_high": 0.7548524292560443,
-      "n_oos": 28,
-      "realized_p_up": 0.42857142857142855,
-      "realized_ci_low": 0.26508547124123694,
-      "realized_ci_high": 0.6092921437253123
+      "n_in": 28,
+      "p_up": 0.6071428571428571,
+      "ci_low": 0.42409044296597176,
+      "ci_high": 0.764343134584204,
+      "n_oos": 27,
+      "realized_p_up": 0.4074074074074074,
+      "realized_ci_low": 0.24514757074395552,
+      "realized_ci_high": 0.592732990319353
     },
     {
       "weekday_pair": "Tue\u2192Thu",
@@ -7271,6 +7302,10 @@
     {
       "date": "2026-11-02",
       "equity": 279959.38699219096
+    },
+    {
+      "date": "2026-11-03",
+      "equity": 272234.1625882572
     }
   ],
   "live_positions": [
@@ -7280,11 +7315,23 @@
       "strike": 22950,
       "entry_date": "2026-10-29",
       "entry_premium": 150.79,
-      "live_premium": 0.73,
-      "live_pnl": -11254.75,
-      "pct_move": -99.52,
+      "live_premium": 0.0,
+      "live_pnl": -11309.44,
+      "pct_move": -100.0,
       "banked_floor": null,
-      "days_to_expiry": 2
+      "days_to_expiry": 1
+    },
+    {
+      "pair": "Mon\u2192Tue",
+      "side": "PE",
+      "strike": 23450,
+      "entry_date": "2026-11-02",
+      "entry_premium": 104.31,
+      "live_premium": 0.47,
+      "live_pnl": -7788.09,
+      "pct_move": -99.55,
+      "banked_floor": null,
+      "days_to_expiry": 1
     }
   ],
   "next_trade_preview": {}
