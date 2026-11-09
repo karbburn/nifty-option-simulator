@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-09T21:32:16Z",
+  "generated_at": "2026-11-09T22:57:52Z",
   "last_trading_date": "2026-11-06",
-  "git_sha": "713a078cbd7fbb05037d42c249356fbe71ef4c41",
+  "git_sha": "493bc49ff47344d55f11705645a0beda517b8a97",
   "config": {
     "iv_flat": 0.125,
     "lot_size": 75,
