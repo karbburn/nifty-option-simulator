@@ -1,7 +1,7 @@
 {
-  "generated_at": "2026-11-24T00:45:23Z",
-  "last_trading_date": "2026-11-20",
-  "git_sha": "42196aef5eb675de5929b853379207393d56464d",
+  "generated_at": "2026-11-24T21:25:16Z",
+  "last_trading_date": "2026-11-23",
+  "git_sha": "3f3675e85233511f4a57911def234b82c5952844",
   "config": {
     "iv_flat": 0.125,
     "lot_size": 75,
@@ -71,11 +71,11 @@
     ]
   },
   "equity_stats": {
-    "n_days": 311,
+    "n_days": 312,
     "final_equity": 43330.990025156396,
     "max_drawdown": 162092.32290358673,
     "max_drawdown_pct": 3.9229228379287564,
-    "sharpe_annualized": 0.20387423658128354,
+    "sharpe_annualized": 0.2035472054810231,
     "annualization": 252,
     "sharpe_note": "mean/std of daily-dollar equity changes \u00d7 \u221a252 (portfolio MTM; ties/flat count as zero)"
   },
@@ -6131,6 +6131,10 @@
     {
       "date": "2026-11-20",
       "equity": 43330.990025156396
+    },
+    {
+      "date": "2026-11-23",
+      "equity": 43330.990025156396
     }
   ],
   "probability_table": [
@@ -6208,10 +6212,10 @@
     },
     {
       "weekday_pair": "Fri\u2192Mon",
-      "n": 59,
-      "p_up": 0.559322033898305,
-      "ci_low": 0.43289354829158677,
-      "ci_high": 0.678497882323879,
+      "n": 60,
+      "p_up": 0.5666666666666667,
+      "ci_low": 0.44103438776125564,
+      "ci_high": 0.6842760319531324,
       "side": "CE",
       "tradeable": false
     },
@@ -6329,10 +6333,10 @@
       "p_up": 0.5483870967741935,
       "ci_low": 0.37772167637354503,
       "ci_high": 0.7083826401947998,
-      "n_oos": 28,
-      "realized_p_up": 0.5714285714285714,
-      "realized_ci_low": 0.3907078562746876,
-      "realized_ci_high": 0.734914528758763
+      "n_oos": 29,
+      "realized_p_up": 0.5862068965517241,
+      "realized_ci_low": 0.4073783598787858,
+      "realized_ci_high": 0.744868226586776
     },
     {
       "weekday_pair": "Fri\u2192Tue",
@@ -7591,6 +7595,10 @@
     {
       "date": "2026-11-20",
       "equity": 191695.22406519312
+    },
+    {
+      "date": "2026-11-23",
+      "equity": 202676.6249464836
     }
   ],
   "live_positions": [
@@ -7600,9 +7608,9 @@
       "strike": 25500,
       "entry_date": "2026-11-19",
       "entry_premium": 153.96,
-      "live_premium": 10.69,
-      "live_pnl": -10745.65,
-      "pct_move": -93.06,
+      "live_premium": 180.9,
+      "live_pnl": 2020.52,
+      "pct_move": 17.5,
       "banked_floor": null,
       "days_to_expiry": 2
     }
